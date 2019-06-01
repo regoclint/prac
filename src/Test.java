@@ -1,11 +1,13 @@
 
+import javafx.util.Pair;
+
 import java.util.*;
 
 public class Test {
     public static HashMap<Character, ArrayList> lookup;
     public static Map<Integer, Integer> map = new HashMap<Integer, Integer>();
     static HashMap<Integer, List<Integer>> numPaths= formNumPaths();
-
+    static String dfsTraversalOrder ="preorder";
     public static void main(String ar[]) {
 
 
@@ -74,6 +76,7 @@ public class Test {
 //        stringSet.add("dog");
 //        stringSet.add("cats");
 //        System.out.println(wordBreakDP("catsanddog",stringSet));
+////////////
 
 //////////// CombinationSum
 //        System.out.println(combinationSum(10,new int[]{1}));
@@ -117,7 +120,7 @@ public class Test {
 ////////////
 
 //////////// Letter combinations
-        System.out.println(letterCombinations("23").size());
+//        System.out.println(letterCombinations("23").size());
 //        System.out.println(letterCombinations("23"));
 ////////////
 
@@ -218,8 +221,8 @@ public class Test {
 //        grid[0]=new int[]{1,0,0};
 //        grid[1]=new int[]{0,2,0};
 //        grid[2]=new int[]{0,0,0};
-////        System.out.println(UniquePathsRecur.uniquePathsIII(grid));
-//        System.out.println(UniquePathsDP.uniquePathsIII(grid));
+////        System.out.println(UniquePathsIIIRecur.uniquePathsIII(grid));
+//        System.out.println(UniquePathsIIIDP.uniquePathsIII(grid));
 ////////////
 
 //////////// N Queens Backtracking
@@ -239,8 +242,775 @@ public class Test {
 //        matrix[1][2]=5;
 //        setZeroes(matrix);
 ////////////
+
+//////////// Spiral Matrix
+//        int[][] matrix=new int[3][3];
+//        matrix[0][0]=1;
+//        matrix[0][1]=2;
+//        matrix[0][2]=3;
+//        matrix[1][0]=4;
+//        matrix[1][1]=5;
+//        matrix[1][2]=6;
+//        matrix[2][0]=7;
+//        matrix[2][1]=8;
+//        matrix[2][2]=9;
+//        spiralOrder(matrix);
+////////////
+
+//////////// Rotate Image
+//        int[][] matrix=new int[4][4];
+//        matrix[0][0]=1;
+//        matrix[0][1]=2;
+//        matrix[0][2]=3;
+//        matrix[0][3]=4;
+//        matrix[1][0]=5;
+//        matrix[1][1]=6;
+//        matrix[1][2]=7;
+//        matrix[1][3]=8;
+//        matrix[2][0]=9;
+//        matrix[2][1]=10;
+//        matrix[2][2]=11;
+//        matrix[2][3]=12;
+//        matrix[3][0]=13;
+//        matrix[3][1]=14;
+//        matrix[3][2]=15;
+//        matrix[3][3]=16;
+////        rotateImageTransposenReverse(matrix);
+////        rotateImageOnePass(matrix);
+//        rotateImageOnePassnOneLoop(matrix);
+////////////
+
+//////////// Word search
+//        char[][] matrix=new char[3][4];
+//        matrix[0][0]='A';
+//        matrix[0][1]='B';
+//        matrix[0][2]='C';
+//        matrix[0][3]='E';
+//        matrix[1][0]='S';
+//        matrix[1][1]='F';
+//        matrix[1][2]='C';
+//        matrix[1][3]='S';
+//        matrix[2][0]='A';
+//        matrix[2][1]='D';
+//        matrix[2][2]='E';
+//        matrix[2][3]='E';
+//        System.out.println(wordSearch(matrix,"SEE"));
+////////////
+
+//////////// Max Depth BT
+//        TreeNode t5 = new TreeNode(7, null, null);
+//        TreeNode t4 = new TreeNode(15, null, null);
+//        TreeNode t3 = new TreeNode(20, t4, t5);
+//        TreeNode t2 = new TreeNode(9, null, null);
+//        TreeNode t1 = new TreeNode(3, t2, t3);
+//        System.out.println(maxDepthStack(t1));
+//        System.out.println(maxDepthRecur(t1));
+////////////
+
+//////////// Same tree
+//        TreeNode t5 = new TreeNode(7, null, null);
+//        TreeNode t4 = new TreeNode(15, null, null);
+//        TreeNode t3 = new TreeNode(20, t4, t5);
+//        TreeNode t2 = new TreeNode(9, null, null);
+//        TreeNode t1 = new TreeNode(3, t2, t3);
+//        System.out.println(isSameTreeRecur(t1, t1));
+//        System.out.println(isSameTreeQueue(t1, t1));
+////////////
+
+//////////// Max Path sum BT
+//        TreeNode t3 = new TreeNode(-3, null, null);
+//        TreeNode t2 = new TreeNode(-1, null, null);
+//        TreeNode t1 = new TreeNode(2, t2, t3);
+//        System.out.println(MaxPathBT.maxPathSum(t1));
+////////////
+
+//////////// Level Order
+//        TreeNode t5 = new TreeNode(7, null, null);
+//        TreeNode t4 = new TreeNode(15, null, null);
+//        TreeNode t3 = new TreeNode(20, t4, t5);
+//        TreeNode t2 = new TreeNode(9, null, null);
+//        TreeNode t1 = new TreeNode(3, t2, t3);
+//        List<List<Integer>> levels = new ArrayList<List<Integer>>();
+////        levelOrderRecur(t1,levels,0);
+////        System.out.println(levels);
+//        System.out.println(levelOrderIter(t1)); // after removing the parents at one level, the remaining elements in the queue = no: of children at next level
+////////////
+
+//////////// Serialize and deserialize BT
+//        TreeNode t5 = new TreeNode(7, null, null);
+//        TreeNode t4 = new TreeNode(15, null, null);
+//        TreeNode t3 = new TreeNode(20, t4, t5);
+//        TreeNode t2 = new TreeNode(9, null, null);
+//        TreeNode t1 = new TreeNode(3, t2, t3);
+//
+//
+//        String serializedString = serialize(t1);
+//        System.out.println(serializedString);
+//
+//        TreeNode result=deserialize(serializedString);
+//        String[] preOrderStringArray= serializedString.split(",");
+//        TreeNode root=new TreeNode(Integer.parseInt(preOrderStringArray[0]));
+//        deserializePreOrder(root,preOrderStringArray,0);
+////////////
+
+//////////// Sub tree
+//        TreeNode t5 = new TreeNode(2, null, null);
+//        TreeNode t4 = new TreeNode(1, null, null);
+//        TreeNode t3 = new TreeNode(5, null, null);
+//        TreeNode t2 = new TreeNode(4, t4, t5);
+//        TreeNode t1 = new TreeNode(3, t2, t3);
+//
+//        TreeNode s2 = new TreeNode(1, null, null);
+//        TreeNode s1 = new TreeNode(4, s2, null);
+//
+//        System.out.println(isSubtreePreOrder(t1,s1));
+//        System.out.println(isSubtreeCompare(t1,s1));
+////////////
+
+//////////// Tree From Preorder & Inorder
+//        int[] preorder=new int[]{3,9,20,15,7};
+//        int[] inorder=new int[]{9,3,15,20,7};
+//        TreeFromPreorderInorder.buildTree(preorder,inorder);
+
+////////////
+
+//////////// Validate BST
+//        TreeNode t5 = new TreeNode(6, null, null);
+//        TreeNode t4 = new TreeNode(4, null, null);
+//        TreeNode t3 = new TreeNode(5, t4, t5);
+//        TreeNode t2 = new TreeNode(1, null, null);
+//        TreeNode t1 = new TreeNode(3, t2, t3);
+//        System.out.println(isValidBSTRecur(t1,null,null));
+//        System.out.println(isValidBSTInorder(t1));
+//        System.out.println(ValidBSTIterative.isValidBSTIterative(t1));
+////////////
+
+//////////// kth Smallest element in BST
+//        TreeNode t5 = new TreeNode(6, null, null);
+//        TreeNode t4 = new TreeNode(4, null, null);
+//        TreeNode t3 = new TreeNode(5, t4, t5);
+//        TreeNode t2 = new TreeNode(1, null, null);
+//        TreeNode t1 = new TreeNode(3, t2, t3);
+//        System.out.println(kthSmallestIter(t1,4));
+//        System.out.println(kthSmallestRecur(t1,4));
+////////////
+
+//////////// kth Smallest element in BST
+//        TreeNode t5 = new TreeNode(6, null, null);
+//        TreeNode t4 = new TreeNode(4, null, null);
+//        TreeNode t3 = new TreeNode(5, t4, t5);
+//        TreeNode t2 = new TreeNode(1, null, null);
+//        TreeNode t1 = new TreeNode(3, t2, t3);
+//        System.out.println(lowestCommonAncestorIter(t1,t3,t4).val);
+//        System.out.println(lowestCommonAncestorRecur(t1,t3,t4).val);
+////////////
+
+//////////// Character Replacement
+        String s="AABABBA";
+        System.out.println(characterReplacement(s,3));
+////////////
+
     }
 
+    public static int characterReplacement(String s, int k)
+    {
+        int[] count = new int[128];
+        int max=0;
+        int start=0;
+        for(int end=0; end<s.length(); end++)
+        {
+            max = Math.max(max, ++count[s.charAt(end)]);
+            if(max+k<=end-start)
+                count[s.charAt(start++)]--;
+        }
+        return s.length()-start;
+    }
+
+    //LCA can be asked for BT also, there whole tree needs to be searched except for inside a node that has matched.
+    public static TreeNode lowestCommonAncestorRecur(TreeNode root, TreeNode p, TreeNode q) {
+
+        // Value of current node or parent node.
+        int parentVal = root.val;
+
+        // Value of p
+        int pVal = p.val;
+
+        // Value of q;
+        int qVal = q.val;
+
+        if (pVal > parentVal && qVal > parentVal) {
+            // If both p and q are greater than parent
+            return lowestCommonAncestorRecur(root.right, p, q);
+        } else if (pVal < parentVal && qVal < parentVal) {
+            // If both p and q are lesser than parent
+            return lowestCommonAncestorRecur(root.left, p, q);
+        } else {
+            // We have found the split point, i.e. the LCA node.
+            return root;
+        }
+    }
+
+    public static TreeNode lowestCommonAncestorIter(TreeNode root, TreeNode p, TreeNode q) {
+
+        // Value of p
+        int pVal = p.val;
+
+        // Value of q;
+        int qVal = q.val;
+
+        // Start from the root node of the tree
+        TreeNode node = root;
+
+        // Traverse the tree
+        while (node != null) {
+
+            // Value of ancestor/parent node.
+            int parentVal = node.val;
+
+            if (pVal > parentVal && qVal > parentVal) {
+                // If both p and q are greater than parent
+                node = node.right;
+            } else if (pVal < parentVal && qVal < parentVal) {
+                // If both p and q are lesser than parent
+                node = node.left;
+            } else {
+                // We have found the split point, i.e. the LCA node.
+                return node;
+            }
+        }
+        return null;
+    }
+
+//    >>>>>???? Check for insert + search optimisation, doubly ll soulution
+    public static ArrayList<Integer> inorder(TreeNode root, ArrayList<Integer> arr) {
+        if (root == null) return arr;
+        inorder(root.left, arr);
+        arr.add(root.val);
+        inorder(root.right, arr);
+        return arr;
+    }
+
+    public static int kthSmallestRecur(TreeNode root, int k) {
+        ArrayList<Integer> nums = inorder(root, new ArrayList<Integer>());
+        return nums.get(k - 1);
+    }
+
+    public static int kthSmallestIter(TreeNode root, int k) {
+        LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
+
+        while (true) {
+            while (root != null) {
+                stack.add(root);
+                root = root.left;
+            }
+            root = stack.removeLast();
+            if (--k == 0) return root.val;
+            root = root.right;
+        }
+    }
+
+//    dfs - stack(Iterative)
+//    bfs - queue(Iterative(levelorder) or recursion)
+//    Parent's value and level can be stored within recursion, no extra space required
+//    Inorder in BST gives ascending order
+
+    public static boolean isValidBSTInorder(TreeNode root) {
+        Stack<TreeNode> stack = new Stack();
+        double inorder = - Double.MAX_VALUE;
+
+        while (!stack.isEmpty() || root != null) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            // If next element in inorder traversal
+            // is smaller than the previous one
+            // that's not BST.
+            if (root.val <= inorder) return false;
+            inorder = root.val;
+            root = root.right;
+        }
+        return true;
+    }
+
+    static class ValidBSTIterative {
+        static LinkedList<TreeNode> stack = new LinkedList();
+        static LinkedList<Integer> uppers = new LinkedList(),
+                lowers = new LinkedList();
+
+        public static void update(TreeNode root, Integer lower, Integer upper) {
+            stack.add(root);
+            lowers.add(lower);
+            uppers.add(upper);
+        }
+
+        public static boolean isValidBSTIterative(TreeNode root) {
+            Integer lower = null, upper = null, val;
+            update(root, lower, upper);
+
+            while (!stack.isEmpty()) {
+                root = stack.poll();
+                lower = lowers.poll();
+                upper = uppers.poll();
+
+                if (root == null) continue;
+                val = root.val;
+                if (lower != null && val <= lower) return false;
+                if (upper != null && val >= upper) return false;
+                update(root.right, val, upper);
+                update(root.left, lower, val);
+            }
+            return true;
+        }
+    }
+
+    public static boolean isValidBSTRecur(TreeNode node, Integer lower, Integer upper) {
+        if (node == null) return true;
+
+        int val = node.val;
+        if (lower != null && val <= lower) return false;
+        if (upper != null && val >= upper) return false;
+
+        if (! isValidBSTRecur(node.right, val, upper)) return false;
+        if (! isValidBSTRecur(node.left, lower, val)) return false;
+        return true;
+    }
+
+    static class TreeFromPreorderInorder {
+        // start from first preorder element
+        static int preIndex = 0;
+        static int[] preorder;
+        static HashMap<Integer, Integer> idx_map = new HashMap<Integer, Integer>();
+
+        public static TreeNode helper(int inLeftBound, int inRightBound) {
+            // if there is no elements to construct subtrees
+            if (inLeftBound == inRightBound)
+                return null;
+
+            // pick up preIndex element as a root
+            int root_val = preorder[preIndex];
+            TreeNode root = new TreeNode(root_val);
+
+            // root splits inorder list
+            // into left and right subtrees
+            int index = idx_map.get(root_val);
+
+            // recursion
+            preIndex++;
+            // build left subtree
+            root.left = helper(inLeftBound, index);
+            // build right subtree
+            root.right = helper(index + 1, inRightBound);
+            return root;
+        }
+
+        public static TreeNode buildTree(int[] preorderr, int[] inorderr) {
+            preorder = preorderr;
+
+            // build a hashmap value -> its index
+            int idx = 0;
+            for (Integer val : inorderr)
+                idx_map.put(val, idx++);
+            return helper(0, inorderr.length);
+        }
+    }
+
+    public static boolean equals(TreeNode x,TreeNode y)
+    {
+        if(x==null && y==null)
+            return true;
+        if(x==null || y==null)
+            return false;
+        return x.val==y.val && equals(x.left,y.left) && equals(x.right,y.right);
+    }
+    public static boolean isSubtreeCompare(TreeNode s,TreeNode t)
+    {
+        return  s!=null && ( equals(s,t) || isSubtreeCompare(s.left,t) || isSubtreeCompare(s.right,t));
+    }
+
+
+    //passes without rnull and lnull
+    public static boolean isSubtreePreOrder(TreeNode s, TreeNode t) {
+        String tree1 = preorder(s, true);
+        String tree2 = preorder(t, true);
+        return tree1.indexOf(tree2) >= 0;
+    }
+    public static String preorder(TreeNode t, boolean left) {
+        if (t == null) {
+            if (left)
+                return "lnull";
+            else
+                return "rnull";
+        }
+        return "#"+t.val + " " +preorder(t.left, true)+" " +preorder(t.right, false);
+    }
+
+    public static String serialize(TreeNode root, String str) {
+        // Recursive serialization.
+        if (root == null) {
+            str += "null,";
+        } else {
+            if(dfsTraversalOrder.equals("preorder"))
+                str += str.valueOf(root.val) + ",";
+
+            str = serialize(root.left, str);
+            if(dfsTraversalOrder.equals("inorder"))
+                str += str.valueOf(root.val) + ",";
+
+            str = serialize(root.right, str);
+
+            if(dfsTraversalOrder.equals("postorder"))
+                str += str.valueOf(root.val) + ",";
+
+        }
+        return str;
+    }
+
+    //For deserializing, the position of root is very important.
+    //for Preorder, its in the start so start from start, post- at the end and inorder-root position should be given
+    public static int deserializePreOrder(TreeNode root, String[] preOrderString, int index) {
+
+        index++;
+        if (!preOrderString[index].equals("null"))
+        {
+            root.left = new TreeNode(Integer.parseInt(preOrderString[index]));
+            index = deserializePreOrder(root.left, preOrderString, index);
+        } else
+            index++;
+
+        if (!preOrderString[index].equals("null"))
+        {
+            root.right = new TreeNode(Integer.parseInt(preOrderString[index]));
+            index = deserializePreOrder(root.right, preOrderString, index);
+        } else
+            index++;
+
+        return index;
+    }
+
+    // Encodes a tree to a single string.
+    public static String serialize(TreeNode root) {
+        return serialize(root, "");
+    }
+
+    public static TreeNode deserialize(List<String> l) {
+        // Recursive deserialization.
+        if (l.get(0).equals("null")) {
+            l.remove(0);
+            return null;
+        }
+
+        TreeNode root = new TreeNode(Integer.valueOf(l.get(0)));
+        l.remove(0);
+        root.left = deserialize(l);
+        root.right = deserialize(l);
+
+        return root;
+    }
+
+    // Decodes your encoded data to tree.
+    public static TreeNode deserialize(String data) {
+        String[] data_array = data.split(",");
+        List<String> data_list = new LinkedList<String>(Arrays.asList(data_array));
+        return deserialize(data_list);
+    }
+
+
+    public static List<List<Integer>> levelOrderIter(TreeNode root) {
+        List<List<Integer>> levels = new ArrayList<List<Integer>>();
+        if (root == null) return levels;
+
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
+        int level = 0;
+        while ( !queue.isEmpty() ) {
+            // start the current level
+            levels.add(new ArrayList<Integer>());
+
+            // number of elements in the current level
+            int level_length = queue.size();
+            for(int i = 0; i < level_length; ++i) {
+                TreeNode node = queue.remove();
+
+                // fulfill the current level
+                levels.get(level).add(node.val);
+
+                // add child nodes of the current level
+                // in the queue for the next level
+                if (node.left != null) queue.add(node.left);
+                if (node.right != null) queue.add(node.right);
+            }
+            // go to next level
+            level++;
+        }
+        return levels;
+    }
+
+    public static void levelOrderRecur(TreeNode node, List<List<Integer>> levels, int level) {
+
+        if(node==null)
+            return;
+        // start the current level
+        if (levels.size() == level)
+            levels.add(new ArrayList<Integer>());
+
+        // fulfil the current level
+        levels.get(level).add(node.val);
+
+        // process child nodes for the next level
+        if (node.left != null)
+            levelOrderRecur(node.left, levels, level + 1);
+        if (node.right != null)
+            levelOrderRecur(node.right, levels, level + 1);
+    }
+
+    static class MaxPathBT {
+        static int max_sum = Integer.MIN_VALUE;
+
+        public static int max_gain(TreeNode node) {
+            if (node == null) return 0;
+
+            // max sum on the left and right sub-trees of node
+            int left_gain = Math.max(max_gain(node.left), 0);
+            int right_gain = Math.max(max_gain(node.right), 0);
+
+            // the price to start a new path where `node` is a highest node
+            int price_newpath = node.val + left_gain + right_gain;
+
+            // update max_sum if it's better to start a new path
+            max_sum = Math.max(max_sum, price_newpath);
+
+            // for recursion :
+            // return the max gain if continue the same path
+            return node.val + Math.max(left_gain, right_gain);
+        }
+
+        public static int maxPathSum(TreeNode root) {
+            max_gain(root);
+            return max_sum;
+        }
+    }
+
+    public static boolean isSameTreeQueue(TreeNode p, TreeNode q) {
+        if (p == null && q == null) return true;
+        if (!check(p, q)) return false;
+
+        // init deques
+        ArrayDeque<TreeNode> deqP = new ArrayDeque<TreeNode>();
+        ArrayDeque<TreeNode> deqQ = new ArrayDeque<TreeNode>();
+        deqP.addLast(p);
+        deqQ.addLast(q);
+
+        while (!deqP.isEmpty()) {
+            p = deqP.removeFirst();
+            q = deqQ.removeFirst();
+
+            if (!check(p, q)) return false;
+            if (p != null) {
+                // in Java nulls are not allowed in Deque
+                if (!check(p.left, q.left)) return false;
+                if (p.left != null) {
+                    deqP.addLast(p.left);
+                    deqQ.addLast(q.left);
+                }
+                if (!check(p.right, q.right)) return false;
+                if (p.right != null) {
+                    deqP.addLast(p.right);
+                    deqQ.addLast(q.right);
+                }
+            }
+        }
+        return true;
+    }
+
+    public static boolean check(TreeNode p, TreeNode q) {
+        // p and q are null
+        if (p == null && q == null) return true;
+        // one of p and q is null
+        if (q == null || p == null) return false;
+        if (p.val != q.val) return false;
+        return true;
+    }
+
+    public static boolean isSameTreeRecur(TreeNode p, TreeNode q) {
+        // p and q are both null
+        if (p == null && q == null) return true;
+        // one of p and q is null
+        if (q == null || p == null) return false;
+        if (p.val != q.val) return false;
+        return isSameTreeRecur(p.right, q.right) &&
+                isSameTreeRecur(p.left, q.left);
+    }
+
+    public static int maxDepthStack(TreeNode root) {
+        LinkedList<Pair<TreeNode, Integer>> stack = new LinkedList<>();
+        if (root != null) {
+            stack.add(new Pair(root, 1));
+        }
+        int depth = 0;
+        while (!stack.isEmpty()) {
+            Pair<TreeNode, Integer> current = stack.pollLast();
+            root = current.getKey();
+            int current_depth = current.getValue();
+            if (root != null) {
+                depth = Math.max(depth, current_depth);
+                stack.add(new Pair(root.left, current_depth + 1));
+                stack.add(new Pair(root.right, current_depth + 1));
+            }
+        }
+        return depth;
+    }
+
+    public static int maxDepthRecur(TreeNode root) {
+        if (root == null) {
+            return 0;
+        } else {
+            int left_height = maxDepthRecur(root.left);
+            int right_height = maxDepthRecur(root.right);
+            return java.lang.Math.max(left_height, right_height) + 1;
+        }
+    }
+    
+    public static boolean wordSearch(char[][] board, String word) {
+        char[] w = word.toCharArray();
+        for (int row=0; row<board.length; row++) {
+            for (int col=0; col<board[row].length; col++) {
+                if (exist(board, row, col, w, 0)) return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean exist(char[][] board, int row, int col, char[] inputWord, int currentWordLength) {
+        if (currentWordLength == inputWord.length) return true;
+        if (row<0 || col<0 || row == board.length || col == board[row].length) return false;
+        if (board[row][col] != inputWord[currentWordLength]) return false;
+        board[row][col] ^= 256;
+        boolean exist = exist(board, row, col+1, inputWord, currentWordLength+1)
+                || exist(board, row, col-1, inputWord, currentWordLength+1)
+                || exist(board, row+1, col, inputWord, currentWordLength+1)
+                || exist(board, row-1, col, inputWord, currentWordLength+1);
+        board[row][col] ^= 256;
+        return exist;
+    }
+
+    public static void rotateImageOnePassnOneLoop(int[][] matrix) {
+//        int n = matrix.length;
+//        for (int i = 0; i < (n + 1) / 2; i ++) {
+//            for (int j = 0; j < n / 2; j++) {
+//                int temp = matrix[n - 1 - j][i];
+//                matrix[n - 1 - j][i] = matrix[n - 1 - i][n - j - 1];
+//                matrix[n - 1 - i][n - j - 1] = matrix[j][n - 1 -i];
+//                matrix[j][n - 1 - i] = matrix[i][j];
+//                matrix[i][j] = temp;
+//            }
+//        }
+
+
+//        int n = matrix.length;
+//        // l is the side length of the matrix we are processing
+//        for(int l = n; l > 1; l -= 2){
+//            // lo is the start index of the matrix we are processing
+//            int lo = (n-l)/2;
+//            // hi is the end index of the matrix we are processing
+//            int hi = lo + l -1;
+//            for(int i = 0; i < l-1; i++){
+//                // move number on one side to the other side clockwise
+//                int temp = matrix[hi-i][lo];
+//                matrix[hi-i][lo] = matrix[hi][hi-i];
+//                matrix[hi][hi-i] = matrix[lo+i][hi];
+//                matrix[lo+i][hi] = matrix[lo][lo+i];
+//                matrix[lo][lo+i] = temp;
+//            }
+//        }
+
+        int n = matrix.length, lo=0,hi=matrix.length-1;
+        // l is the side length, for loop to process one square at a time, l-=2 as the square becomes smaller
+        for(int l = n; l > 1; l -= 2){
+
+            //for loop to go over the elements in the square
+            for(int element = 0; element < l-1; element++){
+                // move number on one side to the other side clockwise
+                int temp = matrix[hi-element][lo];
+                matrix[hi-element][lo] = matrix[hi][hi-element];
+                matrix[hi][hi-element] = matrix[lo+element][hi];
+                matrix[lo+element][hi] = matrix[lo][lo+element];
+                matrix[lo][lo+element] = temp;
+            }
+            // lo is the first element on the side l
+            lo++;
+            // hi is the last element on the side l
+            hi--;
+        }
+    }
+
+    public static void rotateImageOnePass(int[][] matrix) {
+        int n = matrix.length;
+        for (int i = 0; i < n / 2 + n % 2; i++) {
+            for (int j = 0; j < n / 2; j++) {
+                int[] tmp = new int[4];
+                int row = i;
+                int col = j;
+                for (int k = 0; k < 4; k++) {
+                    tmp[k] = matrix[row][col];
+                    int x = row;
+                    row = col;
+                    col = n - 1 - x;
+                }
+                for (int k = 0; k < 4; k++) {
+                    matrix[row][col] = tmp[(k + 3) % 4];
+                    int x = row;
+                    row = col;
+                    col = n - 1 - x;
+                }
+            }
+        }
+    }
+
+    public static void rotateImageTransposenReverse(int[][] matrix) {
+        int n = matrix.length;
+
+        // transpose matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                int tmp = matrix[j][i];
+                matrix[j][i] = matrix[i][j];
+                matrix[i][j] = tmp;
+            }
+        }
+        // reverse each row
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n / 2; j++) {
+                int tmp = matrix[i][j];
+                matrix[i][j] = matrix[i][n - j - 1];
+                matrix[i][n - j - 1] = tmp;
+            }
+        }
+    }
+
+    public static void spiralOrder(int[][] matrix) {
+        List ans = new ArrayList();
+        if (matrix.length == 0)
+            System.out.println(null+"");
+        int r1 = 0, r2 = matrix.length - 1;
+        int c1 = 0, c2 = matrix[0].length - 1;
+        while (r1 <= r2 && c1 <= c2) {
+            for (int c = c1; c <= c2; c++) System.out.print(matrix[r1][c]);
+            for (int r = r1 + 1; r <= r2; r++) System.out.print(matrix[r][c2]);
+            if (r1 < r2 && c1 < c2) {
+                for (int c = c2 - 1; c > c1; c--) System.out.print(matrix[r2][c]);
+                for (int r = r2; r > r1; r--) System.out.print(matrix[r][c1]);
+            }
+            r1++;
+            r2--;
+            c1++;
+            c2--;
+        }
+//        return ans;
+    }
+
+    //>>>>Rev1
     public static void setZeroes(int[][] matrix) {
         Boolean isFirstCol = false;
         int R = matrix.length;
@@ -266,7 +1036,7 @@ public class Test {
             }
         }
 
-        //Use indicators, over other elements
+        //Use indicators, over other elements, Do columns and rows separate for loop will be faster(m+n vs mn)
         // Iterate over the array once again and using the first row and first column, update the elements.
         for (int i = 1; i < R; i++) {
             for (int j = 1; j < C; j++) {
@@ -375,7 +1145,7 @@ public class Test {
         }
     }
 
-    static class UniquePathsDP {
+    static class UniquePathsIIIDP {
         static int ans;
         static int[][] grid;
         static int R, C;
@@ -435,7 +1205,7 @@ public class Test {
         }
     }
 
-    static class UniquePathsRecur {
+    static class UniquePathsIIIRecur {
         static int ans;
         static int[][] gridStatic;
         static int R, C;
@@ -709,7 +1479,6 @@ public class Test {
         return l3.next;
     }
 
-    //>>>>Rev
     public static double findMedianSortedArrays(int[] A, int[] B) {
         int m = A.length;
         int n = B.length;
@@ -792,7 +1561,7 @@ public class Test {
         return ans;
     }
 
-    //Sliding window
+    //Sliding window, can be done with int[] also 26 char, 128 char or 256 extended ASCII
     public static int lengthOfLongestNonRepeatingSubstring(String s) {
         int n = s.length(), ans = 0;
         Map<Character, Integer> map = new HashMap<Character, Integer>(); // current index of character
@@ -1015,7 +1784,7 @@ public class Test {
 
     }
 
-
+//    >>>>????
     public static int maxProdSubArray(int[] nums) {
         int maxSum = nums[0];
         int currentMax = nums[0];
