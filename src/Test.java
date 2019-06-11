@@ -112,6 +112,8 @@ public class Test {
 
 //         Expand around the center
 //        System.out.println(longestPalindromeSubstring("ababa"));
+//        System.out.println(longestPalindromeSubstring("aaa"));
+//        System.out.println(longestPalindromeSubstring("abc"));
 ////////////
 
 //////////// Length Of Longest Non-repeating Substring
@@ -405,11 +407,487 @@ public class Test {
 //        System.out.println(lowestCommonAncestorRecur(t1,t3,t4).val);
 ////////////
 
-//////////// Character Replacement
-        String s="AABABBA";
-        System.out.println(characterReplacement(s,3));
+//////////// Longest Repeating Character Replacement
+//        String s="AABABBA";
+//        String s="ACDBBEFAGHIJA";
+//        System.out.println(characterReplacement(s,2));
 ////////////
 
+//////////// Minimum Window Substring
+//        String s="aabaabaaab";
+//        String t="bb";
+//        String s="adobecodebanc";
+//        String t="abc";
+//        String s="cabeca";
+//        String t="cae";
+//        System.out.println(minWindow(s,t));
+//        System.out.println(minWindowMyWay(s,t));
+//        System.out.println(minWindowTemplate(s,t));
+//        String s="aabbbbcdddd";
+//        System.out.println(lengthOfLongestSubstringKDistinct(s,3));
+////////////
+
+//////////// Encode Decode Strings
+//        List<String> orinigalList = new ArrayList<String>();
+//        orinigalList.add("abc,");
+//        orinigalList.add("def");
+//        System.out.println(decode(encode(orinigalList)));
+//        orinigalList.clear();
+//        orinigalList.add("abc");
+//        orinigalList.add(",def");
+//        System.out.println(decode(encode(orinigalList)));
+//        orinigalList.clear();
+//        System.out.println(decode(encode(orinigalList)));
+
+////////////
+
+//////////// LRU cache
+//        LRUCache cache = new LRUCache(2);
+//        cache.put(1, 1);
+//        cache.put(2, 2);
+//        System.out.println(cache.get(1));       // returns 1
+//        cache.put(3, 3);    // evicts key 2
+//        System.out.println(cache.get(2));       // returns -1 (not found)
+//        cache.put(4, 4);    // evicts key 1
+//        System.out.println(cache.get(1));       // returns -1 (not found)
+//        System.out.println(cache.get(3));       // returns 3
+//        System.out.println(cache.get(4));       // returns 4
+////////////
+
+//////////// Group Anagrams
+//        String[] strs=new String[]{"eat", "tea", "tan", "ate", "nat", "bat"};
+//        System.out.println(groupAnagrams(strs));
+////////////
+
+//////////// Valid Parenthesis
+//        String strs="{[}]";
+//        String strs="(([]){})";
+//        System.out.println(isValidParenthesis(strs));
+////////////
+
+//////////// Count Palindromes
+        String s="babababa";
+        System.out.println(countPalindromeSubstrings(s));
+        System.out.println(countPalindromeSubstringsManachersAlgo(s));
+////////////
+
+    }
+
+    //Stack preserves order
+    public static boolean isValidParenthesis(String s) {
+
+        // Hash table that takes care of the mappings.
+         HashMap<Character, Character> mappings;
+        mappings = new HashMap<Character, Character>();
+        mappings.put(')', '(');
+        mappings.put('}', '{');
+        mappings.put(']', '[');
+
+        // Initialize a stack to be used in the algorithm.
+        Stack<Character> stack = new Stack<Character>();
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            // If the current character is a closing bracket.
+            if (mappings.containsKey(c)) {
+
+                // Get the top element of the stack. If the stack is empty, set a dummy value of '#'
+                char topElement = stack.empty() ? '#' : stack.pop();
+
+                // If the mapping for this bracket doesn't match the stack's top element, return false.
+                if (topElement != mappings.get(c)) {
+                    return false;
+                }
+            } else {
+                // If it was an opening bracket, push to the stack.
+                stack.push(c);
+            }
+        }
+
+        // If the stack still contains elements, then it is an invalid expression.
+        return stack.isEmpty();
+    }
+
+    public static boolean isValidParenthesisDintWork(String s) {
+
+        int openPtr = -1, endPtr = -1, doneIndex = -1;
+        char character = '\0';
+        for (int i = 0; i < s.length(); i++) {
+            character = s.charAt(i);
+            if (character == '{' || character == '(' || character == '[') {
+                if (openPtr == -1 || openPtr>doneIndex)
+                    openPtr = i;
+
+            }
+            else
+            if(character == '}' || character == ')' || character == ']')
+            {
+                    endPtr = i;
+                if(openPtr==-1)
+                    return false;
+
+                if(character=='}' && s.charAt(openPtr)!='{')
+                    return false;
+                if(character==')' && s.charAt(openPtr)!='(')
+                    return false;
+                if(character==']' && s.charAt(openPtr)!='[')
+                    return false;
+
+                //there was a pair match at this point
+                if(--openPtr==doneIndex) {
+                    doneIndex = endPtr;
+                    openPtr=-1;
+                }
+            }
+        }
+        if(openPtr!=-1)
+            return false;
+        return true;
+    }
+
+    public static List<List<String>> groupAnagrams(String[] strs) {
+        if (strs.length == 0) return new ArrayList();
+        Map<String, List> ans = new HashMap<String, List>();
+        int[] count = new int[26];
+        for (String s : strs) {
+            Arrays.fill(count, 0);
+            for (char c : s.toCharArray()) count[c - 'a']++;
+
+            StringBuilder sb = new StringBuilder("");
+            for (int i = 0; i < 26; i++) {
+                sb.append('#');
+                sb.append(count[i]);
+            }
+            String key = sb.toString();
+            if (!ans.containsKey(key)) ans.put(key, new ArrayList());
+            ans.get(key).add(s);
+        }
+        return new ArrayList(ans.values());
+    }
+
+//    Red black trees…properties
+//    Balance a binary tree or BST…do with inorder
+//    Check if balanced binary tree…check by height subtractions
+//    Do binary search in array
+
+//    LRU cache can be a linked hash map too
+    public static class LRUCache {
+
+        private Hashtable<Integer, DLinkedNode> cache =
+                new Hashtable<Integer, DLinkedNode>();
+        private int size;
+        private int capacity;
+        private DLinkedNode head, tail;
+
+        class DLinkedNode {
+            int key;
+            int value;
+            DLinkedNode prev;
+            DLinkedNode next;
+        }
+
+        public LRUCache(int capacity) {
+            this.size = 0;
+            this.capacity = capacity;
+
+            head = new DLinkedNode();
+            // head.prev = null;
+
+            tail = new DLinkedNode();
+            // tail.next = null;
+
+            head.next = tail;
+            tail.prev = head;
+        }
+
+        private void addNode(DLinkedNode node) {
+            /**
+             * Always add the new node right after head.
+             */
+            node.prev = head;
+            node.next = head.next;
+
+            head.next.prev = node;
+            head.next = node;
+        }
+
+        private void removeNode(DLinkedNode node){
+            /**
+             * Remove an existing node from the linked list.
+             */
+            DLinkedNode prev = node.prev;
+            DLinkedNode next = node.next;
+
+            prev.next = next;
+            next.prev = prev;
+        }
+
+        private void moveToHead(DLinkedNode node){
+            /**
+             * Move certain node in between to the head.
+             */
+            removeNode(node);
+            addNode(node);
+        }
+
+        private DLinkedNode popTail() {
+            /**
+             * Pop the current tail.
+             */
+            DLinkedNode res = tail.prev;
+            removeNode(res);
+            return res;
+        }
+
+        public int get(int key) {
+            DLinkedNode node = cache.get(key);
+            if (node == null) return -1;
+
+            // move the accessed node to the head;
+            moveToHead(node);
+
+            return node.value;
+        }
+
+        public void put(int key, int value) {
+            DLinkedNode node = cache.get(key);
+
+            if(node == null) {
+                DLinkedNode newNode = new DLinkedNode();
+                newNode.key = key;
+                newNode.value = value;
+
+                cache.put(key, newNode);
+                addNode(newNode);
+
+                ++size;
+
+                if(size > capacity) {
+                    // pop the tail
+                    DLinkedNode tail = popTail();
+                    cache.remove(tail.key);
+                    --size;
+                }
+            } else {
+                // update the value.
+                node.value = value;
+                moveToHead(node);
+            }
+        }
+    }
+
+    // Encodes a list of strings to a single string.
+    public static String encode(List<String> strs) {
+        StringBuffer sequence = new StringBuffer(".");
+        StringBuffer stringInput = new StringBuffer();
+        if (strs.size() == 0)
+            return "";
+        for (String s : strs) {
+            sequence.append(s.length() + " ");
+            stringInput.append(s);
+        }
+        return stringInput.toString() + sequence.toString();
+    }
+
+    // Decodes a single string to a list of strings.
+    public static List<String> decode(String s) {
+        if(s.isEmpty())
+            return new ArrayList<String>();
+
+        String[] sequence = s.substring(s.lastIndexOf(".") + 1).split(" ");
+        List<String> orinigalList = new ArrayList<String>();
+        int startIndex = 0;
+        int lenghtOfString = 0;
+        for (String number : sequence) {
+            lenghtOfString = Integer.parseInt(number);
+            orinigalList.add(s.substring(startIndex, startIndex + lenghtOfString));
+            startIndex+=lenghtOfString;
+        }
+        return orinigalList;
+    }
+
+    //For 2 distinct char- can be better with earliest last index of the 2 distinct characters
+    // to jump begin ptr quickly rather than inner while loop
+    //In the template way only minWindow() has a for loop to set initial values
+    public static int lengthOfLongestSubstringKDistinct(String s,int k) {
+        int[] map=new int[128];
+        char[] sCharArray=s.toCharArray();
+        int counter=0, begin=0, end=0, d=0;
+        while(end<sCharArray.length){
+            if(map[sCharArray[end++]]++==0) counter++;
+            while(counter>k) if(map[sCharArray[begin++]]--==1) counter--;
+            d=Math.max(d, end-begin);
+        }
+        return d;
+    }
+
+    //Min Mindow, atmost 2 distinct char and without repeating substrings have a template
+    public static String minWindowTemplate(String s, String t) {
+        int[] charactersOfT = new int[128];
+        char[] sCharArray=s.toCharArray();
+        int tcounter = t.length(), beginOfS = 0, endOfS = 0, minStringLength = Integer.MAX_VALUE, minStringStart = 0;
+
+        for (char c : t.toCharArray()) charactersOfT[c]++;
+
+        while (endOfS < s.length()) {
+            if (charactersOfT[sCharArray[endOfS++]]-- > 0) tcounter--; //in t
+
+            //substring found, go over it to find new begin index
+            while (tcounter == 0) {
+                if (endOfS - beginOfS < minStringLength) minStringLength = endOfS - (minStringStart = beginOfS);
+                if (charactersOfT[sCharArray[beginOfS++]]++ == 0)
+                    tcounter++;  //make it invalid
+            }
+        }
+        return minStringLength == Integer.MAX_VALUE ? "" : s.substring(minStringStart, minStringStart + minStringLength);
+    }
+
+    public static String minWindowMyWay(String s, String t) {
+
+        if (t.length() > s.length())
+            return "";
+        if(s.indexOf(t)>=0)
+            return t;
+        if(t.length()==1 && s.indexOf(t)<0)
+            return "";
+
+        int start = 0, end = 0;
+        String maxString = s + "a";
+        HashMap<Character, Integer> remainingSet = new HashMap<Character, Integer>();
+        HashMap<Character, Integer> repeatedElements = new HashMap<Character, Integer>();
+        HashSet<Character> uniqueCharacters = new HashSet<Character>();
+        Queue<CharacterAndIndex> queue = new LinkedList<CharacterAndIndex>();
+
+        boolean firstOccurence=false;
+
+            for (char character : t.toCharArray()) {
+                remainingSet.put(character, remainingSet.getOrDefault(character, 0) + 1);
+                uniqueCharacters.add(character);
+            }
+
+            while (end < s.length() || repeatedElements.size() > 0) {
+
+                while (!remainingSet.isEmpty() && end < s.length()) {
+                    if (remainingSet.containsKey(s.charAt(end))) {
+                        if(!firstOccurence){
+                            start=end;
+                            firstOccurence=true;
+                        }
+
+                        if (remainingSet.get(s.charAt(end)) == 1)
+                            remainingSet.remove(s.charAt(end));
+                        else
+                            remainingSet.put(s.charAt(end), remainingSet.get(s.charAt(end)) - 1);
+                        ((LinkedList<CharacterAndIndex>) queue).push(new CharacterAndIndex(s.charAt(end), end));
+                    } else if (uniqueCharacters.contains(s.charAt(end))) {
+                        repeatedElements.put(s.charAt(end), repeatedElements.getOrDefault(s.charAt(end), 0) + 1);
+                        ((LinkedList<CharacterAndIndex>) queue).push(new CharacterAndIndex(s.charAt(end), end));
+                    }
+                    end++;
+                }
+                if (!remainingSet.isEmpty() && end == s.length())
+                {    if (maxString.length()<=s.length())
+                        return maxString;
+                    else
+                        return "";
+            }
+                //after this point u have found a substring
+                maxString = s.substring(start, end).length() < maxString.length() ? s.substring(start, end) : maxString;
+//                System.out.println(s.substring(start, end));
+
+                if (end < s.length() || repeatedElements.size() > 0) {
+                    CharacterAndIndex poppedElement = ((LinkedList<CharacterAndIndex>) queue).pollLast();
+                        while (repeatedElements.containsKey(poppedElement.character)) {
+                            if (repeatedElements.get(poppedElement.character) == 1)
+                                repeatedElements.remove(poppedElement.character);
+                            else
+                                repeatedElements.put(poppedElement.character, repeatedElements.get(poppedElement.character) - 1);
+
+                            poppedElement = ((LinkedList<CharacterAndIndex>) queue).pollLast();
+                            start = poppedElement.index;
+                            maxString = s.substring(start, end).length() < maxString.length() ? s.substring(start, end) : maxString;
+//                            System.out.println(s.substring(start, end));
+                        }
+                        remainingSet.put(poppedElement.character, 1);
+                        start = ((LinkedList<CharacterAndIndex>) queue).peekLast().index;
+                }
+                if (!repeatedElements.containsKey(remainingSet.get(0)) && end==s.length())
+                    break;
+            }
+        return maxString;
+    }
+
+
+        public static String minWindow(String s, String t) {
+
+        if (s.length() == 0 || t.length() == 0) {
+            return "";
+        }
+
+        // Dictionary which keeps a count of all the unique characters in t.
+        Map<Character, Integer> dictT = new HashMap<Character, Integer>();
+        for (int i = 0; i < t.length(); i++) {
+            int count = dictT.getOrDefault(t.charAt(i), 0);
+            dictT.put(t.charAt(i), count + 1);
+        }
+
+        // Number of unique characters in t, which need to be present in the desired window.
+        int required = dictT.size();
+
+        // Left and Right pointer
+        int l = 0, r = 0;
+
+        // formed is used to keep track of how many unique characters in t
+        // are present in the current window in its desired frequency.
+        // e.g. if t is "AABC" then the window must have two A's, one B and one C.
+        // Thus formed would be = 3 when all these conditions are met.
+        int formed = 0;
+
+        // Dictionary which keeps a count of all the unique characters in the current window.
+        Map<Character, Integer> windowCounts = new HashMap<Character, Integer>();
+
+        // ans list of the form (window length, left, right)
+        int[] ans = {-1, 0, 0};
+
+        while (r < s.length()) {
+            // Add one character from the right to the window
+            char c = s.charAt(r);
+            int count = windowCounts.getOrDefault(c, 0);
+            windowCounts.put(c, count + 1);
+
+            // If the frequency of the current character added equals to the
+            // desired count in t then increment the formed count by 1.
+            if (dictT.containsKey(c) && windowCounts.get(c).intValue() == dictT.get(c).intValue()) {
+                formed++;
+            }
+
+            // Try and contract the window till the point where it ceases to be 'desirable'.
+            while (l <= r && formed == required) {
+                c = s.charAt(l);
+                // Save the smallest window until now.
+                if (ans[0] == -1 || r - l + 1 < ans[0]) {
+                    ans[0] = r - l + 1;
+                    ans[1] = l;
+                    ans[2] = r;
+                }
+
+                // The character at the position pointed by the
+                // `Left` pointer is no longer a part of the window.
+                windowCounts.put(c, windowCounts.get(c) - 1);
+                if (dictT.containsKey(c) && windowCounts.get(c).intValue() < dictT.get(c).intValue()) {
+                    formed--;
+                }
+
+                // Move the left pointer ahead, this would help to look for a new window.
+                l++;
+            }
+
+            // Keep expanding the window once we are done contracting.
+            r++;
+        }
+
+        return ans[0] == -1 ? "" : s.substring(ans[1], ans[2] + 1);
     }
 
     public static int characterReplacement(String s, int k)
@@ -420,7 +898,7 @@ public class Test {
         for(int end=0; end<s.length(); end++)
         {
             max = Math.max(max, ++count[s.charAt(end)]);
-            if(max+k<=end-start)
+            if(max+k<end-start+1)
                 count[s.charAt(start++)]--;
         }
         return s.length()-start;
@@ -1576,9 +2054,65 @@ public class Test {
         return ans;
     }
 
+    //Check Manacher's Algorithm
+    public static int countPalindromeSubstringsManachersAlgo(String S) {
+        int center = 0, right = 0, t = 2, ans = 0, mirrorOfi = 0;
+        char[] paddedInput = new char[2 * S.length() + 3];
+        int[] dp = new int[paddedInput.length];
+
+        paddedInput[0] = '@';
+        paddedInput[1] = '#';
+        paddedInput[paddedInput.length - 1] = '$';
+        for (char c : S.toCharArray()) {
+            paddedInput[t++] = c;
+            paddedInput[t++] = '#';
+        }
+
+        for (int i = 1; i < dp.length - 1; ++i) {
+            mirrorOfi = 2 * center - i;
+
+            //If i is inside second half of palindrome, copy over the palindrome length
+            if (i < right)
+                dp[i] = Math.min(right - i, dp[mirrorOfi]);
+
+            //Compare characters around i
+            while (paddedInput[i + dp[i] + 1] == paddedInput[i - dp[i] - 1])
+                dp[i]++;
+
+            //If palindrome at i expands beyond right side of C
+            if (i + dp[i] > right) {
+                center = i;
+                right = i + dp[i];
+            }
+        }
+
+        for (int v : dp) ans += (v + 1) / 2;
+        return ans;
+    }
+
+    public static int countPalindromeSubstrings(String S) {
+        int N = S.length(), ans = 0, left = 0, right = 0;
+
+        //2*N-1 because we use L=i & R=i and then L=i & R=i+1
+        for (int endIndex = 0; endIndex <= 2 * N - 1; ++endIndex) {
+            left = endIndex / 2;
+            right = left + endIndex % 2;
+            while (left >= 0 && right < N && S.charAt(left) == S.charAt(right)) {
+                ans++;
+                left--;
+                right++;
+            }
+        }
+        return ans;
+    }
+
+    static int palindromCounter=0;
+
+
+    //Code this
     public static String longestPalindromeSubstring(String s) {
         if (s == null || s.length() < 1) return "";
-        int start = 0, end = 0;
+        int start = 0, end = 0; palindromCounter=0;
         for (int i = 0; i < s.length(); i++) {
             int len1 = expandAroundCenter(s, i, i);
             int len2 = expandAroundCenter(s, i, i + 1);
@@ -1588,14 +2122,18 @@ public class Test {
                 end = i + len / 2;
             }
         }
+        System.out.println(palindromCounter+" palindromes");
         return s.substring(start, end + 1);
     }
 
     private static int expandAroundCenter(String s, int left, int right) {
         int L = left, R = right;
         while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
+//            System.out.println(s.substring(L, R+1));
+            palindromCounter++;
             L--;
             R++;
+
         }
         return R - L - 1;
     }
