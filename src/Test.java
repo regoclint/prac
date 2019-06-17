@@ -1,6 +1,7 @@
 
 import javafx.util.Pair;
 
+import java.io.IOException;
 import java.util.*;
 
 public class Test {
@@ -8,7 +9,8 @@ public class Test {
     public static Map<Integer, Integer> map = new HashMap<Integer, Integer>();
     static HashMap<Integer, List<Integer>> numPaths= formNumPaths();
     static String dfsTraversalOrder ="preorder";
-    public static void main(String ar[]) {
+    static Stack<Integer> outputStack=new Stack<>();
+    public static void main(String ar[]) throws IOException {
 
 
 
@@ -355,6 +357,13 @@ public class Test {
 //        deserializePreOrder(root,preOrderStringArray,0);
 ////////////
 
+//////////// Tree From Preorder & Inorder
+//        int[] preorder=new int[]{3,9,20,15,7};
+//        int[] inorder=new int[]{9,3,15,20,7};
+//        TreeFromPreorderInorder.buildTree(preorder,inorder);
+
+////////////
+
 //////////// Sub tree
 //        TreeNode t5 = new TreeNode(2, null, null);
 //        TreeNode t4 = new TreeNode(1, null, null);
@@ -369,22 +378,18 @@ public class Test {
 //        System.out.println(isSubtreeCompare(t1,s1));
 ////////////
 
-//////////// Tree From Preorder & Inorder
-//        int[] preorder=new int[]{3,9,20,15,7};
-//        int[] inorder=new int[]{9,3,15,20,7};
-//        TreeFromPreorderInorder.buildTree(preorder,inorder);
-
-////////////
-
 //////////// Validate BST
 //        TreeNode t5 = new TreeNode(6, null, null);
 //        TreeNode t4 = new TreeNode(4, null, null);
 //        TreeNode t3 = new TreeNode(5, t4, t5);
 //        TreeNode t2 = new TreeNode(1, null, null);
 //        TreeNode t1 = new TreeNode(3, t2, t3);
-//        System.out.println(isValidBSTRecur(t1,null,null));
-//        System.out.println(isValidBSTInorder(t1));
-//        System.out.println(ValidBSTIterative.isValidBSTIterative(t1));
+////        System.out.println(isValidBSTRecur(t1,null,null));
+////        System.out.println(isValidBSTInorder(t1));
+////        System.out.println(ValidBSTIterative.isValidBSTIterative(t1));
+//        int[] inorderlastElement = new int[]{Integer.MIN_VALUE};
+//        System.out.println(isValidBSTInorderArray(t1,inorderlastElement));
+
 ////////////
 
 //////////// kth Smallest element in BST
@@ -395,6 +400,16 @@ public class Test {
 //        TreeNode t1 = new TreeNode(3, t2, t3);
 //        System.out.println(kthSmallestIter(t1,4));
 //        System.out.println(kthSmallestRecur(t1,4));
+////////////
+
+//////////// Insert & Delete BST
+//        TreeNode t5 = new TreeNode(6, null, null);
+//        TreeNode t4 = new TreeNode(4, null, null);
+//        TreeNode t3 = new TreeNode(5, t4, t5);
+//        TreeNode t2 = new TreeNode(1, null, null);
+//        TreeNode t1 = new TreeNode(3, t2, t3);
+//        TreeNode result=insertIntoBST(t1,2);
+//        result=deleteBST(t1,2);
 ////////////
 
 //////////// kth Smallest element in BST
@@ -466,11 +481,256 @@ public class Test {
 ////////////
 
 //////////// Count Palindromes
-        String s="babababa";
-        System.out.println(countPalindromeSubstrings(s));
-        System.out.println(countPalindromeSubstringsManachersAlgo(s));
+//        String s="babbab";
+//        System.out.println(longestPalindromeSubstring(s));
+//        System.out.println(countPalindromeSubstrings(s));
+//        System.out.println(countPalindromeSubstringsManachersAlgo(s));
 ////////////
 
+//////////// Insert location in array
+//        InputStreamReader inputStreamReader = new InputStreamReader(System.in);
+//        BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+//        String inputString=bufferedReader.readLine();
+//        Integer[] input=new Integer[inputString.split(",").length];
+//        int i=0;
+//        for(String s :inputString.split(","))
+//        {
+//            input[i]=Integer.parseInt(s);
+//            i++;
+//        }
+//        System.out.println(insertLocation(input,13));
+//        System.out.println(insertLocation(input,8));
+////////////
+
+//////////// Clone graph
+//        UndirectedGraphNode n1=new UndirectedGraphNode(1);
+//        UndirectedGraphNode n2=new UndirectedGraphNode(2);
+//        UndirectedGraphNode n3=new UndirectedGraphNode(3);
+//        UndirectedGraphNode n4=new UndirectedGraphNode(4);
+//        n1.neighbors.add(n2);
+//        n1.neighbors.add(n4);
+//        n2.neighbors.add(n3);
+//        n2.neighbors.add(n1);
+//        n3.neighbors.add(n2);
+//        n3.neighbors.add(n4);
+//        n4.neighbors.add(n3);
+//        n4.neighbors.add(n1);
+//        HashMap<Integer, UndirectedGraphNode> visited=new HashMap<>();
+//        UndirectedGraphNode clone=clone(n1,visited);
+////////////
+
+//////////// Course scheduling
+//        int[][] pre=new int[2][2];
+//        pre[0][0]=1;
+//        pre[0][1]=0;
+//        pre[1][0]=1;
+//        pre[1][1]=2;
+//        System.out.println(canFinishDFS(3,pre));
+//        System.out.println(canFinishBFS(3,pre));
+////////////
+
+//////////// Graph traversals - DFS, BFS
+//        UndirectedGraphNode n1=new UndirectedGraphNode(1);
+//        UndirectedGraphNode n2=new UndirectedGraphNode(2);
+//        UndirectedGraphNode n3=new UndirectedGraphNode(3);
+//        UndirectedGraphNode n4=new UndirectedGraphNode(4);
+//        n1.neighbors.add(n2);
+//        n1.neighbors.add(n4);
+//        n2.neighbors.add(n3);
+//        n2.neighbors.add(n1);
+//        n3.neighbors.add(n2);
+//        n3.neighbors.add(n4);
+//        n4.neighbors.add(n3);
+//        n4.neighbors.add(n1);
+//        HashSet<Integer> visited =new HashSet<>();
+//        System.out.println(graphDFS(n1,visited,3));
+//        visited.clear();
+//        Queue<UndirectedGraphNode> queue=new LinkedList<>();
+//        queue.add(n1);
+//        System.out.println(graphBFS(queue,visited,3));
+////////////
+
+//////////// Topological sort
+
+//        HashMap<Integer, UndirectedGraphNode> graphNodeHashMap= new HashMap<>();
+//        graphNodeHashMap.put(5,new UndirectedGraphNode(5));
+//        graphNodeHashMap.put(6,new UndirectedGraphNode(6));
+//        graphNodeHashMap.put(7,new UndirectedGraphNode(7));
+//        graphNodeHashMap.put(8,new UndirectedGraphNode(8));
+//        graphNodeHashMap.put(9,new UndirectedGraphNode(9));
+//        graphNodeHashMap.put(10,new UndirectedGraphNode(10));
+//        graphNodeHashMap.put(11,new UndirectedGraphNode(11));
+//        GraphNode graphNode=new GraphNode(graphNodeHashMap);
+//        graphNode.addEdge(5,6);
+//        graphNode.addEdge(6,8);
+//        graphNode.addEdge(6,7);
+//        graphNode.addEdge(8,9);
+//        graphNode.addEdge(7,8);
+//        graphNode.addEdge(7,10);
+//        topologicalSort(graphNodeHashMap);
+//        while(!outputStack.isEmpty()){
+//            System.out.println(outputStack.pop());
+//        }
+////////////
+    }
+
+
+    public static void topologicalSort(HashMap<Integer, UndirectedGraphNode> graphNodeHashMap){
+
+        HashSet<Integer> visited=new HashSet<>();
+        for (int i :graphNodeHashMap.keySet()) {
+
+            if(!visited.contains(i))
+                topoDFS(graphNodeHashMap.get(i),visited);
+        }
+    }
+
+    public static void topoDFS(UndirectedGraphNode node,HashSet<Integer> visited ){
+
+        visited.add(node.value);
+        for(UndirectedGraphNode neighbor: node.neighbors){
+            if(!visited.contains(neighbor.value))
+            topoDFS(neighbor,visited);
+        }
+        outputStack.push(node.value);
+    }
+
+    public static boolean graphBFS(Queue<UndirectedGraphNode> queue, HashSet<Integer> visited,int destination) {
+
+        while(!queue.isEmpty()){
+            UndirectedGraphNode node = queue.poll();
+
+            if(node.value==destination)
+                return true;
+
+            for(UndirectedGraphNode neighbour : node.neighbors){
+                if(neighbour.value==destination)
+                    return true;
+                if(!visited.contains(neighbour.value)) {
+                    queue.add(neighbour);
+                    visited.add(neighbour.value);
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean graphDFS(UndirectedGraphNode node, HashSet<Integer> visited, int destination) {
+
+        if (node == null || visited.contains(node.value))
+            return false;
+
+        if (node.value == destination)
+            return true;
+
+        visited.add(node.value);
+        for (UndirectedGraphNode g : node.neighbors) {
+            if (graphDFS(g, visited, destination))
+                return true;
+        }
+        return false;
+    }
+
+    //When Indegree goes to zero means you can go ahead
+    public static boolean canFinishBFS(int numCourses, int[][] prerequisites) {
+        ArrayList[] graph = new ArrayList[numCourses];
+        int[] indegree = new int[numCourses];
+        Queue queue = new LinkedList();
+        int count = 0;
+
+        for (int i = 0; i < numCourses; i++)
+            graph[i] = new ArrayList();
+
+        for (int i = 0; i < prerequisites.length; i++) {
+            indegree[prerequisites[i][0]]++;
+            graph[prerequisites[i][1]].add(prerequisites[i][0]);
+        }
+        for (int i = 0; i < indegree.length; i++) {
+            if (indegree[i] == 0) {
+                queue.add(i);
+                count++;
+            }
+        }
+
+        while (queue.size() != 0) {
+            int course = (int) queue.poll();
+            for (int i = 0; i < graph[course].size(); i++) {
+                int pointer = (int) graph[course].get(i);
+                indegree[pointer]--;// mark visited
+                if (indegree[pointer] == 0) {
+                    queue.add(pointer);
+                    count++;
+                }
+            }
+        }
+        if (count == numCourses)
+            return true;
+        else
+            return false;
+    }
+
+    public static boolean canFinishDFS(int numCourses, int[][] prerequisites) {
+        ArrayList[] graph = new ArrayList[numCourses];
+        //Initialize array
+        for (int i = 0; i < numCourses; i++)
+            graph[i] = new ArrayList();
+
+        //Set adjacency list
+        boolean[] visited = new boolean[numCourses];
+        for (int i = 0; i < prerequisites.length; i++) {
+            graph[prerequisites[i][1]].add(prerequisites[i][0]);
+        }
+
+        for (int i = 0; i < numCourses; i++) {
+            if (!dfs(graph, visited, i))
+                return false;
+        }
+        return true;
+    }
+
+    private static boolean dfs(ArrayList[] graph, boolean[] visited, int course) {
+        if (visited[course])
+            return false;
+        else
+            visited[course] = true;
+
+        for (int i = 0; i < graph[course].size(); i++) {
+            if (!dfs(graph, visited, (int) graph[course].get(i)))
+                return false;
+        }
+        visited[course] = false;
+        return true;
+    }
+
+    private static UndirectedGraphNode clone(UndirectedGraphNode node, HashMap<Integer, UndirectedGraphNode> visited) {
+        if (node == null) return null;
+
+        if (visited.containsKey(node.value)) {
+            return visited.get(node.value);
+        }
+        UndirectedGraphNode clone = new UndirectedGraphNode(node.value);
+        visited.put(clone.value, clone);
+        for (UndirectedGraphNode neighbor : node.neighbors) {
+            clone.neighbors.add(clone(neighbor,visited));
+        }
+        return clone;
+    }
+
+    public static int insertLocation(Integer[] input, int number) {
+
+        int low = 0, high = input.length - 1, mid = 0;
+        if(input.length==0)
+            return 0;
+        while (low < high) {
+            mid = (low + high) / 2;
+            if (number < input[mid])
+                high = mid;
+            if (number > input[mid])
+                low = mid;
+            if (high - low == 1)
+                return high;
+        }
+        return low+1;
     }
 
     //Stack preserves order
@@ -723,6 +983,7 @@ public class Test {
     }
 
     //Min Mindow, atmost 2 distinct char and without repeating substrings have a template
+    //https://leetcode.com/problems/minimum-window-substring/discuss/26808
     public static String minWindowTemplate(String s, String t) {
         int[] charactersOfT = new int[128];
         char[] sCharArray=s.toCharArray();
@@ -901,9 +1162,11 @@ public class Test {
             if(max+k<end-start+1)
                 count[s.charAt(start++)]--;
         }
-        return s.length()-start;
+        return s.length()-start;// the window of length-start is taken forward always and we try to see if we can better from that number for each end index.
     }
 
+    //>>>>Rev1
+    //In BST iterative, may not need stack as u can move through searching
     //LCA can be asked for BT also, there whole tree needs to be searched except for inside a node that has matched.
     public static TreeNode lowestCommonAncestorRecur(TreeNode root, TreeNode p, TreeNode q) {
 
@@ -959,6 +1222,71 @@ public class Test {
         return null;
     }
 
+    public static int successor(TreeNode root) {
+        root = root.right;
+        while (root.left != null) root = root.left;
+        return root.val;
+    }
+
+    /*
+    One step left and then always right
+    */
+    public static int predecessor(TreeNode root) {
+        root = root.left;
+        while (root.right != null) root = root.right;
+        return root.val;
+    }
+
+    public static TreeNode deleteBST(TreeNode root, int key) {
+        if (root == null) return null;
+
+        // delete from the right subtree
+        if (key > root.val) root.right = deleteBST(root.right, key);
+            // delete from the left subtree
+        else if (key < root.val) root.left = deleteBST(root.left, key);
+            // delete the current node
+        else {
+            // the node is a leaf
+            if (root.left == null && root.right == null) root = null;
+                // the node is not a leaf and has a right child
+            else if (root.right != null) {
+                root.val = successor(root);
+                root.right = deleteBST(root.right, root.val);
+            }
+            // the node is not a leaf, has no right child, and has a left child
+            else {
+                root.val = predecessor(root);
+                root.left = deleteBST(root.left, root.val);
+            }
+        }
+        return root;
+    }
+
+    public static TreeNode insertIntoBST(TreeNode root, int val) {
+        TreeNode node = root;
+        while (node != null) {
+            // insert into the right subtree
+            if (val > node.val) {
+                // insert right now
+                if (node.right == null) {
+                    node.right = new TreeNode(val);
+                    return root;
+                }
+                else node = node.right;
+            }
+            // insert into the left subtree
+            else {
+                // insert right now
+                if (node.left == null) {
+                    node.left = new TreeNode(val);
+                    return root;
+                }
+                else node = node.left;
+            }
+        }
+        return new TreeNode(val);
+    }
+
 //    >>>>>???? Check for insert + search optimisation, doubly ll soulution
     public static ArrayList<Integer> inorder(TreeNode root, ArrayList<Integer> arr) {
         if (root == null) return arr;
@@ -973,6 +1301,8 @@ public class Test {
         return nums.get(k - 1);
     }
 
+    //Kthe smallest and validate BST have the same procedure,
+    // get inorder, push all left then compare root and move right and repeat
     public static int kthSmallestIter(TreeNode root, int k) {
         LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
 
@@ -985,6 +1315,23 @@ public class Test {
             if (--k == 0) return root.val;
             root = root.right;
         }
+    }
+
+    public static boolean isValidBSTInorderArray(TreeNode root,int[] inorderLastElement){
+
+        if(root==null)
+            return true;
+
+        if(!isValidBSTInorderArray(root.left,inorderLastElement)) return false;
+
+        if(root.val<=inorderLastElement[0])
+            return false;
+        else
+            inorderLastElement[0]=root.val;
+
+        if(!isValidBSTInorderArray(root.right,inorderLastElement)) return false;
+
+        return true;
     }
 
 //    dfs - stack(Iterative)
@@ -1055,6 +1402,36 @@ public class Test {
         return true;
     }
 
+    public static boolean equals(TreeNode x,TreeNode y)
+    {
+        if(x==null && y==null)
+            return true;
+        if(x==null || y==null)
+            return false;
+        return x.val==y.val && equals(x.left,y.left) && equals(x.right,y.right);
+    }
+    public static boolean isSubtreeCompare(TreeNode s,TreeNode t)
+    {
+        return  s!=null && ( equals(s,t) || isSubtreeCompare(s.left,t) || isSubtreeCompare(s.right,t));
+    }
+
+    //passes without rnull and lnull
+    public static boolean isSubtreePreOrder(TreeNode s, TreeNode t) {
+        String tree1 = preorder(s, true);
+        String tree2 = preorder(t, true);
+        return tree1.indexOf(tree2) >= 0;
+    }
+    public static String preorder(TreeNode t, boolean left) {
+        if (t == null) {
+            if (left)
+                return "lnull";
+            else
+                return "rnull";
+        }
+        return "#"+t.val + " " +preorder(t.left, true)+" " +preorder(t.right, false);
+    }
+
+
     static class TreeFromPreorderInorder {
         // start from first preorder element
         static int preIndex = 0;
@@ -1094,34 +1471,9 @@ public class Test {
         }
     }
 
-    public static boolean equals(TreeNode x,TreeNode y)
-    {
-        if(x==null && y==null)
-            return true;
-        if(x==null || y==null)
-            return false;
-        return x.val==y.val && equals(x.left,y.left) && equals(x.right,y.right);
-    }
-    public static boolean isSubtreeCompare(TreeNode s,TreeNode t)
-    {
-        return  s!=null && ( equals(s,t) || isSubtreeCompare(s.left,t) || isSubtreeCompare(s.right,t));
-    }
-
-
-    //passes without rnull and lnull
-    public static boolean isSubtreePreOrder(TreeNode s, TreeNode t) {
-        String tree1 = preorder(s, true);
-        String tree2 = preorder(t, true);
-        return tree1.indexOf(tree2) >= 0;
-    }
-    public static String preorder(TreeNode t, boolean left) {
-        if (t == null) {
-            if (left)
-                return "lnull";
-            else
-                return "rnull";
-        }
-        return "#"+t.val + " " +preorder(t.left, true)+" " +preorder(t.right, false);
+    // Encodes a tree to a single string.
+    public static String serialize(TreeNode root) {
+        return serialize(root, "");
     }
 
     public static String serialize(TreeNode root, String str) {
@@ -1167,10 +1519,6 @@ public class Test {
         return index;
     }
 
-    // Encodes a tree to a single string.
-    public static String serialize(TreeNode root) {
-        return serialize(root, "");
-    }
 
     public static TreeNode deserialize(List<String> l) {
         // Recursive deserialization.
@@ -1194,7 +1542,6 @@ public class Test {
         return deserialize(data_list);
     }
 
-
     public static List<List<Integer>> levelOrderIter(TreeNode root) {
         List<List<Integer>> levels = new ArrayList<List<Integer>>();
         if (root == null) return levels;
@@ -1206,7 +1553,7 @@ public class Test {
             // start the current level
             levels.add(new ArrayList<Integer>());
 
-            // number of elements in the current level
+            // number of elements in the current level = size of Q
             int level_length = queue.size();
             for(int i = 0; i < level_length; ++i) {
                 TreeNode node = queue.remove();
@@ -1349,7 +1696,8 @@ public class Test {
             return java.lang.Math.max(left_height, right_height) + 1;
         }
     }
-    
+
+
     public static boolean wordSearch(char[][] board, String word) {
         char[] w = word.toCharArray();
         for (int row=0; row<board.length; row++) {
@@ -1445,6 +1793,7 @@ public class Test {
             }
         }
     }
+
 
     public static void rotateImageTransposenReverse(int[][] matrix) {
         int n = matrix.length;
@@ -2054,7 +2403,7 @@ public class Test {
         return ans;
     }
 
-    //Check Manacher's Algorithm
+    // Manacher's Algorithm
     public static int countPalindromeSubstringsManachersAlgo(String S) {
         int center = 0, right = 0, t = 2, ans = 0, mirrorOfi = 0;
         char[] paddedInput = new char[2 * S.length() + 3];
@@ -2086,6 +2435,7 @@ public class Test {
             }
         }
 
+        //By 2 because there were extra palindromes counted because of #
         for (int v : dp) ans += (v + 1) / 2;
         return ans;
     }
@@ -2129,7 +2479,7 @@ public class Test {
     private static int expandAroundCenter(String s, int left, int right) {
         int L = left, R = right;
         while (L >= 0 && R < s.length() && s.charAt(L) == s.charAt(R)) {
-//            System.out.println(s.substring(L, R+1));
+            System.out.println(s.substring(L, R+1));
             palindromCounter++;
             L--;
             R++;

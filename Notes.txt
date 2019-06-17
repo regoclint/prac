@@ -1,0 +1,13 @@
+Red black tree properties
+
+Graph representations
+    Edge list
+    Adjacency List
+    Adjacency matrix
+    HashMap of HashMaps
+    List of other neighbour Graph Nodes & node lookup HM
+
+Graph BFS or DFS doesnt matter if its undirected or directed
+
+Shallow copy - contains references to the copy from element
+Deep copy - New objects are created
