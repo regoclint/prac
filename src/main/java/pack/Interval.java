@@ -1,3 +1,5 @@
+package pack;
+
 import java.util.Comparator;
 
 public class Interval {
@@ -18,5 +20,12 @@ public class Interval {
         public int compare(Interval a, Interval b) {
             return a.start < b.start ? -1 : a.start == b.start ? 0 : 1;
         }
+    }
+
+    int print(int i){
+        if(i/2!=0)
+            return 2;
+        else
+            return i;
     }
 }

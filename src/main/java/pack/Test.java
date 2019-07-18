@@ -1,4 +1,4 @@
-
+package pack;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -83,7 +83,7 @@ public class Test {
 //        System.out.println(wordBreakDP("catsanddog",stringSet));
 ////////////
 
-//////////// CombinationSum I II IV, Permute II
+//////////// Subsets I II, CombinationSum I II IV, Permute II
 
 //        System.out.println(combinationSum1(new int[]{2,3,6,7},7));
 //        System.out.println(combinationSum1(new int[]{1,2,3},4));
@@ -92,9 +92,10 @@ public class Test {
 //        System.out.println(combinationSum4DP(7,new int[]{2,3,6,7}));
 
 //        Print all combinations of the array
-//        pncArrayQueue(new int[]{1,2,3});
-//        pncArrayBacktrack(new int[]{1,2,3});
-//        permuteUnique(new int[]{0,0,1});
+//        System.out.println(pncArrayQueue(new int[]{1,2,3}));
+//        System.out.println(pncArrayBacktrack(new int[]{1,1,2}));
+        System.out.println(permuteUniqueByTempList(new int[]{1,1,2}));
+//        System.out.println(permuteUniqueBySwapping(new int[]{1,1,2}));
 ////////////
 
 //////////// House robber I & II
@@ -659,6 +660,435 @@ public class Test {
 //        System.out.println(findPeakElement(new int[]{3,2,3,5,6,7,8,9,10}));
 ////////////
 
+//////////// Alien Dictionary
+//    String[] words=new String[]{"wrt","wrf","er","ett","rftt","rf"};
+//    String[] words=new String[]{"z","x"};
+//    String[] words=new String[]{"z","x","z"};
+//    String[] words=new String[]{"z","z"};
+//    String[] words=new String[]{"zy","zx"};
+//    String[] words=new String[]{"ac","ab","b"};
+//    String[] words=new String[]{"vlxpwiqbsg","cpwqwqcd"};
+//
+//        System.out.println(alienDictionary(words));
+////////////
+
+//////////// Number of islands
+//        int[][] grid=new int[][]{{1,1,0,1,1}, {0,0,1,1,1}};
+//        int[][] grid = new int[][]{{1, 1, 0, 0, 0},
+//                                    {1, 1, 0, 0, 0},
+//                                    {0, 0, 1, 0, 0},
+//                                    {0, 0, 0, 1, 1}};
+//
+//        char[][] grid2 = new char[][]{{'1', '1', '0', '0', '0'},
+//                                        {'1', '1', '0', '0', '0'},
+//                                        {'0', '0', '1', '0', '0'},
+//                                        {'0', '0', '0', '1', '1'}};
+//        System.out.println(numIslandsDFSMyWay(grid));
+//        System.out.println(numIslandsDFSMyWay(grid));
+//        System.out.println(numIslandsDFS(grid2));
+//        System.out.println(numIslandsBFS(grid2));
+////////////
+
+//////////// Pacific Atlantic
+//        int[][] grid = new int[][]{{1,2,2,3,5},
+//                                    {3,2,3,4,4},
+//                                    {2,4,5,3,1},
+//                                    {6,7,1,4,5},
+//                                    {5,1,1,2,4}};
+//        int[][] grid = new int[][]{{9,9,9,9,9},
+//                                    {9,2,3,4,9},
+//                                    {9,4,5,3,9},
+//                                    {9,7,1,4,9},
+//                                    {9,9,9,9,9}};
+//        int[][] grid = new int[][]{{1,3,4},
+//                                    {5,1,0},
+//                                    {4,1,2}};
+//        System.out.println(pacificAtlantic(grid));
+////////////
+
+//////////// Number of connected components
+//        int[][] edges=new int[][]{{1, 2}, {3, 4},{0, 1}};
+//        int[][] edges=new int[][]{{0, 1}, {1, 2}, {2, 3}, {3, 4}};
+//        int[][] edges=new int[][]{{5, 4}, {1, 0}, {2, 0}, {3, 0}};
+//        int[][] edges=new int[][]{{0,1},{1,2},{0,2},{3,4}};
+//        int[][] edges=new int[][]{{2,3},{1,2},{1,3}};
+//        int[][] edges=new int[][]{{0,3},{0,2},{0,1}};
+//        countComponentsDFS(4,edges);
+//        System.out.println(connectedComponentsCount);
+//        System.out.println(countComponentsUnionFind(4,edges));
+////////////
+
+
+
+    }
+
+
+
+    static int[] father;
+    static int cnt;
+
+    //No children count is stored in this method, every time a connection is made the count is incremented
+    //Here the array size has to be till the maximum value of a node and integer.
+    // In the case of large int values or strings as node values a HM can be used
+    public static int countComponentsUnionFind(int n, int[][] edges) {
+        father = new int[n];
+        cnt = n;
+        for (int i = 0; i < n; ++i) {
+            father[i] = i;
+        }
+        for (int[] edge : edges) {
+            union(edge[0], edge[1]);
+        }
+        return cnt;
+    }
+
+
+    private static int find(int x) {
+        int fatherOfX = x;
+        //Find father of x
+        while (father[fatherOfX] != fatherOfX) {
+            fatherOfX = father[fatherOfX];
+        }
+        //Collapsing find
+        while (father[x] != fatherOfX) {
+            int tmp = father[x];
+            father[x] = fatherOfX;
+            x = tmp;
+        }
+        return fatherOfX;
+    }
+
+    private static void union(int a, int b) {
+        int fa = find(a);
+        int fb = find(b);
+        if (fa != fb) {
+            father[fa] = fb;
+            --cnt;
+        }
+    }
+
+    static int connectedComponentsCount=0;
+    public static int countComponentsDFS(int n, int[][] edges) {
+
+        HashSet<Integer> visited = new HashSet<>();
+        HashMap<Integer, UndirectedGraphNode> adjList = new HashMap<>();
+        UndirectedGraphNode firstNode;
+        UndirectedGraphNode secondNode;
+
+        //Create adj list
+        for (int i = 0; i < edges.length; i++) {
+            if (adjList.get(edges[i][0]) == null) {
+                firstNode = new UndirectedGraphNode(edges[i][0]);
+                adjList.put(firstNode.value, firstNode);
+            } else
+                firstNode = adjList.get(edges[i][0]);
+
+            if (adjList.get(edges[i][1]) == null) {
+                secondNode = new UndirectedGraphNode(edges[i][1]);
+                adjList.put(secondNode.value, secondNode);
+            } else
+                secondNode = adjList.get(edges[i][1]);
+
+
+            firstNode.neighbors.add(secondNode);
+            secondNode.neighbors.add(firstNode);
+        }
+
+
+        for (int i = 0; i < n; i++) {
+            if (!adjList.containsKey(i)) {
+                connectedComponentsCount++;
+                continue;
+            }
+            UndirectedGraphNode node = adjList.get(i);
+            if (!visited.contains(node.value)) {
+                dfs(node, visited, false, -1);
+            }
+        }
+
+        return connectedComponentsCount;
+    }
+
+    public static boolean dfs(UndirectedGraphNode node,HashSet<Integer> visited,boolean flag,int parentValue) {
+
+        if (node == null)
+            connectedComponentsCount++;
+        if (visited.contains(node.value))
+            return flag;
+
+        visited.add(node.value);
+
+        for (UndirectedGraphNode neighbour : node.neighbors) {
+            if (neighbour.value == parentValue) continue;
+            flag = dfs(neighbour, visited, flag, node.value);
+        }
+        if (flag == false) {
+            flag = true;
+            connectedComponentsCount++;
+        }
+        return flag;
+    }
+
+    //Do with one matrix only
+    public static List<List<Integer>> pacificAtlantic(int[][] matrix) {
+        List<List<Integer>> res = new ArrayList();
+        if (matrix.length == 0 || matrix[0].length == 0)  return res;
+        // visited by pacific == -1, atlantic == -2, both == -3
+        int[][] visited = new int[matrix.length][matrix[0].length];
+        for (int i = 0; i < matrix.length; i++) {
+            dfs(matrix, visited, i, 0, -1);
+            dfs(matrix, visited, i, matrix[0].length-1, -2);
+        }
+        for (int i = 0; i < matrix[0].length; i++) {
+            dfs(matrix, visited, 0, i, -1);
+            dfs(matrix, visited, matrix.length-1, i, -2);
+        }
+
+
+        for (int y = 0; y < matrix.length; y++) {
+            for (int x = 0; x < matrix[0].length; x++) {
+                if (visited[y][x] == -3) {
+                    res.add(Arrays.asList(y,x));
+                }
+            }
+        }
+        return res;
+    }
+
+    private static void dfs(int[][] matrix, int[][] visited, int y, int x, int islandNumber) {
+        int val = matrix[y][x];
+        int vis = visited[y][x];
+        if (vis == islandNumber || vis == -3) return;
+        visited[y][x] = vis < 0 ? -3 : islandNumber;
+
+        boolean left = x > 0 && matrix[y][x-1] >= val;
+        boolean right = x < matrix[0].length -1 && matrix[y][x+1] >= val;
+        boolean up = y > 0 && matrix[y-1][x] >= val;
+        boolean down = y < matrix.length - 1 && matrix[y+1][x] >= val;
+
+        if (left) dfs(matrix, visited, y, x-1, islandNumber);
+        if (right) dfs(matrix, visited, y, x+1, islandNumber);
+        if (up) dfs(matrix, visited, y-1, x, islandNumber);
+        if (down) dfs(matrix, visited, y+1, x, islandNumber);
+    }
+
+    //Space is O(min(m,n))
+    public static int numIslandsBFS(char[][] grid) {
+        if (grid == null || grid.length == 0) {
+            return 0;
+        }
+
+        int nr = grid.length;
+        int nc = grid[0].length;
+        int num_islands = 0;
+
+        for (int r = 0; r < nr; ++r) {
+            for (int c = 0; c < nc; ++c) {
+                if (grid[r][c] == '1') {
+                    ++num_islands;
+                    grid[r][c] = '0'; // mark as visited
+                    Queue<Integer> neighbors = new LinkedList<>();
+                    neighbors.add(r * nc + c);
+                    while (!neighbors.isEmpty()) {
+                        int id = neighbors.remove();
+                        int row = id / nc;
+                        int col = id % nc;
+                        if (row - 1 >= 0 && grid[row-1][col] == '1') {
+                            neighbors.add((row-1) * nc + col);
+                            grid[row-1][col] = '0';
+                        }
+                        if (row + 1 < nr && grid[row+1][col] == '1') {
+                            neighbors.add((row+1) * nc + col);
+                            grid[row+1][col] = '0';
+                        }
+                        if (col - 1 >= 0 && grid[row][col-1] == '1') {
+                            neighbors.add(row * nc + col-1);
+                            grid[row][col-1] = '0';
+                        }
+                        if (col + 1 < nc && grid[row][col+1] == '1') {
+                            neighbors.add(row * nc + col+1);
+                            grid[row][col+1] = '0';
+                        }
+                    }
+                }
+            }
+        }
+
+        return num_islands;
+    }
+
+    static void dfs(char[][] grid, int r, int c) {
+        int nr = grid.length;
+        int nc = grid[0].length;
+
+        if (r < 0 || c < 0 || r >= nr || c >= nc || grid[r][c] == '0') {
+            return;
+        }
+
+        grid[r][c] = '0';
+        dfs(grid, r - 1, c);
+        dfs(grid, r + 1, c);
+        dfs(grid, r, c - 1);
+        dfs(grid, r, c + 1);
+    }
+
+    public static int numIslandsDFS(char[][] grid) {
+        if (grid == null || grid.length == 0) {
+            return 0;
+        }
+
+        int nr = grid.length;
+        int nc = grid[0].length;
+        int num_islands = 0;
+        for (int r = 0; r < nr; ++r) {
+            for (int c = 0; c < nc; ++c) {
+                if (grid[r][c] == '1') {
+                    ++num_islands;
+                    dfs(grid, r, c);
+                }
+            }
+        }
+
+        return num_islands;
+    }
+
+    static int islandCount=0;
+    public static int numIslandsDFSMyWay(int[][] grid) {
+
+
+        for (int row = 0; row < grid.length; row++) {
+            for (int column = 0; column < grid[0].length; column++) {
+                if (grid[row][column] == 1) {
+                    HashSet<String> visited = new HashSet<>();
+                    calculateIsland(grid, row, column, visited);
+                }
+            }
+        }
+        return islandCount * -1;
+    }
+
+    public static int calculateIsland(int[][] grid, int row, int column,HashSet<String> visited) {
+
+        if (row < 0 || row == grid.length || column < 0 || column == grid[0].length || grid[row][column] == 0) return 0;
+
+        if (grid[row][column] < 0) //existing island
+            return grid[row][column];
+
+        if (visited.contains(row + "," + column))//pending island
+            return 0;
+
+        if (grid[row][column] == 1) {
+            visited.add(row + "," + column);
+            int[] tr = {0, -1, 0, 1};
+            int[] tc = {1, 0, -1, 0};
+
+            int total = 0;
+            for (int i = 0; i < 4; i++) {
+                total = calculateIsland(grid, row + tr[i], column + tc[i], visited);
+                if (total < 0) {
+                    visited.remove(row + "," + column);
+                    grid[row][column] = total;
+                    return total;
+                }
+
+            }
+            if (total == 0) {
+                islandCount--;
+                grid[row][column] = islandCount;
+                return islandCount;
+            } else if (total < 0)
+                grid[row][column] = total;
+        }
+        return 0;
+    }
+
+    public static String alienDictionary(String[] words) {
+        HashMap<Character, UndirectedGraphNodeChar> adjacencyList = new HashMap<>();
+        int[] indegree= new int[26];
+        Queue<Character> queue=new LinkedList<>();
+
+        if(words.length==1)
+            return words[0];
+
+        int j=0;
+        //Create adjacency list
+        for (int i = 0; i < words.length - 1; i++) {
+            String word = words[i];
+            String nextWord = words[i + 1];
+
+            for (j = 0; j < Math.min(word.length(), nextWord.length()); j++) {
+                if (word.charAt(j) == nextWord.charAt(j)) //the loop should continue
+                {   if(!adjacencyList.containsKey(word.charAt(j))) {
+                    adjacencyList.put(word.charAt(j), new UndirectedGraphNodeChar(word.charAt(j)));
+                    indegree[word.charAt(j)-'a']++;
+                }
+                }
+                else {  //no point in continuing the loop for adjacencies
+                    UndirectedGraphNodeChar firstNode = adjacencyList.get(word.charAt(j));
+                    UndirectedGraphNodeChar secondNode = adjacencyList.get(nextWord.charAt(j));
+                    if (firstNode == null) {
+                        firstNode = new UndirectedGraphNodeChar(word.charAt(j));
+                        adjacencyList.put(word.charAt(j), firstNode);
+                    }
+
+                    if (secondNode == null)
+                        secondNode = new UndirectedGraphNodeChar(nextWord.charAt(j));
+
+                    firstNode.neighbors.add(secondNode);
+                    adjacencyList.put(nextWord.charAt(j), secondNode);
+
+                    adjacencyList.put(firstNode.value, firstNode);
+                    if(indegree[nextWord.charAt(j)-'a']==0)
+                        indegree[nextWord.charAt(j)-'a']=2;
+                    else
+                        indegree[nextWord.charAt(j)-'a']++;
+
+                    if(indegree[word.charAt(j)-'a']==0)
+                        indegree[word.charAt(j)-'a']=1;
+
+                    addElements(word,adjacencyList,indegree);
+                    addElements(nextWord,adjacencyList,indegree);
+                    break;
+                }
+            }
+            addElements(word,adjacencyList,indegree);
+            addElements(nextWord,adjacencyList,indegree);
+        }
+
+        //Add independent elements to Queue
+        for (int i=0; i<26;i++) {
+            if(indegree[i]==1)
+            {
+                queue.add((char) ('a'+i));
+            }
+        }
+
+        StringBuffer output=new StringBuffer();
+        while (!queue.isEmpty()){
+
+            char poppedChar=queue.poll();
+            output.append(poppedChar);
+            for(UndirectedGraphNodeChar neighbour : adjacencyList.get(poppedChar).neighbors){
+                if(indegree[neighbour.value-'a']--==2){
+                    queue.add(neighbour.value);
+                }
+            }
+
+
+        }
+
+        return output.length()!=adjacencyList.size() ? "" :output.toString();
+    }
+
+    public static void addElements(String word,HashMap<Character,UndirectedGraphNodeChar> adjacencyList,int[] indegree){
+
+        for (int j = 0; j < word.length(); j++) {
+
+            if(!adjacencyList.containsKey(word.charAt(j))) {
+                adjacencyList.put(word.charAt(j), new UndirectedGraphNodeChar(word.charAt(j)));
+                indegree[word.charAt(j)-'a']=1;
+            }
+        }
     }
 
     //here i cannot be equal to i+1, so binary search works
@@ -769,73 +1199,6 @@ public class Test {
         visited.remove(row + "," + column);
     }
 
-    //Duplicate implementation
-    public static List<List<Integer>> pncArrayBacktrack(int[] nums) {
-        // init output list
-        List<List<Integer>> output = new LinkedList();
-
-        // convert nums into list since the output is a list of lists
-        ArrayList<Integer> nums_lst = new ArrayList<Integer>();
-        for (int num : nums)
-            nums_lst.add(num);
-
-        int n = nums.length;
-        backtrack(n, nums_lst, output, 0);
-        return output;
-    }
-
-    public static void backtrack(int n,
-                          ArrayList<Integer> nums,
-                          List<List<Integer>> output,
-                          int first) {
-        // if all integers are used up
-        if (first == n)
-            output.add(new ArrayList<Integer>(nums));
-        for (int i = first; i < n; i++) {
-            // place i-th integer first
-            // in the current permutation
-            Collections.swap(nums, first, i);
-            // use next integers to complete the permutations
-            backtrack(n, nums, output, first + 1);
-            // backtrack
-            Collections.swap(nums, first, i);
-        }
-    }
-
-    public static Queue<String> pncArrayQueue(int[] input) {
-        int n = input.length, popLimit = 0;
-        String elementToPush = "", poppedElement = "";
-        Queue<String> output = new LinkedList<>();
-        output.add("" + input[n - 2] + "," + input[n - 1]);
-        output.add("" + input[n - 1] + "," + input[n - 2]);
-
-        for (int insertCharacter = input.length - 3; insertCharacter >= 0; insertCharacter--) {
-            popLimit = output.size();
-            for (int numberOfTimesToPop = 0; numberOfTimesToPop < popLimit; numberOfTimesToPop++) {
-                poppedElement = output.poll();
-                output.add(input[insertCharacter] + "," + poppedElement);
-                for (int poppedChar = poppedElement.indexOf(","); poppedChar < poppedElement.length(); poppedChar++) {
-
-                    elementToPush = poppedElement.substring(0, poppedChar) + "," + input[insertCharacter] + poppedElement.substring(poppedChar);
-
-                    output.add(elementToPush);
-                    if (poppedElement.substring(poppedChar + 1).indexOf(",") == -1) {
-                        output.add(poppedElement + "," + input[insertCharacter]);
-                        break;
-                    }
-                    poppedChar = poppedElement.substring(poppedChar + 1).indexOf(",") + poppedElement.substring(poppedChar).length();
-                }
-            }
-        }
-        return output;
-    }
-
-    public static void swap(Integer[] input, int a, int b) {
-        int temp = input[a];
-        input[a] = input[b];
-        input[b] = temp;
-    }
-
     public static void topologicalSort(HashMap<Integer, UndirectedGraphNode> graphNodeHashMap) {
 
         HashSet<Integer> visited = new HashSet<>();
@@ -893,6 +1256,7 @@ public class Test {
     }
 
     //When Indegree goes to zero means you can go ahead
+    //Can finish problem check for circles in a graph
     public static boolean canFinishBFS(int numCourses, int[][] prerequisites) {
         ArrayList[] graph = new ArrayList[numCourses];
         int[] indegree = new int[numCourses];
@@ -930,6 +1294,7 @@ public class Test {
             return false;
     }
 
+    //Nodes can be marked as acyclic after traversing them to prevent re-traversing
     public static boolean canFinishDFS(int numCourses, int[][] prerequisites) {
         ArrayList[] graph = new ArrayList[numCourses];
         //Initialize array
@@ -1089,6 +1454,7 @@ public class Test {
 //    Check if balanced binary tree…check by height subtractions
 //    Do binary search in array
 
+    //Do
     //    LRU cache can be a linked hash map too
     public static class LRUCache {
 
@@ -1223,6 +1589,21 @@ public class Test {
             startIndex += lenghtOfString;
         }
         return orinigalList;
+    }
+
+    //Sliding window, can be done with int[] also 26 char, 128 char or 256 extended ASCII
+    public static int lengthOfLongestNonRepeatingSubstring(String s) {
+        int n = s.length(), ans = 0;
+        Map<Character, Integer> map = new HashMap<Character, Integer>(); // current index of character
+        // try to extend the range [i, j]
+        for (int j = 0, i = 0; j < n; j++) {
+            if (map.containsKey(s.charAt(j))) {
+                i = Math.max(map.get(s.charAt(j)), i);
+            }
+            ans = Math.max(ans, j - i + 1);
+            map.put(s.charAt(j), j + 1);
+        }
+        return ans;
     }
 
     //For 2 distinct char- can be better with earliest last index of the 2 distinct characters
@@ -1541,7 +1922,7 @@ public class Test {
         return new TreeNode(val);
     }
 
-    //    >>>>>???? Check for insert + search optimisation, doubly ll soulution
+    //    >>>>>???? Check for insert + search optimisation, doubly ll solution
     public static ArrayList<Integer> inorder(TreeNode root, ArrayList<Integer> arr) {
         if (root == null) return arr;
         inorder(root.left, arr);
@@ -2629,6 +3010,7 @@ public class Test {
         return l3.next;
     }
 
+    //Do
     public static double findMedianSortedArrays(int[] A, int[] B) {
         int m = A.length;
         int n = B.length;
@@ -2678,6 +3060,7 @@ public class Test {
         return 0.0;
     }
 
+    //Check for decimal
     public static int myAtoi(String str) {
         int index = 0, sign = 1, total = 0;
         //1. Empty string
@@ -2719,21 +3102,6 @@ public class Test {
             for (char c : map.toCharArray()) {
                 ans.addLast(remove + c);
             }
-        }
-        return ans;
-    }
-
-    //Sliding window, can be done with int[] also 26 char, 128 char or 256 extended ASCII
-    public static int lengthOfLongestNonRepeatingSubstring(String s) {
-        int n = s.length(), ans = 0;
-        Map<Character, Integer> map = new HashMap<Character, Integer>(); // current index of character
-        // try to extend the range [i, j]
-        for (int j = 0, i = 0; j < n; j++) {
-            if (map.containsKey(s.charAt(j))) {
-                i = Math.max(map.get(s.charAt(j)), i);
-            }
-            ans = Math.max(ans, j - i + 1);
-            map.put(s.charAt(j), j + 1);
         }
         return ans;
     }
@@ -3260,70 +3628,158 @@ public class Test {
         return f[s.length()];
     }
 
-    public static List<List<Integer>> permutee(int[] nums) {
-        List<List<Integer>> list = new ArrayList<>();
-        Arrays.sort(nums);
-        List<Integer> input = new ArrayList<>();
-        for (int i : nums)
-            input.add(i);
-
-        backtrackPermute(input, new ArrayList<Integer>(), list, 0);
-        return list;
-    }
-
-    public static void backtrackPermute(List<Integer> nums, List<Integer> tempList, List<List<Integer>> list, int start) {
-        if (start == nums.size())
-            list.add(new ArrayList<>(nums));
-
-        for (int i = start; i < nums.size(); i++) {
-            Collections.swap(nums, start, i); //always replace with start in this loop, as we are finding all positions of start
-            backtrackPermute(nums, tempList, list, start + 1); // start + 1 because we have to take the next digit and find all its positions
-            Collections.swap(nums, start, i);
-        }
-    }
-
-    public static List<List<Integer>> permute(int[] nums) {
+    //https://leetcode.com/problems/permutations/discuss/18239/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partioning)
+    //This permute method has removal of list and search in list which is expensive
+    public static List<List<Integer>> permute1ByTempList(int[] nums) {
         List<List<Integer>> list = new ArrayList<>();
         // Arrays.sort(nums); // not necessary
-        backtrack(list, new ArrayList<>(), nums);
+        backtrack1TempList(list, new ArrayList<>(), nums);
         return list;
     }
 
-    private static void backtrack(List<List<Integer>> list, List<Integer> tempList, int [] nums){
+    private static void backtrack1TempList(List<List<Integer>> list, List<Integer> tempList, int [] nums){
         if(tempList.size() == nums.length){
             list.add(new ArrayList<>(tempList));
         } else{
             for(int i = 0; i < nums.length; i++){
                 if(tempList.contains(nums[i])) continue; // element already exists, skip
                 tempList.add(nums[i]);
-                backtrack(list, tempList, nums);
+                backtrack1TempList(list, tempList, nums);
                 tempList.remove(tempList.size() - 1);
             }
         }
     }
 
-    public static List<List<Integer>> permuteUnique(int[] nums) {
+    public static List<List<Integer>> permute1BySwapping(int[] nums) {
         List<List<Integer>> list = new ArrayList<>();
         Arrays.sort(nums);
-        backtrack(list, new ArrayList<>(), nums, new boolean[nums.length]);
+        List<Integer> input = new ArrayList<>();
+        for (int i : nums)
+            input.add(i);
+
+        backtrack1BySwapping(input, new ArrayList<Integer>(), list, 0);
         return list;
     }
 
-    private static void backtrack(List<List<Integer>> list, List<Integer> tempList, int [] nums, boolean [] used){
+    public static void backtrack1BySwapping(List<Integer> nums, List<Integer> tempList, List<List<Integer>> list, int start) {
+        if (start == nums.size())
+            list.add(new ArrayList<>(nums));
+
+        for (int i = start; i < nums.size(); i++) {
+            Collections.swap(nums, start, i); //always replace with start in this loop, as we are finding all positions of start
+            backtrack1BySwapping(nums, tempList, list, start + 1); // start + 1 because we have to take the next digit and find all its positions
+            Collections.swap(nums, start, i);
+        }
+    }
+
+    public static List<List<Integer>> permuteUniqueByTempList(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(nums);
+        backtrackUniqueByTempList(list, new ArrayList<>(), nums, new boolean[nums.length]);
+        return list;
+    }
+
+    private static void backtrackUniqueByTempList(List<List<Integer>> list, List<Integer> tempList, int [] nums, boolean [] used){
         if(tempList.size() == nums.length){
             list.add(new ArrayList<>(tempList));
         } else{
             for(int i = 0; i < nums.length; i++){
+                //if the same digit occurring earlier is false then it means that a duplicate combo will be created hence skip
                 if(used[i] || i > 0 && nums[i] == nums[i-1] && !used[i - 1]) continue;
                 used[i] = true;
                 tempList.add(nums[i]);
-                backtrack(list, tempList, nums, used);
+                backtrackUniqueByTempList(list, tempList, nums, used);
                 used[i] = false;
                 tempList.remove(tempList.size() - 1);
             }
         }
     }
 
+    public static List<List<Integer>> permuteUniqueBySwapping(int[] nums) {
+        HashSet<List<Integer>> list = new HashSet<>();
+        Arrays.sort(nums);
+        List<Integer> input = new ArrayList<>();
+        for (int i : nums)
+            input.add(i);
+
+        backtrackPermuteUniqueBySwapping(input, list, 0);
+        return new ArrayList<>(list);
+    }
+
+    public static void backtrackPermuteUniqueBySwapping(List<Integer> nums, HashSet<List<Integer>> list, int start) {
+        if(list.contains(nums))
+            return;
+
+        if (start == nums.size()) {
+            list.add(new ArrayList<>(nums));
+        }
+        for (int i = start; i < nums.size(); i++) {
+            Collections.swap(nums, start, i); //always replace with start in this loop, as we are finding all positions of start
+            backtrackPermuteUniqueBySwapping(nums, list, start + 1); // start + 1 because we have to take the next digit and find all its positions
+            Collections.swap(nums, start, i);
+        }
+    }
+
+    public static Queue<String> pncArrayQueue(int[] input) {
+        int n = input.length, popLimit = 0;
+        String elementToPush = "", poppedElement = "";
+        Queue<String> output = new LinkedList<>();
+        output.add("" + input[n - 2] + "," + input[n - 1]);
+        output.add("" + input[n - 1] + "," + input[n - 2]);
+
+        for (int insertCharacter = input.length - 3; insertCharacter >= 0; insertCharacter--) {
+            popLimit = output.size();
+            for (int numberOfTimesToPop = 0; numberOfTimesToPop < popLimit; numberOfTimesToPop++) {
+                poppedElement = output.poll();
+                output.add(input[insertCharacter] + "," + poppedElement);
+                for (int poppedChar = poppedElement.indexOf(","); poppedChar < poppedElement.length(); poppedChar++) {
+
+                    elementToPush = poppedElement.substring(0, poppedChar) + "," + input[insertCharacter] + poppedElement.substring(poppedChar);
+
+                    output.add(elementToPush);
+                    if (poppedElement.substring(poppedChar + 1).indexOf(",") == -1) {
+                        output.add(poppedElement + "," + input[insertCharacter]);
+                        break;
+                    }
+                    poppedChar = poppedElement.substring(poppedChar + 1).indexOf(",") + poppedElement.substring(poppedChar).length();
+                }
+            }
+        }
+        return output;
+    }
+
+    public static List<List<Integer>> subsets1(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+//        Arrays.sort(nums);
+        backtrack(list, new ArrayList<>(), nums, 0);
+        return list;
+    }
+
+    private static void backtrack(List<List<Integer>> list , List<Integer> tempList, int [] nums, int start){
+        list.add(new ArrayList<>(tempList)); //keep inside for and after temp add to avoid emptyset
+        for(int i = start; i < nums.length; i++){
+            tempList.add(nums[i]);
+            backtrack(list, tempList, nums, i + 1);
+            tempList.remove(tempList.size() - 1);
+        }
+    }
+
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        Arrays.sort(nums);
+        backtrack(list, new ArrayList<>(), nums, 0);
+        return list;
+    }
+
+    private void backtrackSubset2(List<List<Integer>> list, List<Integer> tempList, int [] nums, int start){
+        list.add(new ArrayList<>(tempList));
+        for(int i = start; i < nums.length; i++){
+            if(i > start && nums[i] == nums[i-1]) continue; // skip duplicates
+            tempList.add(nums[i]);
+            backtrackSubset2(list, tempList, nums, i + 1);
+            tempList.remove(tempList.size() - 1);
+        }
+    }
 
     //For all permutations keep int i=0
     //Better to use backtrack for only combinations, to prevent resusable combos, done by the start variable.
@@ -3433,7 +3889,7 @@ public class Test {
 
     // These min max questions count the number in each permuation
     //Counts min number of coins, goes through all permutations(because goes through all coins everytime)
-    //     >>>???? Check the top up and bottom down ways
+    //>>>>???? Check the top up and bottom down ways
     public static int coinChangeDP(int[] coins, int amount) {
         int max = amount + 1;
         int[] dp = new int[amount + 1];

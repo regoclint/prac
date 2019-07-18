@@ -1,3 +1,5 @@
+package pack;
+
 public class TrieNode {
     TrieNode[] next;
     String word;

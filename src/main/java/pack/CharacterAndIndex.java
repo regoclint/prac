@@ -1,3 +1,5 @@
+package pack;
+
 public class CharacterAndIndex{
     char character;
     int index;

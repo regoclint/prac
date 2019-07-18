@@ -1,3 +1,5 @@
+package pack;
+
 import java.util.HashMap;
 
 public class GraphNode {
