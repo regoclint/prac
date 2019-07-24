@@ -35,9 +35,10 @@ public class Test {
 //        int arr[] = new int[]{-2,3,1,3};
 //        int arr[] = new int[]{-2,0,-1};
 //        int arr[] = new int[]{0,-2,0};
-//        int arr[] = new int[]{-1,3,2,0};
-//        System.out.println(maxProdSubArray(arr));
+        int arr[] = new int[]{2,3,-1,2};
+        System.out.println(maxProdSubArray(arr));
 //        System.out.println(maxProdSubArrayMySol(arr));
+        System.out.println(maxProduct(arr));
 ////////////
 
 //////////// 3 Sum
@@ -83,7 +84,18 @@ public class Test {
 //        System.out.println(wordBreakDP("catsanddog",stringSet));
 ////////////
 
-//////////// Subsets I II, CombinationSum I II IV, Permute II
+//////////// Permute I II, Subsets I II, CombinationSum I II IV, Palindrome partitioning
+
+//        Print all permutations of the array
+//        System.out.println(permute1ByTempList(new int[]{1,1,2}));
+//        System.out.println(permute1BySwapping(new int[]{1,1,2}));
+//        System.out.println(permuteUniqueByTempList(new int[]{1,1,2}));
+//        System.out.println(permuteUniqueBySwapping(new int[]{1,1,2}));
+//        System.out.println(pncArrayQueue(new int[]{1,2,3}));
+//
+//        Subsets
+//        System.out.println(subsets1(new int[]{1,2,3}));
+//        System.out.println(subsetsWithDup(new int[]{1,2,3}));
 
 //        System.out.println(combinationSum1(new int[]{2,3,6,7},7));
 //        System.out.println(combinationSum1(new int[]{1,2,3},4));
@@ -91,11 +103,10 @@ public class Test {
 //        System.out.println(combinationSum4Backtrack(new int[]{2,3,6,7},7));
 //        System.out.println(combinationSum4DP(7,new int[]{2,3,6,7}));
 
-//        Print all combinations of the array
-//        System.out.println(pncArrayQueue(new int[]{1,2,3}));
-//        System.out.println(pncArrayBacktrack(new int[]{1,1,2}));
-        System.out.println(permuteUniqueByTempList(new int[]{1,1,2}));
-//        System.out.println(permuteUniqueBySwapping(new int[]{1,1,2}));
+//        Palindrome partitioning
+//        System.out.println(partition("aab"));
+
+
 ////////////
 
 //////////// House robber I & II
@@ -718,11 +729,143 @@ public class Test {
 //        System.out.println(countComponentsUnionFind(4,edges));
 ////////////
 
+//////////// Longest increasing subsequence
+//        System.out.println(LIS(0,new int[]{20,5,40,6,7,8}));
+//        System.out.println(LisDP(new int[]{20,5,40,6,7,8}));
+//        System.out.println(lengthOfLIS(new int[]{20,5,40,6,7,8}));
+////////////
 
+//////////// Longest common subsequence or delete operation for two strings
+//        System.out.println(longestCommonSubsequence("seat","ocean"));
+//        System.out.println(minDistance("seat","ocean"));
+////////////
+
+//////////// basic calculator I II
+//        System.out.println(calculateI("(7-(8+9+10))"));
+//        System.out.println(calculateI("1+1"));
+
+//        System.out.println(calculateII("5+20/2/5-1*4*6/2*2"));
+////////////
+
+//////////// Pretty print JSON
+//        prettyPrint("");
+////////////
 
     }
 
+    public static void prettyPrint(String input) {
+        int spaces = 0;
+        int quoteCounter = 0;
+        for (int i = 0; i < input.length(); i++) {
 
+            if (quoteCounter == 0 && input.charAt(i) == '"') {
+                quoteCounter++;
+            } else if (quoteCounter == 1 && input.charAt(i) == '\"')
+                quoteCounter--;
+
+
+            if (quoteCounter != 1 && input.charAt(i) == '{' || input.charAt(i) == '[') {
+                System.out.print(input.charAt(i));
+                System.out.println();
+                spaces += 2;
+                for (int space = 0; space < spaces; space++)
+                    System.out.print(" ");
+
+            } else if (quoteCounter != 1 && input.charAt(i) == '}' || input.charAt(i) == ']') {
+                System.out.println();
+                spaces -= 2;
+                for (int space = 0; space < spaces; space++)
+                    System.out.print(" ");
+                System.out.print(input.charAt(i));
+
+            } else if (quoteCounter != 1 && input.charAt(i) == ',') {
+                System.out.print(",");
+                System.out.println();
+                for (int space = 0; space < spaces; space++)
+                    System.out.print(" ");
+
+            } else if (quoteCounter != 1 && input.charAt(i) == ':')
+                System.out.print(": ");
+            else
+                System.out.print(input.charAt(i));
+
+
+        }
+    }
+
+    public static int calculateII(String s) {
+        int tail = 0;
+        char operator = '+';
+        int res = 0;
+        // char[] charArray = s.toCharArray(); // no need of char array as String is stored as char array
+        int num = 0;
+        int n = s.length();
+
+
+        for(int i = 0 ; i < n; i++){
+            char c = s.charAt(i); //charAt works on an array
+            if(c == ' '){continue;}
+            if (Character.isDigit(c)){
+                num =  c-'0';
+                while(i + 1 < n && Character.isDigit(s.charAt(i+1))){
+                    num = num * 10 + (s.charAt(i+1) - '0');
+                    i++;
+                }
+                switch (operator){
+                    case '+':
+                        res +=tail;
+                        tail = num;
+                        break;
+                    case '-':
+                        res += tail;
+                        tail = -num;
+                        break;
+                    case '*':
+                        tail*=num;
+                        break;
+                    case '/':
+                        tail/=num;
+                        break;
+                }
+            } else {
+                operator = c;
+            }
+        }
+        return res + tail;
+    }
+    public static int calculateI(String s) {
+
+        Stack<Integer> stack = new Stack<Integer>();
+        int operand = 0;
+        int result = 0; // For the on-going result
+        int sign = 1;  // 1 means positive, -1 means negative
+
+        for (int i = 0; i < s.length(); i++) {
+
+            char ch = s.charAt(i);
+            if (Character.isDigit(ch))
+                operand = 10 * operand + (int) (ch - '0');
+
+            else if (ch == '+' || ch == '-') {
+                result += sign * operand; //calculate the part of this sign
+                sign = ch == '+' ? 1 : -1; //assign sign for next operation
+                operand = 0;
+
+            } else if (ch == '(') {
+                stack.push(result); //push result first
+                stack.push(sign);
+                sign = 1;
+                result = 0;
+
+            } else if (ch == ')') {
+                result += sign * operand; //complete current bracket
+                result *= stack.pop(); //pop sign first
+                result += stack.pop();
+                operand = 0;
+            }
+        }
+        return result + (sign * operand);
+    }
 
     static int[] father;
     static int cnt;
@@ -3373,24 +3516,42 @@ public class Test {
 
     }
 
-    //>>>>????
-    public static int maxProdSubArray(int[] nums) {
-        int maxSum = nums[0];
-        int currentMax = nums[0];
-        int currentMin = nums[0];
-
-        for (int i = 1; i < nums.length; i++) {
-            if (nums[i] < 0) {
-                int tmp = currentMax;
-                currentMax = currentMin;
-                currentMin = tmp;
-            }
-
-            currentMax = Math.max(nums[i], currentMax * nums[i]);
-            currentMin = Math.min(nums[i], currentMin * nums[i]);
-            maxSum = Math.max(maxSum, currentMax);
+    //This is faster than the below one
+    //t's really about odd negative numbers or even negative numbers,
+    // if it's odd, either the left end one or the right end one should be counted,
+    // so it will be revealed by scanning from left and from right in 2 passes.
+    public static int maxProduct(int[] nums) {
+        int max = Integer.MIN_VALUE;
+        int product = 1;
+        for (int i = 0; i < nums.length; i++) {
+            product *= nums[i];
+            if (product > max) max = product;
+            if (product == 0) product = 1;
         }
-        return maxSum;
+        product = 1;
+        for (int j = nums.length - 1; j >= 0; j--) {
+            product *= nums[j];
+            if (product > max) max = product;
+            if (product == 0) product = 1;
+        }
+        return max;
+    }
+
+    //Store previous max and min.
+    public static int maxProdSubArray(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int max = nums[0], min = nums[0], result = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            int temp = max;
+            max = Math.max(Math.max(max * nums[i], min * nums[i]), nums[i]);
+            min = Math.min(Math.min(temp * nums[i], min * nums[i]), nums[i]);
+            if (max > result) {
+                result = max;
+            }
+        }
+        return result;
     }
 
     public static int maxProdSubArrayMySol(int[] nums) {
@@ -3628,6 +3789,8 @@ public class Test {
         return f[s.length()];
     }
 
+
+
     //https://leetcode.com/problems/permutations/discuss/18239/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partioning)
     //This permute method has removal of list and search in list which is expensive
     public static List<List<Integer>> permute1ByTempList(int[] nums) {
@@ -3764,14 +3927,14 @@ public class Test {
         }
     }
 
-    public List<List<Integer>> subsetsWithDup(int[] nums) {
+    public static List<List<Integer>> subsetsWithDup(int[] nums) {
         List<List<Integer>> list = new ArrayList<>();
         Arrays.sort(nums);
         backtrack(list, new ArrayList<>(), nums, 0);
         return list;
     }
 
-    private void backtrackSubset2(List<List<Integer>> list, List<Integer> tempList, int [] nums, int start){
+    private static void backtrackSubset2(List<List<Integer>> list, List<Integer> tempList, int [] nums, int start){
         list.add(new ArrayList<>(tempList));
         for(int i = start; i < nums.length; i++){
             if(i > start && nums[i] == nums[i-1]) continue; // skip duplicates
@@ -3783,9 +3946,11 @@ public class Test {
 
     //For all permutations keep int i=0
     //Better to use backtrack for only combinations, to prevent resusable combos, done by the start variable.
+    //Sorting and then if statement is faster than not sorting
+    //If sorting is not allowed remove the if in the backtrack
     public static List<List<Integer>> combinationSum1(int[] nums, int target) {
         List<List<Integer>> list = new ArrayList<>();
-        Arrays.sort(nums);
+//        Arrays.sort(nums);
         backtrack(list, new ArrayList<>(), nums, target, 0);
         return list;
     }
@@ -3799,8 +3964,9 @@ public class Test {
                     tempList.add(nums[i]);
                     backtrack(list, tempList, nums, remain - nums[i], i); // not i + 1 because we can reuse same elements
                     tempList.remove(tempList.size() - 1);
-                } else
-                    break;
+                }
+//                else
+//                    break; //use if sorted
             }
         }
     }
@@ -3830,7 +3996,8 @@ public class Test {
     }
 
     //PnC backtrack, with i=0.
-    //This is list of all permutations
+    //This is list of all permutations and combinations
+    //For all permuatation do bactrack for number of them can do DP
     public static List<List<Integer>> combinationSum4Backtrack(int[] nums, int target) {
         List<List<Integer>> list = new ArrayList<>();
         Arrays.sort(nums);
@@ -3936,6 +4103,96 @@ public class Test {
 //        for (int i = 0; i < ans.size(); i++)
 //            System.out.println(ans.get(i)+ "  ");
         return ans.size();
+    }
+
+    public static List<List<String>> partition(String s) {
+        List<List<String>> list = new ArrayList<>();
+        backtrack(list, new ArrayList<>(), s, 0);
+        return list;
+    }
+
+    public static void backtrack(List<List<String>> list, List<String> tempList, String s, int start){
+        if(start == s.length())
+            list.add(new ArrayList<>(tempList));
+        else{
+            for(int i = start; i < s.length(); i++){
+                if(isPalindrome(s, start, i)){
+                    tempList.add(s.substring(start, i + 1));
+                    backtrack(list, tempList, s, i + 1);
+                    tempList.remove(tempList.size() - 1);
+                }
+            }
+        }
+    }
+
+    public static boolean isPalindrome(String s, int low, int high){
+        while(low < high)
+            if(s.charAt(low++) != s.charAt(high--)) return false;
+        return true;
+    }
+
+    static int longestCommonSubsequence(String a,String b)
+    {
+        int m = a.length();
+        int n = b.length();
+
+        int[][] dp =new int[m+1][n+1];//Keeping space for empty strings
+
+        for(int i=1; i<=m; i++)
+            for(int j=1; j<=n; j++)
+                dp[i][j] = a.charAt(i-1)==b.charAt(j-1) ? dp[i-1][j-1]+1 : Math.max(dp[i-1][j],dp[i][j-1]);
+
+        return dp[m][n];
+    }
+
+    static int minDistance(String word1, String word2) {
+        return word1.length() + word2.length()- 2 * longestCommonSubsequence(word1,word2);
+    }
+
+    public static int lengthOfLIS(int[] nums) {
+        int[] dp = new int[nums.length];
+        int len = 0;
+        for (int num : nums) {
+            int i = Arrays.binarySearch(dp, 0, len, num);
+            if (i < 0) {
+                i = -(i + 1);
+            }
+            dp[i] = num;
+            if (i == len) {
+                len++;
+            }
+        }
+        return len;
+    }
+
+    public static int LisDP(int[] input) {
+        int finalMax = 1;
+        int[] dp = new int[input.length];
+        for (int i = input.length - 1; i >= 0; i--) {
+            int currentMax = 0;
+            for (int j = i + 1; j < input.length; j++) {
+                if (input[j] > input[i]) {
+                    currentMax = Math.max(currentMax, dp[j]);
+                    if(dp[j]==finalMax) break;
+                }
+            }
+            dp[i] = currentMax + 1;
+            if (dp[i] > finalMax) finalMax = dp[i];
+        }
+        return finalMax;
+    }
+
+    public static int LIS(int start, int[] input) {
+        int maxCount = 1;
+        for (int i = start; i < input.length; i++) {
+            for (int j = i + 1; j < input.length; j++) {
+                if (input[j] > input[i]) {
+                    maxCount = Math.max(LIS(j, input) + 1, maxCount);
+                }
+            }
+        }
+        return maxCount;
+
     }
 
     static int rob(int[] nums) {

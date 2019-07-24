@@ -41,7 +41,11 @@ Utility funcs
     Collections.swap(nums, start, i);
     Arrays.sort...can be used on matrix also
     Arrays.fill
-
+    Arrays.binarySearch(int[] a, int fromIndex, int toIndex, int key)
+    
+    Character.isDigit
+    Character.isAlphabet
+    
 Collections.sort uses Array.sort by converting the collection to array
 Array.sort uses quick sort for primitive type and Tim sort for objects
 
@@ -51,7 +55,17 @@ Array.sort uses quick sort for primitive type and Tim sort for objects
 
 n / 2 + n % 2...for odd and even mid points
 
+Complexities
+    n3 > n! > 2^n > n2 > nlogn > n > logn
+    
+    Recurcive functions
+    T(n)=aT(n-b) + f(n)
+        if a<1 T(n)= f(n)
+        if a=1 T(n)= n * f(n)
+        if a>1 T(n)= a^n *f(n) ...binary tree or trie
 
+    for{} then recursive call(n-1) means n + n-1 +n-2...T(n)=O(n^2)
+    for{ recursive call(n-1)} means n x n-1 x n-2...T(n)=O(n!).....n queen example
 
 **Design Patterns**
 
