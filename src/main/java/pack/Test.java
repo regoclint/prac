@@ -35,10 +35,10 @@ public class Test {
 //        int arr[] = new int[]{-2,3,1,3};
 //        int arr[] = new int[]{-2,0,-1};
 //        int arr[] = new int[]{0,-2,0};
-        int arr[] = new int[]{2,3,-1,2};
-        System.out.println(maxProdSubArray(arr));
+//        int arr[] = new int[]{2,3,-1,2};
+//        System.out.println(maxProdSubArray(arr));
 //        System.out.println(maxProdSubArrayMySol(arr));
-        System.out.println(maxProduct(arr));
+//        System.out.println(maxProduct(arr));
 ////////////
 
 //////////// 3 Sum
@@ -751,7 +751,170 @@ public class Test {
 //        prettyPrint("");
 ////////////
 
+//////////// Search in sorted array of unknown size
+//        System.out.println(search(,9));
+////////////
+
+//////////// Binary tree right side view
+//        TreeNode t5 = new TreeNode(6, null, null);
+//        TreeNode t4 = new TreeNode(4, null, null);
+//        TreeNode t3 = new TreeNode(5, t4, t5);
+//        TreeNode t2 = new TreeNode(1, null, null);
+//        TreeNode t1 = new TreeNode(3, t2, t3);
+//        rightSideViewDFS(t1);
+////////////
+
+//////////// Asteroid collision
+//        int[] output;
+//        output=asteroidCollisionStack(new int[]{10, 2, -5});
+//        output=asteroidCollisionStack(new int[]{-10,40,35,10,2,-30,-10,-20,-40});
+//        output=asteroidCollisionArray(new int[]{-10,40,35,10,2,-30,-10,-20});
+//        for (int i : output)
+//            System.out.print(i+" ");
+
+////////////
+
+//////////// Serialize and deserialize a n-ary tree
+
+////////////
+
+
     }
+
+    public static String serialize(Node root) {
+        List<String> list=new LinkedList<>();
+        serializeHelper(root,list);
+        return String.join(",",list);
+    }
+
+    private static void serializeHelper(Node root, List<String> list){
+        if(root==null){
+            return;
+        }else{
+            list.add(String.valueOf(root.val));
+            list.add(String.valueOf(root.children.size()));
+            for(Node child:root.children){
+                serializeHelper(child,list);
+            }
+        }
+    }
+
+    // Decodes your encoded data to tree.
+    public static Node deserializeNaryTree(String data) {
+        if(data.isEmpty())
+            return null;
+
+        String[] ss=data.split(",");
+        Queue<String> q=new LinkedList<>(Arrays.asList(ss));
+        return deserializeHelper(q);
+    }
+
+    private static Node deserializeHelper(Queue<String> q){
+        Node root=new Node();
+        root.val=Integer.parseInt(q.poll());
+        int size=Integer.parseInt(q.poll());
+        root.children=new ArrayList<Node>(size);
+        for(int i=0;i<size;i++){
+            root.children.add(deserializeHelper(q));
+        }
+        return root;
+    }
+
+    public static int[] asteroidCollisionArray(int[] asteroids) {
+        int n = asteroids.length;
+        int j = -1;
+        for (int i = 0; i < n; i++) {
+            asteroids[++j] = asteroids[i];
+            if (asteroids[i] < 0) {
+                while (j >= 1) {
+                    int r = asteroids[j], l = asteroids[j - 1];
+                    if (l > 0 && r < 0) {
+                        if (l > -r) {--j;break;}
+                        else if (l < -r) asteroids[--j] = r;
+                        else j = j - 2;
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+        return Arrays.copyOfRange(asteroids, 0, j + 1);
+    }
+
+    //Stack is a better DS here than DLL as its cleaner to do remove and add as it happens at the end only
+    //Stack extends Vector class which has data stored as an array of objects so stack.elementAt() is fast
+    public static int[] asteroidCollisionStack(int[] asteroids) {
+        Stack<Integer> stack = new Stack<>();
+        for (int asteroid : asteroids) {
+            if (stack.size() == 0) {
+                stack.push(asteroid);
+                continue;
+            }
+            if (asteroid < 0 && stack.size() > 0 && stack.peek() > 0) {
+                while (stack.size() > 0 && stack.peek() > 0 && Math.abs(asteroid) > Math.abs(stack.peek())) {
+                    stack.pop();
+                }
+                if (stack.size() > 0) {
+                    if (stack.peek() < 0) stack.push(asteroid);
+                    else if (Math.abs(asteroid) == Math.abs(stack.peek())) stack.pop();
+                } else if (stack.size() == 0) stack.push(asteroid);
+
+            } else
+                stack.push(asteroid);
+
+        }
+
+        int[] output = new int[stack.size()];
+        for (int i = 0; i < stack.size(); i++) {
+            output[i] = stack.elementAt(i);
+        }
+        return output;
+    }
+
+
+    public static List<Integer> rightSideViewDFS(TreeNode root) {
+        List<Integer> result = new ArrayList<Integer>();
+        rightView(root, result, 0);
+        return result;
+    }
+
+    public static void rightView(TreeNode curr, List<Integer> result, int currDepth){
+        if(curr == null){
+            return;
+        }
+        if(currDepth == result.size()){
+            result.add(curr.val);
+        }
+
+        rightView(curr.right, result, currDepth + 1);
+        rightView(curr.left, result, currDepth + 1);
+
+    }
+
+//    Search in sorted array of unknown size
+//    public static int search(ArrayReader reader, int target) {
+//        if (reader == null) {
+//            return -1;
+//        }
+//
+//        int l = 0;
+//        int r = 1;
+//        while (l <= r) {
+//            int m = l + (r - l) / 2;
+//
+//            int medianNum = reader.get(m);
+//
+//            if (medianNum == 2147483647 || medianNum > target) {
+//                r = m - 1;
+//            } else if (medianNum < target) {
+//                l = m + 1;
+//                r = l + r;
+//            } else {
+//                return m;
+//            }
+//        }
+//        return -1;
+//    }
 
     public static void prettyPrint(String input) {
         int spaces = 0;
@@ -2434,6 +2597,7 @@ public class Test {
         return true;
     }
 
+    //>>>>Rev3
     public static boolean isSameTreeRecur(TreeNode p, TreeNode q) {
         // p and q are both null
         if (p == null && q == null) return true;
@@ -4279,7 +4443,6 @@ public class Test {
         return grid[n - 1];
     }
 
-//>>>>Rev2
 }
 
 

@@ -67,19 +67,6 @@ Complexities
     for{} then recursive call(n-1) means n + n-1 +n-2...T(n)=O(n^2)
     for{ recursive call(n-1)} means n x n-1 x n-2...T(n)=O(n!).....n queen example
 
-**Design Patterns**
-
-Abstract class is so that no object can be created of it and you can have common functions defined so that
-inherited classes can reuse.
-
-Abstract classes can have abstract functions which will have no body so the inherited classes must define it
-
-Strategy design pattern
-https://www.geeksforgeeks.org/strategy-pattern-set-1/
-https://www.geeksforgeeks.org/strategy-pattern-set-2/
-
-""
-
 
 **System Design**
 
@@ -101,6 +88,38 @@ Pointcuts
 
 
 
+**Design Patterns**
+
+Abstract class is so that no object can be created of it and you can have common functions defined so that
+inherited classes can reuse.
+
+Abstract classes can have abstract functions which will have no body so the inherited classes must define it
+
+Singleton
+    static getInstance
+    private constructor
+    
+Factory
+    Class to create objects so that the creation logic is not handled by clients
+    so client doesnt need to be recompiled
+   
+  
+Template
+    a process flow that needs to be done for many base classes
+    Abstract template class
+    final template method
+    abstract methods which each sub class will define separately
+            
+Strategy design pattern
+    https://www.geeksforgeeks.org/strategy-pattern-set-1/
+    https://www.geeksforgeeks.org/strategy-pattern-set-2/
+    Used for optional behaviours
+    If a behaviour definition is common and required for all classes use abstract classes
+    But, If a behaviour definition is common but not required for all classes use Strategy pattern
+    
+""
+
+
 **Java**
 
 Future Task, ExecutorService, ThreadPoolExecutor, Async(Spring)
@@ -108,3 +127,18 @@ ExecutorService uses ThreadPoolExecutor and can choose the type of threading
 FutureTask blocks current execution
 
 Stream, Lambda
+
+Abstract class - 
+    has to have one abstract method - this method would differ for the sub classes hence abstract
+    increases reuseability through inheritance using common non-abstract method definitions
+    has to be extended
+    Cant creat object cuz there are abstract methods in it
+    It is inherited
+    Not good to keep uncommon functions in abstract class(use Strategy pattern instead)
+    
+Interface 
+    All methods are abstract 
+    All methods must be implemented in implementing class
+    Cant create object cuz all methods are abstract
+    It is implemented
+    
