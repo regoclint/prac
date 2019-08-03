@@ -26,6 +26,8 @@ For list of all pnc backtrack
 
 Palindrome substring - Manacher algo
 
+BST do inorder iteratively with stack
+
 Utility funcs
 
     Changing DS

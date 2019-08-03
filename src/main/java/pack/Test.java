@@ -775,49 +775,328 @@ public class Test {
 ////////////
 
 //////////// Serialize and deserialize a n-ary tree
+//        Node t6 = new Node(6);
+//        Node t5 = new Node(5);
+//        Node t4 = new Node(4);
+//        Node t3 = new Node(3);
+//        Node t2 = new Node(2);
+//        Node t1 = new Node(1);
+//        t1.children.add(t2);
+//        t1.children.add(t3);
+//        t1.children.add(t4);
+//        t3.children.add(t5);
+//        t3.children.add(t6);
+//        Node result=deserializeNaryTree(serialize(t1));
 
 ////////////
 
+//////////// Search in 2D Matrix
+//        int[][] matrix=new int[][]{{1,4,7,11,15},
+//                                    {2,5,8,12,19},
+//                                    {3,6,9,16,22},
+//                                    {10,13,14,17,24},
+//                                    {18,21,23,26,30}};
+//        System.out.println(searchIn2DMatrix(matrix,5));
+////////////
+
+//////////// Implement a trie
+//        implementTrie();
+////////////
+
+//////////// Search in rotated sorted array
+//        System.out.println(searchInRotatedSortedArray(new int[]{4,5,6,7,0,1,2,3},6));
+////////////
+
+////////////
+//        PriorityQueue<Integer> priorityQueue=new PriorityQueue<Integer>((a,b) -> {return -(a-b);});
+//        priorityQueue.add(4);
+//        priorityQueue.add(5);
+//        KthLargestPQ kthLargestPQ=new KthLargestPQ(3,new int[]{4,5,8,2});
+//        System.out.println(kthLargestPQ.add(3));  // returns 4
+//        System.out.println(kthLargestPQ.add(5));  // returns 5
+//        System.out.println(kthLargestPQ.add(10));  // returns 5
+//        System.out.println(kthLargestPQ.add(9));  // returns 8
+//        System.out.println(kthLargestPQ.add(4));  // returns 8
+
+//        KthLargest kthLargest=new KthLargest(3,new int[]{5,4,8,2});
+//        System.out.println(kthLargest.add(3));  // returns 4
+//        System.out.println(kthLargest.add(5));  // returns 5
+//        System.out.println(kthLargest.add(10));  // returns 5
+//        System.out.println(kthLargest.add(9));  // returns 8
+//        System.out.println(kthLargest.add(4));  // returns 8
+
+////////////
+
+//////////// Copy List with Random pointer
+//        RandomListNode l1=new RandomListNode(1);
+//        RandomListNode l2=new RandomListNode(2);
+//        RandomListNode l3=new RandomListNode(3);
+//        l1.next=l2;
+//        l1.random=l3;
+//        l2.next=l3;
+//        l2.random=l2;
+//        RandomListNode result=copyRandomList(l1);
+////////////
+
+//////////// Product of array except self
+        productExceptSelf(new int[]{1,2,3,4});
+////////////
 
     }
 
-    public static String serialize(Node root) {
-        List<String> list=new LinkedList<>();
-        serializeHelper(root,list);
-        return String.join(",",list);
+    public static int[] productExceptSelf(int[] nums) {
+
+        int length = nums.length;
+        int[] answer = new int[length];
+        answer[0] = 1;
+        for (int i = 1; i < length; i++)
+            answer[i] = nums[i - 1] * answer[i - 1];
+
+        int R = 1;
+        for (int i = length - 1; i >= 0; i--) {
+            answer[i] = answer[i] * R;
+            R *= nums[i];
+        }
+        return answer;
     }
 
-    private static void serializeHelper(Node root, List<String> list){
-        if(root==null){
-            return;
-        }else{
-            list.add(String.valueOf(root.val));
-            list.add(String.valueOf(root.children.size()));
-            for(Node child:root.children){
-                serializeHelper(child,list);
+    public static RandomListNode copyRandomList(RandomListNode head) {
+        RandomListNode iter = head, next;
+
+        // 1->1'->2->2'->3->3'
+        while (iter != null) {
+            next = iter.next;
+            RandomListNode copy = new RandomListNode(iter.label);
+            iter.next = copy;
+            copy.next = next;
+            iter = next;
+        }
+
+        // assign the random pointers
+        iter = head;
+        while (iter != null) {
+            if (iter.random != null) {
+                iter.next.random = iter.random.next;
+            }
+            iter = iter.next.next;
+        }
+
+        // separate the lists
+        iter = head;
+        RandomListNode pseudoHead = new RandomListNode(0);
+        RandomListNode copy, copyIter = pseudoHead;
+        while (iter != null) {
+            next = iter.next.next;
+            // extract the copy
+            copy = iter.next;
+            copyIter.next = copy;
+            copyIter = copy;
+            // restore the original list
+            iter.next = next;
+            iter = next;
+        }
+        return pseudoHead.next;
+    }
+
+    static class KthLargest {
+
+        int k = 0;
+        int[] arr;
+        ArrayList<Integer> list;
+        public KthLargest(int k, int[] nums) {
+            arr = nums;
+            this.k = k;
+            list=new ArrayList<>();
+            for(int i : nums) add(i);
+        }
+
+        public int add(int val) {
+            int position=Collections.binarySearch(list,val);
+            if(position<0) position=-(position+1);
+            list.add(position,val);
+            return k>list.size() ? list.get(0):list.get(list.size()-k);
+        }
+    }
+
+    static class KthLargestPQ {
+
+        int k = 0;
+        int[] arr;
+        PriorityQueue<Integer> pq;
+
+        public KthLargestPQ(int k, int[] nums) {
+            arr = nums;
+            this.k = k;
+            pq = new PriorityQueue<Integer>((a, b) -> {
+                return -(a - b);
+            });
+            for (int i : arr) pq.add(i);
+
+        }
+
+        public int add(int val) {
+            pq.add(val);
+            ArrayList<Integer> arrayList = new ArrayList<>();
+            for (int i = 1; i < k; i++) arrayList.add(pq.remove());
+            int returnValue = pq.peek();
+            for (int i : arrayList) pq.add(i);
+            return returnValue;
+        }
+    }
+
+    int searchSomeOtherSoln(int A[], int n, int target) {
+        int lo=0,hi=n-1;
+        // find the index of the smallest value using binary search.
+        // Loop will terminate since mid < hi, and lo or hi will shrink by at least 1.
+        // Proof by contradiction that mid < hi: if mid==hi, then lo==hi and loop would have been terminated.
+        while(lo<hi){
+            int mid=(lo+hi)/2;
+            if(A[mid]>A[hi]) lo=mid+1;
+            else hi=mid;
+        }
+        // lo==hi is the index of the smallest value and also the number of places rotated.
+        int rot=lo;
+        lo=0;hi=n-1;
+        // The usual binary search and accounting for rotation.
+        while(lo<=hi){
+            int mid=(lo+hi)/2;
+            int realmid=(mid+rot)%n;
+            if(A[realmid]==target)return realmid;
+            if(A[realmid]<target)lo=mid+1;
+            else hi=mid-1;
+        }
+        return -1;
+    }
+
+    public static int searchInRotatedSortedArray(int[] nums, int target) {
+        int start = 0;
+        int end = nums.length - 1;
+        while (start <= end){
+            int mid = (start + end) / 2;
+            if (nums[mid] == target)
+                return mid;
+
+            if (nums[start] <= nums[mid]){
+                if (target < nums[mid] && target >= nums[start])
+                    end = mid - 1;
+                else
+                    start = mid + 1;
+            }
+
+            if (nums[mid] <= nums[end]){
+                if (target > nums[mid] && target <= nums[end])
+                    start = mid + 1;
+                else
+                    end = mid - 1;
             }
         }
+        return -1;
     }
 
-    // Decodes your encoded data to tree.
-    public static Node deserializeNaryTree(String data) {
-        if(data.isEmpty())
-            return null;
-
-        String[] ss=data.split(",");
-        Queue<String> q=new LinkedList<>(Arrays.asList(ss));
-        return deserializeHelper(q);
+    public static void implementTrie(){
+        Trie trie=new Trie();
+        trie.insert("apple");
+        System.out.println(trie.search("apple"));   // returns true
+        System.out.println(trie.search("app"));     // returns false
+        System.out.println(trie.startsWith("app")); // returns true
+        trie.insert("app");
+        System.out.println(trie.search("app"));     // returns true
     }
 
-    private static Node deserializeHelper(Queue<String> q){
-        Node root=new Node();
-        root.val=Integer.parseInt(q.poll());
-        int size=Integer.parseInt(q.poll());
-        root.children=new ArrayList<Node>(size);
-        for(int i=0;i<size;i++){
-            root.children.add(deserializeHelper(q));
+    static class Trie {
+
+        // R links to node children
+        private Trie[] links;
+
+        private final int R = 26;
+
+        private boolean isEnd;
+
+        public Trie() {
+            links = new Trie[R];
         }
-        return root;
+
+        public boolean containsKey(char ch) {
+            return links[ch - 'a'] != null;
+        }
+
+        public Trie get(char ch) {
+            return links[ch - 'a'];
+        }
+
+        public void put(char ch, Trie node) {
+            links[ch - 'a'] = node;
+        }
+
+        public void setEnd() {
+            isEnd = true;
+        }
+
+        public boolean isEnd() {
+            return isEnd;
+        }
+
+        // Inserts a word into the trie.
+        public void insert(String word) {
+            Trie node =this;
+            for (int i = 0; i < word.length(); i++) {
+                char currentChar = word.charAt(i);
+                if (!node.containsKey(currentChar)) {
+                    node.put(currentChar, new Trie());
+                }
+                node = node.get(currentChar);
+            }
+            node.setEnd();
+        }
+
+        // search a prefix or whole key in trie and
+        // returns the node where search ends
+        private Trie searchPrefix(String word) {
+            Trie node =this;
+            for (int i = 0; i < word.length(); i++) {
+                char curLetter = word.charAt(i);
+                if (node.containsKey(curLetter)) {
+                    node = node.get(curLetter);
+                } else {
+                    return null;
+                }
+            }
+            return node;
+        }
+
+        // Returns if the word is in the trie.
+        public boolean search(String word) {
+            Trie node = searchPrefix(word);
+            return node != null && node.isEnd();
+        }
+
+        // Returns if there is any word in the trie
+        // that starts with the given prefix.
+        public boolean startsWith(String prefix) {
+            Trie node = searchPrefix(prefix);
+            return node != null;
+        }
+    }
+
+
+
+
+    public static boolean searchIn2DMatrix(int[][] matrix, int target) {
+        // start our "pointer" in the bottom-left
+        int row = matrix.length-1;
+        int col = 0;
+
+        while (row >= 0 && col < matrix[0].length) {
+            if (matrix[row][col] > target) {
+                row--;
+            } else if (matrix[row][col] < target) {
+                col++;
+            } else { // found it
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static int[] asteroidCollisionArray(int[] asteroids) {
@@ -1073,6 +1352,7 @@ public class Test {
         }
     }
 
+    //>>>>>>Rev2
     static int connectedComponentsCount=0;
     public static int countComponentsDFS(int n, int[][] edges) {
 
@@ -2108,7 +2388,7 @@ public class Test {
         return s.length() - start;// the window of length-start is taken forward always and we try to see if we can better from that number for each end index.
     }
 
-
+    //>>>>Rev3
     //In BST iterative, may not need stack as u can move through searching
     //LCA can be asked for BT also, there whole tree needs to be searched except for inside a node that has matched.
     public static TreeNode lowestCommonAncestorRecur(TreeNode root, TreeNode p, TreeNode q) {
@@ -2185,10 +2465,10 @@ public class Test {
 
         // delete from the right subtree
         if (key > root.val) root.right = deleteBST(root.right, key);
-            // delete from the left subtree
+        // delete from the left subtree
         else if (key < root.val) root.left = deleteBST(root.left, key);
-            // delete the current node
-        else {
+        else { // delete the current node
+
             // the node is a leaf
             if (root.left == null && root.right == null) root = null;
                 // the node is not a leaf and has a right child
@@ -2412,6 +2692,46 @@ public class Test {
         }
     }
 
+    public static String serialize(Node root) {
+        List<String> list=new LinkedList<>();
+        serializeHelper(root,list);
+        return String.join(",",list);
+    }
+
+    private static void serializeHelper(Node root, List<String> list){
+        if(root==null){
+            return;
+        }else{
+            list.add(String.valueOf(root.val));
+            list.add(String.valueOf(root.children.size()));
+            for(Node child:root.children){
+                serializeHelper(child,list);
+            }
+        }
+    }
+
+    //Queue and recursion used helps retain the node after its polled too
+    // Decodes your encoded data to tree.
+    public static Node deserializeNaryTree(String data) {
+        if(data.isEmpty())
+            return null;
+
+        String[] ss=data.split(",");
+        Queue<String> q=new LinkedList<>(Arrays.asList(ss));
+        return deserializeHelper(q);
+    }
+
+    private static Node deserializeHelper(Queue<String> q){
+        Node root=new Node();
+        root.val=Integer.parseInt(q.poll());
+        int size=Integer.parseInt(q.poll());
+        root.children=new ArrayList<Node>(size);
+        for(int i=0;i<size;i++){
+            root.children.add(deserializeHelper(q));
+        }
+        return root;
+    }
+
     // Encodes a tree to a single string.
     public static String serialize(TreeNode root) {
         return serialize(root, "");
@@ -2597,7 +2917,7 @@ public class Test {
         return true;
     }
 
-    //>>>>Rev3
+
     public static boolean isSameTreeRecur(TreeNode p, TreeNode q) {
         // p and q are both null
         if (p == null && q == null) return true;
