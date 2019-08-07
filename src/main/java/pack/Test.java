@@ -1,4 +1,6 @@
 package pack;
+import com.sun.org.apache.bcel.internal.generic.LUSHR;
+import com.sun.org.apache.xerces.internal.xs.StringList;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -464,7 +466,8 @@ public class Test {
 //////////// Longest Repeating Character Replacement
 //        String s="AABABBA";
 //        String s="ACDBBEFAGHIJA";
-//        System.out.println(characterReplacement(s,2));
+//        String s="abaaaabbcde";
+//        System.out.println(characterReplacement(s,1));
 ////////////
 
 //////////// Minimum Window Substring
@@ -733,6 +736,7 @@ public class Test {
 //        System.out.println(LIS(0,new int[]{20,5,40,6,7,8}));
 //        System.out.println(LisDP(new int[]{20,5,40,6,7,8}));
 //        System.out.println(lengthOfLIS(new int[]{20,5,40,6,7,8}));
+//        System.out.println(lengthOfLIS(new int[]{0,7,5,6}));
 ////////////
 
 //////////// Longest common subsequence or delete operation for two strings
@@ -745,6 +749,7 @@ public class Test {
 //        System.out.println(calculateI("1+1"));
 
 //        System.out.println(calculateII("5+20/2/5-1*4*6/2*2"));
+        System.out.println(calculateII("5-20+1+3+4"));
 ////////////
 
 //////////// Pretty print JSON
@@ -839,9 +844,74 @@ public class Test {
 ////////////
 
 //////////// Product of array except self
-        productExceptSelf(new int[]{1,2,3,4});
+//        productExceptSelf(new int[]{1,2,3,4});
 ////////////
 
+//////////// Odd even list
+//        ListNode l1=new ListNode(1);
+//        ListNode l2=new ListNode(2);
+//        ListNode l3=new ListNode(3);
+//        ListNode l4=new ListNode(4);
+//        ListNode l5=new ListNode(5);
+//        l1.next=l2;
+//        l2.next=l3;
+//        l3.next=l4;
+//        l4.next=l5;
+//        oddEvenList(l1);
+////////////
+
+//////////// Zig Zag iterator
+//        List<Integer> list1=Arrays.asList(1,2,3,4,5);
+//        List<Integer> list2=Arrays.asList(5,6,7,8,9);
+//        List<Integer> list3=Arrays.asList(10,11,12,13,14,15);
+//        List<Integer> list4=Arrays.asList(16,17,18,19,20);
+//        List<List<Integer>> lists=new ArrayList<>();
+//        lists.add(list1);
+//        lists.add(list2);
+//        lists.add(list3);
+//        lists.add(list4);
+//        ZigzagIterator zigzagIterator=new ZigzagIterator(lists);
+//        while (ZigzagIterator.hasNext())
+//        {
+//            System.out.println(ZigzagIterator.next());
+//        }
+////////////
+
+    }
+
+    public static class ZigzagIterator {
+
+        // Better solution, 6ms
+        static Queue<Iterator> q;
+
+        public ZigzagIterator(List<List<Integer>> lists) {
+            q = new LinkedList();
+            for(List<Integer> list :lists) if (!list.isEmpty()) q.offer(list.iterator());
+        }
+
+        public static int next() {
+            Iterator cur = q.poll();
+            int res = (int) cur.next();
+            if (cur.hasNext()) q.offer(cur);
+            return res;
+        }
+
+        public static boolean hasNext() {
+            return q.peek() != null;
+        }
+    }
+
+    public static ListNode oddEvenList(ListNode head) {
+        if (head == null) return null;
+        ListNode odd = head, even = head.next, evenHead = even;
+        while (even != null && even.next != null) {
+            odd.next = even.next;
+            odd = odd.next;
+            even.next = odd.next;
+            even = even.next;
+        }
+        odd.next = evenHead;
+        return head;
     }
 
     public static int[] productExceptSelf(int[] nums) {
@@ -1231,10 +1301,10 @@ public class Test {
             else
                 System.out.print(input.charAt(i));
 
-
         }
     }
 
+    //Keep + - together in result and /* in tail
     public static int calculateII(String s) {
         int tail = 0;
         char operator = '+';
@@ -1246,7 +1316,7 @@ public class Test {
 
         for(int i = 0 ; i < n; i++){
             char c = s.charAt(i); //charAt works on an array
-            if(c == ' '){continue;}
+            if(c == ' ') continue;
             if (Character.isDigit(c)){
                 num =  c-'0';
                 while(i + 1 < n && Character.isDigit(s.charAt(i+1))){
@@ -1275,6 +1345,7 @@ public class Test {
         }
         return res + tail;
     }
+
     public static int calculateI(String s) {
 
         Stack<Integer> stack = new Stack<Integer>();
@@ -1289,7 +1360,7 @@ public class Test {
                 operand = 10 * operand + (int) (ch - '0');
 
             else if (ch == '+' || ch == '-') {
-                result += sign * operand; //calculate the part of this sign
+                result += sign * operand; //calculate the left part of this sign
                 sign = ch == '+' ? 1 : -1; //assign sign for next operation
                 operand = 0;
 
@@ -1331,9 +1402,8 @@ public class Test {
     private static int find(int x) {
         int fatherOfX = x;
         //Find father of x
-        while (father[fatherOfX] != fatherOfX) {
-            fatherOfX = father[fatherOfX];
-        }
+        while (fatherOfX != father[fatherOfX]) fatherOfX = father[fatherOfX];
+
         //Collapsing find
         while (father[x] != fatherOfX) {
             int tmp = father[x];
@@ -1441,21 +1511,21 @@ public class Test {
         return res;
     }
 
-    private static void dfs(int[][] matrix, int[][] visited, int y, int x, int islandNumber) {
+    private static void dfs(int[][] matrix, int[][] visited, int y, int x, int ocean) {
         int val = matrix[y][x];
-        int vis = visited[y][x];
-        if (vis == islandNumber || vis == -3) return;
-        visited[y][x] = vis < 0 ? -3 : islandNumber;
+        int visitedOcean = visited[y][x];
+        if (visitedOcean == ocean || visitedOcean == -3) return;
+        visited[y][x] = visitedOcean < 0 ? -3 : ocean;
 
         boolean left = x > 0 && matrix[y][x-1] >= val;
         boolean right = x < matrix[0].length -1 && matrix[y][x+1] >= val;
         boolean up = y > 0 && matrix[y-1][x] >= val;
         boolean down = y < matrix.length - 1 && matrix[y+1][x] >= val;
 
-        if (left) dfs(matrix, visited, y, x-1, islandNumber);
-        if (right) dfs(matrix, visited, y, x+1, islandNumber);
-        if (up) dfs(matrix, visited, y-1, x, islandNumber);
-        if (down) dfs(matrix, visited, y+1, x, islandNumber);
+        if (left) dfs(matrix, visited, y, x-1, ocean);
+        if (right) dfs(matrix, visited, y, x+1, ocean);
+        if (up) dfs(matrix, visited, y-1, x, ocean);
+        if (down) dfs(matrix, visited, y+1, x, ocean);
     }
 
     //Space is O(min(m,n))
@@ -1507,9 +1577,7 @@ public class Test {
         int nr = grid.length;
         int nc = grid[0].length;
 
-        if (r < 0 || c < 0 || r >= nr || c >= nc || grid[r][c] == '0') {
-            return;
-        }
+        if (r < 0 || c < 0 || r >= nr || c >= nc || grid[r][c] == '0') return;
 
         grid[r][c] = '0';
         dfs(grid, r - 1, c);
@@ -1590,13 +1658,13 @@ public class Test {
 
     public static String alienDictionary(String[] words) {
         HashMap<Character, UndirectedGraphNodeChar> adjacencyList = new HashMap<>();
-        int[] indegree= new int[26];
-        Queue<Character> queue=new LinkedList<>();
+        int[] indegree = new int[26];
+        Queue<Character> queue = new LinkedList<>();
 
-        if(words.length==1)
+        if (words.length == 1)
             return words[0];
 
-        int j=0;
+        int j = 0;
         //Create adjacency list
         for (int i = 0; i < words.length - 1; i++) {
             String word = words[i];
@@ -1604,12 +1672,12 @@ public class Test {
 
             for (j = 0; j < Math.min(word.length(), nextWord.length()); j++) {
                 if (word.charAt(j) == nextWord.charAt(j)) //the loop should continue
-                {   if(!adjacencyList.containsKey(word.charAt(j))) {
-                    adjacencyList.put(word.charAt(j), new UndirectedGraphNodeChar(word.charAt(j)));
-                    indegree[word.charAt(j)-'a']++;
-                }
-                }
-                else {  //no point in continuing the loop for adjacencies
+                {
+                    if (!adjacencyList.containsKey(word.charAt(j))) {
+                        adjacencyList.put(word.charAt(j), new UndirectedGraphNodeChar(word.charAt(j)));
+                        indegree[word.charAt(j) - 'a']++;
+                    }
+                } else {  //no point in continuing the loop for adjacencies
                     UndirectedGraphNodeChar firstNode = adjacencyList.get(word.charAt(j));
                     UndirectedGraphNodeChar secondNode = adjacencyList.get(nextWord.charAt(j));
                     if (firstNode == null) {
@@ -1621,49 +1689,46 @@ public class Test {
                         secondNode = new UndirectedGraphNodeChar(nextWord.charAt(j));
 
                     firstNode.neighbors.add(secondNode);
+                    adjacencyList.put(firstNode.value, firstNode);
                     adjacencyList.put(nextWord.charAt(j), secondNode);
 
-                    adjacencyList.put(firstNode.value, firstNode);
-                    if(indegree[nextWord.charAt(j)-'a']==0)
-                        indegree[nextWord.charAt(j)-'a']=2;
+                    if (indegree[nextWord.charAt(j) - 'a'] == 0)
+                        indegree[nextWord.charAt(j) - 'a'] = 2;
                     else
-                        indegree[nextWord.charAt(j)-'a']++;
+                        indegree[nextWord.charAt(j) - 'a']++;
 
-                    if(indegree[word.charAt(j)-'a']==0)
-                        indegree[word.charAt(j)-'a']=1;
+                    if (indegree[word.charAt(j) - 'a'] == 0)
+                        indegree[word.charAt(j) - 'a'] = 1;
 
-                    addElements(word,adjacencyList,indegree);
-                    addElements(nextWord,adjacencyList,indegree);
+                    addElements(word, adjacencyList, indegree);
+                    addElements(nextWord, adjacencyList, indegree);
                     break;
                 }
             }
-            addElements(word,adjacencyList,indegree);
-            addElements(nextWord,adjacencyList,indegree);
+            addElements(word, adjacencyList, indegree);
+            addElements(nextWord, adjacencyList, indegree);
         }
 
         //Add independent elements to Queue
-        for (int i=0; i<26;i++) {
-            if(indegree[i]==1)
-            {
-                queue.add((char) ('a'+i));
+        for (int i = 0; i < 26; i++) {
+            if (indegree[i] == 1) {
+                queue.add((char) ('a' + i));
             }
         }
 
-        StringBuffer output=new StringBuffer();
-        while (!queue.isEmpty()){
+        StringBuilder output = new StringBuilder();
+        while (!queue.isEmpty()) {
 
-            char poppedChar=queue.poll();
+            char poppedChar = queue.poll();
             output.append(poppedChar);
-            for(UndirectedGraphNodeChar neighbour : adjacencyList.get(poppedChar).neighbors){
-                if(indegree[neighbour.value-'a']--==2){
+            for (UndirectedGraphNodeChar neighbour : adjacencyList.get(poppedChar).neighbors) {
+                if (indegree[neighbour.value - 'a']-- == 2) {
                     queue.add(neighbour.value);
                 }
             }
-
-
         }
 
-        return output.length()!=adjacencyList.size() ? "" :output.toString();
+        return output.length() != adjacencyList.size() ? "" : output.toString();
     }
 
     public static void addElements(String word,HashMap<Character,UndirectedGraphNodeChar> adjacencyList,int[] indegree){
@@ -1678,6 +1743,7 @@ public class Test {
     }
 
     //here i cannot be equal to i+1, so binary search works
+    //peak is an element greater than its neighbours, return any one peak
     public static int findPeakElement(int[] nums) {
         int l = 0, r = nums.length - 1;
         while (l < r) {
@@ -1751,7 +1817,7 @@ public class Test {
         return output;
     }
 
-    //Time limit exceeded solution
+    //Time limit exceeded solution cuz it goes over all possible combos
     public static void wordSearchII(char[][] input, HashSet<String> visited, HashSet<String> wordDict) {
         for (int row = 0; row < input.length; row++) {
             for (int coloumn = 0; coloumn < input[0].length; coloumn++) {
@@ -1785,6 +1851,7 @@ public class Test {
         visited.remove(row + "," + column);
     }
 
+    //Topological sort assumes the graph is directed and acyclic whereas canFinish() checks whether it is DAC
     public static void topologicalSort(HashMap<Integer, UndirectedGraphNode> graphNodeHashMap) {
 
         HashSet<Integer> visited = new HashSet<>();
@@ -1949,8 +2016,7 @@ public class Test {
     public static boolean isValidParenthesis(String s) {
 
         // Hash table that takes care of the mappings.
-        HashMap<Character, Character> mappings;
-        mappings = new HashMap<Character, Character>();
+        HashMap<Character, Character> mappings=new HashMap<Character, Character>();
         mappings.put(')', '(');
         mappings.put('}', '{');
         mappings.put(']', '[');
@@ -2015,6 +2081,7 @@ public class Test {
         return true;
     }
 
+    //>>>>Rev3
     public static List<List<String>> groupAnagrams(String[] strs) {
         if (strs.length == 0) return new ArrayList();
         Map<String, List> ans = new HashMap<String, List>();
@@ -2040,8 +2107,29 @@ public class Test {
 //    Check if balanced binary tree…check by height subtractions
 //    Do binary search in array
 
-    //Do
-    //    LRU cache can be a linked hash map too
+
+    class LRUCacheLHM extends LinkedHashMap<Integer, Integer>{
+        private int capacity;
+
+        public LRUCacheLHM(int capacity) {
+            super(capacity, 0.75F, true);
+            this.capacity = capacity;
+        }
+
+        public int get(int key) {
+            return super.getOrDefault(key, -1);
+        }
+
+        public void put(int key, int value) {
+            super.put(key, value);
+        }
+
+        @Override
+        protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
+            return size() > capacity;
+        }
+    }
+
     public static class LRUCache {
 
         private Hashtable<Integer, DLinkedNode> cache =
@@ -2149,15 +2237,15 @@ public class Test {
 
     // Encodes a list of strings to a single string.
     public static String encode(List<String> strs) {
-        StringBuffer sequence = new StringBuffer(".");
-        StringBuffer stringInput = new StringBuffer();
+        StringBuilder stringLengthSequence = new StringBuilder(".");
+        StringBuilder inputSequence = new StringBuilder();
         if (strs.size() == 0)
             return "";
         for (String s : strs) {
-            sequence.append(s.length() + " ");
-            stringInput.append(s);
+            stringLengthSequence.append(s.length() + " ");
+            inputSequence.append(s);
         }
-        return stringInput.toString() + sequence.toString();
+        return inputSequence.toString() + stringLengthSequence.toString();
     }
 
     // Decodes a single string to a list of strings.
@@ -2376,6 +2464,7 @@ public class Test {
         return ans[0] == -1 ? "" : s.substring(ans[1], ans[2] + 1);
     }
 
+    //>>>Do yr way
     public static int characterReplacement(String s, int k) {
         int[] count = new int[128];
         int max = 0;
@@ -2388,7 +2477,6 @@ public class Test {
         return s.length() - start;// the window of length-start is taken forward always and we try to see if we can better from that number for each end index.
     }
 
-    //>>>>Rev3
     //In BST iterative, may not need stack as u can move through searching
     //LCA can be asked for BT also, there whole tree needs to be searched except for inside a node that has matched.
     public static TreeNode lowestCommonAncestorRecur(TreeNode root, TreeNode p, TreeNode q) {

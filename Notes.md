@@ -60,7 +60,8 @@ n / 2 + n % 2...for odd and even mid points
 Complexities
     n3 > n! > 2^n > n2 > nlogn > n > logn
     
-    Recurcive functions
+Recursive functions
+
     T(n)=aT(n-b) + f(n)
         if a<1 T(n)= f(n)
         if a=1 T(n)= n * f(n)
@@ -72,21 +73,52 @@ Complexities
 
 **System Design**
 
+Twitter (News Feed)    
+- is read heavy compared to write
+- Tweeting
+    - HTTP Put -> Load balancer -> into 3 redis instances(Fan out). Redis because high speed in memory and only 140 characters.
+    - We need more speed than space.
+    - A tweet updates the followers timeline in redis (precomputing)
+    - A celeb tweet appears on page refresh(from DB rather than Redis) so that comment on the tweet appears in the right order due to the high volume of followers                      
+- Timeline - User and Home
+    - User timeline is simple 
+    - Home timeline merge from all followers in chronological order
+    - HTTP Get -> LB -> get fastest timeline from 3 redis instances         
+- Following
+    - Active followers table is checked before precomputing the tweet into timelines
+- Search
+    - During the tweet operation the tweet is also sent to a Search engine to be indexed and be searchable
+- Advertising
+- Eventual consistency???
+ 
+Instagram
+- Precomputing like count is better so store the aggregation counts in another table  
+- similar to twitter cuz of timelines
+- Cache or precompute news
+- Push notifications for users posts and pull for celebreties or rate limit pushes 
+- Web sockets to push notifications
+    
+Whatsapp (Chat service)
+- https://www.youtube.com/watch?v=vvhC64hQZMk
+- One-one chat
+- UserA over TCP -> to gateway -> sessions service which has the user to gateway mapping -> Queue -> Gateway(Web socket) -> UserB
+- Group chat - also has group service for group to user id mapping       
 
+Tinder
++ Store Profiles
+    - Images stored as File vs BLOB 
+        - Files are cheaper, faster, dont need updates. Can use CDN 
+    - Images stored in DFS(Distributed File system)
+    
+- Recommend matches    
+- To index multiple coloumns
+  - Casandra or Amazon Dynamo DB - NoSql
+  - Sharding or Horizontal scaling
 
-**Spring**
+HTTP - client to server protocol
+XMPP or Websockets - Peer to peer protocol -Stateful and long lived TCP connection    
+CDN - Build to reduce response times by creating copies in different geographical locations
 
-Cyclic dependency - if set a bean in constructor
-
-Dependency injection - Helps in loosely coupling and mocking classes
-
-Scheduling
-@Async
-Async functions need to be public like @Transactional
-https://dzone.com/articles/spring-and-threads-async
-
-Pointcuts
-@Transactional
 
 
 
@@ -144,3 +176,45 @@ Interface
     Cant create object cuz all methods are abstract
     It is implemented
     
+String buffer - is synchronized, slow
+String builder - is not synchronized, twice as fast
+
+Generics 
+- <T> used for type safety. 
+- Also helps reducing the number of overloaded functions
+- Used for 
+    
+Reflection
+- Get all definitions in a class via java.lang.reflect such as methods, fields, super classes
+ 
+ 
+**Spring**
+
+Cyclic dependency - if set a bean in constructor
+
+Dependency injection - Helps in loosely coupling and mocking classes(testing)
+
+Scheduling
+@Async
+Async functions need to be public like @Transactional
+https://dzone.com/articles/spring-and-threads-async
+
+AOP
+
+Aspects 
+- Advice- Before, After, Around, After returning and After throwing
+- Pointcuts - Conditions
+- JoinPoint - program execution
+- Aspects(concerns) consists of Advice and pointcuts. Advice uses pointcuts
+
+Filter
+- Filters are provided as a part of tomcat for Servlets. Spring implements tomcat's Filter
+- Tomcat filter lifecycle - init() -> doFilter(){ chain.doFilter()} -> destroy()
+- Executes in web layer only
+
+Interceptors
+        
+
+@Transactional
+Live reload
+Actuator 
