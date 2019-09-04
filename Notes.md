@@ -55,21 +55,33 @@ Array.sort uses quick sort for primitive type and Tim sort for objects
 128 -
 256 - Extended ASCII
 
+Alphabets can be stored in array instead of hashmaps
+
 n / 2 + n % 2...for odd and even mid points
 
 Complexities
-    n3 > n! > 2^n > n2 > nlogn > n > logn
-    
+    n3 > n! > 2^n > n2 > nlogn > n > sq root n > logn
+
+for i=i+2 - O(n/2)    
+for i=i*2 - O(log n)    
+for i=i*3 - O(log3 n)
+for i=i/2 - O(log n)
+
+Sum of 2 powers till n - O(2^n)    
 Recursive functions
 
+    Masters theorem
     T(n)=aT(n-b) + f(n)
-        if a<1 T(n)= f(n)
+        if a<1 T(n)= f(n).....not that important
         if a=1 T(n)= n * f(n)
-        if a>1 T(n)= a^n *f(n) ...binary tree or trie
+        if a>1 T(n)= a^n/b * f(n) ...binary tree or trie
 
+    Consider upper bounds if a for loop decrements on every recursive call
+    
     for{} then recursive call(n-1) means n + n-1 +n-2...T(n)=O(n^2)
     for{ recursive call(n-1)} means n x n-1 x n-2...T(n)=O(n!).....n queen example
 
+AB testing - create 2 versions and gauge the response to finalize the version 
 
 **System Design**
 
@@ -159,6 +171,8 @@ Strategy design pattern
 Future Task, ExecutorService, ThreadPoolExecutor, Async(Spring)
 ExecutorService uses ThreadPoolExecutor and can choose the type of threading
 FutureTask blocks current execution
+Enumerations serve the purpose of representing a group of named constants like types -days of the week,
+planets,colors etc
 
 Stream, Lambda
 
@@ -169,7 +183,7 @@ Abstract class -
     Cant creat object cuz there are abstract methods in it
     It is inherited
     Not good to keep uncommon functions in abstract class(use Strategy pattern instead)
-    
+     
 Interface 
     All methods are abstract 
     All methods must be implemented in implementing class
@@ -179,6 +193,11 @@ Interface
 String buffer - is synchronized, slow
 String builder - is not synchronized, twice as fast
 
+Final
+    classes - Cannot be inherited...This can confer security eg. java.lang.system
+    methods - cannot be overriden
+    variables - are constant
+    
 Generics 
 - <T> used for type safety. 
 - Also helps reducing the number of overloaded functions
@@ -187,8 +206,19 @@ Generics
 Reflection
 - Get all definitions in a class via java.lang.reflect such as methods, fields, super classes
  
+Threads
+- Created via extending Thread class or implementing Runnable and define run function
+- ExecutorService can be used as a thread pool
+    - It can use future.get which returns null when its over
+    - It can be implemented via Callable instead of Runnable and return a result via future.get()
+ 
+Apache Velocity templating engine, can be used for email templates
+Javax.mail - mail api
+
  
 **Spring**
+
+Spring is a framework over Servlets
 
 Cyclic dependency - if set a bean in constructor
 
@@ -215,6 +245,8 @@ Filter
 Interceptors
         
 
-@Transactional
+@Transactional - will rollback failures
 Live reload
 Actuator 
+
+Redirect - https://www.baeldung.com/spring-redirect-and-forward

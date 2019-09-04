@@ -1,6 +1,4 @@
 package pack;
-import com.sun.org.apache.bcel.internal.generic.LUSHR;
-import com.sun.org.apache.xerces.internal.xs.StringList;
 import javafx.util.Pair;
 
 import java.io.IOException;
@@ -65,6 +63,14 @@ public class Test {
 
         // Unique Paths I, II(has obstacles)
 //        System.out.println(uniquePaths(3,2));
+//        int[][] input=new int[][]{{1,1,1,1},
+//                                    {1,0,1,1},
+//                                    {1,1,0,1},
+//                                    {1,1,1,1}};
+//        int[][] input=new int[][]{{1,1,0,1}};
+//        int[][] input=new int[][]{{0,1,1}};
+//        System.out.println(uniquePathsII(input));
+//        System.out.println(uniquePathsIIRecur(input));
 ////////////
 
 //////////// Coin change
@@ -749,7 +755,7 @@ public class Test {
 //        System.out.println(calculateI("1+1"));
 
 //        System.out.println(calculateII("5+20/2/5-1*4*6/2*2"));
-        System.out.println(calculateII("5-20+1+3+4"));
+//        System.out.println(calculateII("5-20+1+3+4"));
 ////////////
 
 //////////// Pretty print JSON
@@ -877,6 +883,658 @@ public class Test {
 //        }
 ////////////
 
+//////////// Isomorphic strings
+//        System.out.println(isIsomorphic("egg","add"));
+//        System.out.println(isIsomorphic("egd","add"));
+////////////
+
+//////////// Print repeating elements
+//        printRepeating(new int[]{1, 2, 3, 1, 3, 6, 6});
+////////////
+
+//////////// Hit Counter
+//        HitCounterTreeMapMyWay counter = new HitCounterTreeMapMyWay();
+//        counter.hit(1);
+//        counter.hit(2);
+//        counter.hit(3);
+//        System.out.println(counter.getHits(4));
+//        counter.hit(300);
+//        System.out.println(counter.getHits(300));
+//        System.out.println(counter.getHits(301));
+//        System.out.println(counter.getHits(350));
+//        System.out.println(counter.getHits(2));
+//
+//
+//        System.out.println(counter.getHits(100));
+//        System.out.println(counter.getHits(200));
+//        System.out.println(counter.getHits(300));
+//        counter.hit(300);
+//        counter.hit(401);
+//        System.out.println(counter.getHits(402));
+
+
+//        HitCounterTreeMap counter2 = new HitCounterTreeMap();
+//        counter2.hit(1);
+//        counter2.hit(2);
+//        counter2.hit(3);
+//        System.out.println(counter2.getHits(4));
+//        counter2.hit(300);
+//        System.out.println(counter2.getHits(300));
+//        System.out.println(counter2.getHits(301));
+//        System.out.println(counter2.getHits(350));
+//        System.out.println(counter2.getHits(2));
+
+////////////
+
+//////////// Binary tree coloring game
+//        TreeNode t11 = new TreeNode(11, null, null);
+//        TreeNode t10 = new TreeNode(10, null, null);
+//        TreeNode t9 = new TreeNode(9, null, null);
+//        TreeNode t8 = new TreeNode(8, null, null);
+//        TreeNode t7 = new TreeNode(7, null, null);
+//        TreeNode t6 = new TreeNode(6, null, null);
+//        TreeNode t5 = new TreeNode(5, t10, t11);
+//        TreeNode t4 = new TreeNode(4, t8, t9);
+//        TreeNode t3 = new TreeNode(3, t6, t7);
+//        TreeNode t2 = new TreeNode(2, t4, t5);
+//        TreeNode t1 = new TreeNode(1, t2, t3);
+//        System.out.println(btreeGameWinningMove(t1,11,3));
+////////////
+
+//////////// Buy sell stocks
+//        System.out.println(maxProfit(new int[]{7,1,5,3,6,4}));
+////////////
+
+//////////// Trapping rain water
+//        System.out.println(trap2Pointers(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
+//        System.out.println(trapStack(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
+//        System.out.println(trapDP(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
+////////////
+
+//////////// K closest points to origin
+//        int[][] output=kClosest(new int[][]{{3,3},{5,-1},{-2,4}},2);
+//        System.out.println(output[0].toString());
+//        System.out.println(Arrays.asList(output[1]));
+////////////
+
+//////////// Number to words
+//        NumberToWords numberToWords=new NumberToWords();
+//        System.out.println(numberToWords.numberToWords(123456));
+////////////
+
+//////////// Remove invalid parentheses
+//        HashSet output=new HashSet();
+//        removeParentheses(new StringBuffer(),output,new char[]{'(','a',')','(',')',')','(',')'},0);
+//        System.out.println(output);
+////////////
+
+//////////// Subarray sum equals k
+//        System.out.println(subarraySum(new int[]{28,54,7,-70,22,65,-6},100));
+//        System.out.println(subarraySum(new int[]{1,2,4,3,1},4));
+//        System.out.println(subarraySumBruteForce(new int[]{1,2,4,3,1},4));
+//        System.out.println(subarraySumHM(new int[]{1,2,4,3,1},4));
+////////////
+
+//////////// Merge sorted arrays
+//        int[] nums1=new int[]{1,2,3,0,0,0};
+//        mergeSortedArrayFromEnd(nums1,3,new int[]{2,5,6},3);
+////////////
+
+//////////// Next permutation
+//        int[] input=new int[]{1,5,8,4,7,6,5,3,1};
+//        nextPermutation(input);
+////////////
+
+//////////// Interval list intersections
+//        int[][] a = new int[][]{{0, 2}, {5, 10}, {13, 23}, {24, 25}};
+//        int[][] b = new int[][]{{1, 5}, {8, 12}, {15, 24}, {25, 26}};
+//        int[][] output= intervalIntersection(a, b);
+////////////
+
+    }
+
+    public static int[][] intervalIntersection(int[][] A, int[][] B) {
+        List<int[]> ans = new ArrayList();
+        int i = 0, j = 0;
+
+        while (i < A.length && j < B.length) {
+            int lo = Math.max(A[i][0], B[j][0]);
+            int hi = Math.min(A[i][1], B[j][1]);
+            if (lo <= hi)
+                ans.add(new int[]{lo, hi});
+
+            // Remove the interval with the smallest endpoint
+            if (A[i][1] < B[j][1])
+                i++;
+            else
+                j++;
+        }
+
+        return ans.toArray(new int[ans.size()][2]);
+    }
+
+    public static void nextPermutation(int[] nums) {
+        int i = nums.length - 2;
+        while (i >= 0 && nums[i + 1] <= nums[i]) {
+            i--;
+        }
+        if (i >= 0) {
+            int j = nums.length - 1;
+            while (j >= 0 && nums[j] <= nums[i]) {
+                j--;
+            }
+            swap(nums, i, j);
+        }
+        reverse(nums, i + 1);
+    }
+
+    private static void reverse(int[] nums, int start) {
+        int i = start, j = nums.length - 1;
+        while (i < j) {
+            swap(nums, i, j);
+            i++;
+            j--;
+        }
+    }
+
+    private static void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+    //Approach 1: merge and then sort
+    //Approach 2: merge sorted array from begining with extra space
+    public static void mergeSortedArrayFromEnd(int[] nums1, int m, int[] nums2, int n) {
+        // two get pointers for nums1 and nums2
+        int p1 = m - 1;
+        int p2 = n - 1;
+        // set pointer for nums1
+        int p = m + n - 1;
+
+        // while there are still elements to compare
+        while ((p1 >= 0) && (p2 >= 0))
+            // compare two elements from nums1 and nums2
+            // and add the largest one in nums1
+            nums1[p--] = (nums1[p1] < nums2[p2]) ? nums2[p2--] : nums1[p1--];
+
+        // add missing elements from nums2
+        System.arraycopy(nums2, 0, nums1, 0, p2 + 1);
+    }
+
+
+    public static int subarraySumHM(int[] nums, int k) {
+        int count = 0, sum = 0;
+        HashMap < Integer, Integer > map = new HashMap < > ();
+        map.put(0, 1);
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            if (map.containsKey(sum - k))
+                count += map.get(sum - k);
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
+        }
+        return count;
+    }
+
+    public static int subarraySumBruteForce(int[] nums, int k) {
+        int count = 0;
+        for (int start = 0; start < nums.length; start++) {
+            int sum=0;
+            for (int end = start; end < nums.length; end++) {
+                sum+=nums[end];
+                if (sum == k)
+                    count++;
+            }
+        }
+        return count;
+    }
+
+    //Doesnt work for negatives
+    public static int subarraySum(int[] nums, int k) {
+        int start = 0,end, count = 0, sum = 0;
+        for ( end = 0; end < nums.length; end++) {
+            sum += nums[end];
+            while (sum > k && start <nums.length) {
+                sum -= nums[start++];
+            }
+            if (start<=end && sum == k) count++;
+        }
+        while (start<end-1){
+            sum-=nums[start++];
+            if (sum == k) count++;
+        }
+        return count;
+    }
+
+    static int maxValidString=0;
+    public static void removeParentheses(StringBuffer tempList, Set<String> output, char[] input, int start) {
+        if (tempList.length() >= maxValidString && isValidParenthesis(tempList.toString())) {
+            if (tempList.length() == maxValidString)
+                output.add(tempList.toString());
+            else {
+                maxValidString=tempList.length();
+                output.clear();
+                output.add(tempList.toString());
+            }
+        }
+
+        for (int i = start; i < input.length; i++) {
+            tempList.append(input[i]);
+            removeParentheses(tempList, output, input, i + 1);
+            tempList.setLength(tempList.length() - 1);
+        }
+    }
+
+    static class NumberToWords {
+        public String one(int num) {
+            switch (num) {
+                case 1:
+                    return "One";
+                case 2:
+                    return "Two";
+                case 3:
+                    return "Three";
+                case 4:
+                    return "Four";
+                case 5:
+                    return "Five";
+                case 6:
+                    return "Six";
+                case 7:
+                    return "Seven";
+                case 8:
+                    return "Eight";
+                case 9:
+                    return "Nine";
+            }
+            return "";
+        }
+
+        public String twoLessThan20(int num) {
+            switch (num) {
+                case 10:
+                    return "Ten";
+                case 11:
+                    return "Eleven";
+                case 12:
+                    return "Twelve";
+                case 13:
+                    return "Thirteen";
+                case 14:
+                    return "Fourteen";
+                case 15:
+                    return "Fifteen";
+                case 16:
+                    return "Sixteen";
+                case 17:
+                    return "Seventeen";
+                case 18:
+                    return "Eighteen";
+                case 19:
+                    return "Nineteen";
+            }
+            return "";
+        }
+
+        public String ten(int num) {
+            switch (num) {
+                case 2:
+                    return "Twenty";
+                case 3:
+                    return "Thirty";
+                case 4:
+                    return "Forty";
+                case 5:
+                    return "Fifty";
+                case 6:
+                    return "Sixty";
+                case 7:
+                    return "Seventy";
+                case 8:
+                    return "Eighty";
+                case 9:
+                    return "Ninety";
+            }
+            return "";
+        }
+
+        public String two(int num) {
+            if (num == 0)
+                return "";
+            else if (num < 10)
+                return one(num);
+            else if (num < 20)
+                return twoLessThan20(num);
+            else {
+                int tenner = num / 10;
+                int rest = num - tenner * 10;
+                if (rest != 0)
+                    return ten(tenner) + " " + one(rest);
+                else
+                    return ten(tenner);
+            }
+        }
+
+        public String three(int num) {
+            int hundred = num / 100;
+            int rest = num - hundred * 100;
+            String res = "";
+            if (hundred * rest != 0)
+                res = one(hundred) + " Hundred " + two(rest);
+            else if ((hundred == 0) && (rest != 0))
+                res = two(rest);
+            else if ((hundred != 0) && (rest == 0))
+                res = one(hundred) + " Hundred";
+            return res;
+        }
+
+        public String numberToWords(int num) {
+            if (num == 0)
+                return "Zero";
+
+            int billion = num / 1000000000;
+            int million = (num - billion * 1000000000) / 1000000;
+            int thousand = (num - billion * 1000000000 - million * 1000000) / 1000;
+            int rest = num - billion * 1000000000 - million * 1000000 - thousand * 1000;
+
+            String result = "";
+            if (billion != 0)
+                result = three(billion) + " Billion";
+            if (million != 0) {
+                if (!result.isEmpty())
+                    result += " ";
+                result += three(million) + " Million";
+            }
+            if (thousand != 0) {
+                if (!result.isEmpty())
+                    result += " ";
+                result += three(thousand) + " Thousand";
+            }
+            if (rest != 0) {
+                if (!result.isEmpty())
+                    result += " ";
+                result += three(rest);
+            }
+            return result;
+        }
+    }
+
+    //this can better be done by max heap or arrayList & binary search
+    public static int[][] kClosest(int[][] points, int K) {
+        int N = points.length;
+        int[] dists = new int[N];
+        for (int i = 0; i < N; ++i)
+            dists[i] = dist(points[i]);
+
+        Arrays.sort(dists);
+        int distK = dists[K-1];
+
+        int[][] ans = new int[K][2];
+        int t = 0;
+        for (int i = 0; i < N; ++i)
+            if (dist(points[i]) <= distK)
+                ans[t++] = points[i];
+        return ans;
+    }
+
+    public static int dist(int[] point) {
+        return point[0] * point[0] + point[1] * point[1];
+    }
+
+    static int trap2Pointers(int[] height) {
+        int left = 0, right = height.length - 1;
+        int ans = 0;
+        int left_max = 0, right_max = 0;
+        while (left < right) {
+            if (height[left] < height[right]) {
+                if (height[left] >= left_max) left_max = height[left];
+                else ans += left_max - height[left];
+                ++left;
+            } else {
+                if (height[right] >= right_max) right_max = height[right];
+                else ans += right_max - height[right];
+                --right;
+            }
+        }
+        return ans;
+    }
+
+    static int trapStack(int[] height)
+    {
+        int ans = 0, current = 0;
+        Stack<Integer> st=new Stack<>();
+        while (current < height.length) {
+            while (!st.empty() && height[current] > height[st.peek()]) {
+                int top = st.peek();
+                st.pop();
+                if (st.empty())
+                    break;
+                int distance = current - st.peek() - 1;
+                int bounded_height = Math.min(height[current], height[st.peek()]) - height[top];
+                ans += distance * bounded_height;
+            }
+            st.push(current++);
+        }
+        return ans;
+    }
+
+    static int trapDP(int[] height)
+    {
+        if(height == null)
+            return 0;
+        int ans = 0;
+        int size = height.length;
+        int[] left_max=new int[size], right_max=new int[size];
+        left_max[0] = height[0];
+        for (int i = 1; i < size; i++) {
+            left_max[i] = Math.max(height[i], left_max[i - 1]);
+        }
+        right_max[size - 1] = height[size - 1];
+        for (int i = size - 2; i >= 0; i--) {
+            right_max[i] = Math.max(height[i], right_max[i + 1]);
+        }
+        for (int i = 1; i < size - 1; i++) {
+            ans += Math.min(left_max[i], right_max[i]) - height[i];
+        }
+        return ans;
+    }
+
+    static int maxProfit(int prices[]) {
+        int minprice = Integer.MAX_VALUE;
+        int maxprofit = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < minprice)
+                minprice = prices[i];
+            else if (prices[i] - minprice > maxprofit)
+                maxprofit = prices[i] - minprice;
+        }
+        return maxprofit;
+    }
+
+    static int left, right, val;
+    public static boolean btreeGameWinningMove(TreeNode root, int n, int x) {
+        val = x;
+        count(root);
+        return Math.max(Math.max(left, right), n - left - right - 1) > n / 2;
+    }
+
+    static int count(TreeNode node) {
+        if (node == null) return 0;
+        int l = count(node.left), r = count(node.right);
+        if (node.val == val) {
+            left = l;
+            right = r;
+        }
+        return l + r + 1;
+    }
+
+
+    //constant space and time. You can also get past getHits() by adding condtion timestamp > times[i] && ....
+    static class HitCounterArrays {
+        private int[] times;
+        private int[] hits;
+        /** Initialize your data structure here. */
+        public HitCounterArrays() {
+            times = new int[300];
+            hits = new int[300];
+        }
+
+        /** Record a hit.
+         @param timestamp - The current timestamp (in seconds granularity). */
+        public void hit(int timestamp) {
+            int index = timestamp % 300;
+            if (times[index] != timestamp) {
+                times[index] = timestamp;
+                hits[index] = 1;
+            } else {
+                hits[index]++;
+            }
+        }
+
+        /** Return the number of hits in the past 5 minutes.
+         @param timestamp - The current timestamp (in seconds granularity). */
+        public int getHits(int timestamp) {
+            int total = 0;
+            for (int i = 0; i < 300; i++) {
+                if (timestamp - times[i] < 300) {
+                    total += hits[i];
+                }
+            }
+            return total;
+        }
+    }
+
+    static class HitCounterQueue {
+
+        Queue<Integer> q = null;
+
+        /**
+         * Initialize your data structure here.
+         */
+        public HitCounterQueue() {
+            q = new LinkedList<Integer>();
+        }
+
+        /**
+         * Record a hit.
+         *
+         * @param timestamp - The current timestamp (in seconds granularity).
+         */
+        public void hit(int timestamp) {
+            q.offer(timestamp);
+        }
+
+        /**
+         * Return the number of hits in the past 5 minutes.
+         *
+         * @param timestamp - The current timestamp (in seconds granularity).
+         */
+        public int getHits(int timestamp) {
+            while (!q.isEmpty() && timestamp - q.peek() >= 300) {
+                q.poll();
+            }
+            return q.size();
+        }
+    }
+
+    static class HitCounterTreeMap {
+
+        TreeMap<Integer, Integer> map;
+        int count = 1;
+
+        /** Initialize your data structure here. */
+        public HitCounterTreeMap() {
+            map = new TreeMap<Integer, Integer>();
+        }
+
+        /** Record a hit.
+         @param timestamp - The current timestamp (in seconds granularity). */
+        public void hit(int timestamp) {
+            map.put(timestamp, count++);
+        }
+
+        /** Return the number of hits in the past 5 minutes.
+         @param timestamp - The current timestamp (in seconds granularity). */
+        public int getHits(int timestamp) {
+            return count-1 - (map.floorKey(timestamp-300) == null ? 0 : map.get(map.floorKey(timestamp-300)));
+        }
+    }
+
+    static class HitCounterTreeMapMyWay {
+
+        TreeMap<Integer, Integer> timestampToHitCounterMap;
+        int count = 0;
+
+        /**
+         * Initialize your data structure here.
+         */
+        public HitCounterTreeMapMyWay() {
+            timestampToHitCounterMap = new TreeMap<>();
+        }
+
+        /**
+         * Record a hit.
+         *
+         * @param timestamp - The current timestamp (in seconds granularity).
+         */
+        public void hit(int timestamp) {
+            timestampToHitCounterMap.put(timestamp, ++count);
+        }
+
+        /**
+         * Return the number of hits in the past 5 minutes.
+         *
+         * @param timestamp - The current timestamp (in seconds granularity).
+         */
+        public int getHits(int timestamp) {
+            if (timestampToHitCounterMap.containsKey(timestamp)) {
+                if (timestamp <= 300) return timestampToHitCounterMap.get(timestamp);
+                else {
+                    if (timestampToHitCounterMap.containsKey(timestamp - 300))
+                        return timestampToHitCounterMap.get(timestamp) - timestampToHitCounterMap.get(timestamp - 300);
+                    else
+                        return timestampToHitCounterMap.get(timestamp) - timestampToHitCounterMap.get(timestampToHitCounterMap.headMap(timestamp - 300).lastKey());
+                }
+            } else {
+                if (timestampToHitCounterMap.headMap(timestamp).size() == 0) return 0;
+                int lastKey = timestampToHitCounterMap.headMap(timestamp).lastKey();
+                if (timestamp <= 300 && lastKey < 300) return timestampToHitCounterMap.get(lastKey);
+                else {
+                    if (timestampToHitCounterMap.containsKey(timestamp - 300))
+                        return timestampToHitCounterMap.get(lastKey) - timestampToHitCounterMap.get(timestamp - 300);
+                    else if (timestampToHitCounterMap.headMap(timestamp - 300).size() == 0)
+                        return timestampToHitCounterMap.get(lastKey);
+                    else
+                        return timestampToHitCounterMap.get(lastKey) - timestampToHitCounterMap.get(timestampToHitCounterMap.headMap(timestamp - 300).lastKey());
+                }
+            }
+        }
+    }
+
+
+    //use value as index to mark presence
+    static void printRepeating(int arr[])
+    {
+        int i;
+        System.out.println("The repeating elements are : ");
+
+        for (i = 0; i < arr.length; i++)
+        {
+            if (arr[Math.abs(arr[i])] >= 0)
+                arr[Math.abs(arr[i])] = -arr[Math.abs(arr[i])];
+            else
+                System.out.println(Math.abs(arr[i]) + " ");
+        }
+    }
+
+    //Can also be done with an array of hashSets containing value 1 & -1
+    public static boolean isIsomorphic(String s, String t) {
+        int m1[] = new int[256], m2[] = new int[256], n = s.length();
+        for (int i = 0; i < n; ++i) {
+            if (m1[s.charAt(i)] != m2[t.charAt(i)]) return false;
+            m1[s.charAt(i)] = i + 1;
+            m2[t.charAt(i)] = i + 1;
+        }
+        return true;
     }
 
     public static class ZigzagIterator {
@@ -901,6 +1559,7 @@ public class Test {
         }
     }
 
+    //even comes after odd so need to check for even only and even.next as even.next.next is also accessed
     public static ListNode oddEvenList(ListNode head) {
         if (head == null) return null;
         ListNode odd = head, even = head.next, evenHead = even;
@@ -1149,21 +1808,15 @@ public class Test {
     }
 
 
-
-
     public static boolean searchIn2DMatrix(int[][] matrix, int target) {
         // start our "pointer" in the bottom-left
-        int row = matrix.length-1;
+        int row = matrix.length - 1;
         int col = 0;
 
         while (row >= 0 && col < matrix[0].length) {
-            if (matrix[row][col] > target) {
-                row--;
-            } else if (matrix[row][col] < target) {
-                col++;
-            } else { // found it
-                return true;
-            }
+            if (matrix[row][col] > target) row--;
+            else if (matrix[row][col] < target) col++;
+            else return true; // found it
         }
 
         return false;
@@ -1220,7 +1873,6 @@ public class Test {
         return output;
     }
 
-
     public static List<Integer> rightSideViewDFS(TreeNode root) {
         List<Integer> result = new ArrayList<Integer>();
         rightView(root, result, 0);
@@ -1240,30 +1892,34 @@ public class Test {
 
     }
 
+    //temp class to remove compilation errors
+    static class ArrayReader{
+        public int get(int m){return m;}
+    }
 //    Search in sorted array of unknown size
-//    public static int search(ArrayReader reader, int target) {
-//        if (reader == null) {
-//            return -1;
-//        }
-//
-//        int l = 0;
-//        int r = 1;
-//        while (l <= r) {
-//            int m = l + (r - l) / 2;
-//
-//            int medianNum = reader.get(m);
-//
-//            if (medianNum == 2147483647 || medianNum > target) {
-//                r = m - 1;
-//            } else if (medianNum < target) {
-//                l = m + 1;
-//                r = l + r;
-//            } else {
-//                return m;
-//            }
-//        }
-//        return -1;
-//    }
+    public static int search(ArrayReader reader, int target) {
+        if (reader == null) {
+            return -1;
+        }
+
+        int l = 0;
+        int r = 1;
+        while (l <= r) {
+            int m = l + (r - l) / 2;
+
+            int medianNum = reader.get(m);
+
+            if (medianNum == 2147483647 || medianNum > target) {
+                r = m - 1;
+            } else if (medianNum < target) {
+                l = m + 1;
+                r = l + r;
+            } else {
+                return m;
+            }
+        }
+        return -1;
+    }
 
     public static void prettyPrint(String input) {
         int spaces = 0;
@@ -1303,6 +1959,7 @@ public class Test {
 
         }
     }
+
 
     //Keep + - together in result and /* in tail
     public static int calculateII(String s) {
@@ -1422,7 +2079,7 @@ public class Test {
         }
     }
 
-    //>>>>>>Rev2
+    //>>>>Rev
     static int connectedComponentsCount=0;
     public static int countComponentsDFS(int n, int[][] edges) {
 
@@ -2037,7 +2694,7 @@ public class Test {
                 if (topElement != mappings.get(c)) {
                     return false;
                 }
-            } else {
+            } else if(c=='(' || c=='{' || c=='['){
                 // If it was an opening bracket, push to the stack.
                 stack.push(c);
             }
@@ -2081,7 +2738,6 @@ public class Test {
         return true;
     }
 
-    //>>>>Rev3
     public static List<List<String>> groupAnagrams(String[] strs) {
         if (strs.length == 0) return new ArrayList();
         Map<String, List> ans = new HashMap<String, List>();
@@ -4089,9 +4745,10 @@ public class Test {
     }
 
     //This is faster than the below one
-    //t's really about odd negative numbers or even negative numbers,
+    //It's really about odd or even negative numbers,
     // if it's odd, either the left end one or the right end one should be counted,
     // so it will be revealed by scanning from left and from right in 2 passes.
+    // we can also count negatives in the first loop and avoid if count%2==0
     public static int maxProduct(int[] nums) {
         int max = Integer.MIN_VALUE;
         int product = 1;
@@ -4836,6 +5493,38 @@ public class Test {
 //        }
 //        return dp[n];
         return 0;
+    }
+
+    public static int uniquePathsII(int[][] obstacleGrid) {
+        int m = obstacleGrid.length;
+        int n = obstacleGrid[0].length;
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if ((i - 1 < 0 && j - 1 < 0) || obstacleGrid[i][j] == 0) continue;
+                if (i - 1 < 0)
+                    obstacleGrid[i][j] = obstacleGrid[i][j - 1];
+                else if (j - 1 < 0)
+                    obstacleGrid[i][j] = obstacleGrid[i - 1][j];
+                else
+                    obstacleGrid[i][j] = obstacleGrid[i][j - 1] + obstacleGrid[i - 1][j];
+            }
+        }
+        return obstacleGrid[m - 1][n - 1] == 0 ? 0 : obstacleGrid[m - 1][n - 1];
+
+    }
+
+    static int uniqueCount=0;
+    //Recursive way goes over cells repeatedly can be removed by storing the right and left counts
+    public static int uniquePathsIIRecur(int[][] input) {
+        recur(0,0,input.length-1,input[0].length-1,input);
+        return uniqueCount;
+    }
+    public static void recur(int row, int coloumn, int targetRow, int targetCol,int[][] input) {
+        if(row==targetRow && coloumn==targetCol) {uniqueCount++; return;}
+        if(row<0 || row >targetRow || coloumn<0 || coloumn >targetCol || input[row][coloumn]==0) return;
+        recur(row,coloumn+1,targetRow,targetCol,input);
+        recur(row+1,coloumn,targetRow,targetCol,input);
     }
 
     public static int uniquePaths(int m, int n) {
