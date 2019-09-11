@@ -515,6 +515,17 @@ public class Test {
 //        System.out.println(cache.get(1));       // returns -1 (not found)
 //        System.out.println(cache.get(3));       // returns 3
 //        System.out.println(cache.get(4));       // returns 4
+
+//        LRUCacheLHM cache=new LRUCacheLHM(2);
+//        cache.put(1, 1);
+//        cache.put(2, 2);
+//        System.out.println(cache.get(1));       // returns 1
+//        cache.put(3, 3);    // evicts key 2
+//        System.out.println(cache.get(2));       // returns -1 (not found)
+//        cache.put(4, 4);    // evicts key 1
+//        System.out.println(cache.get(1));       // returns -1 (not found)
+//        System.out.println(cache.get(3));       // returns 3
+//        System.out.println(cache.get(4));       // returns 4
 ////////////
 
 //////////// Group Anagrams
@@ -690,6 +701,7 @@ public class Test {
 //    String[] words=new String[]{"vlxpwiqbsg","cpwqwqcd"};
 //
 //        System.out.println(alienDictionary(words));
+//        System.out.println(alienOrder(words));
 ////////////
 
 //////////// Number of islands
@@ -964,7 +976,10 @@ public class Test {
 
 //////////// Remove invalid parentheses
 //        HashSet output=new HashSet();
-//        removeParentheses(new StringBuffer(),output,new char[]{'(','a',')','(',')',')','(',')'},0);
+//        String s="()())()";
+////        String s=")(a";
+//        maxValidString= validParenthesisCount(s);
+//        removeParentheses(new StringBuffer(),output,s.toCharArray(),0,0,0);
 //        System.out.println(output);
 ////////////
 
@@ -991,6 +1006,442 @@ public class Test {
 //        int[][] output= intervalIntersection(a, b);
 ////////////
 
+//////////// Shortest distance to a character
+//        int[] output = shortestToChar("loveleetcode", 'e');
+//        shortestToCharMyWay("loveleetcode", 'e');
+//        shortestToCharMyWay("aaab", 'b');
+//        shortestToCharMyWay("tonee", 'n');
+//        shortestToCharFastest("tonee", 'n');
+////////////
+
+//////////// Boundary of binary tree
+//        TreeNode t1=new TreeNode(1);
+//        TreeNode t2=new TreeNode(2);
+//        TreeNode t3=new TreeNode(3);
+//        TreeNode t4=new TreeNode(4);
+//        TreeNode t5=new TreeNode(5);
+//        TreeNode t6=new TreeNode(6);
+//        TreeNode t7=new TreeNode(7);
+//        t1.right=t3;
+//        t1.left=t2;
+//        t2.left=t4;
+//        t2.right=t5;
+//        t3.left=t6;
+//        t3.right=t7;
+
+//        TreeNode t1=new TreeNode(1);
+//        TreeNode t2=new TreeNode(2);
+//        TreeNode t3=new TreeNode(3);
+//        TreeNode t4=new TreeNode(4);
+//        TreeNode t5=new TreeNode(5);
+//        TreeNode t6=new TreeNode(6);
+//        TreeNode t7=new TreeNode(7);
+//        TreeNode t8=new TreeNode(8);
+//        TreeNode t9=new TreeNode(9);
+//        TreeNode t10=new TreeNode(10);
+//        t1.right=t3;
+//        t1.left=t2;
+//        t2.right=t5;
+//        t2.left=t4;
+//        t3.left=t6;
+////        t3.right=t7;
+//        t5.left=t7;
+//        t5.right=t8;
+//        t6.left=t9;
+//        t6.right=t10;
+
+//        System.out.println(boundaryOfBinaryTreeMyWay(t1));
+//        List<Integer> nodes = new ArrayList<>();
+//        System.out.println(boundaryOfBinaryTree2Iterations(t1,nodes));
+//        System.out.println(boundaryOfBinaryTreePreOrder(t1));
+//        System.out.println(boundaryOfBinaryTreeMyWayOnePass(t1));
+//        System.out.println(boundaryOfBinaryTreeOnePass(t1));
+////////////
+
+//////////// Add and search word
+//        WordDictionary wordDictionary=new WordDictionary();
+//        wordDictionary.addWord("bad");
+//        wordDictionary.addWord("dad");
+//        wordDictionary.addWord("mad");
+//        System.out.println(wordDictionary.search("pad"));
+//        System.out.println(wordDictionary.search("bad"));
+//        System.out.println(wordDictionary.search(".ad"));
+//        System.out.println(wordDictionary.search("b.."));
+////////////
+
+//////////// Symmetric tree
+//        TreeNode t1=new TreeNode(1);
+//        TreeNode t2=new TreeNode(2);
+//        TreeNode t3=new TreeNode(2);
+//        TreeNode t4=new TreeNode(3);
+//        TreeNode t5=new TreeNode(3);
+//        t1.right=t3;
+//        t1.left=t2;
+//        t2.right=t4;
+//        t3.left=t5;
+//        System.out.println(isSymmetricRecursive(t1,t1));
+//        System.out.println(isSymmetricIterative(t1));
+////////////
+
+    }
+
+    public static boolean isSymmetricIterative(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        q.add(root);
+        while (!q.isEmpty()) {
+            TreeNode t1 = q.poll();
+            TreeNode t2 = q.poll();
+            if (t1 == null && t2 == null) continue;
+            if (t1 == null || t2 == null) return false;
+            if (t1.val != t2.val) return false;
+            q.add(t1.left);
+            q.add(t2.right);
+            q.add(t1.right);
+            q.add(t2.left);
+        }
+        return true;
+    }
+
+    public static boolean isSymmetricRecursive(TreeNode t1, TreeNode t2) {
+        if (t1 == null && t2 == null) return true;
+        if (t1 == null || t2 == null) return false;
+        return (t1.val == t2.val)
+                && isSymmetricRecursive(t1.right, t2.left)
+                && isSymmetricRecursive(t1.left, t2.right);
+    }
+
+    static class TreeNodeNChild {
+        TreeNode treeNode;
+        boolean isRightSubtree;
+
+        public TreeNodeNChild(TreeNode treeNode, boolean isRightSubtree) {
+            this.treeNode = treeNode;
+            this.isRightSubtree = isRightSubtree;
+        }
+    }
+
+    public static List<Integer> boundaryOfBinaryTreeOnePass(TreeNode root){
+
+        List<Integer> exteriorList = new ArrayList<>();
+
+        if(root == null){
+            return exteriorList;
+        }
+
+        List<Integer> leftBoundaryAndLeavesList = new ArrayList<>();
+        List<Integer> rightBoundaryAndLeavesList = new ArrayList<>();
+
+        computeLeftBoundaryAndLeaves(root.left,leftBoundaryAndLeavesList,true);
+        computeRightBoundaryAndLeaves(root.right,rightBoundaryAndLeavesList,true);
+
+        exteriorList.add(root.val);
+        exteriorList.addAll(leftBoundaryAndLeavesList);
+        exteriorList.addAll(rightBoundaryAndLeavesList);
+
+        return exteriorList;
+
+    }
+
+    private static void computeLeftBoundaryAndLeaves(TreeNode root, List<Integer> result,boolean isBoundary){
+
+        if(root!=null){
+
+            if(isBoundary || isLeaf(root)){
+                result.add(root.val);
+            }
+
+            computeLeftBoundaryAndLeaves(root.left,result,isBoundary);
+            computeLeftBoundaryAndLeaves(root.right,result,isBoundary && root.left == null);
+
+        }
+    }
+
+    private static void computeRightBoundaryAndLeaves(TreeNode root, List<Integer> result,boolean isBoundary){
+
+        if(root!=null){
+
+            computeRightBoundaryAndLeaves(root.left,result,isBoundary && root.right == null);
+            computeRightBoundaryAndLeaves(root.right,result,isBoundary);
+
+            if(isBoundary || isLeaf(root)){
+                result.add(root.val);
+            }
+
+        }
+    }
+
+    public static List<Integer> boundaryOfBinaryTreeMyWayOnePass(TreeNode treeNode) {
+        List<Integer> leftBoundaryNLeaves = new ArrayList<>();
+        if(treeNode==null) return leftBoundaryNLeaves;
+        leftBoundaryNLeaves.add(treeNode.val);
+        boundaryOfBinaryTreeMyWay2(treeNode.left, leftBoundaryNLeaves, false, true, leftBoundaryNLeaves.size());
+        boundaryOfBinaryTreeMyWay2(treeNode.right, leftBoundaryNLeaves, false, false,leftBoundaryNLeaves.size());
+        return leftBoundaryNLeaves;
+    }
+
+    public static boolean boundaryOfBinaryTreeMyWay2(TreeNode root, List<Integer> output, boolean boundaryOver, boolean isLeftSubtree, int leftBoundaryNLeavesSize) {
+        if (root == null) return boundaryOver;
+        if (root.left == null && root.right == null) // add leaf nodes
+        {
+            boundaryOver = true;
+            output.add(getIndex(isLeftSubtree,output.size(),leftBoundaryNLeavesSize), root.val);
+            return boundaryOver;
+        }
+        if (!boundaryOver) { // go for boundary
+            output.add(getIndex(isLeftSubtree,output.size(),leftBoundaryNLeavesSize), root.val); //add boundary nodes
+            if (getSameDirection(root, isLeftSubtree) == null)
+                boundaryOver = boundaryOfBinaryTreeMyWay2(getOppositeDirection(root, isLeftSubtree), output, boundaryOver, isLeftSubtree,leftBoundaryNLeavesSize);
+            else {
+                boundaryOver = boundaryOfBinaryTreeMyWay2(getSameDirection(root, isLeftSubtree), output, boundaryOver, isLeftSubtree,leftBoundaryNLeavesSize);
+                if (boundaryOver)
+                    boundaryOfBinaryTreeMyWay2(getOppositeDirection(root, isLeftSubtree), output, boundaryOver, isLeftSubtree,leftBoundaryNLeavesSize);
+            }
+        } else { //go for leaf nodes
+            boundaryOfBinaryTreeMyWay2(getSameDirection(root, isLeftSubtree), output, boundaryOver, isLeftSubtree,leftBoundaryNLeavesSize);
+            boundaryOfBinaryTreeMyWay2(getOppositeDirection(root, isLeftSubtree), output, boundaryOver, isLeftSubtree,leftBoundaryNLeavesSize);
+        }
+        return boundaryOver;
+    }
+
+    public static int getIndex(boolean isLeftSubtree,int outputSize,int leftBoundaryNLeavesSize ) {
+        return isLeftSubtree ? outputSize : leftBoundaryNLeavesSize;
+    }
+
+    public static TreeNode getSameDirection(TreeNode treeNode, boolean left) {
+        if (left) return treeNode.left;
+        else return treeNode.right;
+    }
+
+    public static TreeNode getOppositeDirection(TreeNode treeNode, boolean left) {
+        if (left) return treeNode.right;
+        else return treeNode.left;
+    }
+
+    public static List<Integer> boundaryOfBinaryTreePreOrder(TreeNode root) {
+        List<Integer> left_boundary = new LinkedList<>(), right_boundary = new LinkedList<>(), leaves = new LinkedList<>();
+        preorder(root, left_boundary, right_boundary, leaves, 0);
+        left_boundary.addAll(leaves);
+        left_boundary.addAll(right_boundary);
+        return left_boundary;
+    }
+
+    public static boolean isLeaf(TreeNode cur) {
+        return (cur.left == null && cur.right == null);
+    }
+
+    public static boolean isRightBoundary(int flag) {
+        return (flag == 2);
+    }
+
+    public static boolean isLeftBoundary(int flag) {
+        return (flag == 1);
+    }
+
+    public static boolean isRoot(int flag) {
+        return (flag == 0);
+    }
+
+    public static int leftChildFlag(TreeNode cur, int flag) {
+        if (isLeftBoundary(flag) || isRoot(flag))
+            return 1;
+        else if (isRightBoundary(flag) && cur.right == null)
+            return 2;
+        else return 3;
+    }
+
+    public static int rightChildFlag(TreeNode cur, int flag) {
+        if (isRightBoundary(flag) || isRoot(flag))
+            return 2;
+        else if (isLeftBoundary(flag) && cur.left == null)
+            return 1;
+        else return 3;
+    }
+
+    public static void preorder(TreeNode cur, List<Integer> left_boundary, List<Integer> right_boundary, List<Integer> leaves, int flag) {
+        if (cur == null)
+            return;
+        if (isRightBoundary(flag))
+            right_boundary.add(0, cur.val);
+        else if (isLeftBoundary(flag) || isRoot(flag))
+            left_boundary.add(cur.val);
+        else if (isLeaf(cur))
+            leaves.add(cur.val);
+        preorder(cur.left, left_boundary, right_boundary, leaves, leftChildFlag(cur, flag));
+        preorder(cur.right, left_boundary, right_boundary, leaves, rightChildFlag(cur, flag));
+    }
+
+    //This is 2 iterations, can be reduced to one
+    public static List<Integer> boundaryOfBinaryTree2Iterations(TreeNode root, List<Integer> nodes) {
+
+        if (root == null) return nodes;
+
+        nodes.add(root.val);
+        leftBoundary(root.left, nodes);
+        leaves(root.left, nodes);
+        leaves(root.right, nodes);
+        rightBoundary(root.right, nodes);
+
+        return nodes;
+    }
+
+    public static void leftBoundary(TreeNode root, List<Integer> nodes) {
+        if (root == null || (root.left == null && root.right == null)) return;
+        nodes.add(root.val);
+        if (root.left == null) leftBoundary(root.right, nodes);
+        else leftBoundary(root.left, nodes);
+    }
+
+    public static void rightBoundary(TreeNode root, List<Integer> nodes) {
+        if (root == null || (root.right == null && root.left == null)) return;
+        if (root.right == null) rightBoundary(root.left, nodes);
+        else rightBoundary(root.right, nodes);
+        nodes.add(root.val); // add after child visit(reverse)
+    }
+
+    public static void leaves(TreeNode root, List<Integer> nodes) {
+        if (root == null) return;
+        if (root.left == null && root.right == null) {
+            nodes.add(root.val);
+            return;
+        }
+        leaves(root.left, nodes);
+        leaves(root.right, nodes);
+    }
+
+    //Doesnt work completely 104/117
+    public static List<Integer> boundaryOfBinaryTreeMyWay(TreeNode root) {
+        List<Integer> output = new ArrayList<>();
+        List<TreeNodeNChild> currentLevelElements = new ArrayList<>();
+        ArrayList<Integer> leafNodes = new ArrayList<>();
+        Queue<TreeNodeNChild> queue = new LinkedList<>();
+        int numberOfElements, left = 0;
+        TreeNodeNChild polledNode = null;
+
+        if (root == null) return output;
+        output.add(left++, root.val);
+        if (root.left != null)
+            queue.offer(new TreeNodeNChild(root.left, false));
+        if (root.right != null)
+            queue.offer(new TreeNodeNChild(root.right, true));
+
+        while (!queue.isEmpty()) {
+            currentLevelElements.clear();
+            numberOfElements = queue.size();
+
+            if (!queue.peek().isRightSubtree)
+                output.add(left++, queue.peek().treeNode.val); // left boundary
+
+            for (int i = 0; i < numberOfElements; i++) {
+                polledNode = queue.poll();
+                currentLevelElements.add(polledNode);
+                if (polledNode.treeNode.left != null) {
+                    queue.offer(new TreeNodeNChild(polledNode.treeNode.left, polledNode.isRightSubtree));
+                }
+                if (polledNode.treeNode.right != null) {
+                    queue.offer(new TreeNodeNChild(polledNode.treeNode.right, polledNode.isRightSubtree));
+                }
+                //Add leaf nodes
+                if (polledNode.treeNode.left == null && polledNode.treeNode.right == null && ((i > 0 && i < numberOfElements - 1)
+                        || (numberOfElements > 1 && ((i == 0 && polledNode.isRightSubtree) || (i == numberOfElements - 1 && !polledNode.isRightSubtree)))))
+                    leafNodes.add(polledNode.treeNode.val);
+            }
+            if (polledNode.isRightSubtree)
+                output.add(left, polledNode.treeNode.val); // right boundary
+        }
+        for (int i = 0; i <= leafNodes.size() - 1; i++)
+            output.add(left++, leafNodes.get(i));
+
+        return output;
+    }
+
+
+    public static int[] shortestToCharFastest(String S, char C) {
+
+        int[] array = new int[S.length()];
+
+        wave(array, S.toCharArray(), C);
+
+        /*for (int i : array) {
+            System.out.print(i + ",");
+        }*/
+        return array;
+    }
+
+    public static void wave(int[] array, char[] letter, char c) {
+        int counter = 0;
+        int index = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (letter[i] == c) {
+                goBack(array, i);
+                index = i + 1;
+                break;
+            } else {
+                array[i] = array.length;
+            }
+        }
+        for (int i = index; i < array.length; i++) {
+            array[i] = counter = letter[i] != c ? counter + 1 : 0;
+            if (array[i] == 0) {
+                goBack(array, i);
+            }
+        }
+    }
+
+    public static void goBack(int[] array, int index){
+        int counter = 1;
+        for (int i = index - 1; i >= 0; i--) {
+            if (array[i] > counter) {
+                array[i] = counter;
+            } else {
+                break;
+            }
+            counter++;
+        }
+    }
+
+    public static int[] shortestToCharMyWay(String s, char C) {
+        int N = s.length();
+        int[] ans = new int[N];
+        int leftIndex=0 ,leftCount=0, rightIndex=0, rightCount=0;
+        Arrays.fill(ans, -1);
+
+        for (int i = 0; i < N; ++i) {
+            if (s.charAt(i) == C) {
+                //go left
+                leftIndex = i;
+                leftCount = 0;
+                while (leftIndex >= 0 && (ans[leftIndex] == -1 || ans[leftIndex] >= leftCount))
+                    ans[leftIndex--] = leftCount++;
+
+                //go right
+                rightIndex = i + 1;
+                rightCount = 1;
+                while (rightIndex <= N - 1 && s.charAt(rightIndex) != C)
+                    ans[rightIndex++] = rightCount++;
+
+            }
+        }
+        return ans;
+    }
+
+    public static int[] shortestToChar(String S, char C) {
+        int N = S.length();
+        int[] ans = new int[N];
+        int prev = Integer.MIN_VALUE / 2;
+
+        for (int i = 0; i < N; ++i) {
+            if (S.charAt(i) == C) prev = i;
+            ans[i] = i - prev;
+        }
+
+        prev = Integer.MAX_VALUE / 2;
+        for (int i = N-1; i >= 0; --i) {
+            if (S.charAt(i) == C) prev = i;
+            ans[i] = Math.min(ans[i], prev - i);
+        }
+
+        return ans;
     }
 
     public static int[][] intervalIntersection(int[][] A, int[][] B) {
@@ -1106,22 +1557,49 @@ public class Test {
     }
 
     static int maxValidString=0;
-    public static void removeParentheses(StringBuffer tempList, Set<String> output, char[] input, int start) {
-        if (tempList.length() >= maxValidString && isValidParenthesis(tempList.toString())) {
-            if (tempList.length() == maxValidString)
-                output.add(tempList.toString());
-            else {
-                maxValidString=tempList.length();
-                output.clear();
-                output.add(tempList.toString());
-            }
-        }
+    static int leftBracketTotalCount =0;
+    static int rightBracketTotalCount=0;
+
+    //Find number of invalid parentheses question created from this
+    //Check for removing combinations when its not brackets
+    public static void removeParentheses(StringBuffer tempList, Set<String> output, char[] input, int start, int leftBracketCount, int rightBracketCount) {
 
         for (int i = start; i < input.length; i++) {
-            tempList.append(input[i]);
-            removeParentheses(tempList, output, input, i + 1);
-            tempList.setLength(tempList.length() - 1);
+            if (input[i] == ')') rightBracketCount++;
+            else if (input[i] == '(') leftBracketCount++;
+
+            if (rightBracketCount <= leftBracketCount && rightBracketCount<=rightBracketTotalCount && leftBracketCount<=leftBracketTotalCount) {
+                tempList.append(input[i]);
+                if (tempList.length() == maxValidString && rightBracketCount==rightBracketTotalCount && leftBracketCount== leftBracketTotalCount)
+                    output.add(tempList.toString());
+                removeParentheses(tempList, output, input, i + 1, leftBracketCount, rightBracketCount);
+                tempList.setLength(tempList.length() - 1);
+            }
+            if (input[i] == ')') rightBracketCount--;
+            else if (input[i] == '(') leftBracketCount--;
         }
+    }
+
+    public static int validParenthesisCount(String s) {
+
+        int count = 0;
+        char c = ' ';
+        Stack<Character> stack = new Stack<Character>();
+
+        for (int i = 0; i < s.length(); i++) {
+            c = s.charAt(i);
+            if (c == ')') {
+                char topElement = stack.empty() ? '#' : stack.pop();
+                //matched pair
+                if (topElement == '(') {
+                    count += 2;
+                    leftBracketTotalCount++;
+                    rightBracketTotalCount++;
+                }
+            } else if (c == '(') stack.push(c);
+            else count++;
+        }
+        return count;
     }
 
     static class NumberToWords {
@@ -1351,6 +1829,7 @@ public class Test {
     }
 
     static int left, right, val;
+    //player 2 can choose either the left, right or parent of 1's node to restrict its maximum nodes
     public static boolean btreeGameWinningMove(TreeNode root, int n, int x) {
         val = x;
         count(root);
@@ -1722,6 +2201,46 @@ public class Test {
         return -1;
     }
 
+    public static class WordDictionary {
+        public class TrieNode {
+            public TrieNode[] children = new TrieNode[26];
+            public String item = "";
+        }
+
+        private TrieNode root = new TrieNode();
+
+        public void addWord(String word) {
+            TrieNode node = root;
+            for (char c : word.toCharArray()) {
+                if (node.children[c - 'a'] == null) {
+                    node.children[c - 'a'] = new TrieNode();
+                }
+                node = node.children[c - 'a'];
+            }
+            node.item = word;
+        }
+
+        public boolean search(String word) {
+            return match(word.toCharArray(), 0, root);
+        }
+
+        private boolean match(char[] chs, int k, TrieNode node) {
+            if (k == chs.length) return !node.item.equals("");
+            if (chs[k] != '.') {
+                return node.children[chs[k] - 'a'] != null && match(chs, k + 1, node.children[chs[k] - 'a']);
+            } else {
+                for (int i = 0; i < node.children.length; i++) {
+                    if (node.children[i] != null) {
+                        if (match(chs, k + 1, node.children[i])) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+    }
+
     public static void implementTrie(){
         Trie trie=new Trie();
         trie.insert("apple");
@@ -2079,7 +2598,7 @@ public class Test {
         }
     }
 
-    //>>>>Rev
+
     static int connectedComponentsCount=0;
     public static int countComponentsDFS(int n, int[][] edges) {
 
@@ -2142,7 +2661,6 @@ public class Test {
         return flag;
     }
 
-    //Do with one matrix only
     public static List<List<Integer>> pacificAtlantic(int[][] matrix) {
         List<List<Integer>> res = new ArrayList();
         if (matrix.length == 0 || matrix[0].length == 0)  return res;
@@ -2185,7 +2703,8 @@ public class Test {
         if (down) dfs(matrix, visited, y+1, x, ocean);
     }
 
-    //Space is O(min(m,n))
+    //Space is O(min(m,n)) or may be diagonal
+    //BFS space keeps reducing cuz of popping the queue
     public static int numIslandsBFS(char[][] grid) {
         if (grid == null || grid.length == 0) {
             return 0;
@@ -2313,6 +2832,55 @@ public class Test {
         return 0;
     }
 
+    public static String alienOrder(String[] words) {
+        Map<Character, Set<Character>> adjacencyList = new HashMap<Character, Set<Character>>();
+        Map<Character, Integer> degree = new HashMap<Character, Integer>();
+        String result = "";
+        if (words == null || words.length == 0) return result;
+        //default indgrees ( this can be combined in the below loop)
+        for (String s : words) {
+            for (char c : s.toCharArray()) {
+                degree.put(c, 0);
+            }
+        }
+
+        for (int i = 0; i < words.length - 1; i++) {
+            String cur = words[i];
+            String next = words[i + 1];
+            int length = Math.min(cur.length(), next.length());
+            for (int j = 0; j < length; j++) {
+                char c1 = cur.charAt(j);
+                char c2 = next.charAt(j);
+                if (c1 != c2) {
+                    Set<Character> set = new HashSet<Character>();
+                    if (adjacencyList.containsKey(c1)) set = adjacencyList.get(c1);
+                    if (!set.contains(c2)) {
+                        set.add(c2);
+                        adjacencyList.put(c1, set);
+                        degree.put(c2, degree.get(c2) + 1);
+                    }
+                    break;
+                }
+            }
+        }
+        Queue<Character> queue = new LinkedList<Character>();
+        for (char c : degree.keySet()) {
+            if (degree.get(c) == 0) queue.add(c);
+        }
+        while (!queue.isEmpty()) {
+            char c = queue.remove();
+            result += c;
+            if (adjacencyList.containsKey(c)) {
+                for (char c2 : adjacencyList.get(c)) {
+                    degree.put(c2, degree.get(c2) - 1);
+                    if (degree.get(c2) == 0) queue.add(c2);
+                }
+            }
+        }
+        if (result.length() != degree.size()) return "";
+        return result;
+    }
+
     public static String alienDictionary(String[] words) {
         HashMap<Character, UndirectedGraphNodeChar> adjacencyList = new HashMap<>();
         int[] indegree = new int[26];
@@ -2414,12 +2982,6 @@ public class Test {
     }
 
 
-//    {
-//        for(int i=start;i<nums.length;i++)
-//        swap();
-//        func(i+1)
-//        swap
-//    }
     public static List<String> wordSearchIITrie(char[][] board, String[] words) {
         List<String> res = new ArrayList<>();
         TrieNode root = buildTrie(words);
@@ -2652,6 +3214,7 @@ public class Test {
         return clone;
     }
 
+
     public static int insertLocation(Integer[] input, int number) {
 
         int low = 0, high = input.length - 1, mid = 0;
@@ -2761,10 +3324,8 @@ public class Test {
 //    Red black trees…properties
 //    Balance a binary tree or BST…do with inorder
 //    Check if balanced binary tree…check by height subtractions
-//    Do binary search in array
 
-
-    class LRUCacheLHM extends LinkedHashMap<Integer, Integer>{
+    static class LRUCacheLHM extends LinkedHashMap<Integer, Integer>{
         private int capacity;
 
         public LRUCacheLHM(int capacity) {
@@ -3121,6 +3682,7 @@ public class Test {
     }
 
     //>>>Do yr way
+    //Longest Repeating Character Replacement
     public static int characterReplacement(String s, int k) {
         int[] count = new int[128];
         int max = 0;
@@ -3137,25 +3699,17 @@ public class Test {
     //LCA can be asked for BT also, there whole tree needs to be searched except for inside a node that has matched.
     public static TreeNode lowestCommonAncestorRecur(TreeNode root, TreeNode p, TreeNode q) {
 
-        // Value of current node or parent node.
         int parentVal = root.val;
-
-        // Value of p
         int pVal = p.val;
-
-        // Value of q;
         int qVal = q.val;
 
-        if (pVal > parentVal && qVal > parentVal) {
             // If both p and q are greater than parent
+        if (pVal > parentVal && qVal > parentVal)
             return lowestCommonAncestorRecur(root.right, p, q);
-        } else if (pVal < parentVal && qVal < parentVal) {
-            // If both p and q are lesser than parent
-            return lowestCommonAncestorRecur(root.left, p, q);
-        } else {
-            // We have found the split point, i.e. the LCA node.
+         else if (pVal < parentVal && qVal < parentVal)
+             return lowestCommonAncestorRecur(root.left, p, q);
+         else // We have found the split point, i.e. the LCA node.
             return root;
-        }
     }
 
     public static TreeNode lowestCommonAncestorIter(TreeNode root, TreeNode p, TreeNode q) {
@@ -3266,7 +3820,7 @@ public class Test {
         return nums.get(k - 1);
     }
 
-    //Kthe smallest and validate BST have the same procedure,
+    //Kth smallest and validate BST have the same procedure,
     // get inorder, push all left then compare root and move right and repeat
     public static int kthSmallestIter(TreeNode root, int k) {
         LinkedList<TreeNode> stack = new LinkedList<TreeNode>();
@@ -3380,6 +3934,7 @@ public class Test {
     }
 
     //passes without rnull and lnull
+    //Comparing with pre order need the # in the start
     public static boolean isSubtreePreOrder(TreeNode s, TreeNode t) {
         String tree1 = preorder(s, true);
         String tree2 = preorder(t, true);
@@ -3436,6 +3991,7 @@ public class Test {
         }
     }
 
+    //For nary tree need children count
     public static String serialize(Node root) {
         List<String> list=new LinkedList<>();
         serializeHelper(root,list);
@@ -3545,6 +4101,7 @@ public class Test {
         return deserialize(data_list);
     }
 
+    //>>>>Rev
     public static List<List<Integer>> levelOrderIter(TreeNode root) {
         List<List<Integer>> levels = new ArrayList<List<Integer>>();
         if (root == null) return levels;
@@ -3821,24 +4378,22 @@ public class Test {
     }
 
     public static void spiralOrder(int[][] matrix) {
-        List ans = new ArrayList();
         if (matrix.length == 0)
             System.out.println(null + "");
-        int r1 = 0, r2 = matrix.length - 1;
-        int c1 = 0, c2 = matrix[0].length - 1;
-        while (r1 <= r2 && c1 <= c2) {
-            for (int c = c1; c <= c2; c++) System.out.print(matrix[r1][c]);
-            for (int r = r1 + 1; r <= r2; r++) System.out.print(matrix[r][c2]);
-            if (r1 < r2 && c1 < c2) {
-                for (int c = c2 - 1; c > c1; c--) System.out.print(matrix[r2][c]);
-                for (int r = r2; r > r1; r--) System.out.print(matrix[r][c1]);
+        int rowStart = 0, rowEnd = matrix.length - 1;
+        int colStart = 0, colEnd = matrix[0].length - 1;
+        while (rowStart <= rowEnd && colStart <= colEnd) {
+            for (int c = colStart; c <= colEnd; c++) System.out.print(matrix[rowStart][c]);
+            for (int r = rowStart + 1; r <= rowEnd; r++) System.out.print(matrix[r][colEnd]);
+            if (rowStart < rowEnd && colStart < colEnd) {
+                for (int c = colEnd - 1; c > colStart; c--) System.out.print(matrix[rowEnd][c]);
+                for (int r = rowEnd; r > rowStart; r--) System.out.print(matrix[r][colStart]);
             }
-            r1++;
-            r2--;
-            c1++;
-            c2--;
+            rowStart++;
+            rowEnd--;
+            colStart++;
+            colEnd--;
         }
-//        return ans;
     }
 
     public static void setZeroes(int[][] matrix) {

@@ -27,6 +27,11 @@ For list of all pnc backtrack
 Palindrome substring - Manacher algo
 
 BST do inorder iteratively with stack
+Inorder in BST is ascending order and postorder is descending
+For nary tree serialize deserialize need children count
+For binary tree serialize deserialize need null values
+For preorder subtree need # at start
+
 
 Utility funcs
 
@@ -80,6 +85,7 @@ Recursive functions
     
     for{} then recursive call(n-1) means n + n-1 +n-2...T(n)=O(n^2)
     for{ recursive call(n-1)} means n x n-1 x n-2...T(n)=O(n!).....n queen example
+
 
 AB testing - create 2 versions and gauge the response to finalize the version 
 
@@ -224,7 +230,11 @@ Cyclic dependency - if set a bean in constructor
 
 Dependency injection - Helps in loosely coupling and mocking classes(testing)
 
-Scheduling
+Bean scope - As a rule of thumb, you should use the prototype scope for all beans that are stateful, 
+while the singleton scope should be used for stateless beans.
+
+
+Scheduling - Quartz
 @Async
 Async functions need to be public like @Transactional
 https://dzone.com/articles/spring-and-threads-async
@@ -250,3 +260,12 @@ Live reload
 Actuator 
 
 Redirect - https://www.baeldung.com/spring-redirect-and-forward
+
+Spring testing
+@RunWith(SpringRunner.class) only is required for spring
+@RunWith(MockitoJunitRunner.class) is for non-spring context
+@MockMvc creates a test without server
+@MockBean - for mocking beans, automatically injects them
+@SpyBean - for mocking only certain parts
+@Mock , @Spy - for non spring boot context
+@InjectMocks used by normal mockito to inject mocks into service/class
