@@ -18,13 +18,11 @@ public class Test {
 //        String wordDict[] = {"cats", "dog", "sand", "and", "cat","og"};
 //        String wordDict[] = {"dog", "and", "cats"};
 //        String wordDict[] = {"apple", "pen"};
-////////////
 
 //////////// Max Sub array
 //        int arr[] = new int[]{-2,1,-3,4,-1,2,1,-5,4};
 //        System.out.println(maxSubArrayDivideNConquer(arr, 0, arr.length - 1));
 //        System.out.println(maxSubArray(arr));
-////////////
 
 //////////// Max Prod Sub array
 //        int arr[] = new int[]{-2,1,-1,-3,-2};
@@ -39,12 +37,10 @@ public class Test {
 //        System.out.println(maxProdSubArray(arr));
 //        System.out.println(maxProdSubArrayMySol(arr));
 //        System.out.println(maxProduct(arr));
-////////////
 
 //////////// 3 Sum
 //        int arr[] = new int[]{2,-2,2,0,0};
 //        System.out.println(threeSumm(arr));
-////////////
 
 ///////////// Knapsack
 //        int val[] = new int[]{60, 100, 120};
@@ -52,7 +48,6 @@ public class Test {
 //        int  W = 50;
 //        int n = val.length;
 //        System.out.println(knapSack(W, wt, val, n));
-////////////
 
 //////////// Similar questions Climbing Stairs, Decode ways, Unique Paths, Fibonacci Number
 //        System.out.println(climb_Stairs(0,5));
@@ -71,14 +66,12 @@ public class Test {
 //        int[][] input=new int[][]{{0,1,1}};
 //        System.out.println(uniquePathsII(input));
 //        System.out.println(uniquePathsIIRecur(input));
-////////////
 
 //////////// Coin change
 //        System.out.println(coinChangeDP(new int[]{2,3,4,5},8));
 //        System.out.println(maxcoinChangeDP(new int[]{2,3,4,5},8));
 //        System.out.println(numberOfPncsCoinChange(new int[]{2,3,4},7));
 //        System.out.println(coinChangeGreedy(new int[]{9,6,5,1},11));
-////////////
 
 //////////// Wordbreak
 //        lookup=getLookup(wordDict);
@@ -90,7 +83,6 @@ public class Test {
 //        stringSet.add("dog");
 //        stringSet.add("cats");
 //        System.out.println(wordBreakDP("catsanddog",stringSet));
-////////////
 
 //////////// Permute I II, Subsets I II, CombinationSum I II IV, Palindrome partitioning
 
@@ -115,7 +107,6 @@ public class Test {
 //        System.out.println(partition("aab"));
 
 
-////////////
 
 //////////// House robber I & II
 //        System.out.println(rob(new int[]{2,1,1,3}));
@@ -125,7 +116,6 @@ public class Test {
 //        int[] nums=new int[]{2,1,1,3};
 //        System.out.println(Math.max(rob(Arrays.copyOfRange(nums, 0,nums.length-1)),
 //                                    rob(Arrays.copyOfRange(nums, 1,nums.length))));
-////////////
 
 //////////// Can Jump
 //        System.out.println(canJump(new int[]{2,3,1,1,4},0));
@@ -133,14 +123,12 @@ public class Test {
 //        System.out.println(minCanJumpConstantSpace(new int[]{1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9},0));
 //        System.out.println(canJumpItr(new int[]{1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9}));
 //        System.out.println(canJumpItr(new int[]{1, 3, 0, 1,2,3}));
-////////////
 
 //////////// Telephone knight
 
 //        System.out.println(telephoneKnight(1,3));
 //        System.out.println(telephoneKnightDP(1,2));
 //        System.out.println(knightDialerDP(3));
-////////////
 
 //////////// Longest Palindrome
 //        Find substrings of those with >= 2 occurences.
@@ -149,25 +137,20 @@ public class Test {
 //        System.out.println(longestPalindromeSubstring("ababa"));
 //        System.out.println(longestPalindromeSubstring("aaa"));
 //        System.out.println(longestPalindromeSubstring("abc"));
-////////////
 
 //////////// Length Of Longest Non-repeating Substring
 //        T = O(n) optimised sliding window with hashmap
 //        System.out.println(lengthOfLongestNonRepeatingSubstring("abca"));
-////////////
 
 //////////// Letter combinations
 //        System.out.println(letterCombinations("23").size());
 //        System.out.println(letterCombinations("23"));
-////////////
 
 //////////// ATOI
 //        System.out.println(myAtoi("2147483648"));
-////////////
 
 //////////// Median of Sorted Arrays
 //        System.out.println(findMedianSortedArrays(new int[]{1,2,4},new int[]{2,5}));
-////////////
 
 //////////// merge K Lists
 //        ListNode l1=new ListNode(1);
@@ -189,16 +172,16 @@ public class Test {
 //        l8.next=l9;
 //        l9.next=null;
 //        ListNode[] listNodes=new ListNode[3];
-//        listNodes[0]=l1;
-//        listNodes[1]=l4;
+//        listNodes[0]=l4;
+//        listNodes[1]=l1;
 //        listNodes[2]=l7;
-//        ListNode head=mergeKLists(listNodes);
+////        ListNode head=mergeKLists(listNodes);
+//        ListNode head=mergeKListsMyTest(listNodes);
 //        while(head!=null)
 //        {
 //            System.out.print(head.val+" ");
 //            head=head.next;
 //        }
-////////////
 
 //////////// Reorder list (inorder to traverse a list backwards, reverse a list and traverse it forward)
 //        ListNode l1=new ListNode(1);
@@ -219,11 +202,9 @@ public class Test {
 //            System.out.print(l1.val+" ");
 //            l1=l1.next;
 //        }
-////////////
 
 //////////// Detect cycle in a list
 //        visited nodes and 2 pointer. visited 2ptr already in 2ptr list or in 1ptr list
-////////////
 
 //////////// Insert Intervals, FYI a List of int[], .toArray() will give a matrix
 //        int[][] intervals = new int[3][2];
@@ -235,12 +216,10 @@ public class Test {
 //        intervals[2][1]=15;
 //        int[] newInterval={7,10};
 //        int[][] output=insertIntervals(intervals,newInterval);
-////////////
 
 //////////// Merge intervals
         //Check graph solution for
 //        merge();
-////////////
 
 //////////// Meeting Rooms II
 //        Interval[] intervals=new Interval[3];
@@ -251,7 +230,6 @@ public class Test {
 ////        intervals[4]=new Interval(10,20);
 //        intervals[2]=new Interval(1,5);
 //        System.out.println(minMeetingRooms(intervals));
-////////////
 
 //////////// Unique Paths III - 4 directions
 //        int[][] grid=new int[5][5];
@@ -274,14 +252,12 @@ public class Test {
 //        System.out.println(UniquePathsIIIDP.uniquePathsIII(grid));
 //        System.out.println(UniquePathsIIIDPMyWay.uniquePathsIII(grid));
 //        System.out.println(System.currentTimeMillis()-startTime);
-////////////
 
 //////////// N Queens Backtracking
 //        Long start=System.currentTimeMillis();
 ////        System.out.println(NQueenHashSet.solveNQueens(4));
 //        System.out.println(NQueenBoolArray.solveNQueens(4)); //faster, boolean arrays are faster than HashSets
 //        System.out.println((System.currentTimeMillis()-start) + "ms");
-////////////
 
 //////////// Set Zeroes
 //        int[][] matrix=new int[2][3];
@@ -292,7 +268,6 @@ public class Test {
 //        matrix[1][1]=4;
 //        matrix[1][2]=5;
 //        setZeroes(matrix);
-////////////
 
 //////////// Spiral Matrix
 //        int[][] matrix=new int[3][3];
@@ -306,7 +281,6 @@ public class Test {
 //        matrix[2][1]=8;
 //        matrix[2][2]=9;
 //        spiralOrder(matrix);
-////////////
 
 //////////// Rotate Image
 //        int[][] matrix=new int[4][4];
@@ -329,7 +303,6 @@ public class Test {
 ////        rotateImageTransposenReverse(matrix);
 ////        rotateImageOnePass(matrix);
 //        rotateImageOnePassnOneLoop(matrix);
-////////////
 
 //////////// Word search
 //        char[][] matrix=new char[3][4];
@@ -346,7 +319,6 @@ public class Test {
 //        matrix[2][2]='E';
 //        matrix[2][3]='E';
 //        System.out.println(wordSearch(matrix,"SEE"));
-////////////
 
 //////////// Max Depth BT
 //        TreeNode t5 = new TreeNode(7, null, null);
@@ -356,7 +328,6 @@ public class Test {
 //        TreeNode t1 = new TreeNode(3, t2, t3);
 //        System.out.println(maxDepthStack(t1));
 //        System.out.println(maxDepthRecur(t1));
-////////////
 
 //////////// Same tree
 //        TreeNode t5 = new TreeNode(7, null, null);
@@ -366,14 +337,14 @@ public class Test {
 //        TreeNode t1 = new TreeNode(3, t2, t3);
 //        System.out.println(isSameTreeRecur(t1, t1));
 //        System.out.println(isSameTreeQueue(t1, t1));
-////////////
 
 //////////// Max Path sum BT
-//        TreeNode t3 = new TreeNode(-3, null, null);
-//        TreeNode t2 = new TreeNode(-1, null, null);
-//        TreeNode t1 = new TreeNode(2, t2, t3);
+//        TreeNode t4 = new TreeNode(-4, null, null);
+//        TreeNode t5 = new TreeNode(-5, null, null);
+//        TreeNode t3 = new TreeNode(-3, t4, null);
+//        TreeNode t2 = new TreeNode(-1, null, t5);
+//        TreeNode t1 = new TreeNode(-2, t2, t3);
 //        System.out.println(MaxPathBT.maxPathSum(t1));
-////////////
 
 //////////// Level Order
 //        TreeNode t5 = new TreeNode(7, null, null);
@@ -385,7 +356,6 @@ public class Test {
 ////        levelOrderRecur(t1,levels,0);
 ////        System.out.println(levels);
 //        System.out.println(levelOrderIter(t1)); // after removing the parents at one level, the remaining elements in the queue = no: of children at next level
-////////////
 
 //////////// Serialize and deserialize BT
 //        TreeNode t5 = new TreeNode(7, null, null);
@@ -402,14 +372,12 @@ public class Test {
 //        String[] preOrderStringArray= serializedString.split(",");
 //        TreeNode root=new TreeNode(Integer.parseInt(preOrderStringArray[0]));
 //        deserializePreOrder(root,preOrderStringArray,0);
-////////////
 
 //////////// Tree From Preorder & Inorder
 //        int[] preorder=new int[]{3,9,20,15,7};
 //        int[] inorder=new int[]{9,3,15,20,7};
 //        TreeFromPreorderInorder.buildTree(preorder,inorder);
 
-////////////
 
 //////////// Sub tree
 //        TreeNode t5 = new TreeNode(2, null, null);
@@ -423,7 +391,6 @@ public class Test {
 //
 //        System.out.println(isSubtreePreOrder(t1,s1));
 //        System.out.println(isSubtreeCompare(t1,s1));
-////////////
 
 //////////// Validate BST
 //        TreeNode t5 = new TreeNode(6, null, null);
@@ -437,7 +404,6 @@ public class Test {
 //        int[] inorderlastElement = new int[]{Integer.MIN_VALUE};
 //        System.out.println(isValidBSTInorderArray(t1,inorderlastElement));
 
-////////////
 
 //////////// kth Smallest element in BST
 //        TreeNode t5 = new TreeNode(6, null, null);
@@ -447,7 +413,6 @@ public class Test {
 //        TreeNode t1 = new TreeNode(3, t2, t3);
 //        System.out.println(kthSmallestIter(t1,4));
 //        System.out.println(kthSmallestRecur(t1,4));
-////////////
 
 //////////// Insert & Delete BST
 //        TreeNode t5 = new TreeNode(6, null, null);
@@ -457,7 +422,6 @@ public class Test {
 //        TreeNode t1 = new TreeNode(3, t2, t3);
 //        TreeNode result=insertIntoBST(t1,2);
 //        result=deleteBST(t1,2);
-////////////
 
 //////////// kth Smallest element in BST
 //        TreeNode t5 = new TreeNode(6, null, null);
@@ -467,14 +431,12 @@ public class Test {
 //        TreeNode t1 = new TreeNode(3, t2, t3);
 //        System.out.println(lowestCommonAncestorIter(t1,t3,t4).val);
 //        System.out.println(lowestCommonAncestorRecur(t1,t3,t4).val);
-////////////
 
 //////////// Longest Repeating Character Replacement
 //        String s="AABABBA";
 //        String s="ACDBBEFAGHIJA";
 //        String s="abaaaabbcde";
 //        System.out.println(characterReplacement(s,1));
-////////////
 
 //////////// Minimum Window Substring
 //        String s="aabaabaaab";
@@ -488,7 +450,6 @@ public class Test {
 //        System.out.println(minWindowTemplate(s,t));
 //        String s="aabbbbcdddd";
 //        System.out.println(lengthOfLongestSubstringKDistinct(s,3));
-////////////
 
 //////////// Encode Decode Strings
 //        List<String> orinigalList = new ArrayList<String>();
@@ -502,7 +463,6 @@ public class Test {
 //        orinigalList.clear();
 //        System.out.println(decode(encode(orinigalList)));
 
-////////////
 
 //////////// LRU cache
 //        LRUCache cache = new LRUCache(2);
@@ -526,25 +486,21 @@ public class Test {
 //        System.out.println(cache.get(1));       // returns -1 (not found)
 //        System.out.println(cache.get(3));       // returns 3
 //        System.out.println(cache.get(4));       // returns 4
-////////////
 
 //////////// Group Anagrams
 //        String[] strs=new String[]{"eat", "tea", "tan", "ate", "nat", "bat"};
 //        System.out.println(groupAnagrams(strs));
-////////////
 
 //////////// Valid Parenthesis
 //        String strs="{[}]";
 //        String strs="(([]){})";
 //        System.out.println(isValidParenthesis(strs));
-////////////
 
 //////////// Count Palindromes
 //        String s="babbab";
 //        System.out.println(longestPalindromeSubstring(s));
 //        System.out.println(countPalindromeSubstrings(s));
 //        System.out.println(countPalindromeSubstringsManachersAlgo(s));
-////////////
 
 //////////// Insert location in array
 //        InputStreamReader inputStreamReader = new InputStreamReader(System.in);
@@ -559,7 +515,6 @@ public class Test {
 //        }
 //        System.out.println(insertLocation(input,13));
 //        System.out.println(insertLocation(input,8));
-////////////
 
 //////////// Clone graph
 //        UndirectedGraphNode n1=new UndirectedGraphNode(1);
@@ -576,7 +531,6 @@ public class Test {
 //        n4.neighbors.add(n1);
 //        HashMap<Integer, UndirectedGraphNode> visited=new HashMap<>();
 //        UndirectedGraphNode clone=clone(n1,visited);
-////////////
 
 //////////// Course scheduling
 //        int[][] pre=new int[2][2];
@@ -586,7 +540,6 @@ public class Test {
 //        pre[1][1]=2;
 //        System.out.println(canFinishDFS(3,pre));
 //        System.out.println(canFinishBFS(3,pre));
-////////////
 
 //////////// Graph traversals - DFS, BFS
 //        UndirectedGraphNode n1=new UndirectedGraphNode(1);
@@ -607,7 +560,6 @@ public class Test {
 //        Queue<UndirectedGraphNode> queue=new LinkedList<>();
 //        queue.add(n1);
 //        System.out.println(graphBFS(queue,visited,3));
-////////////
 
 //////////// Topological sort
 
@@ -630,7 +582,6 @@ public class Test {
 //        while(!outputStack.isEmpty()){
 //            System.out.println(outputStack.pop());
 //        }
-////////////
 
 
 //////////// Word Search II
@@ -685,11 +636,9 @@ public class Test {
 //        wordSearchII(input,visited,wordDict);
 //        List<String> res=wordSearchIITrie(input,new String[]{"oath","pea","eat","rain"});
 
-////////////
 
 //////////// Peak element
 //        System.out.println(findPeakElement(new int[]{3,2,3,5,6,7,8,9,10}));
-////////////
 
 //////////// Alien Dictionary
 //    String[] words=new String[]{"wrt","wrf","er","ett","rftt","rf"};
@@ -702,7 +651,6 @@ public class Test {
 //
 //        System.out.println(alienDictionary(words));
 //        System.out.println(alienOrder(words));
-////////////
 
 //////////// Number of islands
 //        int[][] grid=new int[][]{{1,1,0,1,1}, {0,0,1,1,1}};
@@ -719,7 +667,6 @@ public class Test {
 //        System.out.println(numIslandsDFSMyWay(grid));
 //        System.out.println(numIslandsDFS(grid2));
 //        System.out.println(numIslandsBFS(grid2));
-////////////
 
 //////////// Pacific Atlantic
 //        int[][] grid = new int[][]{{1,2,2,3,5},
@@ -736,7 +683,6 @@ public class Test {
 //                                    {5,1,0},
 //                                    {4,1,2}};
 //        System.out.println(pacificAtlantic(grid));
-////////////
 
 //////////// Number of connected components
 //        int[][] edges=new int[][]{{1, 2}, {3, 4},{0, 1}};
@@ -748,19 +694,16 @@ public class Test {
 //        countComponentsDFS(4,edges);
 //        System.out.println(connectedComponentsCount);
 //        System.out.println(countComponentsUnionFind(4,edges));
-////////////
 
 //////////// Longest increasing subsequence
 //        System.out.println(LIS(0,new int[]{20,5,40,6,7,8}));
 //        System.out.println(LisDP(new int[]{20,5,40,6,7,8}));
 //        System.out.println(lengthOfLIS(new int[]{20,5,40,6,7,8}));
 //        System.out.println(lengthOfLIS(new int[]{0,7,5,6}));
-////////////
 
 //////////// Longest common subsequence or delete operation for two strings
 //        System.out.println(longestCommonSubsequence("seat","ocean"));
 //        System.out.println(minDistance("seat","ocean"));
-////////////
 
 //////////// basic calculator I II
 //        System.out.println(calculateI("(7-(8+9+10))"));
@@ -768,15 +711,12 @@ public class Test {
 
 //        System.out.println(calculateII("5+20/2/5-1*4*6/2*2"));
 //        System.out.println(calculateII("5-20+1+3+4"));
-////////////
 
 //////////// Pretty print JSON
 //        prettyPrint("");
-////////////
 
 //////////// Search in sorted array of unknown size
 //        System.out.println(search(,9));
-////////////
 
 //////////// Binary tree right side view
 //        TreeNode t5 = new TreeNode(6, null, null);
@@ -785,7 +725,6 @@ public class Test {
 //        TreeNode t2 = new TreeNode(1, null, null);
 //        TreeNode t1 = new TreeNode(3, t2, t3);
 //        rightSideViewDFS(t1);
-////////////
 
 //////////// Asteroid collision
 //        int[] output;
@@ -795,7 +734,6 @@ public class Test {
 //        for (int i : output)
 //            System.out.print(i+" ");
 
-////////////
 
 //////////// Serialize and deserialize a n-ary tree
 //        Node t6 = new Node(6);
@@ -811,7 +749,6 @@ public class Test {
 //        t3.children.add(t6);
 //        Node result=deserializeNaryTree(serialize(t1));
 
-////////////
 
 //////////// Search in 2D Matrix
 //        int[][] matrix=new int[][]{{1,4,7,11,15},
@@ -820,17 +757,13 @@ public class Test {
 //                                    {10,13,14,17,24},
 //                                    {18,21,23,26,30}};
 //        System.out.println(searchIn2DMatrix(matrix,5));
-////////////
 
 //////////// Implement a trie
 //        implementTrie();
-////////////
 
 //////////// Search in rotated sorted array
 //        System.out.println(searchInRotatedSortedArray(new int[]{4,5,6,7,0,1,2,3},6));
-////////////
 
-////////////
 //        PriorityQueue<Integer> priorityQueue=new PriorityQueue<Integer>((a,b) -> {return -(a-b);});
 //        priorityQueue.add(4);
 //        priorityQueue.add(5);
@@ -848,7 +781,6 @@ public class Test {
 //        System.out.println(kthLargest.add(9));  // returns 8
 //        System.out.println(kthLargest.add(4));  // returns 8
 
-////////////
 
 //////////// Copy List with Random pointer
 //        RandomListNode l1=new RandomListNode(1);
@@ -859,11 +791,9 @@ public class Test {
 //        l2.next=l3;
 //        l2.random=l2;
 //        RandomListNode result=copyRandomList(l1);
-////////////
 
 //////////// Product of array except self
 //        productExceptSelf(new int[]{1,2,3,4});
-////////////
 
 //////////// Odd even list
 //        ListNode l1=new ListNode(1);
@@ -876,7 +806,6 @@ public class Test {
 //        l3.next=l4;
 //        l4.next=l5;
 //        oddEvenList(l1);
-////////////
 
 //////////// Zig Zag iterator
 //        List<Integer> list1=Arrays.asList(1,2,3,4,5);
@@ -893,16 +822,13 @@ public class Test {
 //        {
 //            System.out.println(ZigzagIterator.next());
 //        }
-////////////
 
 //////////// Isomorphic strings
 //        System.out.println(isIsomorphic("egg","add"));
 //        System.out.println(isIsomorphic("egd","add"));
-////////////
 
 //////////// Print repeating elements
 //        printRepeating(new int[]{1, 2, 3, 1, 3, 6, 6});
-////////////
 
 //////////// Hit Counter
 //        HitCounterTreeMapMyWay counter = new HitCounterTreeMapMyWay();
@@ -936,7 +862,6 @@ public class Test {
 //        System.out.println(counter2.getHits(350));
 //        System.out.println(counter2.getHits(2));
 
-////////////
 
 //////////// Binary tree coloring game
 //        TreeNode t11 = new TreeNode(11, null, null);
@@ -951,60 +876,54 @@ public class Test {
 //        TreeNode t2 = new TreeNode(2, t4, t5);
 //        TreeNode t1 = new TreeNode(1, t2, t3);
 //        System.out.println(btreeGameWinningMove(t1,11,3));
-////////////
 
 //////////// Buy sell stocks
 //        System.out.println(maxProfit(new int[]{7,1,5,3,6,4}));
-////////////
 
 //////////// Trapping rain water
 //        System.out.println(trap2Pointers(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
 //        System.out.println(trapStack(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
 //        System.out.println(trapDP(new int[]{0,1,0,2,1,0,1,3,2,1,2,1}));
-////////////
 
 //////////// K closest points to origin
 //        int[][] output=kClosest(new int[][]{{3,3},{5,-1},{-2,4}},2);
 //        System.out.println(output[0].toString());
 //        System.out.println(Arrays.asList(output[1]));
-////////////
 
 //////////// Number to words
 //        NumberToWords numberToWords=new NumberToWords();
 //        System.out.println(numberToWords.numberToWords(123456));
-////////////
 
 //////////// Remove invalid parentheses
 //        HashSet output=new HashSet();
-//        String s="()())()";
+////        String s="()())()";
+//        String s="o(()()()m()((()t";
 ////        String s=")(a";
 //        maxValidString= validParenthesisCount(s);
+//        long startTime=System.currentTimeMillis();
 //        removeParentheses(new StringBuffer(),output,s.toCharArray(),0,0,0);
 //        System.out.println(output);
-////////////
+//        System.out.println("time taken for output "+(System.currentTimeMillis()-startTime));
+//        removeInvalidParentheses(s);
 
 //////////// Subarray sum equals k
 //        System.out.println(subarraySum(new int[]{28,54,7,-70,22,65,-6},100));
 //        System.out.println(subarraySum(new int[]{1,2,4,3,1},4));
 //        System.out.println(subarraySumBruteForce(new int[]{1,2,4,3,1},4));
 //        System.out.println(subarraySumHM(new int[]{1,2,4,3,1},4));
-////////////
 
 //////////// Merge sorted arrays
 //        int[] nums1=new int[]{1,2,3,0,0,0};
 //        mergeSortedArrayFromEnd(nums1,3,new int[]{2,5,6},3);
-////////////
 
 //////////// Next permutation
 //        int[] input=new int[]{1,5,8,4,7,6,5,3,1};
 //        nextPermutation(input);
-////////////
 
 //////////// Interval list intersections
 //        int[][] a = new int[][]{{0, 2}, {5, 10}, {13, 23}, {24, 25}};
 //        int[][] b = new int[][]{{1, 5}, {8, 12}, {15, 24}, {25, 26}};
 //        int[][] output= intervalIntersection(a, b);
-////////////
 
 //////////// Shortest distance to a character
 //        int[] output = shortestToChar("loveleetcode", 'e');
@@ -1012,7 +931,6 @@ public class Test {
 //        shortestToCharMyWay("aaab", 'b');
 //        shortestToCharMyWay("tonee", 'n');
 //        shortestToCharFastest("tonee", 'n');
-////////////
 
 //////////// Boundary of binary tree
 //        TreeNode t1=new TreeNode(1);
@@ -1056,7 +974,6 @@ public class Test {
 //        System.out.println(boundaryOfBinaryTreePreOrder(t1));
 //        System.out.println(boundaryOfBinaryTreeMyWayOnePass(t1));
 //        System.out.println(boundaryOfBinaryTreeOnePass(t1));
-////////////
 
 //////////// Add and search word
 //        WordDictionary wordDictionary=new WordDictionary();
@@ -1067,7 +984,6 @@ public class Test {
 //        System.out.println(wordDictionary.search("bad"));
 //        System.out.println(wordDictionary.search(".ad"));
 //        System.out.println(wordDictionary.search("b.."));
-////////////
 
 //////////// Symmetric tree
 //        TreeNode t1=new TreeNode(1);
@@ -1081,8 +997,350 @@ public class Test {
 //        t3.left=t5;
 //        System.out.println(isSymmetricRecursive(t1,t1));
 //        System.out.println(isSymmetricIterative(t1));
-////////////
 
+//////////// Detect cycle start
+//        ListNode l1=new ListNode(1);
+//        ListNode l2=new ListNode(2);
+//        ListNode l3=new ListNode(3);
+//        l1.next=l2;
+//        l2.next=l3;
+//        l3.next=l2;
+//        ListNode output = detectCycle(l1);
+
+//////////// Median of stream
+//        MedianFinder.addNum(1);
+//        MedianFinder.addNum(2);
+//        System.out.println(MedianFinder.findMedian()); // 1.5
+//        MedianFinder.addNum(3);
+//        System.out.println(MedianFinder.findMedian()); // 2
+
+//////////// Reorder log files
+//        String[] output = reorderLogFiles(new String[]{"dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art aero"});
+
+//////////// Optimal Utilization
+//        List<int[]> a = new ArrayList<>();
+//        a.add(new int[]{1, 5});
+//        a.add(new int[]{2, 5});
+//        List<int[]> b = new ArrayList<>();
+//        b.add(new int[]{1, 5});
+//        b.add(new int[]{2, 5});
+//        List<int[]> output = getPairs(a, b, 10);
+
+//////////// Minimum cost to connect sticks
+//        System.out.println(connectSticks(new int[]{2,4,3}));
+
+//////////// Treasure island II
+//        treasureIslandII(new char[][]{});
+
+        
+//////////// 01 Matrix
+//        int[][] input=new int[][]{{1,1,1},{0,1,0},{1,1,1}};
+//        int[][] output=o1MatrixDP(input);
+//        output=o1MatrixBFS(input);
+
+        
+//////////// Lemonade change
+//        System.out.println(lemonadeChange(new int[]{5,5,5,10,20}));
+        
+        
+//////////// Backspace compare
+//        System.out.println(backspaceCompare("ab##","c#d#"));
+        
+
+    }
+
+    public static boolean backspaceCompare(String S, String T) {
+        int i = S.length() - 1, j = T.length() - 1;
+        int skipS = 0, skipT = 0;
+
+        while (i >= 0 || j >= 0) { // While there may be chars in build(S) or build (T)
+            while (i >= 0) { // Find position of next possible char in build(S)
+                if (S.charAt(i) == '#') {skipS++; i--;}
+                else if (skipS > 0) {skipS--; i--;}
+                else break;
+            }
+            while (j >= 0) { // Find position of next possible char in build(T)
+                if (T.charAt(j) == '#') {skipT++; j--;}
+                else if (skipT > 0) {skipT--; j--;}
+                else break;
+            }
+            // If two actual characters are different
+            if (i >= 0 && j >= 0 && S.charAt(i) != T.charAt(j))
+                return false;
+            // If expecting to compare char vs nothing
+            if ((i >= 0) != (j >= 0))
+                return false;
+            i--; j--;
+        }
+        return true;
+    }
+
+    public static boolean lemonadeChange(int[] bills) {
+        int five = 0, ten = 0;
+        for (int bill: bills) {
+            if (bill == 5)
+                five++;
+            else if (bill == 10) {
+                if (five == 0) return false;
+                five--;
+                ten++;
+            } else {
+                if (five > 0 && ten > 0) {
+                    five--;
+                    ten--;
+                } else if (five >= 3) {
+                    five -= 3;
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    static int[][] o1MatrixDP(int[][] matrix)
+    {
+        int rows = matrix.length;
+        if (rows == 0)
+            return matrix;
+        int cols = matrix[0].length;
+        int[][] dist= new int[rows][cols];
+
+        //First pass: check for left and top
+        for (int i = 0; i < rows; i++) {
+            Arrays.fill(dist[i], Integer.MAX_VALUE-10000);
+            for (int j = 0; j < cols; j++) {
+                if (matrix[i][j] == 0)
+                    dist[i][j] = 0;
+                else {
+                    if (i > 0)
+                        dist[i][j] = Math.min(dist[i][j], dist[i - 1][j] + 1);
+                    if (j > 0)
+                        dist[i][j] = Math.min(dist[i][j], dist[i][j - 1] + 1);
+                }
+            }
+        }
+
+        //Second pass: check for bottom and right
+        for (int i = rows - 1; i >= 0; i--) {
+            for (int j = cols - 1; j >= 0; j--) {
+                if (i < rows - 1)
+                    dist[i][j] = Math.min(dist[i][j], dist[i + 1][j] + 1);
+                if (j < cols - 1)
+                    dist[i][j] = Math.min(dist[i][j], dist[i][j + 1] + 1);
+            }
+        }
+
+        return dist;
+    }
+
+    //Multi source BFS, multiple ways to reach target node(s)
+    //starting BFS from 1s can only be done one 1 at a time, the other 1s in this path may not have the same closest 0
+    //Starting with multiple 1s cannot be done cuz of marking visited
+    //the above is true for  only one 0 at a time also
+    //starting from Multiple 0s(start) get to the closest 1s first
+    //marking it visited or checking less than is the same indicator to prevent reusing nodes
+    static int[][] o1MatrixBFS(int[][] matrix)
+    {
+        int rows = matrix.length;
+        if (rows == 0)
+            return matrix;
+        int cols = matrix[0].length;
+        int[][] dist= new int[rows][cols];
+
+        Queue<Pair> q=new LinkedList<>();
+        for (int i = 0; i < rows; i++) {
+            Arrays.fill(dist[i], Integer.MAX_VALUE-10000);
+            for (int j = 0; j < cols; j++)
+                if (matrix[i][j] == 0) {
+                    dist[i][j] = 0;
+                    q.offer(new Pair(i, j)); //Put all 0s in the queue.
+                }
+        }
+
+        int[][] dir=new int[][]{ { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+        while (!q.isEmpty()) {
+            Pair curr = q.poll();
+
+            for (int i = 0; i < 4; i++) {
+                int new_r = curr.first + dir[i][0], new_c = curr.second + dir[i][1];
+                if (new_r >= 0 && new_c >= 0 && new_r < rows && new_c < cols) {
+                    if (dist[new_r][new_c] > dist[curr.first][curr.second] + 1) {
+                        dist[new_r][new_c] = dist[curr.first][curr.second] + 1;
+                        q.offer(new Pair(new_r, new_c ));
+                    }
+                }
+            }
+        }
+        return dist;
+    }
+
+    static class Pair{
+        int first;
+        int second;
+        Pair(int i,int j) {
+            first = i;
+            second = j;
+        }
+    }
+
+    public static int treasureIslandII(char[][] islands){
+        final int[][] dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        if(islands.length == 0 || islands[0].length == 0) return -1;
+        int R = islands.length, C = islands[0].length;
+        Queue<int[]> queue = new LinkedList<>();
+        int steps = 1;
+        // add all sources to queue and set 'visited'.
+        for(int i = 0; i < R; ++i){
+            for(int j = 0; j < C; ++j){
+                if(islands[i][j] == 'S'){
+                    queue.add(new int[]{i, j}); islands[i][j] = 'D';
+                }
+            }
+        }
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            for(int i = 0; i < size; ++i){
+                int[] pos = queue.poll();
+                for(int[] dir: dirs){
+                    int x = pos[0] + dir[0], y = pos[1] + dir[1];
+                    if(x < 0 || x >= R || y < 0 || y >= C || islands[x][y] == 'D') continue;
+                    if(islands[x][y] == 'E') return steps;
+                    queue.add(new int[]{x, y});
+                    islands[x][y] = 'D';
+                }
+            }
+            ++steps;
+        }
+        return -1;
+    }
+
+    public static int connectSticks(int[] sticks) {
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+        for(int i: sticks) pq.add(i);
+        int res = 0;
+        while(pq.size() > 1){
+            int t = pq.poll() + pq.poll();   // sum the two smallest
+            res +=t;  // count the cost
+            pq.offer(t); //
+        }
+        return res;
+    }
+
+    //get pairs that equal a target
+    private static List<int[]> getPairs(List<int[]> a, List<int[]> b, int target) {
+        Collections.sort(a, (i,j) -> i[1] - j[1]);
+        Collections.sort(b, (i,j) -> i[1] - j[1]);
+        List<int[]> result = new ArrayList<>();
+        int max = Integer.MIN_VALUE;
+        int m = a.size();
+        int n = b.size();
+        int i =0;
+        int j =n-1;
+        while(i<m && j >= 0) {
+            int sum = a.get(i)[1] + b.get(j)[1];
+            if(sum > target) {
+                --j;
+            } else {
+                if(max <= sum) {
+                    if(max < sum) {
+                        max = sum;
+                        result.clear();
+                    }
+                    result.add(new int[]{a.get(i)[0], b.get(j)[0]});
+                    int index = j-1;
+                    while(index >=0 && b.get(index)[1] == b.get(index+1)[1]) {
+                        result.add(new int[]{a.get(i)[0], b.get(index--)[0]});
+                    }
+                }
+                ++i;
+            }
+        }
+        return result;
+    }
+
+    public static String[] reorderLogFiles(String[] logs) {
+        Arrays.sort(logs, (log1, log2) -> {
+            String[] split1 = log1.split(" ", 2);
+            String[] split2 = log2.split(" ", 2);
+            boolean isDigit1 = Character.isDigit(split1[1].charAt(0));
+            boolean isDigit2 = Character.isDigit(split2[1].charAt(0));
+            if (!isDigit1 && !isDigit2) {
+                int cmp = split1[1].compareTo(split2[1]);
+                if (cmp != 0) return cmp;
+                return split1[0].compareTo(split2[0]);
+            }
+            return isDigit1 ? (isDigit2 ? 0 : 1) : -1;
+        });
+        return logs;
+    }
+
+     static class MedianFinder {
+        static PriorityQueue<Integer> lo=new PriorityQueue<>();
+        static PriorityQueue<Integer> hi=new PriorityQueue<>(Collections.reverseOrder());
+
+        // Adds a number into the data structure.
+        static void addNum(int num)
+        {
+            lo.offer(num);              // Add to max heap
+            hi.offer(lo.poll());        // balancing step
+
+            if (lo.size() < hi.size())   // maintain size property
+                lo.offer(hi.poll());
+
+        }
+
+        // Returns the median of current data stream
+        static double findMedian()
+        {
+            return lo.size() > hi.size() ? (double) lo.peek() : (lo.peek() + hi.peek()) * 0.5;
+        }
+    };
+
+    //distance from intersection and from start to the start of cycle is same
+    //2(F+a)= F+a+b+a ie F=b
+    public static ListNode detectCycle(ListNode head) {
+        if (head == null) {
+            return null;
+        }
+
+        // If there is a cycle, the fast/slow pointers will intersect at some
+        // node. Otherwise, there is no cycle, so we cannot find an entrance to
+        // a cycle.
+        ListNode intersect = getIntersect(head);
+        if (intersect == null) {
+            return null;
+        }
+
+        // To find the entrance to the cycle, we have two pointers traverse at
+        // the same speed -- one from the front of the list, and the other from
+        // the point of intersection.
+        ListNode ptr1 = head;
+        ListNode ptr2 = intersect;
+        while (ptr1 != ptr2) {
+            ptr1 = ptr1.next;
+            ptr2 = ptr2.next;
+        }
+
+        return ptr1;
+    }
+
+    public static ListNode getIntersect(ListNode head) {
+        ListNode tortoise = head;
+        ListNode hare = head;
+
+        // A fast pointer will either loop around a cycle and meet the slow
+        // pointer or reach the `null` at the end of a non-cyclic list.
+        while (hare != null && hare.next != null) {
+            tortoise = tortoise.next;
+            hare = hare.next.next;
+            if (tortoise == hare) {
+                return tortoise;
+            }
+        }
+
+        return null;
     }
 
     public static boolean isSymmetricIterative(TreeNode root) {
@@ -1556,6 +1814,83 @@ public class Test {
         return count;
     }
 
+
+
+
+    private static Set<String> validExpressions = new HashSet<String>();
+
+    private static void recurse(String s, int index, int leftCount, int rightCount, int leftRem, int rightRem, StringBuilder expression) {
+
+        // If we reached the end of the string, just check if the resulting expression is
+        // valid or not and also if we have removed the total number of left and right
+        // parentheses that we should have removed.
+        if (index == s.length()) {
+            if (leftRem == 0 && rightRem == 0) {
+                validExpressions.add(expression.toString());
+            }
+
+        } else {
+            char character = s.charAt(index);
+            int length = expression.length();
+
+            // The discard case. Note that here we have our pruning condition.
+            // We don't recurse if the remaining count for that parenthesis is == 0.
+            if ((character == '(' && leftRem > 0) || (character == ')' && rightRem > 0)) {
+                recurse(s, index + 1, leftCount, rightCount, leftRem - (character == '(' ? 1 : 0), rightRem - (character == ')' ? 1 : 0), expression);
+            }
+
+            expression.append(character);
+
+            // Simply recurse one step further if the current character is not a parenthesis.
+            if (character != '(' && character != ')') {
+
+                recurse(s, index + 1, leftCount, rightCount, leftRem, rightRem, expression);
+
+            } else if (character == '(') {
+
+                // Consider an opening bracket.
+                recurse(s, index + 1, leftCount + 1, rightCount, leftRem, rightRem, expression);
+
+            } else if (rightCount < leftCount) {
+
+                // Consider a closing bracket.
+                recurse(s, index + 1, leftCount, rightCount + 1, leftRem, rightRem, expression);
+            }
+
+            // Delete for backtracking.
+            expression.deleteCharAt(length);
+        }
+    }
+
+    public static List<String> removeInvalidParentheses(String s) {
+
+        int left = 0, right = 0;
+
+        long startTime = System.currentTimeMillis();
+        // First, we find out the number of misplaced left and right parentheses.
+        for (int i = 0; i < s.length(); i++) {
+
+            // Simply record the left one.
+            if (s.charAt(i) == '(') {
+                left++;
+            } else if (s.charAt(i) == ')') {
+                // If we don't have a matching left, then this is a misplaced right, record it.
+                if (left == 0) right = right + 1;
+
+                // Decrement count of left parentheses because we have found a right
+                // which CAN be a matching one for a left.
+                if (left > 0) left = left - 1;
+            }
+        }
+
+        System.out.println("time taken " + (System.currentTimeMillis() - startTime));
+        startTime = System.currentTimeMillis();
+        recurse(s, 0, 0, 0, left, right, new StringBuilder());
+        System.out.println("time taken for output " + (System.currentTimeMillis() - startTime));
+        return new ArrayList<String>(validExpressions);
+    }
+
+
     static int maxValidString=0;
     static int leftBracketTotalCount =0;
     static int rightBracketTotalCount=0;
@@ -1586,6 +1921,7 @@ public class Test {
         char c = ' ';
         Stack<Character> stack = new Stack<Character>();
 
+        long startTime=System.currentTimeMillis();
         for (int i = 0; i < s.length(); i++) {
             c = s.charAt(i);
             if (c == ')') {
@@ -1599,6 +1935,7 @@ public class Test {
             } else if (c == '(') stack.push(c);
             else count++;
         }
+        System.out.println("time taken "+(System.currentTimeMillis()-startTime));
         return count;
     }
 
@@ -1847,7 +2184,7 @@ public class Test {
     }
 
 
-    //constant space and time. You can also get past getHits() by adding condtion timestamp > times[i] && ....
+    //constant space and time. You can also get past getHits() by adding condition timestamp > times[i] && ....
     static class HitCounterArrays {
         private int[] times;
         private int[] hits;
@@ -1882,6 +2219,7 @@ public class Test {
         }
     }
 
+    //Can handle volume
     static class HitCounterQueue {
 
         Queue<Integer> q = null;
@@ -2071,7 +2409,7 @@ public class Test {
     public static RandomListNode copyRandomList(RandomListNode head) {
         RandomListNode iter = head, next;
 
-        // 1->1'->2->2'->3->3'
+        // 1->1'->2->2'->3->3'  //the existing list is used to store mapping old->new-old->
         while (iter != null) {
             next = iter.next;
             RandomListNode copy = new RandomListNode(iter.label);
@@ -2096,14 +2434,45 @@ public class Test {
         while (iter != null) {
             next = iter.next.next;
             // extract the copy
-            copy = iter.next;
-            copyIter.next = copy;
-            copyIter = copy;
+            copyIter.next = iter.next;
+            copyIter = iter.next;
             // restore the original list
             iter.next = next;
             iter = next;
         }
         return pseudoHead.next;
+    }
+
+
+    public static RandomListNode copyRandomListIterativeWithSpace(RandomListNode head, HashMap<RandomListNode, RandomListNode> visited) {
+
+        if (head == null) return null;
+
+        RandomListNode oldNode = head;
+
+        RandomListNode newNode = new RandomListNode(oldNode.label);
+        visited.put(oldNode, newNode);
+
+        while (oldNode != null) {
+            newNode.random = getClonedNode(oldNode.random,visited);
+            newNode.next = getClonedNode(oldNode.next,visited);
+
+            oldNode = oldNode.next;
+            newNode = newNode.next;
+        }
+        return visited.get(head);
+    }
+
+    public static RandomListNode getClonedNode(RandomListNode node, HashMap<RandomListNode, RandomListNode> visited) {
+        if (node != null) {
+            if (visited.containsKey(node))
+                return visited.get(node);
+             else {
+                visited.put(node, new RandomListNode(node.label));
+                return visited.get(node);
+            }
+        }
+        return null;
     }
 
     static class KthLargest {
@@ -4156,7 +4525,7 @@ public class Test {
         public static int max_gain(TreeNode node) {
             if (node == null) return 0;
 
-            // max sum on the left and right sub-trees of node
+            //By comparing with 0, negatives are ignored. If there are only negatives the maximum negative node will be the answer
             int left_gain = Math.max(max_gain(node.left), 0);
             int right_gain = Math.max(max_gain(node.right), 0);
 
@@ -4230,19 +4599,19 @@ public class Test {
     }
 
     public static int maxDepthStack(TreeNode root) {
-        LinkedList<Pair<TreeNode, Integer>> stack = new LinkedList<>();
+        LinkedList<javafx.util.Pair<TreeNode, Integer>> stack = new LinkedList<>();
         if (root != null) {
-            stack.add(new Pair(root, 1));
+            stack.add(new javafx.util.Pair(root, 1));
         }
         int depth = 0;
         while (!stack.isEmpty()) {
-            Pair<TreeNode, Integer> current = stack.pollLast();
+            javafx.util.Pair<TreeNode, Integer> current = stack.pollLast();
             root = current.getKey();
             int current_depth = current.getValue();
             if (root != null) {
                 depth = Math.max(depth, current_depth);
-                stack.add(new Pair(root.left, current_depth + 1));
-                stack.add(new Pair(root.right, current_depth + 1));
+                stack.add(new javafx.util.Pair(root.left, current_depth + 1));
+                stack.add(new javafx.util.Pair(root.right, current_depth + 1));
             }
         }
         return depth;
@@ -4902,12 +5271,28 @@ public class Test {
         }
     }
 
+    public static ListNode mergeKListsMyTest(ListNode[] lists){
+
+        int increment=1,end=lists.length-1;
+        //O(nlogk)
+        while(end>0) {
+            for (int start = 0; start < end; start++,end--)
+                lists[start] = merge2Lists(lists[start], lists[end]);
+        }
+
+        //O(nk)
+//        for (int i = 1; i < lists.length; i++) {
+//            lists[0] = merge2Lists(lists[0], lists[i]);
+//        }
+        return lists[0];
+    }
+
     public static ListNode mergeKLists(ListNode[] lists) {
         if (lists.length == 0) return null;
         int interval = 1;
         while (interval < lists.length) {
             for (int i = 0; i + interval < lists.length; i = i + interval * 2)
-                lists[i] = merge2Lists(lists[i], lists[i + interval]);
+                merge2Lists(lists[i], lists[i + interval]);
 
             interval *= 2;
         }

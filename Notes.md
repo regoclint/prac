@@ -10,6 +10,7 @@ Graph representations
     List of other neighbour Graph Nodes & node lookup HM
 
 Graph BFS or DFS doesnt matter if its undirected or directed
+BFS is better than DFS in grid
 
 Shallow copy - contains references to the copy from element
 Deep copy - New objects are created
@@ -31,7 +32,13 @@ Inorder in BST is ascending order and postorder is descending
 For nary tree serialize deserialize need children count
 For binary tree serialize deserialize need null values
 For preorder subtree need # at start
-
+PQ and TreeSet
+    Both O(log(N)) time complexity for adding, removing, and searching elements
+    PQ can have duplicates, TreeSet cannot
+    Iteration in TreeSet is ordered PQ is random
+DL - faster insertions and removals, lookup by index is slow. HM can be used for faster lookup
+ArrayList - slower insertions and removals, faster lookup by index    
+            Can do a binary search if sorted.
 
 Utility funcs
 
@@ -91,13 +98,16 @@ AB testing - create 2 versions and gauge the response to finalize the version
 
 **System Design**
 
-Twitter (News Feed)    
+Twitter (News Feed) https://www.youtube.com/watch?v=KmAyPUv9gOY    
 - is read heavy compared to write
 - Tweeting
-    - HTTP Put -> Load balancer -> into 3 redis instances(Fan out). Redis because high speed in memory and only 140 characters.
+    - HTTP Put -> Load balancer -> into 3 redis instances(Fan out). Redis because high speed of in-memory and only 140 characters.
     - We need more speed than space.
-    - A tweet updates the followers timeline in redis (precomputing)
-    - A celeb tweet appears on page refresh(from DB rather than Redis) so that comment on the tweet appears in the right order due to the high volume of followers                      
+    - A tweet updates the followers timeline in redis (precomputing). Based on a frequently logged in user too.
+    - 3 Redis instances have duplicated data for high availability
+    - A celeb tweet appears on page refresh(from DB rather than Redis) so that comment on the tweet appears in the right order due to the high volume of followers
+        The order would get destroyed if redis is used for celebs, cuz updating the follower's timeline would take and due to that a comment on a celeb tweet may 
+        appear before the celeb tweet                      
 - Timeline - User and Home
     - User timeline is simple 
     - Home timeline merge from all followers in chronological order
@@ -107,13 +117,15 @@ Twitter (News Feed)
 - Search
     - During the tweet operation the tweet is also sent to a Search engine to be indexed and be searchable
 - Advertising
-- Eventual consistency???
+- Eventual consistency
+    
+    
  
-Instagram
+Instagram (News Feed) 
 - Precomputing like count is better so store the aggregation counts in another table  
 - similar to twitter cuz of timelines
-- Cache or precompute news
-- Push notifications for users posts and pull for celebreties or rate limit pushes 
+- Cache and precompute news
+- Push notifications for users posts and pull for celebrities (or rate limit pushes) 
 - Web sockets to push notifications
     
 Whatsapp (Chat service)
@@ -122,21 +134,86 @@ Whatsapp (Chat service)
 - UserA over TCP -> to gateway -> sessions service which has the user to gateway mapping -> Queue -> Gateway(Web socket) -> UserB
 - Group chat - also has group service for group to user id mapping       
 
-Tinder
+Tinder 
+https://www.youtube.com/watch?v=tndzLznxq40&list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX&index=9
 + Store Profiles
+    - No of images req?
     - Images stored as File vs BLOB 
         - Files are cheaper, faster, dont need updates. Can use CDN 
-    - Images stored in DFS(Distributed File system)
+    - Images stored in DFS(Distributed File system) based on user id
+    -DB storing user id and file url(CDN ???)
     
-- Recommend matches    
-- To index multiple coloumns
-  - Casandra or Amazon Dynamo DB - NoSql
-  - Sharding or Horizontal scaling
+- Recommend matches
+    - Recommend based on age, gender, location and have a fast lookup
+    - Location is updated every hour then how sharding is done??? 
+    - If all 3 columns are indexed, only one index is used at a time and binary search happens on them
+        - Casandra or Amazon Dynamo DB - NoSql...better than sharding as sharding is complicated
+        - Sharding or Horizontal scaling - shard based
+         
+- Note matches
+    - only the user id to user id so that matches can be recovered
+    
+- Direct messaging    
 
-HTTP - client to server protocol
+Amazon (Shopping)
+
+- Availability > consistency
+    - Loss of availability means loss of revenue, hence more important
+    - Increase servers for availability but maintaining the replicas consistency is difficult
+    - Achieving high availability and consistency is difficult
+
+Netflix
+
+
+HTTP - is synchronous, client to server protocol
+TCP - is asynchronous
 XMPP or Websockets - Peer to peer protocol -Stateful and long lived TCP connection    
 CDN - Build to reduce response times by creating copies in different geographical locations
+Eventual consistency
+    https://www.youtube.com/watch?v=fIfH-kUaX4c
+    Monetary Transactions can be tightly coupled
+    Like count, hit counter etc can be loosely coupled thru queues
+    When high volume comes into picture asynchronous communication might be better
 
+Reverse proxy(NGINX) - A proxy for servers...inbound communication
+Forward proxy - A proxy for clients...outbound communication
+Gateway/Proxy servers help in
+    -Hiding behind a domain(Anonymity)
+    -Security, firewalls
+    -Caching
+    -Load balancing
+    -Routing
+NGINX is a software based reverse proxy, better than hardware based ones  
+Precomputing could generally mean make updates when the update activity is done before run time of the actual activity
+
+Consistent hashing 
+    Way to distribute load uniformly by hashing many times for more virtual servers
+    So when servers are added or deleted or fail the load is properly distributed
+    Hash so that only few servers are affected and caches of previous requests are not dumped
+
+Sharding (DB servers)
+    it is technique of distributing data in a relational database on a particular field
+    Indexes can be created on another field so that queries are more optimised 
+    Consistent hashing can be used to allocate new shards
+    Master slave configs provide better availability and consistency as writes happen only to master and then it fans out, read can happen anywhere
+    Drawbacks - Joins, Shards are fixed, hierarchical sharding further divides shards into smaller shards
+
+
+CAP theorem
+Consistency - Data should be same in read for all users
+              read and writes should be synchronised
+              Consistency is more important than availability for DBs
+Availability - Always on               
+               More important than consistency for Computational servers
+Partition tolerance - 
+
+                 
+Server crash use heartbeats to the service not box and restart nodes
+
+Pessimistic concurrency lock - Lock the resource when accessed
+                                Helpful for multiple simultaneous access  
+Optimistic concurrency lock - No locks, while committing a change check whether the previous read state == current read state 
+                              Helpful for infrequent multiple simultaneous access  
 
 
 
@@ -269,3 +346,10 @@ Spring testing
 @SpyBean - for mocking only certain parts
 @Mock , @Spy - for non spring boot context
 @InjectMocks used by normal mockito to inject mocks into service/class
+
+
+**Misc**
+Agile methodology uses scrum framework 
+Sprint is like 2 weeks or 4 weeks development cycle and shippable product
+Daily Scrum meetings is a standup meeting either daily, where what has been completed, what being worked on and issues are discussed 
+A sprint has many daily scrums
