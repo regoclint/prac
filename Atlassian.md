@@ -14,38 +14,47 @@ Have you had to adapt your communication style to achieve a better outcome in a 
 -Stay Calm, hear completely and 'we'
 
 
-2. Build with heart and balance
-Prioritization and decision making - balancing decision making for example late night deployments to hit business goals vs risks associated with doing that.
-
-Eg.
-
-3. Dont f the customer
+2. Dont f the customer
 How is your mentality ‘user centered’?
 How have you put the customer first? What trade-offs did you have to make to do this? For example: Ship late, but ship right?
 
 -Response times, 
 -customer behaviours through clickStream
 -Loading indicators during n/w calls
+-confirmation on deletion
 -Localization
 -Indicators or info symbols to explain
 
-Eg.
 
-4. Play as a team
-How have you helped make a team/individual more successful if they were not performing well? Examples of when you have had to put the goals of the team above personal ambitions.
-
-mock simulators
-Admin ui development
-formatter
-spring boot live reload
-h2 db
-
-
-5. Be the change you seek
+3. Be the change you seek
 How did you influence to push for change? What did you learn from this process? What was the outcome?
 
 -Postman test suite
 -Chrome extension
 -Macros
 
-Eg.
+4. Play as a team
+How have you helped make a team/individual more successful if they were not performing well? Examples of when you have had to put the goals of the team above personal ambitions.
+
+Admin ui development
+mock simulators
+formatter
+spring boot live reload
+h2 db
+batch writes to improve performance
+
+
+
+5. Build with heart and balance
+Prioritization and decision making - balancing decision making for example late night deployments to hit business goals vs risks associated with doing that.
+
+
+Questions
+-How values influence work
+-Hows shipit
+-No sales team, how does that work out
+
+-Sharepoint -Confluence main competitor
+
+CEO
+Mike Cannon-Brookes and Scott Faraquar

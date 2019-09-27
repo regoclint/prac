@@ -3304,21 +3304,21 @@ public class Test {
         return res;
     }
 
-    private static void dfs(int[][] matrix, int[][] visited, int y, int x, int ocean) {
-        int val = matrix[y][x];
-        int visitedOcean = visited[y][x];
+    private static void dfs(int[][] matrix, int[][] visited, int row, int col, int ocean) {
+        int val = matrix[row][col];
+        int visitedOcean = visited[row][col];
         if (visitedOcean == ocean || visitedOcean == -3) return;
-        visited[y][x] = visitedOcean < 0 ? -3 : ocean;
+        visited[row][col] = visitedOcean < 0 ? -3 : ocean;
 
-        boolean left = x > 0 && matrix[y][x-1] >= val;
-        boolean right = x < matrix[0].length -1 && matrix[y][x+1] >= val;
-        boolean up = y > 0 && matrix[y-1][x] >= val;
-        boolean down = y < matrix.length - 1 && matrix[y+1][x] >= val;
+        boolean left = col > 0 && matrix[row][col-1] >= val;
+        boolean right = col < matrix[0].length -1 && matrix[row][col+1] >= val;
+        boolean up = row > 0 && matrix[row-1][col] >= val;
+        boolean down = row < matrix.length - 1 && matrix[row+1][col] >= val;
 
-        if (left) dfs(matrix, visited, y, x-1, ocean);
-        if (right) dfs(matrix, visited, y, x+1, ocean);
-        if (up) dfs(matrix, visited, y-1, x, ocean);
-        if (down) dfs(matrix, visited, y+1, x, ocean);
+        if (left) dfs(matrix, visited, row, col-1, ocean);
+        if (right) dfs(matrix, visited, row, col+1, ocean);
+        if (up) dfs(matrix, visited, row-1, col, ocean);
+        if (down) dfs(matrix, visited, row+1, col, ocean);
     }
 
     //Space is O(min(m,n)) or may be diagonal
