@@ -28,7 +28,7 @@ For list of all pnc backtrack
 Palindrome substring - Manacher algo
 
 BST do inorder iteratively with stack
-Inorder in BST is ascending order and postorder is descending
+Inorder in BST is ascending order and modify inorder for descending
 For nary tree serialize deserialize need children count
 For binary tree serialize deserialize need null values
 For preorder subtree need # at start
@@ -106,7 +106,7 @@ Twitter (News Feed) https://www.youtube.com/watch?v=KmAyPUv9gOY
     - A tweet updates the followers timeline in redis (precomputing). Based on a frequently logged in user too.
     - 3 Redis instances have duplicated data for high availability
     - A celeb tweet appears on page refresh(from DB rather than Redis) so that comment on the tweet appears in the right order due to the high volume of followers
-        The order would get destroyed if redis is used for celebs, cuz updating the follower's timeline would take and due to that a comment on a celeb tweet may 
+        The order would get destroyed if redis is used for celebs, cuz updating the follower's timeline would take time and due to that a comment on a celeb tweet may 
         appear before the celeb tweet                      
 - Timeline - User and Home
     - User timeline is simple 
@@ -130,11 +130,22 @@ Instagram (News Feed)
     
 Whatsapp (Chat service)
 - https://www.youtube.com/watch?v=vvhC64hQZMk
+- Auth Service/Profile service
 - One-one chat
-- UserA over TCP -> to gateway -> sessions service which has the user to gateway mapping -> Queue -> Gateway(Web socket) -> UserB
-- Group chat - also has group service for group to user id mapping       
+    - UserA over TCP -> to gateway -> LB -> sessions service which has the user to gateway mapping(cache) -> Queue -> Gateway(Web socket) -> UserB
+- Sent, delivered and read receipts
+- Online/Last seen    
+- Group chat 
+    - has group service for group to user id mapping
+    - Group limit as fanning out can be expensive
+    - Group id based consistent hashing
+    - failed sending/ Retry message failures
+- Chat Backup           
+- Image service
+- Email/SMS service
 
-Tinder 
+
+Tinder (Dating)
 https://www.youtube.com/watch?v=tndzLznxq40&list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX&index=9
 + Store Profiles
     - No of images req?
@@ -155,6 +166,25 @@ https://www.youtube.com/watch?v=tndzLznxq40&list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPy
     
 - Direct messaging    
 
+
+Uber (Ride share)
+ - https://www.youtube.com/watch?v=umWABit-wbk
+ - Booking a cab
+    - Mapping drivers to riders, cost, time calculations
+    - Make payments
+    - Confirming request with driver
+    - Confirmation sent to customer
+ - Mapping (DISCO)
+    lat long, circle drawn, by road time and cost calculation done   
+ - Payment
+ - Messaging/Call
+ - Logging service
+ - Surge pricing
+ - Fraud detection
+ - ML stuff
+ 
+
+
 Amazon (Shopping)
 
 - Availability > consistency
@@ -162,7 +192,42 @@ Amazon (Shopping)
     - Increase servers for availability but maintaining the replicas consistency is difficult
     - Achieving high availability and consistency is difficult
 
-Netflix
+
+Netflix (Streaming service) https://www.youtube.com/watch?v=psQzyFfsUGU
+- Uploading content
+    - Transcoding - Videos need to be created for different formats and resolutions for different devices approx 1200 different versions are created
+        - Video validation
+        - Divide the original content into chunks, put them into kafka, merge them for different formats and resolutions (concurrent async workers)
+        - Store them finally in S3
+    - Adaptive bit rate streaming is used to fetch these different formats
+    - Different versions are pushed to the Open Connect around the world
+
+- Zuul as gateway
+- DB both mysql and cassandra
+    MySql - for billing, user, transaction for ACID
+        - Writes happens to two masters, then it syncs to slaves
+        - Reads happen from slaves
+    Cassandra - for user activity, other big data etc 
+                When user activity data increased, they compresses old data 
+    
+- Live Anaylsis
+    - Kafka and Chukwa
+    - Events such as viewing activity, error logs etc are sent thru kafka
+    - ELK used to display search and display activities
+    
+- Recommendations
+    - Spark n ML    
+    - Collaborative filtering - What a similar user watched 
+    - Content based filtering - What content type the user is interested in from the past
+
+       
+Tiny URL
+
+
+    
+Maximus (upload and download)
+
+
 
 
 HTTP - is synchronous, client to server protocol
@@ -198,6 +263,7 @@ Sharding (DB servers)
     Master slave configs provide better availability and consistency as writes happen only to master and then it fans out, read can happen anywhere
     Drawbacks - Joins, Shards are fixed, hierarchical sharding further divides shards into smaller shards
 
+Load balancing helps you scale horizontally across an ever-increasing number of servers
 
 CAP theorem
 Consistency - Data should be same in read for all users
@@ -205,8 +271,13 @@ Consistency - Data should be same in read for all users
               Consistency is more important than availability for DBs
 Availability - Always on               
                More important than consistency for Computational servers
-Partition tolerance - 
-
+Partition tolerance - cluster functions even when some nodes can't communicate with each other
+    CA - data is consistent between all nodes - as long as all nodes are online 
+       - and you can read/write from any node and be sure that the data is the same, 
+       - but if you ever develop a partition between nodes, the data will be out of sync (and won't re-sync once the partition is resolved).
+    CP - data is consistent between all nodes, and maintains partition tolerance (preventing data desync) by becoming unavailable when a node goes down.
+    AP - nodes remain online even if they can't communicate with each other and will resync data once the partition is resolved,
+       - but you aren't guaranteed that all nodes will have the same data (either during or after the partition)
                  
 Server crash use heartbeats to the service not box and restart nodes
 
@@ -214,6 +285,19 @@ Pessimistic concurrency lock - Lock the resource when accessed
                                 Helpful for multiple simultaneous access  
 Optimistic concurrency lock - No locks, while committing a change check whether the previous read state == current read state 
                               Helpful for infrequent multiple simultaneous access  
+
+- Idempotent - No matter how many times you call the operation, the result will be the same.
+
+ACID - Atomicity, Consistency, Isolation, and Durability
+
+- Kafka vs Message queues
+    - https://hackernoon.com/a-super-quick-comparison-between-kafka-and-message-queues-e69742d855a8
+    - https://kafka.apache.org/intro.html
+    - Messaging traditionally has two models: queuing and publish-subscribe
+    - queues aren't multi-subscriber—once one process reads the data it's gone
+    - Publish-subscribe allows you broadcast data to multiple processes, but has no way of scaling processing since every message goes to every subscriber
+    - Kafka's model is that every topic has both these properties—it can scale processing and is also multi-subscriber
+    - Kafka messages are retained even after they are consumed
 
 
 
@@ -278,7 +362,7 @@ String builder - is not synchronized, twice as fast
 
 Final
     classes - Cannot be inherited...This can confer security eg. java.lang.system
-    methods - cannot be overriden
+    methods - cannot be overridden
     variables - are constant
     
 Generics 
@@ -353,3 +437,9 @@ Agile methodology uses scrum framework
 Sprint is like 2 weeks or 4 weeks development cycle and shippable product
 Daily Scrum meetings is a standup meeting either daily, where what has been completed, what being worked on and issues are discussed 
 A sprint has many daily scrums
+
+Experience related question:
+- Memory issues
+- Performance issues
+- Commodity code issue
+- Code review

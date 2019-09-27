@@ -1045,8 +1045,257 @@ public class Test {
         
 //////////// Backspace compare
 //        System.out.println(backspaceCompare("ab##","c#d#"));
-        
 
+//////////// Min stack
+//        MinStack.push(-2);
+//        MinStack.push(0);
+//        MinStack.push(-3);
+//        MinStack.getMin();   // Returns -3.
+//        MinStack.pop();
+//        MinStack.top();      // Returns 0.
+//        MinStack.getMin();   // Returns -2.
+
+
+//////////// Word ladder
+//        System.out.println(ladderLengthBFS("hit","cog",Arrays.asList("hot","dot","dog","lot","log","cog")));
+//        System.out.println(ladderLengthBiBFS("hit","cog",Arrays.asList("hot","dot","dog","lot","log","cog")));
+
+//////////// LFU cache
+//        LFUCache cache = new LFUCache( 2 /* capacity */ );
+
+//        cache.put(1, 1);
+//        cache.put(2, 2);
+//        System.out.println(cache.get(1));       // returns 1
+//        cache.put(3, 3);    // evicts key 2
+//        System.out.println(cache.get(2));       // returns -1 (not found)
+//        System.out.println(cache.get(3));       // returns 3.
+//        cache.put(4, 4);    // evicts key 1.
+//        System.out.println(cache.get(1));       // returns -1 (not found)
+//        System.out.println(cache.get(3));       // returns 3
+//        System.out.println(cache.get(4));       // returns 4
+
+//        cache.put(1, 1);
+//        cache.put(2, 2);
+//        System.out.println(cache.get(1));
+//        System.out.println(cache.get(2));
+//        System.out.println(cache.get(2));
+//        System.out.println(cache.get(1));
+//        cache.put(3, 3);
+//        cache.put(2, 2);
+
+
+    }
+
+
+    static class LFUCache {
+        HashMap<Integer, Integer> keyToVal;
+        HashMap<Integer, Integer> keyToCount;
+        HashMap<Integer, LinkedHashSet<Integer>> countToLRUKeys;
+        int cap;
+        int min = -1;
+
+        public LFUCache(int capacity) {
+            cap = capacity;
+            keyToVal = new HashMap<>();
+            keyToCount = new HashMap<>();
+            countToLRUKeys = new HashMap<>();
+            countToLRUKeys.put(1, new LinkedHashSet<>());
+        }
+
+        public int get(int key) {
+            if (!keyToVal.containsKey(key))
+                return -1;
+            int count = keyToCount.get(key);
+            keyToCount.put(key, count + 1);
+            countToLRUKeys.get(count).remove(key);
+            if (count == min && countToLRUKeys.get(count).size() == 0)
+                min++;
+            if (!countToLRUKeys.containsKey(count + 1))
+                countToLRUKeys.put(count + 1, new LinkedHashSet<>());
+            countToLRUKeys.get(count + 1).add(key);
+            return keyToVal.get(key);
+        }
+
+        public void put(int key, int value) {
+            if (cap <= 0)
+                return;
+            if (keyToVal.containsKey(key)) {
+                keyToVal.put(key, value);
+                get(key);   // inrease frequency when same value is put
+                return;
+            }
+            if (keyToVal.size() >= cap) {
+                int evit = countToLRUKeys.get(min).iterator().next();// this removes the least used element
+                countToLRUKeys.get(min).remove(evit);
+                keyToVal.remove(evit);
+            }
+            keyToVal.put(key, value);
+            keyToCount.put(key, 1);
+            min = 1;
+            countToLRUKeys.get(1).add(key);
+        }
+    }
+
+    public static int ladderLengthBiBFS(String beginWord, String endWord, List<String> wordList) {
+
+        if (!wordList.contains(endWord))
+            return 0;
+
+        HashMap<String, ArrayList<String>> allComboDict = new HashMap<String, ArrayList<String>>();
+
+        // Since all words are of same length.
+        int wordLength = beginWord.length();
+
+        wordList.forEach(
+                word -> {
+                    for (int i = 0; i < wordLength; i++) {
+                        // Key is the generic word
+                        // Value is a list of words which have the same intermediate generic word.
+                        String newWord = word.substring(0, i) + '*' + word.substring(i + 1, wordLength);
+                        ArrayList<String> transformations =
+                                allComboDict.getOrDefault(newWord, new ArrayList<String>());
+                        transformations.add(word);
+                        allComboDict.put(newWord, transformations);
+                    }
+                });
+
+        Queue<Pair<String, Integer>> Q_begin = new LinkedList<Pair<String, Integer>>();
+        Queue<Pair<String, Integer>> Q_end = new LinkedList<Pair<String, Integer>>();
+        Q_begin.add(new Pair(beginWord, 1));
+        Q_end.add(new Pair(endWord, 1));
+
+        HashMap<String, Integer> visitedBegin = new HashMap<String, Integer>();
+        HashMap<String, Integer> visitedEnd = new HashMap<String, Integer>();
+        visitedBegin.put(beginWord, 1);
+        visitedEnd.put(endWord, 1);
+
+        while (!Q_begin.isEmpty() && !Q_end.isEmpty()) {
+
+            // One hop from begin word
+            int ans = visitWordNode(Q_begin, visitedBegin, visitedEnd, allComboDict, wordLength);
+            if (ans > -1)
+                return ans;
+
+            // One hop from end word
+            ans = visitWordNode(Q_end, visitedEnd, visitedBegin, allComboDict, wordLength);
+            if (ans > -1)
+                return ans;
+
+        }
+
+        return 0;
+    }
+
+    private static int visitWordNode(
+            Queue<Pair<String, Integer>> queue,
+            HashMap<String, Integer> visited,
+            HashMap<String, Integer> othersVisited, HashMap<String, ArrayList<String>> allComboDict, int wordLength) {
+        Pair<String, Integer> node = queue.remove();
+        String word = node.getKey();
+        int level = node.getValue();
+
+        for (int i = 0; i < wordLength; i++) {
+            String newWord = word.substring(0, i) + '*' + word.substring(i + 1, wordLength);
+
+            for (String adjacentWord : allComboDict.getOrDefault(newWord, new ArrayList<String>())) {
+                // If at any point if we find what we are looking for
+                // i.e. the end word - we can return with the answer.
+                if (othersVisited.containsKey(adjacentWord))
+                    return level + othersVisited.get(adjacentWord);
+
+                if (!visited.containsKey(adjacentWord)) {
+                    visited.put(adjacentWord, level + 1);
+                    queue.add(new Pair(adjacentWord, level + 1));
+                }
+            }
+        }
+        return -1;
+    }
+
+    public static int ladderLengthBFS(String beginWord, String endWord, List<String> wordList) {
+
+        // Since all words are of same length.
+        int L = beginWord.length();
+
+        // Dictionary to hold combination of words that can be formed,
+        // from any given word. By changing one letter at a time.
+        HashMap<String, ArrayList<String>> allComboDict = new HashMap<String, ArrayList<String>>();
+
+        wordList.forEach(
+                word -> {
+                    for (int i = 0; i < L; i++) {
+                        // Key is the generic word
+                        // Value is a list of words which have the same intermediate generic word.
+                        String newWord = word.substring(0, i) + '*' + word.substring(i + 1, L);
+                        ArrayList<String> transformations =
+                                allComboDict.getOrDefault(newWord, new ArrayList<String>());
+                        transformations.add(word);
+                        allComboDict.put(newWord, transformations);
+                    }
+                });
+
+        // Queue for BFS
+        Queue<Pair<String, Integer>> Q = new LinkedList<Pair<String, Integer>>();
+        Q.add(new Pair(beginWord, 1));
+
+        // Visited to make sure we don't repeat processing same word.
+        HashMap<String, Boolean> visited = new HashMap<String, Boolean>();
+        visited.put(beginWord, true);
+
+        while (!Q.isEmpty()) {
+            Pair<String, Integer> node = Q.remove();
+            String word = node.getKey();
+            int level = node.getValue();
+            for (int i = 0; i < L; i++) {
+
+                // Intermediate words for current word
+                String newWord = word.substring(0, i) + '*' + word.substring(i + 1, L);
+
+                // Next states are all the words which share the same intermediate state.
+                for (String adjacentWord : allComboDict.getOrDefault(newWord, new ArrayList<String>())) {
+                    // If at any point if we find what we are looking for
+                    // i.e. the end word - we can return with the answer.
+                    if (adjacentWord.equals(endWord)) {
+                        return level + 1;
+                    }
+                    // Otherwise, add it to the BFS Queue. Also mark it visited
+                    if (!visited.containsKey(adjacentWord)) {
+                        visited.put(adjacentWord, true);
+                        Q.add(new Pair(adjacentWord, level + 1));
+                    }
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    static class MinStack {
+        static int min = Integer.MAX_VALUE;
+        static Stack<Integer> stack = new Stack<Integer>();
+        public static void push(int x) {
+            // only push the old minimum value when the current
+            // minimum value changes after pushing the new value x
+            if(x <= min){
+                stack.push(min);
+                min=x;
+            }
+            stack.push(x);
+        }
+
+        public static void pop() {
+            // if pop operation could result in the changing of the current minimum value,
+            // pop twice and change the current minimum value to the last minimum value.
+            if(stack.pop() == min) min=stack.pop();
+        }
+
+        public static int top() {
+            return stack.peek();
+        }
+
+        public static int getMin() {
+            return min;
+        }
     }
 
     public static boolean backspaceCompare(String S, String T) {
@@ -1149,26 +1398,26 @@ public class Test {
         int cols = matrix[0].length;
         int[][] dist= new int[rows][cols];
 
-        Queue<Pair> q=new LinkedList<>();
+        Queue<o1Pair> q=new LinkedList<>();
         for (int i = 0; i < rows; i++) {
             Arrays.fill(dist[i], Integer.MAX_VALUE-10000);
             for (int j = 0; j < cols; j++)
                 if (matrix[i][j] == 0) {
                     dist[i][j] = 0;
-                    q.offer(new Pair(i, j)); //Put all 0s in the queue.
+                    q.offer(new o1Pair(i, j)); //Put all 0s in the queue.
                 }
         }
 
         int[][] dir=new int[][]{ { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
         while (!q.isEmpty()) {
-            Pair curr = q.poll();
+            o1Pair curr = q.poll();
 
             for (int i = 0; i < 4; i++) {
                 int new_r = curr.first + dir[i][0], new_c = curr.second + dir[i][1];
                 if (new_r >= 0 && new_c >= 0 && new_r < rows && new_c < cols) {
                     if (dist[new_r][new_c] > dist[curr.first][curr.second] + 1) {
                         dist[new_r][new_c] = dist[curr.first][curr.second] + 1;
-                        q.offer(new Pair(new_r, new_c ));
+                        q.offer(new o1Pair(new_r, new_c ));
                     }
                 }
             }
@@ -1176,10 +1425,10 @@ public class Test {
         return dist;
     }
 
-    static class Pair{
+    static class o1Pair{
         int first;
         int second;
-        Pair(int i,int j) {
+        o1Pair(int i,int j) {
             first = i;
             second = j;
         }
@@ -4599,19 +4848,19 @@ public class Test {
     }
 
     public static int maxDepthStack(TreeNode root) {
-        LinkedList<javafx.util.Pair<TreeNode, Integer>> stack = new LinkedList<>();
+        LinkedList<Pair<TreeNode, Integer>> stack = new LinkedList<>();
         if (root != null) {
-            stack.add(new javafx.util.Pair(root, 1));
+            stack.add(new Pair(root, 1));
         }
         int depth = 0;
         while (!stack.isEmpty()) {
-            javafx.util.Pair<TreeNode, Integer> current = stack.pollLast();
+            Pair<TreeNode, Integer> current = stack.pollLast();
             root = current.getKey();
             int current_depth = current.getValue();
             if (root != null) {
                 depth = Math.max(depth, current_depth);
-                stack.add(new javafx.util.Pair(root.left, current_depth + 1));
-                stack.add(new javafx.util.Pair(root.right, current_depth + 1));
+                stack.add(new Pair(root.left, current_depth + 1));
+                stack.add(new Pair(root.right, current_depth + 1));
             }
         }
         return depth;

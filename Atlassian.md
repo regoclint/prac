@@ -5,7 +5,7 @@ How have you had to have difficult conversations and what was your approach to t
 - Pna Run time optimisation, explain to dev, then manager then my manager
 - scalability of Pna
 - Sudha content aux code duplication
-- polling based on a condition
+- Activity polling based on a condition
 
 
 How have you resolved conflict situations?
@@ -23,15 +23,22 @@ Eg.
 How is your mentality ‘user centered’?
 How have you put the customer first? What trade-offs did you have to make to do this? For example: Ship late, but ship right?
 
--Response times
+-Response times, 
+-customer behaviours through clickStream
 -Loading indicators during n/w calls
+-Localization
 -Indicators or info symbols to explain
 
 Eg.
 
 4. Play as a team
 How have you helped make a team/individual more successful if they were not performing well? Examples of when you have had to put the goals of the team above personal ambitions.
-Eg.
+
+mock simulators
+Admin ui development
+formatter
+spring boot live reload
+h2 db
 
 
 5. Be the change you seek
