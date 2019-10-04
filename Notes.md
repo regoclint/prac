@@ -1,5 +1,8 @@
 **DS & Algos**
 
+DS
+String, Array, ArrayList, LinkedList, PQ(Heap), TreeSet, 
+
 Red black tree properties
 
 Graph representations

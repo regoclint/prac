@@ -1083,7 +1083,194 @@ public class Test {
 //        cache.put(3, 3);
 //        cache.put(2, 2);
 
+//////////// Critical connections
+//        Bridges bridges=new Bridges();
+//        System.out.println(bridges.findBridges(5,new int[][]{{1, 2}, {1, 3}, {3, 4}, {1, 4}, {4, 5}}));
+//        System.out.println(bridges.findBridges(9,new int[][]{{1, 2}, {1, 3}, {2, 3}, {3, 4}, {3, 6}, {4, 5}, {6, 7}, {6, 9}, {7, 8}, {8, 9}}));
 
+//////////// Find closest fibonacci index
+//        TreeMap<Integer,Integer> fibToIndex=new TreeMap<>();
+//        System.out.println(findClosestFibTreeMap(5, fibToIndex));
+//        System.out.println(findClosestFibTreeMap(14, fibToIndex));
+
+
+//////////// Subarray with k distinct characters
+//        System.out.println(kDistinctSubstringsCount("pqrpqrq1",3));
+//        System.out.println(kDistinctSubstringsCount("aabab",3));
+
+////////////  Path With Maximum Minimum Value
+//        System.out.println(maximumMinimumPath(new int[][]{{5,4,5},{1,2,6},{7,4,6}}));
+
+//////////// All paths from source to target
+        System.out.println(allPathsSourceTarget(new int[][]{{1,2},{3},{3},{}}, 0));
+
+    }
+
+    public static List<List<Integer>> allPathsSourceTarget(int[][] graph, int node) {
+        int N = graph.length;
+        List<List<Integer>> ans = new ArrayList();
+        if (node == N - 1) {
+            List<Integer> path = new ArrayList();
+            path.add(N-1);
+            ans.add(path);
+            return ans;
+        }
+
+        for (int nei: graph[node]) {
+            for (List<Integer> path: allPathsSourceTarget(graph, nei)) {
+                path.add(0, node);
+                ans.add(path);
+            }
+        }
+        return ans;
+    }
+
+
+    public static int maximumMinimumPath(int[][] A) {
+        int[][] directions = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+        int n = A.length;
+        int m = A[0].length;
+        boolean[][] visited = new boolean[n][m];
+
+        // in the BFS approach, for each step, we are interested in getting the maximum min that we have seen so far, thus we reverse the ordering in the pq(descending)
+        Queue<int[]> pq = new PriorityQueue<>((a,b) -> b[2] - a[2]);
+
+        pq.offer(new int[]{0, 0, A[0][0]});
+
+        // BFS
+        while (!pq.isEmpty()) {
+            int[] cell = pq.poll();
+            int row = cell[0];
+            int col = cell[1];
+
+            if (row == n - 1 && col == m - 1) {
+                return cell[2];
+            }
+
+            visited[row][col] = true;
+
+            for (int[] dir : directions) {
+                int nextRow = row + dir[0];
+                int nextCol = col + dir[1];
+
+                if (nextRow < 0 || nextRow >= n || nextCol < 0 || nextCol >= m || visited[nextRow][nextCol]) continue;
+
+                // we are keeping track of the min element that we have seen until now
+                pq.offer(new int[]{nextRow, nextCol, Math.min(cell[2], A[nextRow][nextCol])});
+            }
+        }
+        return -1;
+    }
+
+
+    //Do???
+    public static int kDistinctSubstringsCount(String s, int k) {
+        int start = 0, end = 0, distinctCount = 0, ansCount = 0, currentAns=0;
+        int[] characterCount = new int[128];
+        while (end < s.length()) {
+            if (characterCount[s.charAt(end++)]++ == 0) distinctCount++;
+            if (distinctCount == k) {
+//                System.out.println(s.substring(start, end));
+                if (end - start > k) // >string length
+                {
+                    ansCount += currentAns+1;
+                    currentAns++;
+                }
+                else
+                {
+                    ansCount++;
+                    currentAns++;
+                }
+            }
+
+            if (end==s.length() && distinctCount > k) {
+                Arrays.fill(characterCount, 0);
+                end = start = end - k;
+                distinctCount = 0;
+                currentAns=0;
+            }
+        }
+        return ansCount;
+    }
+
+
+    static int maxInTreeMap=0;
+
+    //TreeMap.lastKey() goes over the right half of the tree, so it's not O(1)
+    public static int findClosestFibTreeMap(int num, TreeMap<Integer,Integer> fibToIndex) {
+        int prev = 1, curr = 1, index = 3;
+
+        if (num <= maxInTreeMap) {
+            if (num - fibToIndex.floorKey(num) <= fibToIndex.ceilingKey(num) - num)
+                return fibToIndex.get(fibToIndex.floorKey(num));
+            else
+                return fibToIndex.get(fibToIndex.ceilingKey(num));
+
+        } else if (fibToIndex.size() > 0) {
+            prev = fibToIndex.floorKey(maxInTreeMap - 1);
+            curr = maxInTreeMap;
+            index = fibToIndex.get(maxInTreeMap);
+        }
+
+        while (curr <= num) {
+            fibToIndex.put(curr, index);
+            maxInTreeMap = curr;
+            int temp = curr;
+            curr = prev + curr;
+            prev = temp;
+            index++;
+        }
+
+        if (num - prev <= curr - prev)
+            return index - 1;
+        else
+            return index;
+    }
+
+
+    //Tarjan's bridge-finding algorithm
+    public static class Bridges {
+        private int id;
+        private int[] visited;
+        private int[] low;
+        private List<Integer>[] graph;
+
+        public List<List<Integer>> findBridges(int n, int[][] edges) {
+            List<List<Integer>> bridges = new ArrayList<>();
+            graph = buildGraph(n, edges);
+            visited = new int[n + 1];
+            low = new int[n + 1];
+            id = 1;
+            visit(1, -1, bridges);
+            return bridges;
+        }
+
+        private void visit(int curr, int parent, List<List<Integer>> bridges) {
+            low[curr] = visited[curr] = id++;
+            for (int next : graph[curr]) {
+                if (next == parent) continue;
+                if (visited[next] == 0) { // not visited
+                    visit(next, curr, bridges);
+                    low[curr] = Math.min(low[curr], low[next]); //making sure on the way back to consolidate to a cycle
+                    if (visited[curr] < low[next]) // this means next doesnt belong to current's cycle, so there's a bridge
+                        bridges.add(Arrays.asList(curr, next));
+
+                } else
+                    low[curr] = Math.min(low[curr], visited[next]); // consolidating cycles
+            }
+        }
+
+        private List<Integer>[] buildGraph(int n, int[][] edges) {
+            List<Integer>[] graph = new List[n + 1];
+            Arrays.setAll(graph, (i) -> new ArrayList<>());
+            for (int[] edge : edges) {
+                int u = edge[0];
+                int v = edge[1];
+                graph[u].add(v);
+                graph[v].add(u);
+            }
+            return graph;
+        }
     }
 
 
