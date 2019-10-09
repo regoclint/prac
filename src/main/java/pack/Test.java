@@ -691,6 +691,7 @@ public class Test {
 //        int[][] edges=new int[][]{{0,1},{1,2},{0,2},{3,4}};
 //        int[][] edges=new int[][]{{2,3},{1,2},{1,3}};
 //        int[][] edges=new int[][]{{0,3},{0,2},{0,1}};
+//        int[][] edges=new int[][]{{0,3},{0,2}};
 //        countComponentsDFS(4,edges);
 //        System.out.println(connectedComponentsCount);
 //        System.out.println(countComponentsUnionFind(4,edges));
@@ -784,7 +785,7 @@ public class Test {
 
 //////////// Copy List with Random pointer
 //        RandomListNode l1=new RandomListNode(1);
-//        RandomListNode l2=new RandomListNode(2);
+//        RandomListNode l2=new RandomListNode(2);Josef John
 //        RandomListNode l3=new RandomListNode(3);
 //        l1.next=l2;
 //        l1.random=l3;
@@ -1088,6 +1089,27 @@ public class Test {
 //        System.out.println(bridges.findBridges(5,new int[][]{{1, 2}, {1, 3}, {3, 4}, {1, 4}, {4, 5}}));
 //        System.out.println(bridges.findBridges(9,new int[][]{{1, 2}, {1, 3}, {2, 3}, {3, 4}, {3, 6}, {4, 5}, {6, 7}, {6, 9}, {7, 8}, {8, 9}}));
 
+//        CriticalConnections criticalConnections=new CriticalConnections();
+//        List<List<Integer>> lists=new ArrayList<>();
+//        lists.add(Arrays.asList(1,2));
+//        lists.add(Arrays.asList(1,3));
+//        lists.add(Arrays.asList(3,4));
+//        lists.add(Arrays.asList(1,4));
+//        lists.add(Arrays.asList(4,5));
+
+//        lists.add(Arrays.asList(1,2));
+//        lists.add(Arrays.asList(1,3));
+//        lists.add(Arrays.asList(2,3));
+//        lists.add(Arrays.asList(3,4));
+//        lists.add(Arrays.asList(3,6));
+//        lists.add(Arrays.asList(4,5));
+//        lists.add(Arrays.asList(6,7));
+//        lists.add(Arrays.asList(6,9));
+//        lists.add(Arrays.asList(7,8));
+//        lists.add(Arrays.asList(8,9));
+
+//        System.out.println(criticalConnections.criticalConnections(9,lists));
+
 //////////// Find closest fibonacci index
 //        TreeMap<Integer,Integer> fibToIndex=new TreeMap<>();
 //        System.out.println(findClosestFibTreeMap(5, fibToIndex));
@@ -1098,14 +1120,182 @@ public class Test {
 //        System.out.println(kDistinctSubstringsCount("pqrpqrq1",3));
 //        System.out.println(kDistinctSubstringsCount("aabab",3));
 
+//        System.out.println(subarraysWithKDistinct(new int[]{1,2,1,2,3},2));
+//        System.out.println(subarraysWithKDistinct(new int[]{1,2,1,3,4},3));
+//        System.out.println(subarraysWithKDistinct(new int[]{1,1,1,3,4,4,4},3));
+//        System.out.println(subarraysWithKDistinct(new int[]{1,1,3,4,4,4},3));
+
 ////////////  Path With Maximum Minimum Value
 //        System.out.println(maximumMinimumPath(new int[][]{{5,4,5},{1,2,6},{7,4,6}}));
 
 //////////// All paths from source to target
-        System.out.println(allPathsSourceTarget(new int[][]{{1,2},{3},{3},{}}, 0));
+//        System.out.println(allPathsSourceTarget(new int[][]{{1,2},{3},{3},{}}, 0));
+
+//////////// construct BST and find distance
+//        System.out.println(bstDistance(new int[]{3,1,2,5,4,6},1,6));
+
+//////////// Max score sight seeing
+//        System.out.println(maxScoreSightSeeingPair(new int[]{8,1,5,2,6}));
+
+//////////// Connecting cities with Min cost,
+//        MinCostMST minCostMST=new MinCostMST();
+//        System.out.println(minCostMST.minimumCost(3,new int[][]{{1,2,5},{1,3,6},{2,3,1}}));
+
+//////////// Prison cells after n days
+        int[] input=new int[]{0,1,0,1,1,0,0,1};
+        int[] output=new int[input.length];
+        output=prisonAfterNDays(input,8);
 
     }
 
+    //Leetcode solution stores the cycle and uses it for further iterations
+    public static int[] prisonAfterNDays(int[] cells, int N) {
+
+        if (N==0)
+            return cells;
+        while (N>0) {
+            int prevOutputValue = 0, currentOutputValue = 0;
+
+            for (int i = 1; i < cells.length - 1; i++) {
+                if (cells[i - 1] == cells[i + 1])
+                    currentOutputValue = 1;
+                else
+                    currentOutputValue = 0;
+
+                cells[i - 1] = prevOutputValue;
+                prevOutputValue = currentOutputValue;
+            }
+
+            cells[cells.length - 2] = prevOutputValue;
+            cells[cells.length - 1] = 0;
+            N--;
+        }
+        return cells;
+    }
+
+    static class MinCostMST {
+
+        int[] parent;
+        int n;
+
+        private void unionMST(int x, int y) {
+            int px = findMST(x);
+            int py = findMST(y);
+
+            if (px != py) {
+                parent[px] = py;
+                n--;
+            }
+        }
+
+        private int findMST(int x) {
+            if (parent[x] == x)
+                return parent[x];
+
+            parent[x] = findMST(parent[x]); // path compression
+            return parent[x];
+        }
+
+        public int minimumCost(int N, int[][] connections) {
+            parent = new int[N + 1];
+            n = N;
+            for (int i = 0; i <= N; i++) {
+                parent[i] = i;
+            }
+
+            Arrays.sort(connections, (a, b) -> (a[2] - b[2]));
+
+            int res = 0;
+
+            for (int[] c : connections) {
+                int x = c[0], y = c[1];
+                if (findMST(x) != findMST(y)) {
+                    res += c[2];
+                    unionMST(x, y);
+                }
+            }
+
+            return n == 1 ? res : -1;
+        }
+    }
+
+    public static int maxScoreSightSeeingPair(int[] A) {
+        int res = 0;
+        for (int j = 1, max_i = A[0] - 1; j < A.length; ++j, --max_i) {
+            res = (res > A[j] + max_i) ? res : A[j] + max_i;
+            max_i = (max_i > A[j]) ? max_i : A[j];
+        }
+        return res;
+    }
+
+    public static int bstDistance(int[] nums, int node1, int node2) {
+        TreeNode root = buildBST(nums, node1, node2);
+        if (root == null) return -1;
+        TreeNode lca = lca(root, node1, node2);
+        return getDistance(lca, node1) + getDistance(lca, node2);
+    }
+
+    private static int getDistance(TreeNode src, int dest) {
+        if (src.val == dest) return 0;
+        TreeNode node = src.left;
+        if (src.val < dest) {
+            node = src.right;
+        }
+        return 1 + getDistance(node, dest);
+    }
+
+    private static TreeNode lca(TreeNode root, int node1, int node2) {
+        while (true) {
+            if (root.val > node1 && root.val > node2) {
+                root = root.left;
+            } else if (root.val < node1 && root.val < node2) {
+                root = root.right;
+            } else {
+                return root;
+            }
+        }
+    }
+
+    private static TreeNode buildBST(int[] nums, int node1, int node2) {
+        TreeNode root = null;
+        boolean found1 = false;
+        boolean found2 = false;
+        for (int val : nums) {
+            if (val == node1) found1 = true;
+            if (val == node2) found2 = true;
+
+            TreeNode node = new TreeNode(val);
+            if (root == null) {
+                root = node;
+                continue;
+            }
+            addToBST(root, node);
+        }
+        if (!found1 || !found2) return null;
+        return root;
+    }
+
+    private static void addToBST(TreeNode root, TreeNode node) {
+        for (TreeNode curr = root; true; ) {
+            if (curr.val > node.val) {
+                if (curr.left == null) {
+                    curr.left = node;
+                    break;
+                } else {
+                    curr = curr.left;
+                }
+            } else {
+                if (curr.right == null) {
+                    curr.right = node;
+                    break;
+                } else {
+                    curr = curr.right;
+                }
+            }
+        }
+    }
+
+    //Complexity O(2^N N^2).????
     public static List<List<Integer>> allPathsSourceTarget(int[][] graph, int node) {
         int N = graph.length;
         List<List<Integer>> ans = new ArrayList();
@@ -1124,7 +1314,6 @@ public class Test {
         }
         return ans;
     }
-
 
     public static int maximumMinimumPath(int[][] A) {
         int[][] directions = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
@@ -1162,8 +1351,56 @@ public class Test {
         return -1;
     }
 
+    //Do????
+    public static int subarraysWithKDistinct(int[] A, int K) {
+        Window window1 = new Window();
+        Window window2 = new Window();
+        int ans = 0, left1 = 0, left2 = 0;
 
-    //Do???
+        for (int right = 0; right < A.length; ++right) {
+            int x = A[right];
+            window1.add(x);
+            window2.add(x);
+
+            while (window1.getDistictCount() > K)
+                window1.remove(A[left1++]);
+            while (window2.getDistictCount() >= K)
+                window2.remove(A[left2++]);
+
+            ans += left2 - left1;
+        }
+
+        return ans;
+    }
+
+
+    static class Window {
+        Map<Integer, Integer> count;
+        int distictCount;
+
+        Window() {
+            count = new HashMap();
+            distictCount = 0;
+        }
+
+        void add(int x) {
+            count.put(x, count.getOrDefault(x, 0) + 1);
+            if (count.get(x) == 1)
+                distictCount++;
+        }
+
+        void remove(int x) {
+            count.put(x, count.get(x) - 1);
+            if (count.get(x) == 0)
+                distictCount--;
+        }
+
+        int getDistictCount() {
+            return distictCount;
+        }
+    }
+
+    //doesnt work
     public static int kDistinctSubstringsCount(String s, int k) {
         int start = 0, end = 0, distinctCount = 0, ansCount = 0, currentAns=0;
         int[] characterCount = new int[128];
@@ -1227,6 +1464,65 @@ public class Test {
             return index;
     }
 
+    static class CriticalConnections {
+        int edgeIndex = 0;
+        int[] to;
+        int[] next;
+        int[] head;
+        int[] low;
+        int[] visited;
+        int time = -1;
+        List<List<Integer>> res = new ArrayList<>();
+
+        private void addEdge(int u, int v) {
+            to[edgeIndex] = v;
+            next[edgeIndex] = head[u];
+            head[u] = edgeIndex ++;
+        }
+
+        public List<List<Integer>> criticalConnections(int n, List<List<Integer>> connections) {
+            low = new int[n+1];
+            visited = new int[n+1];
+            int m = connections.size();
+            to = new int[m * 2];
+            head = new int[n+1];
+            next = new int[m * 2];
+            Arrays.fill(head, -1);
+            Arrays.fill(next, -1);
+            Arrays.fill(low, -1);
+            Arrays.fill(visited, -1);
+
+            for (List<Integer> edge : connections) {
+                int u = edge.get(0);
+                int v = edge.get(1);
+                addEdge(u, v);
+                addEdge(v, u);
+            }
+
+            dfs(1, -1);
+            return res;
+        }
+        private void dfs(int curr, int parent) {
+            //not required
+//            if (visited[curr] != -1)
+//                return;
+            System.out.println("dfs");
+            low[curr] = visited[curr] = ++ time;
+            for (int edge = head[curr]; edge != -1; edge = next[edge]) {
+                int next = to[edge];
+                if (next == parent) continue;
+                if (visited[next] == -1) {
+                    dfs(next, curr);
+                    low[curr] = Math.min(low[curr], low[next]);
+                    if (visited[curr]< low[next]) {
+                        res.add(Arrays.asList(curr, next));
+                    }
+                } else
+                    low[curr] = Math.min(low[curr], visited[next]);
+
+            }
+        }
+    }
 
     //Tarjan's bridge-finding algorithm
     public static class Bridges {

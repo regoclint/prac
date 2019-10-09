@@ -53,7 +53,7 @@ Utility funcs
         list.add(new ArrayList<String>(list1));
         Arrays.copyOfRange(nums, 0,nums.length-1)
 
-
+ 
     Collections.sort(list, new Comparator<int>(){...})
     Collections.swap(nums, start, i);
     Arrays.sort...can be used on matrix also
@@ -74,8 +74,10 @@ Alphabets can be stored in array instead of hashmaps
 
 n / 2 + n % 2...for odd and even mid points
 
-Complexities
-    n3 > n! > 2^n > n2 > nlogn > n > sq root n > logn
+
+_Complexities_:-
+
+n3 > n! > 2^n > n2 > nlogn > n > sq root n > logn
 
 for i=i+2 - O(n/2)    
 for i=i*2 - O(log n)    
@@ -96,8 +98,38 @@ Recursive functions
     for{} then recursive call(n-1) means n + n-1 +n-2...T(n)=O(n^2)
     for{ recursive call(n-1)} means n x n-1 x n-2...T(n)=O(n!).....n queen example
 
+Optimization problems:-
+- Greedy
+    - local optimal is global optimal
+    - Faster than DP
+- DP
+    - Considers all solutions
+    - Optimal substructure property
+    - Overlapping sub-problems property
+    - Approach - Recursive(top down) or Iterative(mostly bottom up) with tabulation
+- Branch and bound
+    - It's BFS and backtracking is DFS
+    
+State space tree
+
+MST 
+- is a tree with minimum cost of edges. Edges = Vertex -1 to prevent a cycle
+- works for only undirected graph
+     
+Prim's Algo
+- Select minimum cost edge
+- Next minimum cost edge should be connected to existing edges(keep forming a tree)
+- Time complexity  
+
+Kruskal's Algo
+- Select next minimum cost edge always
+- If it forms a cycle ignore it 
+- Time complexity nlogn with PQ
+    
 
 AB testing - create 2 versions and gauge the response to finalize the version 
+
+
 
 **System Design**
 
