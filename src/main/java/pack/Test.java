@@ -3,6 +3,7 @@ import javafx.util.Pair;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Test {
     public static HashMap<Character, ArrayList> lookup;
@@ -1116,15 +1117,6 @@ public class Test {
 //        System.out.println(findClosestFibTreeMap(14, fibToIndex));
 
 
-//////////// Subarray with k distinct characters
-//        System.out.println(kDistinctSubstringsCount("pqrpqrq1",3));
-//        System.out.println(kDistinctSubstringsCount("aabab",3));
-
-//        System.out.println(subarraysWithKDistinct(new int[]{1,2,1,2,3},2));
-//        System.out.println(subarraysWithKDistinct(new int[]{1,2,1,3,4},3));
-//        System.out.println(subarraysWithKDistinct(new int[]{1,1,1,3,4,4,4},3));
-//        System.out.println(subarraysWithKDistinct(new int[]{1,1,3,4,4,4},3));
-
 ////////////  Path With Maximum Minimum Value
 //        System.out.println(maximumMinimumPath(new int[][]{{5,4,5},{1,2,6},{7,4,6}}));
 
@@ -1142,9 +1134,583 @@ public class Test {
 //        System.out.println(minCostMST.minimumCost(3,new int[][]{{1,2,5},{1,3,6},{2,3,1}}));
 
 //////////// Prison cells after n days
-        int[] input=new int[]{0,1,0,1,1,0,0,1};
-        int[] output=new int[input.length];
-        output=prisonAfterNDays(input,8);
+//        int[] input=new int[]{0,1,0,1,1,0,0,1};
+//        int[] output=new int[input.length];
+//        output=prisonAfterNDays(input,8);
+
+//////////// Number of Music Playlists
+//        List<List<Integer>> output=new ArrayList<>();
+//        numMusicPlaylistsMyway(2,3,1,new ArrayList(),output,new HashMap<Integer, Integer>());
+//        System.out.println(numMusicPlaylists(2,3,1));
+
+//////////// Min moves to equal array
+//        System.out.println(minMovesSort(new int[]{1,3,5,10}));
+//        System.out.println(minMovesMyWay2Pass(new int[]{1,3,5,10}));
+//        System.out.println(minMovesMyWay1Pass(new int[]{1,3,5,10}));
+//        System.out.println(minMovesSort(new int[]{1,2,3}));
+//        System.out.println(minMovesMyWay2Pass(new int[]{1,2,3}));
+//        System.out.println(minMovesMyWay1Pass(new int[]{1,2,3}));
+
+//////////// Special Binary String
+//        TreeMap<String, String> map=new TreeMap<>((a,b)->{return a.compareTo(b);});
+//        map.put("2,5","1100");
+//        map.put("0,1","10");
+
+//        largestNumber="11011000";
+//        largestNumber="101101011000";
+//        largestNumber="101100101100";
+//        System.out.println(makeLargestSpecialMyWayRecur(largestNumber));
+//        largestNumber="11011000";
+//        largestNumber="101101011000";
+//        largestNumber="101100101100";
+//        System.out.println(makeLargestSpecialMyWayIter(largestNumber));
+
+//////////// Text justification
+//        String[] input =new String[]{"This", "is", "an", "example", "of", "text", "justification."};
+//        System.out.println(fullJustify(input,16));
+
+
+//////////// Regular Expression Matching
+//        System.out.println(isMatchMyWay("aab","c*a*b"));
+//        System.out.println(isMatchMyWay("aa","a"));
+//        System.out.println(isMatchMyWay("ab",".*"));
+//        System.out.println(isMatchMyWay("mississippi","mis*is*p*."));
+
+//        System.out.println(isMatchRecur("mississippi","mis*is*p*."));
+//        System.out.println(isMatchRecur("ab",".*c"));
+//        System.out.println(isMatchRecurDP("ab",".*c"));
+//        System.out.println(isMatchRecurDP("mississippi","mis*is*p*."));
+//        System.out.println(isMatchIterativeDP("mississippi","mis*is*p*."));
+//        System.out.println(isMatchIterativeDP("aab","c*a*b"));
+
+
+//////////// Subarray with k distinct characters
+//        System.out.println(kDistinctSubstringsCount("pqrpqrq1",3));
+//        System.out.println(kDistinctSubstringsCount("aabab",3));
+
+//        System.out.println(subarraysWithKDistinctWindow(new int[]{1,2,1},2));
+//        System.out.println(subarraysWithKDistinctWindow(new int[]{1,2,1,2,3},2));
+//        System.out.println(subarraysWithKDistinctWindow(new int[]{1,2,1,3,4},3));
+//        System.out.println(subarraysWithKDistinctWindow(new int[]{1,1,1,3,4,4,4},3));
+//        System.out.println(subarraysWithKDistinctWindow(new int[]{1,1,3,4,4,4},3));
+
+//        System.out.println(subarraysWithKDistinct(new int[]{1,2,1},2));
+
+
+//////////// Subarray Product Less Than K
+//        System.out.println(numSubarrayProductLessThanKMyWay(new int[]{10,5,2,6}, 100));
+//        System.out.println(numSubarrayProductLessThanKMyWay(new int[]{10,2,2,5,4,4,4,3,7,7}, 289));
+//        System.out.println(numSubarrayProductLessThanK(new int[]{10,2,2,5,4,4,4,3,7,7}, 289));
+
+//////////// Reaching points
+//        System.out.println(reachingPointsBackwards(1,2,3,5));
+
+//////////// Sliding Window Maximum
+        int[] output=maxSlidingWindow(new int[]{1,3,-1,-3,5,3,6,7},3);
+
+    }
+
+
+
+
+    public static void clean_deque(int i, int k,int[] nums,ArrayDeque<Integer> deq) {
+        // removes the maximum element not in the sliding window
+        if (!deq.isEmpty() && deq.getFirst() == i - k)
+            deq.removeFirst();
+
+        // remove from deq indexes of all elements
+        // which are smaller than current element nums[i]
+        while (!deq.isEmpty() && nums[i] > nums[deq.getLast()])
+            deq.removeLast();
+    }
+
+    public static int[] maxSlidingWindow(int[] nums, int k) {
+        int n = nums.length;
+        if (n * k == 0) return new int[0];
+        if (k == 1) return nums;
+        ArrayDeque<Integer> deq = new ArrayDeque<Integer>();
+
+        // init deque and output
+        int max_idx = 0;
+        for (int i = 0; i < k; i++) {
+            clean_deque(i, k,nums,deq);
+            deq.addLast(i);
+            // compute max in nums[:k]
+            if (nums[i] > nums[max_idx]) max_idx = i;
+        }
+        int [] output = new int[n - k + 1];
+        output[0] = nums[max_idx];
+
+        // build output
+        for (int i  = k; i < n; i++) {
+            clean_deque(i, k,nums,deq);
+            deq.addLast(i);
+            output[i - k + 1] = nums[deq.getFirst()];
+        }
+        return output;
+    }
+
+
+    //bidirectional bfs can also be done but is slower than this
+    //brute force approach is recursion 2^n
+    public static boolean reachingPointsBackwards(int sx, int sy, int tx, int ty) {
+        while (tx >= sx && ty >= sy) {
+            if (sx == tx && sy == ty)
+                return true;
+            if (tx > ty) tx -= ty;
+            else ty -= tx;
+        }
+        return false;
+    }
+
+    //here the subarrays monotonically increase for a valid length
+    public static int numSubarrayProductLessThanK(int[] nums, int k) {
+        if (k <= 1) return 0;
+        int prod = 1, ans = 0, left = 0;
+        for (int right = 0; right < nums.length; right++) {
+            prod *= nums[right];
+            while (prod >= k) prod /= nums[left++];
+            ans += right - left + 1;
+        }
+        return ans;
+    }
+
+    //Doesnt work- counts the overlapping intervals
+    //2-10-5-2 k=101, 2-10-5 & 10-5-2, 10-5 is counted twice
+    public static int numSubarrayProductLessThanKMyWay(int[] nums, int k) {
+        int start = 0, end = 0, product = 1, output = 0, elementsLessThanK = 0;
+
+        if (k == 0 || k == 1) return 0;
+
+        for (; end < nums.length; end++) {
+            if (nums[end] < k)
+                elementsLessThanK++;
+
+            product *= nums[end];
+            if (product >= k) {
+                for (int i = 1; i < end - start; i++)
+                    output += i;
+
+                while (product >= k)
+                    product /= nums[start++];
+            }
+        }
+        if (product < k)
+            for (int i = 1; i < end - start; i++)
+                output += i;
+
+        return output + elementsLessThanK;
+    }
+
+    //since value of a[i]<a.length we can store in array m
+    public static int subarraysWithKDistinct(int[] A, int K) {
+        int res = 0, prefix = 0;
+        int[] charCount = new int[A.length + 1];
+        for (int i = 0, j = 0, distinctCount = 0; i < A.length; ++i) {
+            if (charCount[A[i]] == 0) distinctCount++;
+            charCount[A[i]]++;
+
+            if (distinctCount > K) {
+                charCount[A[j]]--;
+                distinctCount--;
+                prefix = 0;
+                j++;
+            }
+
+            while (charCount[A[j]] > 1) {
+                prefix++;
+                charCount[A[j]]--;
+                j++;
+            }
+            if (distinctCount == K)
+                res += prefix + 1;
+        }
+        return res;
+    }
+
+    public static int subarraysWithKDistinctWindow(int[] A, int K) {
+        Window window1 = new Window(); // for a valid k char
+        Window window2 = new Window();// for == k char
+        int ans = 0, left1 = 0, left2 = 0;
+
+        for (int right = 0; right < A.length; ++right) {
+            int x = A[right];
+            window1.add(x);
+            window2.add(x);
+
+            while (window1.getDistictCount() > K)
+                window1.remove(A[left1++]);
+            while (window2.getDistictCount() == K)
+                window2.remove(A[left2++]);
+
+            ans += left2 - left1;
+        }
+
+        return ans;
+    }
+
+
+    static class Window {
+        Map<Integer, Integer> count;
+        int distictCount;
+
+        Window() {
+            count = new HashMap();
+            distictCount = 0;
+        }
+
+        void add(int x) {
+            count.put(x, count.getOrDefault(x, 0) + 1);
+            if (count.get(x) == 1)
+                distictCount++;
+        }
+
+        void remove(int x) {
+            count.put(x, count.get(x) - 1);
+            if (count.get(x) == 0)
+                distictCount--;
+        }
+
+        int getDistictCount() {
+            return distictCount;
+        }
+    }
+
+    //doesnt work
+    public static int kDistinctSubstringsCount(String s, int k) {
+        int start = 0, end = 0, distinctCount = 0, ansCount = 0, currentAns=0;
+        int[] characterCount = new int[128];
+        while (end < s.length()) {
+            if (characterCount[s.charAt(end++)]++ == 0) distinctCount++;
+            if (distinctCount == k) {
+//                System.out.println(s.substring(start, end));
+                if (end - start > k) // >string length
+                {
+                    ansCount += currentAns+1;
+                    currentAns++;
+                }
+                else
+                {
+                    ansCount++;
+                    currentAns++;
+                }
+            }
+
+            if (end==s.length() && distinctCount > k) {
+                Arrays.fill(characterCount, 0);
+                end = start = end - k;
+                distinctCount = 0;
+                currentAns=0;
+            }
+        }
+        return ansCount;
+    }
+
+
+    public static boolean isMatchIterativeDP(String text, String pattern) {
+        boolean[][] dp = new boolean[text.length() + 1][pattern.length() + 1];
+        dp[text.length()][pattern.length()] = true;
+
+        for (int i = text.length(); i >= 0; i--){
+            for (int j = pattern.length() - 1; j >= 0; j--){
+                boolean first_match = (i < text.length() &&
+                        (pattern.charAt(j) == text.charAt(i) ||
+                                pattern.charAt(j) == '.'));
+                if (j + 1 < pattern.length() && pattern.charAt(j+1) == '*'){
+                    dp[i][j] = dp[i][j+2] || first_match && dp[i+1][j];
+                } else {
+                    dp[i][j] = first_match && dp[i+1][j+1];
+                }
+            }
+        }
+        return dp[0][0];
+    }
+
+    enum Result{
+        TRUE, FALSE
+    }
+
+    public static boolean isMatchRecurDP(String text, String pattern) {
+        Result[][] memo = new Result[text.length() + 1][pattern.length() + 1];
+        return dp(0, 0, text, pattern, memo);
+    }
+
+    public static boolean dp(int i, int j, String text, String pattern,Result[][] memo) {
+        if (memo[i][j] != null) {
+            return memo[i][j] == Result.TRUE;
+        }
+        boolean ans;
+        if (j == pattern.length()){
+            ans = i == text.length();
+        } else{
+            boolean first_match = (i < text.length() &&
+                    (pattern.charAt(j) == text.charAt(i) ||
+                            pattern.charAt(j) == '.'));
+
+            if (j + 1 < pattern.length() && pattern.charAt(j+1) == '*'){
+                ans = (dp(i, j+2, text, pattern,memo) ||
+                        first_match && dp(i+1, j, text, pattern,memo));
+            } else {
+                ans = first_match && dp(i+1, j+1, text, pattern,memo);
+            }
+        }
+        memo[i][j] = ans ? Result.TRUE : Result.FALSE;
+        return ans;
+    }
+
+
+    public static boolean isMatchRecur(String text, String pattern) {
+        if (pattern.isEmpty()) return text.isEmpty();
+        boolean first_match = (!text.isEmpty() &&
+                (pattern.charAt(0) == text.charAt(0) || pattern.charAt(0) == '.'));
+
+        if (pattern.length() >= 2 && pattern.charAt(1) == '*'){
+            //does not match the pattern or first char matched
+            return (isMatchRecur(text, pattern.substring(2)) || (first_match && isMatchRecur(text.substring(1), pattern)));
+        } else {
+            return first_match && isMatchRecur(text.substring(1), pattern.substring(1));
+        }
+    }
+
+    //Doesnt work for .* etc
+    public static boolean isMatchMyWay(String s, String p) {
+
+        int i = 0, j = 0;
+
+        while (i < s.length() && j < p.length()) {
+            if (s.charAt(i) == p.charAt(j) || p.charAt(j)=='.') {
+                i++;
+                j++;
+            } else if (p.charAt(j) == '*') {
+                char repeatingCharacter = p.charAt(j - 1);
+                if(repeatingCharacter=='.' && j+1==p.length()) return true;
+                while (i < s.length() && s.charAt(i) == repeatingCharacter) {
+                    i++;
+                }
+                j++;
+            } else if (p.charAt(j + 1) == '*') {
+                j = j + 2;
+            } else
+                return false;
+        }
+
+        if (i < s.length() || j < p.length()) return false;
+
+        return true;
+
+    }
+
+
+    public static List<String> fullJustify(String[] words, int maxWidth) {
+        List<String> lines = new ArrayList<String>();
+
+        int index = 0;
+        while (index < words.length) {
+            int count = words[index].length();
+            int last = index + 1;
+            while (last < words.length) {
+                if (words[last].length() + count + 1 > maxWidth) break;
+                count += words[last].length() + 1;
+                last++;
+            }
+
+            StringBuilder builder = new StringBuilder();
+            int diff = last - index - 1;
+            // if last line or number of words in the line is 1, left-justified
+            if (last == words.length || diff == 0) {
+                for (int i = index; i < last; i++) {
+                    builder.append(words[i] + " ");
+                }
+                builder.deleteCharAt(builder.length() - 1);
+                for (int i = builder.length(); i < maxWidth; i++) {
+                    builder.append(" ");
+                }
+            } else {
+                // middle justified
+                int spaces = (maxWidth - count) / diff;
+                int r = (maxWidth - count) % diff;
+                for (int i = index; i < last; i++) {
+                    builder.append(words[i]);
+                    if (i < last - 1) {
+                        for (int j = 0; j <= (spaces + ((i - index) < r ? 1 : 0)); j++) {
+                            builder.append(" ");
+                        }
+                    }
+                }
+            }
+            lines.add(builder.toString());
+            index = last;
+        }
+
+
+        return lines;
+    }
+
+
+    //??? case of "101100101100" is a mystery
+    public static String makeLargestSpecialMyWayIter(String s) {
+        int oneCount = 0, zeroCount = 0;
+        HashMap<Integer, HashSet<String>> endIndexMap = new HashMap<>();
+
+        do {
+            s=largestNumber;
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == '0') zeroCount++;
+                else oneCount++;
+                for (int j = i + 1; j < s.length(); j++) {
+                    if (s.charAt(j) == '0') zeroCount++;
+                    else oneCount++;
+                    if (zeroCount == oneCount) {
+                        String specialString = s.substring(i, j + 1);
+                        if (!endIndexMap.containsKey(j + 1)) {
+                            HashSet<String> strings = new HashSet<>();
+                            strings.add(specialString);
+                            endIndexMap.put(j + 1, strings);
+                        } else
+                            endIndexMap.get(j + 1).add(specialString);
+
+                        //consecutive special strings
+                        if (endIndexMap.containsKey(i)) {
+                            for (String matchingString : endIndexMap.get(i)) {
+                                String swappedMathcingString = s.substring(0, i - matchingString.length()) + specialString + matchingString;
+                                String finalString = swappedMathcingString + s.substring(swappedMathcingString.length());
+                                largestNumber = finalString.compareTo(largestNumber) == 1 ? finalString : largestNumber;
+                            }
+                        }
+
+                    }
+                }
+                zeroCount = oneCount = 0;
+            }
+            endIndexMap.clear();
+        } while (largestNumber.compareTo(s) == 1);
+
+        return largestNumber;
+    }
+
+
+    public static String makeLargestSpecialMyWayRecur(String s) {
+        TreeMap<String, String> map=new TreeMap<>((a,b)->{return a.compareTo(b);});
+        HashMap<Integer, HashSet<String>> startTimeMap=new HashMap<>();
+        largestNumber=s;
+        do
+        {
+            s=largestNumber;
+            startTimeMap.clear();
+            specialSubstrings(largestNumber, new ArrayList<>(), 0, 0, 0, startTimeMap);
+
+        }while (largestNumber.compareTo(s)==1);
+
+        return largestNumber;
+    }
+
+    static String largestNumber="0";
+    public static void specialSubstrings(String input, List<Character> tempList,
+                                         int start,int zeroCount,int oneCount,HashMap<Integer, HashSet<String>> startTimeMap) {
+
+        if (oneCount == zeroCount && oneCount > 0) {
+            String specialString = tempList.stream().map(String::valueOf).collect(Collectors.joining());
+//            map.put(start - tempList.size() + "," + start, specialString);
+            if (!startTimeMap.containsKey(start - tempList.size())) {
+                HashSet<String> strings = new HashSet<>();
+                strings.add(specialString);
+                startTimeMap.put(start - tempList.size(), strings);
+            } else {
+                startTimeMap.get(start - tempList.size()).add(specialString);
+            }
+
+            if (startTimeMap.containsKey(start)) {
+                for (String matchingString : startTimeMap.get(start)) {
+                    String swappedMathcingString = input.substring(0, start - tempList.size()) + matchingString + specialString;
+                    String finalString = swappedMathcingString + input.substring(swappedMathcingString.length());
+                    largestNumber = finalString.compareTo(largestNumber) == 1 ? finalString :largestNumber;
+                }
+            }
+
+        }
+        for (int i = start; i <= start + 1 && i < input.length(); i++) {
+            tempList.add(input.charAt(i));
+            specialSubstrings(input, tempList, i + 1, input.charAt(i) == '0' ? zeroCount + 1 : zeroCount,
+                    input.charAt(i) == '1' ? oneCount + 1 : oneCount, startTimeMap);
+            tempList.clear();
+            zeroCount = oneCount = 0;
+
+        }
+
+    }
+
+    public static int minMovesMyWay1Pass(int[] nums) {
+        int min = nums[0], count = 0;
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] < min) {
+                count += (min - nums[i]) * i;
+                min = nums[i];
+            } else
+                count += nums[i] - min;
+        }
+        return count;
+    }
+
+    public static int minMovesMyWay2Pass(int[] nums) {
+        int moves = 0, min = Integer.MAX_VALUE;
+        for (int i = 0; i < nums.length; i++)
+            min = Math.min(min, nums[i]);
+
+        for (int i = 0; i < nums.length; i++)
+            moves += nums[i] - min;
+
+        return moves;
+    }
+
+    public static int minMovesSort(int[] nums) {
+        Arrays.sort(nums);
+        int count = 0;
+        for (int i = nums.length - 1; i > 0; i--) {
+            count += nums[i] - nums[0];
+        }
+        return count;
+    }
+
+    //Num of playlists means there is a possibility of DP
+    public static int numMusicPlaylists(int N, int L, int K) {
+        int MOD = 1_000_000_007;
+
+        long[][] dp = new long[L+1][N+1];
+        dp[0][0] = 1;
+        for (int i = 1; i <= L; ++i)
+            for (int j = 1; j <= N; ++j) {
+                dp[i][j] += dp[i-1][j-1] * (N-j+1);
+                dp[i][j] += dp[i-1][j] * Math.max(j-K, 0);
+                dp[i][j] %= MOD;
+            }
+
+        return (int) dp[L][N];
+    }
+
+    public static void numMusicPlaylistsMyway(int n, int l, int k,List<Integer> tempPlaylist,
+                                              List<List<Integer>> playlist,HashMap<Integer,Integer> uniqueMapCount) {
+
+        if (tempPlaylist.size() == l)
+        {
+            if(uniqueMapCount.size()==n)
+            playlist.add(new ArrayList<>(tempPlaylist));
+            return;
+        }
+
+        for (int i = 1; i <= n; i++) {
+            if(uniqueMapCount.containsKey(i) && uniqueMapCount.size()-1<k) continue;
+
+            tempPlaylist.add(i);
+            uniqueMapCount.put(i,uniqueMapCount.getOrDefault(i,0)+1);
+
+            numMusicPlaylistsMyway(n,l,k,tempPlaylist,playlist,uniqueMapCount);
+
+            uniqueMapCount.put(i,uniqueMapCount.get(i)-1);
+            if(uniqueMapCount.containsKey(i) && uniqueMapCount.get(i)==0)
+                uniqueMapCount.remove(i);
+
+            tempPlaylist.remove(tempPlaylist.size()-1);
+        }
 
     }
 
@@ -1350,86 +1916,6 @@ public class Test {
         }
         return -1;
     }
-
-    //Do????
-    public static int subarraysWithKDistinct(int[] A, int K) {
-        Window window1 = new Window();
-        Window window2 = new Window();
-        int ans = 0, left1 = 0, left2 = 0;
-
-        for (int right = 0; right < A.length; ++right) {
-            int x = A[right];
-            window1.add(x);
-            window2.add(x);
-
-            while (window1.getDistictCount() > K)
-                window1.remove(A[left1++]);
-            while (window2.getDistictCount() >= K)
-                window2.remove(A[left2++]);
-
-            ans += left2 - left1;
-        }
-
-        return ans;
-    }
-
-
-    static class Window {
-        Map<Integer, Integer> count;
-        int distictCount;
-
-        Window() {
-            count = new HashMap();
-            distictCount = 0;
-        }
-
-        void add(int x) {
-            count.put(x, count.getOrDefault(x, 0) + 1);
-            if (count.get(x) == 1)
-                distictCount++;
-        }
-
-        void remove(int x) {
-            count.put(x, count.get(x) - 1);
-            if (count.get(x) == 0)
-                distictCount--;
-        }
-
-        int getDistictCount() {
-            return distictCount;
-        }
-    }
-
-    //doesnt work
-    public static int kDistinctSubstringsCount(String s, int k) {
-        int start = 0, end = 0, distinctCount = 0, ansCount = 0, currentAns=0;
-        int[] characterCount = new int[128];
-        while (end < s.length()) {
-            if (characterCount[s.charAt(end++)]++ == 0) distinctCount++;
-            if (distinctCount == k) {
-//                System.out.println(s.substring(start, end));
-                if (end - start > k) // >string length
-                {
-                    ansCount += currentAns+1;
-                    currentAns++;
-                }
-                else
-                {
-                    ansCount++;
-                    currentAns++;
-                }
-            }
-
-            if (end==s.length() && distinctCount > k) {
-                Arrays.fill(characterCount, 0);
-                end = start = end - k;
-                distinctCount = 0;
-                currentAns=0;
-            }
-        }
-        return ansCount;
-    }
-
 
     static int maxInTreeMap=0;
 

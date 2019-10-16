@@ -18,7 +18,7 @@ BFS is better than DFS in grid
 Shallow copy - contains references to the copy from element
 Deep copy - New objects are created
 
-Fail-fast - fail earlier in the process. Iterator fails fast incase of concurrent modification
+Fail-fast - fail earlier in the process. Iterator fails fast in case of concurrent modification
 Use iterator to remove elements while iterating over a list
 To Remove from list - break after removal or use iterator to avoid comod error
 
@@ -42,6 +42,14 @@ PQ and TreeSet
 DL - faster insertions and removals, lookup by index is slow. HM can be used for faster lookup
 ArrayList - slower insertions and removals, faster lookup by index    
             Can do a binary search if sorted.
+
+Subset is not a substring or subarray. Subsets are combinations and are supersets to substrings
+Substrings are contiguous subsets.
+Substring Template applies to longest/shortest substrings
+For contiguous number of subsets that equal a number, it monotonically increases so its sum of n-1 numbers
+    numSubarrayProductLessThanK()
+Going reverse in a binary tree has only 1 path unlike going forward - reaching points
+    
 
 Utility funcs
 
