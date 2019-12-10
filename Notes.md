@@ -49,7 +49,9 @@ Substring Template applies to longest/shortest substrings
 For contiguous number of subsets that equal a number, it monotonically increases so its sum of n-1 numbers
     numSubarrayProductLessThanK()
 Going reverse in a binary tree has only 1 path unlike going forward - reaching points
-    
+Kadane's algo     
+Tarjan's algo - Bridges
+Array deque can be used for front and back operations. sliding window    
 
 Utility funcs
 
