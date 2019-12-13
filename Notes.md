@@ -52,6 +52,8 @@ Going reverse in a binary tree has only 1 path unlike going forward - reaching p
 Kadane's algo     
 Tarjan's algo - Bridges
 Array deque can be used for front and back operations. sliding window    
+new HashSet(Collection<? extends E) a collection can quickly be copied into a hashset
+
 
 Utility funcs
 

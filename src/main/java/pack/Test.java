@@ -716,7 +716,9 @@ public class Test {
 //        System.out.println(calculateII("5-20+1+3+4"));
 
 //////////// Pretty print JSON
-//        prettyPrint("");
+//        prettyPrint("{\"key\\\"1\":\"val1\",\"key2\":[\"item1\",{\"item2key\":1.2}]}");
+//        prettyPrint("{\"a\":\"b\",\"c\":\"d\"}");
+//        prettyPrint("{\"id\": \"0001\", \"type\": \"donut\", \"name\": \"Cake\", \"ppu\": 0.55, \"batters\":{\"batter\":[{ \"id\": \"1001\", \"type\": \"Regular\" },{ \"id\": \"1002\", \"type\": \"Chocolate\" }]},\"topping\":[{ \"id\": \"5001\", \"type\": \"None\" },{ \"id\": \"5002\", \"type\": \"Glazed\" }]}");
 
 //////////// Search in sorted array of unknown size
 //        System.out.println(search(,9));
@@ -1293,7 +1295,228 @@ public class Test {
 //        System.out.println(iterator.hasNext()); // return true
 //        System.out.println(iterator.next());    // return 20
 //        System.out.println(iterator.hasNext()); // return false
+
+//////////// Maximum Sum of 3 Non-Overlapping Subarrays
+//        maxSumOfThreeSubarrays(new int[]{1,2,1,2,6,7,5,1},2);
+
+//////////// Simplify Path
+//        System.out.println(simplifyPath("/a/../../b/../c//.//"));
+
+//////////// Valid Number
+//        System.out.println(isNumber(" 6e-1"));
+//        System.out.println(isNumber(" 53.5e93"));
+//        System.out.println(isNumber("e3"));
+
+//////////// Add strings
+//        System.out.println(addStrings("123","999"));
+
+//////////// Find First and Last Position of Element in Sorted Array
+//        System.out.println(searchRange(new int[]{5,6},3));
+        System.out.println(searchRange(new int[]{1,4},4));
     }
+
+    private static int extremeInsertionIndex(int[] nums, int target, boolean left) {
+        int lo = 0;
+        int hi = nums.length;
+
+        while (lo < hi) {
+            int mid = (lo + hi) / 2;
+            if (nums[mid] > target || (left && target == nums[mid])) {
+                hi = mid;
+            }
+            else {
+                lo = mid+1;
+            }
+        }
+
+        return lo;
+    }
+
+    public static int[] searchRange(int[] nums, int target) {
+        int[] targetRange = {-1, -1};
+
+        int leftIdx = extremeInsertionIndex(nums, target, true);
+
+        // assert that `leftIdx` is within the array bounds and that `target`
+        // is actually in `nums`.
+        if (leftIdx == nums.length || nums[leftIdx] != target) {
+            return targetRange;
+        }
+
+        targetRange[0] = leftIdx;
+        targetRange[1] = extremeInsertionIndex(nums, target, false)-1;
+
+        return targetRange;
+    }
+
+    public static int[] searchRangeMyWay(int[] nums, int target) {
+
+        int left = 0, mid = 0, right = nums.length - 1;
+        int[] output = new int[]{-1, -1};
+        if(nums.length==0) return output;
+        while (left < right) {
+            mid = (left + right) / 2;
+            if (target > nums[mid])
+                left = mid + 1;
+            else if (target < nums[mid])
+                right = mid - 1;
+            else
+                break;
+        }
+
+        if (nums[mid] != target && nums[left]!=target)
+            return output;
+
+        if(nums[left]==target) mid=left;
+        output[1] = output[0] = mid;
+
+        //find first left index
+        output[0] = findLeftIndex(0, right, mid, target, nums);
+
+        //find first right index
+        output[1] = findRightIndex(0, right, mid, target, nums);
+
+        return output;
+    }
+
+    public static int findLeftIndex( int left, int right,int mid, int target, int[] nums) {
+        if (mid - 1 >= 0 && nums[mid - 1] == target) {
+            right = mid - 1;
+            while (left < right) {
+                mid = (left + right) / 2;
+                if (target > nums[mid])
+                    left = mid + 1;
+                else if (target < nums[mid])
+                    right = mid - 1;
+                else
+                    return findLeftIndex(left, right, mid, target, nums);
+            }
+            return left;
+        } else
+            return mid;
+    }
+
+    public static int findRightIndex(int left, int right,int mid, int target, int[] nums) {
+        if (mid + 1 <= nums.length - 1 && nums[mid + 1] == target) {
+            left = mid + 1;
+            while (left < right) {
+                mid = (left + right) / 2;
+                if (target > nums[mid])
+                    left = mid + 1;
+                else if (target < nums[mid])
+                    right = mid - 1;
+                else
+                    return findRightIndex(left, right, mid, target, nums);
+            }
+            return left;
+        } else
+            return mid;
+    }
+
+    public static String addStrings(String num1, String num2) {
+        StringBuilder sb = new StringBuilder();
+        int carry = 0;
+        for(int i = num1.length() - 1, j = num2.length() - 1; i >= 0 || j >= 0 || carry == 1; i--, j--){
+            int x = i < 0 ? 0 : num1.charAt(i) - '0';
+            int y = j < 0 ? 0 : num2.charAt(j) - '0';
+            sb.append((x + y + carry) % 10);
+            carry = (x + y + carry) / 10;
+        }
+        return sb.reverse().toString();
+    }
+
+    public static boolean isNumber(String s) {
+        s = s.trim();
+
+        boolean pointSeen = false;
+        boolean eSeen = false;
+        boolean numberSeen = false;
+        boolean numberAfterE = true;
+        for (int i = 0; i < s.length(); i++) {
+            if ('0' <= s.charAt(i) && s.charAt(i) <= '9') {
+                numberSeen = true;
+                numberAfterE = true;
+            } else if (s.charAt(i) == '.') {
+                if (eSeen || pointSeen) {
+                    return false;
+                }
+                pointSeen = true;
+            } else if (s.charAt(i) == 'e') {
+                if (eSeen || !numberSeen) {
+                    return false;
+                }
+                numberAfterE = false;
+                eSeen = true;
+            } else if (s.charAt(i) == '-' || s.charAt(i) == '+') {
+                if (i != 0 && s.charAt(i - 1) != 'e') {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+
+        return numberSeen && numberAfterE;
+    }
+
+    public static String simplifyPath(String path) {
+        StringBuilder sb = new StringBuilder("/");
+        LinkedList<String> stack = new LinkedList<String>();
+        for(String s: path.split("/")){
+            if(s.equals("..")){
+                if(!stack.isEmpty())
+                    stack.removeLast();
+            }
+            else if(!s.equals("") && !s.equals("."))
+                stack.add(s);
+        }
+        for(String s: stack){
+            sb.append(s+"/");
+        }
+        if(!stack.isEmpty()) sb.setLength(sb.length()-1);
+        return sb.toString();
+    }
+
+    //DP didnt understand
+    public static int[] maxSumOfThreeSubarrays(int[] nums, int subarrayLength) {
+        //W is an array of sums of windows
+        int[] W = new int[nums.length - subarrayLength + 1];
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            if (i >= subarrayLength) sum -= nums[i-subarrayLength];
+            if (i >= subarrayLength-1) W[i-subarrayLength+1] = sum;
+        }
+
+        //indices of w from left
+        int[] left = new int[W.length];
+        int best = 0;
+        for (int i = 0; i < W.length; i++) {
+            if (W[i] > W[best]) best = i;
+            left[i] = best;
+        }
+
+        int[] right = new int[W.length];
+        best = W.length - 1;
+        for (int i = W.length - 1; i >= 0; i--) {
+            if (W[i] >= W[best]) best = i;
+            right[i] = best;
+        }
+
+        int[] ans = new int[]{-1, -1, -1};
+        for (int j = subarrayLength; j < W.length - subarrayLength; j++) {
+            int i = left[j - subarrayLength], k = right[j + subarrayLength];
+            if (ans[0] == -1 || W[i] + W[j] + W[k] >
+                    W[ans[0]] + W[ans[1]] + W[ans[2]]) {
+
+                ans[0] = i;
+                ans[1] = j;
+                ans[2] = k;
+            }
+        }
+        return ans;
+    }
+
 
     //Can also covert BST to DLL and iterate over right pointer
     static class BSTIterator {
@@ -4583,40 +4806,39 @@ public class Test {
     public static void prettyPrint(String input) {
         int spaces = 0;
         int quoteCounter = 0;
+        char character = ' ';
         for (int i = 0; i < input.length(); i++) {
-
-            if (quoteCounter == 0 && input.charAt(i) == '"') {
+            character=input.charAt(i);
+            if (quoteCounter == 0 && character == '"') {
                 quoteCounter++;
-            } else if (quoteCounter == 1 && input.charAt(i) == '\"')
+            } else if (quoteCounter == 1 && character == '\"')
                 quoteCounter--;
 
 
-            if (quoteCounter != 1 && input.charAt(i) == '{' || input.charAt(i) == '[') {
-                System.out.print(input.charAt(i));
-                System.out.println();
-                spaces += 2;
-                for (int space = 0; space < spaces; space++)
-                    System.out.print(" ");
+            if (quoteCounter != 1 && character == '{' || character == '[') {
+                System.out.print(character);
+                printSpaces(spaces+=2);
 
-            } else if (quoteCounter != 1 && input.charAt(i) == '}' || input.charAt(i) == ']') {
-                System.out.println();
-                spaces -= 2;
-                for (int space = 0; space < spaces; space++)
-                    System.out.print(" ");
-                System.out.print(input.charAt(i));
+            } else if (quoteCounter != 1 && character == '}' || character == ']') {
+                printSpaces(spaces-=2);
+                System.out.print(character);
 
             } else if (quoteCounter != 1 && input.charAt(i) == ',') {
-                System.out.print(",");
-                System.out.println();
-                for (int space = 0; space < spaces; space++)
-                    System.out.print(" ");
+                System.out.print(character);
+                printSpaces(spaces);
 
-            } else if (quoteCounter != 1 && input.charAt(i) == ':')
+            } else if (quoteCounter != 1 && character == ':')
                 System.out.print(": ");
             else
-                System.out.print(input.charAt(i));
+                System.out.print(character);
 
         }
+    }
+
+    public static void printSpaces(int spaces){
+        System.out.println();
+        for (int space = 0; space < spaces; space++)
+            System.out.print(" ");
     }
 
 
@@ -7729,7 +7951,44 @@ public class Test {
         return f[s.length()];
     }
 
+    // with memo its n^2 and without n^n
+    public static boolean word_BreakRecurWithMemo(String s, Set<String> wordDict, int start, Boolean[] memo) {
+        if (start == s.length()) {
+            return true;
+        }
+        if (memo[start] != null) {
+            return memo[start];
+        }
+        for (int end = start + 1; end <= s.length(); end++) {
+            if (wordDict.contains(s.substring(start, end)) && word_BreakRecurWithMemo(s, wordDict, end, memo)) {
+                return memo[start] = true;
+            }
+        }
+        return memo[start] = false;
+    }
 
+    //Word break dfs using startsWith() and the dictionary
+    public boolean wordBreak(String s, List<String> wordDict) {
+        if(s == null || s.length()==0)
+            return false;
+        boolean[] visited = new boolean[s.length()];
+        return dfs(s, 0, wordDict, visited);
+    }
+
+    private boolean dfs(String s, int start, List<String> wordDict, boolean[] visited){
+        if(start == s.length())
+            return true;
+        if(visited[start])
+            return false;
+        visited[start] = true;
+        for(String word : wordDict){
+            if(s.startsWith(word, start)){
+                if(dfs(s, start + word.length(), wordDict, visited))
+                    return true;
+            }
+        }
+        return false;
+    }
 
     //https://leetcode.com/problems/permutations/discuss/18239/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partioning)
     //This permute method has removal of list and search in list which is expensive
