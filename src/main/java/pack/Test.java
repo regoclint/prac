@@ -1312,7 +1312,1031 @@ public class Test {
 
 //////////// Find First and Last Position of Element in Sorted Array
 //        System.out.println(searchRange(new int[]{5,6},3));
-        System.out.println(searchRange(new int[]{1,4},4));
+//        System.out.println(searchRange(new int[]{1,4},4));
+
+//////////// Vertical Order Traversal of a Binary Tree
+//        TreeNode n1=new TreeNode(1);
+//        TreeNode n2=new TreeNode(2);
+//        TreeNode n3=new TreeNode(3);
+//        TreeNode n4=new TreeNode(4);
+//        TreeNode n5=new TreeNode(5);
+//        TreeNode n6=new TreeNode(6);
+//        TreeNode n7=new TreeNode(7);
+//        n1.left=n2;
+//        n1.right=n3;
+//        n2.left=n4;
+//        n2.right=n5;
+//        n3.left=n6;
+//        n3.right=n7;
+//        System.out.println(verticalTraversal(n1));
+
+//////////// Range Sum Query 2D - Immutable
+//        int[][] matrix = new int[][]{
+//                {3, 0, 1, 4, 2},
+//                {5, 6, 3, 2, 1},
+//                {1, 2, 0, 1, 5},
+//                {4, 1, 0, 1, 7},
+//                {1, 0, 3, 0, 5}
+//        };
+//        NumMatrixCachingRows numMatrixCachingRows = new NumMatrixCachingRows(matrix);
+//        numMatrixCachingRows.sumRegion(2, 1, 4, 3);
+//        numMatrixCachingRows.sumRegion(1, 1, 2, 2);
+//        numMatrixCachingRows.sumRegion(1, 2, 2, 4);
+
+//        NumMatrixCachingSmarter numMatrixCachingSmarter = new NumMatrixCachingSmarter(matrix);
+//        numMatrixCachingSmarter.sumRegion(2, 1, 4, 3);
+//        numMatrixCachingSmarter.sumRegion(1, 1, 2, 2);
+//        numMatrixCachingSmarter.sumRegion(1, 2, 2, 4);
+
+
+//////////// Reorganize String
+//        System.out.println(reorganizeString("aab"));
+
+//////////// Closest Binary Search Tree Value
+//        TreeNode n1=new TreeNode(1);
+//        TreeNode n2=new TreeNode(2);
+//        TreeNode n3=new TreeNode(3);
+//        TreeNode n4=new TreeNode(4);
+//        TreeNode n5=new TreeNode(5);
+//        n4.left=n2;
+//        n4.right=n5;
+//        n2.left=n1;
+//        n2.right=n3;
+//        System.out.println(closestValue(n4,3.7));
+
+//////////// Longest Arithmetic Sequence
+//        System.out.println(longestArithSeqLength(new int[]{9,4,7,2,10}));
+
+//////////// All Nodes Distance K in Binary Tree
+//        TreeNode n0=new TreeNode(0);
+//        TreeNode n1=new TreeNode(1);
+//        TreeNode n2=new TreeNode(2);
+//        TreeNode n3=new TreeNode(3);
+//        TreeNode n4=new TreeNode(4);
+//        TreeNode n5=new TreeNode(5);
+//        TreeNode n6=new TreeNode(6);
+//        TreeNode n7=new TreeNode(7);
+//        TreeNode n8=new TreeNode(8);
+//        n3.right=n1;
+//        n3.left=n5;
+//        n5.left=n6;
+//        n5.right=n2;
+//        n1.right=n8;
+//        n1.left=n0;
+//        n2.left=n7;
+//        n2.right=n4;
+//        System.out.println(distanceK(n3,n6,3));
+
+//////////// Check Completeness of a Binary Tree
+//        TreeNode n1=new TreeNode(1);
+//        TreeNode n2=new TreeNode(2);
+//        TreeNode n3=new TreeNode(3);
+//        TreeNode n4=new TreeNode(4);
+//        TreeNode n5=new TreeNode(5);
+//        TreeNode n6=new TreeNode(6);
+//        TreeNode n7=new TreeNode(7);
+//        n1.left=n2;
+//        n1.right=n3;
+//        n2.left=n4;
+//        n2.right=n5;
+//        n3.left=n6;
+//        n3.right=n7;
+//        System.out.println(isCompleteTree(n1));
+
+//////////// Accounts Merge
+//        ArrayList accounts= new ArrayList<ArrayList<String>>();
+//        ArrayList<String> account1=new ArrayList<>();
+//        account1.add("John");
+//        account1.add("johnsmith@mail.com");
+//        account1.add("john00@mail.com");
+//        ArrayList<String> account2=new ArrayList<>();
+//        account2.add("John");
+//        account2.add("johnnybravo@mail.com");
+//        ArrayList<String> account3=new ArrayList<>();
+//        account3.add("John");
+//        account3.add("john_newyork@mail.com");
+//        account3.add("johnsmith@mail.com");
+//        ArrayList<String> account4=new ArrayList<>();
+//        account4.add("Mary");
+//        account4.add("mary@mail.com");
+//        accounts.add(account1);
+//        accounts.add(account2);
+//        accounts.add(account3);
+//        accounts.add(account4);
+
+//        accounts.add(Arrays.asList(new String[]{"David","David0@m.co","David4@m.co","David3@m.co"}));
+//        accounts.add(Arrays.asList(new String[]{"David","David5@m.co","David5@m.co","David0@m.co"}));
+//        accounts.add(Arrays.asList(new String[]{"David","David1@m.co","David4@m.co","David0@m.co"}));
+//        accounts.add(Arrays.asList(new String[]{"David","David0@m.co","David1@m.co","David3@m.co"}));
+//        accounts.add(Arrays.asList(new String[]{"David","David4@m.co","David1@m.co","David3@m.co"}));
+//        System.out.println(accountsMergeMyWay(accounts));
+//        System.out.println(accountsMergeDFS(accounts));
+//        System.out.println(accountsMergeUnionFindWithMaxSize(accounts));
+//        System.out.println(accountsMergeUnionFind(accounts));
+
+//////////// Insert into a Sorted Circular Linked List
+//        ListNode n2=new ListNode(2);
+//        ListNode n3=new ListNode(3);
+//        ListNode n4=new ListNode(4);
+//        n2.next=n3;
+//        n3.next=n4;
+//        n4.next=n2;
+//        insert(n3,1);
+
+//////////// Partition Equal Subset Sum
+//        System.out.println(canPartitionTopDown(new int[]{1, 5, 11, 5}));
+//        System.out.println(canPartitionTopDown(new int[]{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,100}));
+//        System.out.println(canPartitionBottomUp(new int[]{1, 5, 11, 5}));
+//        System.out.println(canPartitionBottomUp(new int[]{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,100}));
+//        System.out.println(canPartitionBottomUp1dArray(new int[]{1, 5, 11, 5}));
+
+//////////// Random Pick Index
+//        int[] arr=new int[]{1,2,3,3,2,3};
+//        Random rand=new Random();
+//        System.out.println(pick(arr,2,rand));
+//        System.out.println(pick(arr,2,rand));
+
+//////////// Strobogrammatic Number II
+//        System.out.println(findStrobogrammaticRecur(3,3));
+
+//////////// Strobogrammatic Number II
+//        System.out.println(strobogrammaticInRange("9999","10000"));
+
+//////////// Bulb Switcher
+
+    }
+
+    //Check iterator over List of List
+
+    //can eliminate out of range numbers and will be much faster
+    private static final char[][] CHAR_PAIRS = new char[][]{{'0', '0'}, {'1', '1'}, {'6', '9'}, {'8', '8'}, {'9', '6'}};
+    public static int strobogrammaticInRange(String low, String high) {
+        int count = 0;
+
+        for (int k = low.length(); k <= high.length(); k++) {
+            count += strobogrammaticInRangeHelper(low, high, new char[k], 0, k - 1);
+        }
+
+        return count;
+    }
+
+    private static int strobogrammaticInRangeHelper(String low, String high, char[] numChars, int left, int right) {
+        if (left > right) {
+            return isInRange(String.valueOf(numChars), low, high) ? 1 : 0;
+        }
+
+        int count = 0;
+
+        for (char[] pair: CHAR_PAIRS) {
+            char c = pair[0]; // character
+            char p = pair[1]; // partner
+
+            // Skip "0 ... 0" while keeping "0"
+            if (left == 0 && right != 0 && c == '0') continue;
+            // Skip "... 6 ..." and " ... 9 ... "
+            if (left == right && (c == '6' || c == '9')) continue;
+
+            numChars[left] = c;
+            numChars[right] = p;
+            count += strobogrammaticInRangeHelper(low, high, numChars, left + 1, right - 1);
+        }
+
+        return count;
+    }
+
+    private static boolean isInRange(String num, String low, String high) {
+        int N = num.length();
+
+        if (N < low.length()) {
+            return false;
+        }
+        if (N == low.length() && num.compareTo(low) < 0) {
+            return false;
+        }
+
+        if (N > high.length()) {
+            return false;
+        }
+        if (N == high.length() && num.compareTo(high) > 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    //fill each position appears to be faster. can be done faster if memoized like previous one
+    public List<String> findStrobogrammaticEachPosition(int n) {
+        if (n == 1) {
+            return Arrays.asList("0", "1", "8");
+        }
+        List<String> res = new LinkedList<>();
+        char[] arr = new char[n];
+        Map<Character, Character> map = new HashMap<>();
+        map.put('0', '0');
+        map.put('1', '1');
+        map.put('6', '9');
+        map.put('8', '8');
+        map.put('9', '6');
+        find(arr, 0, n - 1, map, res);
+        return res;
+    }
+
+    void find(char[] arr, int left, int right, Map<Character, Character> map, List<String> res) {
+        if (left > right) {
+            res.add(new String(arr));
+            return;
+        }
+        char[] nums = {'0', '1', '6', '8', '9'};
+        for (char n : nums) {
+            if (left == 0 && n == '0') {
+                continue;
+            }
+            if (left == right && (n == '6' || n == '9')) {
+                continue;
+            }
+            arr[left] = n;
+            arr[right] = map.get(n);
+            find(arr, left + 1, right - 1, map, res);
+        }
+    }
+
+    //Can be done iteratively by storing last 2 lists
+    static List<String> findStrobogrammaticRecur(int n, int m) {
+        if (n == 0) return new ArrayList<String>(Arrays.asList(""));
+        if (n == 1) return new ArrayList<String>(Arrays.asList("0", "1", "8"));
+
+        List<String> list = findStrobogrammaticRecur(n - 2, m);
+
+        List<String> res = new ArrayList<String>();
+
+        for (int i = 0; i < list.size(); i++) {
+            String s = list.get(i);
+
+            if (n != m) res.add("0" + s + "0");
+
+            res.add("1" + s + "1");
+            res.add("6" + s + "9");
+            res.add("8" + s + "8");
+            res.add("9" + s + "6");
+        }
+
+        return res;
+    }
+
+    //????Didnt get the equal probability
+    public static int pick(int[] a,int target,Random rand) {
+        int count = 0;
+        for(int i = 0; i < a.length; i++)
+            if(target == a[i]) count++;
+
+        int pickIndex = rand.nextInt(count); // returns a random number from 0 to count(excluding)
+        for(int i = 0; i < a.length; i++) {
+            if(target == a[i]) {
+                if(pickIndex-- == 0) return i;
+            }
+        }
+        return 0; // shouldn't come here
+    }
+
+    public static boolean canPartitionBottomUp1dArray(int[] nums) {
+        int sum = 0;
+
+        for (int num : nums) {
+            sum += num;
+        }
+
+        if ((sum & 1) == 1) {
+            return false;
+        }
+        sum /= 2;
+
+        int n = nums.length;
+        boolean[] dp = new boolean[sum+1];
+        dp[0] = true;
+
+        for (int num : nums) {
+            for (int i = sum; i > 0; i--) {
+                if (i >= num) {
+                    dp[i] = dp[i] || dp[i-num];
+                }
+            }
+        }
+
+        return dp[sum];
+    }
+
+    public static boolean canPartitionBottomUp(int[] nums) {
+        int sum = 0;
+        for (int number : nums)
+            sum += number;
+
+        if (sum % 2 != 0) return false;
+        boolean[][] dp = new boolean[nums.length][sum / 2 + 1];
+
+        for (int i = 0; i < nums.length; i++)
+            dp[i][0] = true;
+        for (int i = 1; i < sum / 2 + 1; i++)
+            dp[0][i] = i == nums[0] ? true : false;
+
+
+        for (int row = 1; row < nums.length; row++) {
+            for (int col = 1; col < sum / 2 + 1; col++) {
+                dp[row][col] = dp[row - 1][col];
+                if (!dp[row][col] && nums[row] <= col)
+                    dp[row][col] = dp[row - 1][col - nums[row]];
+            }
+        }
+
+        //with extra row in dp
+//        boolean[][] dp = new boolean[nums.length + 1][sum / 2 + 1];
+//        for (int i = 0; i < nums.length + 1; i++) {
+//            for (int j = 0; j < sum / 2 + 1; j++) {
+//                if (j == 0)
+//                    dp[i][j] = true;
+//                else if (i == 0) dp[i][j] = false;
+//                else {
+//                    dp[i][j] = dp[i - 1][j];
+//                    if (!dp[i][j] && j >= nums[i - 1])
+//                        dp[i][j] = dp[i - 1][j - nums[i - 1]];
+//                }
+//            }
+//        }
+//        return dp[nums.length][sum / 2];
+
+        return dp[nums.length - 1][sum / 2];
+    }
+
+    // TLE
+    public static boolean canPartitionTopDown(int[] nums) {
+        int sum = 0;
+        for (int number : nums)
+            sum += number;
+
+        if (sum % 2 != 0) return false;
+        boolean[][] dp = new boolean[nums.length][sum / 2 + 1];
+        return pick(nums, 0, sum / 2, dp);
+    }
+
+    public static boolean pick(int[] nums,int currentIndex, int sum, boolean[][] dp) {
+        if (sum == 0) return true;
+        if (currentIndex == nums.length) return false;
+        if (dp[currentIndex][sum]) return true;
+        if (nums[currentIndex] <= sum) {
+            if (pick(nums, currentIndex + 1, sum - nums[currentIndex], dp))
+                return dp[currentIndex][sum] = true;
+        }
+        if (pick(nums, currentIndex + 1, sum, dp))
+            return dp[currentIndex][sum] = true;
+        else
+            return false;
+    }
+
+    public static ListNode insert(ListNode head, int insertVal) {
+        if (head == null) {
+            ListNode newNode = new ListNode(insertVal, null);
+            newNode.next = newNode;
+            return newNode;
+        }
+
+        ListNode prev = head;
+        ListNode curr = head.next;
+        boolean toInsert = false;
+
+        do {
+            if (prev.val <= insertVal && insertVal <= curr.val) {
+                // Case 1).
+                toInsert = true;
+            } else if (prev.val > curr.val) {
+                // Case 2).
+                if (insertVal >= prev.val || insertVal <= curr.val)
+                    toInsert = true;
+            }
+
+            if (toInsert) {
+                prev.next = new ListNode(insertVal, curr);
+                return head;
+            }
+
+            prev = curr;
+            curr = curr.next;
+        } while (prev != head);
+
+        // Case 3).
+        prev.next = new ListNode(insertVal, curr);
+        return head;
+    }
+
+    //uses accounts as parent
+    public static List<List<String>> accountsMergeUnionFind(List<List<String>> accounts) {
+        Map<String, Integer> map = new HashMap(); // email -> account idx
+        int[] parent;
+        List<List<String>> res = new ArrayList();
+        if (accounts == null || accounts.size() == 0) return res;
+
+        parent = new int[accounts.size()];
+        for (int i = 0; i < parent.length; i++) parent[i] = i;
+        for (int i = 0; i < parent.length; i++) {
+            List<String> acc = accounts.get(i);
+            for (int j = 1; j < acc.size(); j++){
+                Integer prev = map.put(acc.get(j), i);// returns the value in the map
+                if (prev != null) {
+                    union(prev, i,parent);
+                }
+            }
+        }
+        //Grouping
+        ArrayList<String>[] children = new ArrayList[parent.length];
+        for (Map.Entry<String, Integer> entry : map.entrySet()){
+            int idx = find(entry.getValue(),parent);
+            if (children[idx] == null){
+                children[idx] = new ArrayList();
+            }
+            children[idx].add(entry.getKey());
+        }
+        //This can be done rather than find
+//        for(int i=0;i<parent.length;i++){
+//            if(children[parent[i]]!=null)
+//                children[parent[i]]=new ArrayList<>(accounts.get(i));
+//            else
+//            children[parent[i]].addAll(accounts.get(i));
+//        }
+
+        //Sort and assign first element
+        for (int i = 0; i < children.length; i++){
+            if (children[i] != null){
+                List<String> cur = new ArrayList();
+                cur.add(accounts.get(i).get(0));
+                Collections.sort(children[i]);
+                cur.addAll(children[i]);
+                res.add(cur);
+            }
+        }
+        return res;
+    }
+    public static void union(int p, int c,int[] parent){
+        int pp = find(p,parent);
+        int cc = find(c,parent);
+        parent[cc] = pp;
+    }
+    public static int find(int c,int[] parent){
+        if (c != parent[c]){
+            parent[c] = find(parent[c],parent);
+        }
+        return parent[c];
+    }
+
+    //uses emails as parent
+    public static List<List<String>> accountsMergeUnionFindWithMaxSize(List<List<String>> accounts) {
+        DSU dsu = new DSU();
+        Map<String, String> emailToName = new HashMap();
+        Map<String, Integer> emailToID = new HashMap();
+        int id = 0;
+        for (List<String> account : accounts) {
+            String name = "";
+            for (String email : account) {
+                if (name == "") {
+                    name = email;
+                    continue;
+                }
+                emailToName.put(email, name);
+                if (!emailToID.containsKey(email)) {
+                    emailToID.put(email, id++);
+                }
+                dsu.union(emailToID.get(account.get(1)), emailToID.get(email));
+            }
+        }
+
+        Map<Integer, List<String>> ans = new HashMap();
+        for (Map.Entry<String,Integer> entry: emailToID.entrySet()) {
+            int index = dsu.find(entry.getValue());
+            ans.computeIfAbsent(index, x -> new ArrayList()).add(entry.getKey());
+        }
+        for (List<String> component : ans.values()) {
+            Collections.sort(component);
+            component.add(0, emailToName.get(component.get(0)));
+        }
+        return new ArrayList(ans.values());
+    }
+
+    static class DSU {
+        int[] parent;
+
+        public DSU() {
+            parent = new int[10001];
+            for (int i = 0; i <= 10000; ++i)
+                parent[i] = i;
+        }
+
+        public int find(int x) {
+            if (parent[x] != x) parent[x] = find(parent[x]);
+            return parent[x];
+        }
+
+        public void union(int x, int y) {
+            parent[find(x)] = find(y);
+        }
+    }
+
+    public static List<List<String>> accountsMergeDFS(List<List<String>> accounts) {
+        Map<String, String> emailToName = new HashMap();
+        Map<String, ArrayList<String>> graph = new HashMap();
+        for (List<String> account: accounts) {
+            String name = "";
+            for (String email: account) {
+                if (name == "") {
+                    name = email;
+                    continue;
+                }
+                graph.computeIfAbsent(email, x-> new ArrayList<String>()).add(account.get(1));
+                graph.computeIfAbsent(account.get(1), x-> new ArrayList<String>()).add(email);
+                emailToName.put(email, name);
+            }
+        }
+
+        Set<String> seen = new HashSet();
+        List<List<String>> ans = new ArrayList();
+        for (String email: graph.keySet()) {
+            if (!seen.contains(email)) {
+                seen.add(email);
+                Stack<String> stack = new Stack();
+                stack.push(email);
+                List<String> component = new ArrayList();
+                while (!stack.empty()) {
+                    String node = stack.pop();
+                    component.add(node);
+                    for (String nei: graph.get(node)) {
+                        if (!seen.contains(nei)) {
+                            seen.add(nei);
+                            stack.push(nei);
+                        }
+                    }
+                }
+                Collections.sort(component);
+                component.add(0, emailToName.get(email));
+                ans.add(component);
+            }
+        }
+        return ans;
+    }
+
+    //Doesnt work because an account can belong to multiple groups
+    //    [["David","David0@m.co","David1@m.co"],["David","David3@m.co","David4@m.co"],
+    //    ["David","David4@m.co","David5@m.co"],["David","David2@m.co","David3@m.co"],
+    //    ["David","David1@m.co","David2@m.co"]]
+    public static List<List<String>> accountsMergeMyWay(List<List<String>> accounts) {
+
+        HashMap<String, Integer> emailToIndex = new HashMap<>();
+        Iterator<List<String>> iterator = accounts.iterator();
+        List<Integer> accountsToRemove = new ArrayList<>();
+        for (int i = 0; i < accounts.size(); i++) {
+            boolean merge = false;
+            Set<String> templList = new HashSet<>();
+            for (int j = 1; j < accounts.get(i).size(); j++) {
+                String email = accounts.get(i).get(j);
+
+                if (!emailToIndex.containsKey(email))
+                    templList.add(email);
+                else {
+                    merge = true;
+                    mergeAndSort(i, email, emailToIndex, accounts, accountsToRemove);
+                    break;
+                }
+            }
+            if (!merge) {
+
+                if (templList.size() < accounts.get(i).size()) {
+                    templList.add(accounts.get(i).get(0));
+                    accounts.set(i, new ArrayList<>(templList));
+                }
+                for (String email : templList)
+                    emailToIndex.put(email, i);
+            }
+            Collections.sort(accounts.get(i));
+        }
+
+        int i = 0;
+        for (int accountIndex : accountsToRemove) {
+            accounts.remove(i == 0 ? accountIndex : accountIndex - i);
+            i++;
+        }
+        return accounts;
+    }
+
+    public static void mergeAndSort(int sourceIndex, String email, HashMap<String, Integer> emailToIndex,List<List<String>> accounts,List<Integer> accountsToRemove){
+        int destinationIndex = emailToIndex.get(email);
+        for(int j = 1; j < accounts.get(sourceIndex).size(); j++) {
+            String emailToAdd=accounts.get(sourceIndex).get(j);
+            if (!emailToIndex.containsKey(emailToAdd)) {
+                accounts.get(destinationIndex).add(emailToAdd);
+                emailToIndex.put(emailToAdd, destinationIndex);
+            }
+        }
+        accountsToRemove.add(sourceIndex);
+            Collections.sort(accounts.get(destinationIndex));
+    }
+
+
+    //Can keep node count and compare it with code and terminate earlier
+    //Can do bfs and keep track of only previous code, if diff > 1 return false
+    //Can do bfs and keep track of null node and if more nodes are left
+    public static boolean isCompleteTree(TreeNode root) {
+        List<ANode> nodes = new ArrayList();
+        nodes.add(new ANode(root, 1));
+        int i = 0;
+        while (i < nodes.size()) {
+            ANode anode = nodes.get(i++);
+            if (anode.node != null) {
+                nodes.add(new ANode(anode.node.left, anode.code * 2));
+                nodes.add(new ANode(anode.node.right, anode.code * 2 + 1));
+            }
+        }
+
+        return nodes.get(i - 1).code == nodes.size();
+    }
+
+
+    static class ANode {  // Annotated Node
+        TreeNode node;
+        int code;
+
+        ANode(TreeNode node, int code) {
+            this.node = node;
+            this.code = code;
+        }
+    }
+    //fastest, quick termination, goes only after necessary nodes
+    public static List<Integer> distanceK(TreeNode root, TreeNode target, int K) {
+        List<Integer> ans = new LinkedList();
+        dfs(root, ans, target, K);
+        return ans;
+    }
+
+    // Return vertex distance from node to target if exists, else -1
+    // Vertex distance: the number of vertices on the path from node to target
+    public static int dfs(TreeNode node, List<Integer> ans, TreeNode target, int K) {
+        if (node == null)
+            return -1;
+        else if (node == target) {
+            subtree_add(node, 0, ans, K);
+            return 1;
+        } else {
+            int L = dfs(node.left, ans, target, K), R = 0;
+            if (L > K) return L + 1; // no point to DFS into right subtree after this
+            if (L >= 1) {
+                if (L == K) ans.add(node.val);
+                else
+                    subtree_add(node.right, L + 1, ans, K);
+                return L + 1;
+            }
+            R = dfs(node.right, ans, target, K);
+            if (R > K) return R + 1;
+            if (R >= 1) {
+                if (R == K) ans.add(node.val);
+                else
+                    subtree_add(node.left, R + 1, ans, K);
+                return R + 1;
+            }
+            return -1;
+        }
+    }
+
+    // Add all nodes 'K - dist' from the node to answer.
+    public static void subtree_add(TreeNode node, int dist, List<Integer> ans, int K) {
+        if (node == null) return;
+        if (dist == K)
+            ans.add(node.val);
+        else {
+            subtree_add(node.left, dist + 1, ans, K);
+            subtree_add(node.right, dist + 1, ans, K);
+        }
+    }
+
+    public List<Integer> distanceKDfsBfs(TreeNode root, TreeNode target, int K) {
+        Map<TreeNode, TreeNode> parent = new HashMap();
+        dfs(root, null,parent);
+
+        Queue<TreeNode> queue = new LinkedList();
+        queue.add(null);
+        queue.add(target);
+
+        Set<TreeNode> seen = new HashSet();
+        seen.add(target);
+        seen.add(null);
+
+        int dist = 0;
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (node == null) {
+                if (dist == K) {
+                    List<Integer> ans = new ArrayList();
+                    for (TreeNode n: queue)
+                        ans.add(n.val);
+                    return ans;
+                }
+                queue.offer(null);
+                dist++;
+            } else {
+                if (!seen.contains(node.left)) {
+                    seen.add(node.left);
+                    queue.offer(node.left);
+                }
+                if (!seen.contains(node.right)) {
+                    seen.add(node.right);
+                    queue.offer(node.right);
+                }
+                TreeNode par = parent.get(node);
+                if (!seen.contains(par)) {
+                    seen.add(par);
+                    queue.offer(par);
+                }
+            }
+        }
+
+        return new ArrayList<Integer>();
+    }
+
+    public void dfs(TreeNode node, TreeNode par,Map<TreeNode, TreeNode> parent) {
+        if (node != null) {
+            parent.put(node, par);
+            dfs(node.left, node,parent);
+            dfs(node.right, node,parent);
+        }
+    }
+
+    //build und graph + BFS
+    public static List<Integer> distanceKGraph(TreeNode root, TreeNode target, int K) {
+        List<Integer> res = new ArrayList<Integer> ();
+        Map<TreeNode, List<TreeNode>> map = new HashMap();
+        if (root == null || K < 0) return res;
+        buildMap(root, null,map);
+        if (!map.containsKey(target)) return res;
+        Set<TreeNode> visited = new HashSet<TreeNode>();
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        q.add(target);
+        visited.add(target);
+        while (!q.isEmpty()) {
+            int size = q.size();
+            if (K == 0) {
+                for (int i = 0; i < size ; i++) res.add(q.poll().val);
+                return res;
+            }
+            for (int i = 0; i < size; i++) {
+                TreeNode node = q.poll();
+                for (TreeNode next : map.get(node)) {
+                    if (visited.contains(next)) continue;
+                    visited.add(next);
+                    q.add(next);
+                }
+            }
+            K--;
+        }
+        return res;
+    }
+
+    public static void buildMap(TreeNode node, TreeNode parent, Map<TreeNode, List<TreeNode>> map) {
+        if (node == null) return;
+        if (!map.containsKey(node)) {
+            map.put(node, new ArrayList<TreeNode>());
+            if (parent != null)  { map.get(node).add(parent); map.get(parent).add(node) ; }
+            buildMap(node.left, node,map);
+            buildMap(node.right, node,map);
+        }
+    }
+
+
+    //faster
+    public int longestArithSeqLengthWithMaxLength(int[] A) {
+        int res = 0;
+        //array to keep differences and sequence length. dp[i][j] meaning is
+        //sequence of length i and difference j. Because of the problem restrictions we can
+        //allocate array for differences beforehand (0 <= A[i] <= 10000)
+        int[][] dp = new int[A.length][20001];
+
+        //set the right border of the sequence
+        for (int i = 0; i < A.length; i++) {
+            //start checking sequences by moving left border, so sequences from 0..i to i-1..i will
+            //be checked
+            for (int j = 0; j < i; j++) {
+                //get the difference i and j elements, apply 10.000 shift so we can use array indexes
+                int dif = (A[i] - A[j]) + 10000;
+                //check if we have seen this difference before, if not - make it of length 2 (i and j makes at least
+                //2 elements sequence)
+                dp[i][dif] = (dp[j][dif] == 0 ? 1 : dp[j][dif]) + 1;
+                //keep running max so we dont have to scan our dp matrix at the end
+                res = Math.max(res, dp[i][dif]);
+            }
+        }
+        return res;
+    }
+
+    public static int longestArithSeqLength(int[] A) {
+        int res = 2, n = A.length;
+        HashMap<Integer, Integer>[] dp = new HashMap[n];
+        for (int j = 0; j < A.length; j++) {
+            dp[j] = new HashMap<>();
+            for (int i = 0; i < j; i++) {
+                int d = A[j] - A[i];
+                dp[j].put(d, dp[i].getOrDefault(d, 1) + 1);
+                res = Math.max(res, dp[j].get(d));
+            }
+        }
+        return res;
+    }
+
+
+    //Path of binary search passes over the closes values to target
+    public static int closestValue(TreeNode root, double target) {
+        int val, closest = root.val;
+        while (root != null) {
+            val = root.val;
+            closest = Math.abs(val - target) < Math.abs(closest - target) ? val : closest;
+            root =  target < root.val ? root.left : root.right;
+        }
+        return closest;
+    }
+
+    // the key exit here is character count > half of length return ""
+    public static String reorganizeString(String S) {
+        int N = S.length();
+        int[] count = new int[128];
+        for (char c: S.toCharArray()) count[c]++;
+        PriorityQueue<int[]> pq = new PriorityQueue<int[]>((a, b) ->
+                a[1] == b[1] ? a[0] - b[0] : b[1] - a[1]);
+
+        for (int character = 0; character < 128; ++character) if (count[character] > 0) {
+            if (count[character] > (N + 1) / 2) return "";
+            pq.add(new int[]{character, count[character]});
+        }
+
+        StringBuilder ans = new StringBuilder();
+        while (pq.size() >= 2) {
+            int[] mc1 = pq.poll();
+            int[] mc2 = pq.poll();
+            /*This code turns out to be superfluous, but explains what is happening
+            if (ans.length() == 0 || mc1.letter != ans.charAt(ans.length() - 1)) {
+                ans.append(mc1.letter);
+                ans.append(mc2.letter);
+            } else {
+                ans.append(mc2.letter);
+                ans.append(mc1.letter);
+            }*/
+            ans.append((char)mc1[0]);
+            ans.append((char)mc2[0]);
+            if (--mc1[1] > 0) pq.add(mc1);
+            if (--mc2[1] > 0) pq.add(mc2);
+        }
+
+        if (pq.size() > 0) ans.append((char)pq.poll()[0]);
+        return ans.toString();
+    }
+
+    static class NumMatrixCachingSmarter {
+
+        private int[][] dp;
+
+        public NumMatrixCachingSmarter(int[][] matrix) {
+            if (matrix.length == 0 || matrix[0].length == 0) return;
+            dp = new int[matrix.length + 1][matrix[0].length + 1];
+            for (int r = 0; r < matrix.length; r++) {
+                for (int c = 0; c < matrix[0].length; c++) {
+                    dp[r + 1][c + 1] = dp[r + 1][c] + dp[r][c + 1] + matrix[r][c] - dp[r][c];
+                }
+            }
+        }
+
+        public int sumRegion(int row1, int col1, int row2, int col2) {
+            return dp[row2 + 1][col2 + 1] - dp[row1][col2 + 1] - dp[row2 + 1][col1] + dp[row1][col1];
+        }
+    }
+
+    static class NumMatrixCachingRows {
+
+        private int[][] dp;
+
+        public NumMatrixCachingRows(int[][] matrix) {
+            if (matrix.length == 0 || matrix[0].length == 0) return;
+            dp = new int[matrix.length][matrix[0].length + 1];
+            for (int r = 0; r < matrix.length; r++) {
+                for (int c = 0; c < matrix[0].length; c++) {
+                    dp[r][c + 1] = dp[r][c] + matrix[r][c];
+                }
+            }
+        }
+
+        public int sumRegion(int row1, int col1, int row2, int col2) {
+            int sum = 0;
+            for (int row = row1; row <= row2; row++) {
+                sum += dp[row][col2 + 1] - dp[row][col1];
+            }
+            return sum;
+        }
+    }
+
+    class Coordinate{
+        TreeNode node;
+        int x;  //horizontal
+        int y;  //depth
+        Coordinate(TreeNode n, int x, int y)
+        {
+            node = n;
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    public List<List<Integer>> verticalTraversalBfsAndHm(TreeNode root) {
+        List<List<Integer>> lists = new ArrayList<>();
+        Map<Integer, List<Coordinate>> map = new HashMap<>(); //x -> list (some nodes might have same y in the list)
+
+        Queue<Coordinate> q = new LinkedList<>();
+        q.add(new Coordinate(root, 0, 0));
+        int min = 0, max = 0;
+        while(!q.isEmpty())
+        {
+            Coordinate p = q.remove();
+
+            min = Math.min(min, p.x);
+            max = Math.max(max, p.x);
+
+            if(!map.containsKey(p.x))
+                map.put(p.x, new ArrayList<>());
+            map.get(p.x).add(p);
+
+            if(p.node.left!=null) q.add(new Coordinate(p.node.left, p.x-1, p.y+1));
+            if(p.node.right!=null) q.add(new Coordinate(p.node.right, p.x+1, p.y+1));
+        }
+
+        for(int i=min; i<=max; i++)
+        {
+            List<Coordinate> coordinates=map.get(i);
+            Collections.sort(coordinates, new Comparator<Coordinate>(){
+                public int compare(Coordinate a, Coordinate b)
+                {
+                    if(a.y==b.y) //when y is equal, sort it by value
+                        return a.node.val - b.node.val;
+                    return 0; //otherwise don't change the order as BFS guarantees that top nodes are visited first
+                }
+            });
+            List<Integer> list = new ArrayList<>();
+            for(int j=0; j<coordinates.size(); j++)
+            {
+                list.add(coordinates.get(j).node.val);
+            }
+            lists.add(list);
+        }
+        return lists;
+    }
+
+    static List<Location> locations;
+
+    public static List<List<Integer>> verticalTraversal(TreeNode root) {
+        locations = new ArrayList();
+        dfs(root, 0, 0);
+        Collections.sort(locations);
+
+        //Grouping
+        List<List<Integer>> ans = new ArrayList();
+        ans.add(new ArrayList<Integer>());
+        int prev = locations.get(0).x;
+        for (Location loc : locations) {
+            // If the x value changed, it's part of a new report.
+            if (loc.x != prev) {
+                prev = loc.x;
+                ans.add(new ArrayList<Integer>());
+            }
+
+            // We always add the node's value to the latest report.
+            ans.get(ans.size() - 1).add(loc.val);
+        }
+
+        return ans;
+    }
+
+    public static void dfs(TreeNode node, int x, int y) {
+        if (node != null) {
+            locations.add(new Location(x, y, node.val));
+            dfs(node.left, x - 1, y + 1);
+            dfs(node.right, x + 1, y + 1);
+        }
+    }
+
+    static class Location implements Comparable<Location>{
+        int x, y, val;
+        Location(int x, int y, int val) {
+            this.x = x;
+            this.y = y;
+            this.val = val;
+        }
+
+        @Override
+        public int compareTo(Location that) {
+            if (this.x != that.x)
+                return Integer.compare(this.x, that.x);
+            else if (this.y != that.y)
+                return Integer.compare(this.y, that.y);
+            else
+                return Integer.compare(this.val, that.val);
+        }
     }
 
     private static int extremeInsertionIndex(int[] nums, int target, boolean left) {
@@ -1451,9 +2475,9 @@ public class Test {
                 if (i != 0 && s.charAt(i - 1) != 'e') {
                     return false;
                 }
-            } else {
+            } else
                 return false;
-            }
+
         }
 
         return numberSeen && numberAfterE;
@@ -7821,6 +8845,22 @@ public class Test {
 
     }
 
+    //for this we need 2d array
+    private void printSelectedElementsKnapsack(int dp[][], int[] weights, int[] profits, int capacity) {
+        System.out.print("Selected weights:");
+        int totalProfit = dp[weights.length - 1][capacity];
+        for (int i = weights.length - 1; i > 0; i--) {
+            if (totalProfit != dp[i - 1][capacity]) {
+                System.out.print(" " + weights[i]);
+                capacity -= weights[i];
+                totalProfit -= profits[i];
+            }
+        }
+
+        if (totalProfit != 0)
+            System.out.print(" " + weights[0]);
+        System.out.println("");
+    }
     //>>>>????
     // Returns the maximum value that can be put in a knapsack of capacity W
     static int knapSack(int W, int wt[], int val[], int N) {

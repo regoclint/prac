@@ -53,7 +53,13 @@ Kadane's algo
 Tarjan's algo - Bridges
 Array deque can be used for front and back operations. sliding window    
 new HashSet(Collection<? extends E) a collection can quickly be copied into a hashset
+Enhanced for loop over stack gives it in sequential order unlike pop
+Path of binary search passes over the closes values to target
+To access parent nodes of binary 
+    convert tree to graph
+    make a parent map for each node
 
+ 
 
 Utility funcs
 
