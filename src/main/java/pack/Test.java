@@ -21,24 +21,6 @@ public class Test {
 //        String wordDict[] = {"dog", "and", "cats"};
 //        String wordDict[] = {"apple", "pen"};
 
-//////////// Max Sub array
-//        int arr[] = new int[]{-2,1,-3,4,-1,2,1,-5,4};
-//        System.out.println(maxSubArrayDivideNConquer(arr, 0, arr.length - 1));
-//        System.out.println(maxSubArray(arr));
-
-//////////// Max Prod Sub array
-//        int arr[] = new int[]{-2,1,-1,-3,-2};
-//        int arr[] = new int[]{-2,0,-1,-3,-2};
-//        int arr[] = new int[]{2,3,-2,4};
-//        int arr[] = new int[]{-2,0,-1};
-//        int arr[] = new int[]{2,-5,-2,-4,3};
-//        int arr[] = new int[]{-2,3,1,3};
-//        int arr[] = new int[]{-2,0,-1};
-//        int arr[] = new int[]{0,-2,0};
-//        int arr[] = new int[]{2,3,-1,2};
-//        System.out.println(maxProdSubArray(arr));
-//        System.out.println(maxProdSubArrayMySol(arr));
-//        System.out.println(maxProduct(arr));
 
 //////////// 3 Sum
 //        int arr[] = new int[]{2,-2,2,0,0};
@@ -911,11 +893,6 @@ public class Test {
 //        System.out.println("time taken for output "+(System.currentTimeMillis()-startTime));
 //        removeInvalidParentheses(s);
 
-//////////// Subarray sum equals k
-//        System.out.println(subarraySum(new int[]{28,54,7,-70,22,65,-6},100));
-//        System.out.println(subarraySum(new int[]{1,2,4,3,1},4));
-//        System.out.println(subarraySumBruteForce(new int[]{1,2,4,3,1},4));
-//        System.out.println(subarraySumHM(new int[]{1,2,4,3,1},4));
 
 //////////// Merge sorted arrays
 //        int[] nums1=new int[]{1,2,3,0,0,0};
@@ -1037,17 +1014,17 @@ public class Test {
 //////////// Treasure island II
 //        treasureIslandII(new char[][]{});
 
-        
+
 //////////// 01 Matrix
 //        int[][] input=new int[][]{{1,1,1},{0,1,0},{1,1,1}};
 //        int[][] output=o1MatrixDP(input);
 //        output=o1MatrixBFS(input);
 
-        
+
 //////////// Lemonade change
 //        System.out.println(lemonadeChange(new int[]{5,5,5,10,20}));
-        
-        
+
+
 //////////// Backspace compare
 //        System.out.println(backspaceCompare("ab##","c#d#"));
 
@@ -1143,7 +1120,7 @@ public class Test {
 
 //////////// Number of Music Playlists
 //        List<List<Integer>> output=new ArrayList<>();
-//        numMusicPlaylistsMyway(2,3,1,new ArrayList(),output,new HashMap<Integer, Integer>());
+//        numMusicPlaylistsMyway(3,3,3,new ArrayList(),output,new HashMap<Integer, Integer>());
 //        System.out.println(numMusicPlaylists(2,3,1));
 
 //////////// Min moves to equal array
@@ -1167,6 +1144,7 @@ public class Test {
 //        largestNumber="101101011000";
 //        largestNumber="101100101100";
 //        System.out.println(makeLargestSpecialMyWayIter(largestNumber));
+//        System.out.println(makeLargestSpecial(largestNumber));
 
 //////////// Text justification
 //        String[] input =new String[]{"This", "is", "an", "example", "of", "text", "justification."};
@@ -1187,26 +1165,11 @@ public class Test {
 //        System.out.println(isMatchIterativeDP("aab","c*a*b"));
 
 
-//////////// Subarray with k distinct characters
-//        System.out.println(kDistinctSubstringsCount("pqrpqrq1",3));
-//        System.out.println(kDistinctSubstringsCount("aabab",3));
-
-//        System.out.println(subarraysWithKDistinctWindow(new int[]{1,2,1},2));
-//        System.out.println(subarraysWithKDistinctWindow(new int[]{1,2,1,2,3},2));
-//        System.out.println(subarraysWithKDistinctWindow(new int[]{1,2,1,3,4},3));
-//        System.out.println(subarraysWithKDistinctWindow(new int[]{1,1,1,3,4,4,4},3));
-//        System.out.println(subarraysWithKDistinctWindow(new int[]{1,1,3,4,4,4},3));
-
-//        System.out.println(subarraysWithKDistinct(new int[]{1,2,1},2));
-
-
-//////////// Subarray Product Less Than K
-//        System.out.println(numSubarrayProductLessThanKMyWay(new int[]{10,5,2,6}, 100));
-//        System.out.println(numSubarrayProductLessThanKMyWay(new int[]{10,2,2,5,4,4,4,3,7,7}, 289));
-//        System.out.println(numSubarrayProductLessThanK(new int[]{10,2,2,5,4,4,4,3,7,7}, 289));
 
 //////////// Reaching points
 //        System.out.println(reachingPointsBackwards(1,2,3,5));
+//        System.out.println(reachingPointsBackwards(2,5,7,12));
+//        System.out.println(reachingPointsBackwardsModulo(2,5,7,12));
 
 //////////// Sliding Window Maximum
 //        int[] output=maxSlidingWindow(new int[]{1,3,-1,-3,5,3,6,7},3);
@@ -1243,8 +1206,6 @@ public class Test {
 //        sol.read(buf, 2); // Now buf should contain "bc". We read a total of 2 characters from the file, so return 2.
 //        sol.read(buf, 1); // We have reached the end of file, no more characters can be read. So return 0.
 
-//////////// Continuous Subarray Sum multiple of 7
-//        System.out.println(checkSubarraySum(new int[]{2, 5, 33, 6, 7, 25, 15},13));
 
 //////////// Task Scheduler
 //        System.out.println(leastIntervalMyWay(new char[]{'A','A','A','B','B','B'},2));
@@ -1256,12 +1217,16 @@ public class Test {
 //        System.out.println(isBipartite(new int[][]{{1,3}, {0,2}, {1,3}, {0,2}}));
 
 //////////// Exclusive Time of Functions
-//        List <String> logs =new ArrayList<>();
-//        logs.add("0:start:0");
-//        logs.add("1:start:2");
-//        logs.add("1:end:5");
-//        logs.add("0:end:6");
+//        List <String> logs =new ArrayList<>(Arrays.asList(new String[]{"0:start:0","1:start:2","1:end:5","0:end:6"}));
+//        List <String> logs =new ArrayList<>(Arrays.asList(
+//                new String[]{"0:start:0","1:start:5","2:start:6","3:start:9","4:start:11","5:start:12","6:start:14",
+//                        "7:start:15","1:start:24","1:end:29","7:end:34","6:end:37","5:end:39","4:end:40","3:end:45",
+//                        "0:start:49","0:end:54","5:start:55","5:end:59","4:start:63","4:end:66","2:start:69","2:end:70",
+//                        "2:start:74","6:start:78","0:start:79","0:end:80","6:end:85","1:start:89","1:end:93","2:end:96",
+//                        "2:end:100","1:end:102","2:start:105","2:end:109","0:end:114"}));
 //        exclusiveTime(2, logs);
+//        exclusiveTimeWithoutStack(8, logs);
+
 
 //////////// First bad version
 //        System.out.println(firstBadVersion(2126753390));
@@ -1296,8 +1261,6 @@ public class Test {
 //        System.out.println(iterator.next());    // return 20
 //        System.out.println(iterator.hasNext()); // return false
 
-//////////// Maximum Sum of 3 Non-Overlapping Subarrays
-//        maxSumOfThreeSubarrays(new int[]{1,2,1,2,6,7,5,1},2);
 
 //////////// Simplify Path
 //        System.out.println(simplifyPath("/a/../../b/../c//.//"));
@@ -1463,11 +1426,450 @@ public class Test {
 //        System.out.println(strobogrammaticInRange("9999","10000"));
 
 //////////// Bulb Switcher
+//        System.out.println(bulbSwitch(4);
+
+//////////// Subarray sum equals k - boolean return
+//        System.out.println(subarraySum(new int[]{28,54,7,-70,22,65,-6},100));
+//        System.out.println(subarraySum(new int[]{1,2,4,3,1},4));
+//        System.out.println(subarraySumBruteForce(new int[]{1,2,4,3,1},4));
+//        System.out.println(subarraySumHM(new int[]{1,2,4,3,1},4));
+
+//////////// Continuous Subarray Sum multiple of k - boolean return
+//        System.out.println(checkSubarraySum(new int[]{2, 5, 33, 6, 7, 25, 15},13));
+
+//////////// Maximum Sum of 3 Non-Overlapping Subarrays
+//        maxSumOfThreeSubarrays(new int[]{1,2,1,2,6,7,5,1},2);
+
+//////////// count Subarray Product Less Than K
+//        System.out.println(numSubarrayProductLessThanKMyWay(new int[]{10,5,2,6}, 100));
+//        System.out.println(numSubarrayProductLessThanKMyWay(new int[]{10,2,2,5,4,4,4,3,7,7}, 289));
+//        System.out.println(numSubarrayProductLessThanK(new int[]{10,5}, 100));
+//        System.out.println(numSubarrayProductLessThanK(new int[]{10,2,2,5,4,4,4,3,7,7}, 289));
+
+//////////// count Subarray with k distinct characters
+//        System.out.println(kDistinctSubstringsCount("pqrpqrq1",3));
+//        System.out.println(kDistinctSubstringsCount("aabab",3));
+
+//        System.out.println(subarraysWithKDistinctWindow(new int[]{1,2,1},2));
+//        System.out.println(subarraysWithKDistinctWindow(new int[]{1,2,1,2,3},2));
+//        System.out.println(subarraysWithKDistinctWindow(new int[]{1,2,1,3,4},3));
+//        System.out.println(subarraysWithKDistinctWindow(new int[]{1,1,1,3,4,4,4},3));
+//        System.out.println(subarraysWithKDistinctWindow(new int[]{1,1,3,4,4,4},3));
+//        System.out.println(subarraysWithKDistinct(new int[]{1,2,1},2));
+
+  //////////// Max Prod Subarray
+//        int arr[] = new int[]{-2,1,-1,-3,-2};
+//        int arr[] = new int[]{-2,0,-1,-3,-2};
+//        int arr[] = new int[]{2,3,-2,4};
+//        int arr[] = new int[]{-2,0,-1};
+//        int arr[] = new int[]{2,-5,-2,-4,3};
+//        int arr[] = new int[]{-2,3,1,3};
+//        int arr[] = new int[]{-2,0,-1};
+//        int arr[] = new int[]{0,-2,0};
+//        int arr[] = new int[]{2,3,-1,2};
+//        System.out.println(maxProdSubArray(arr));
+//        System.out.println(maxProdSubArrayMySol(arr));
+//        System.out.println(maxProduct(arr));
+
+//////////// Max Sub array sum
+//        int arr[] = new int[]{-2,1,-3,4,-1,2,1,-5,4};
+//        System.out.println(maxSubArrayDivideNConquer(arr, 0, arr.length - 1));
+//        System.out.println(maxSubArray(arr));
+
+//////////// Find K Closest Elements
+//        System.out.println(findClosestElements(Arrays.asList(1,2,3,4,5),3,4));
 
     }
-
     //Check iterator over List of List
 
+    public static List<Integer> findClosestElements(List<Integer> arr, int k, int x) {
+        int n = arr.size();
+        if (x <= arr.get(0)) {
+            return arr.subList(0, k);
+        } else if (arr.get(n - 1) <= x) {
+            return arr.subList(n - k, n);
+        } else {
+            int index = Collections.binarySearch(arr, x);
+            if (index < 0)
+                index = -index - 1;
+            int low = Math.max(0, index - k - 1), high = Math.min(arr.size() - 1, index + k - 1);
+
+            while (high - low > k - 1) {
+                if (low < 0 || (x - arr.get(low)) <= (arr.get(high) - x))
+                    high--;
+                else if (high > arr.size() - 1 || (x - arr.get(low)) > (arr.get(high) - x))
+                    low++;
+                else
+                    System.out.println("unhandled case: " + low + " " + high);
+            }
+            return arr.subList(low, high + 1);
+        }
+    }
+
+    //Handy usage of collection sort to save space
+    public static List<Integer> findClosestElementsLongerMethod(List<Integer> arr, int k, int x) {
+        Collections.sort(arr, (a,b) -> a == b ? a - b : Math.abs(a-x) - Math.abs(b-x));
+        arr = arr.subList(0, k);
+        Collections.sort(arr);
+        return arr;
+    }
+
+    private static int maxSubArray(int[] nums) {
+        int sum = 0, smax = 0x80000000;
+        for (int num : nums) {
+            sum += num;
+            smax = Math.max(smax, sum);
+            if (sum < 0) {
+                sum = 0;
+            }
+        }
+        return smax;
+    }
+
+    private static int maxSubArrayDivideNConquer(int[] nums, int l, int r) {
+        if (l > r) {
+            return 0x80000000;
+        }
+        int m = l + (r - l) / 2;
+        int lmax = maxSubArrayDivideNConquer(nums, l, m - 1);
+        int rmax = maxSubArrayDivideNConquer(nums, m + 1, r);
+        int smaxl = 0, smaxr = 0;
+        for (int i = m - 1, sum = 0; i >= l; i--) {
+            sum += nums[i];
+            smaxl = Math.max(smaxl, sum);
+        }
+        for (int i = m + 1, sum = 0; i <= r; i++) {
+            sum += nums[i];
+            smaxr = Math.max(smaxr, sum);
+        }
+        return Math.max(Math.max(lmax, rmax), smaxl + smaxr + nums[m]);
+    }
+
+    //This is faster than the below one
+    //It's really about odd or even negative numbers,
+    // if it's odd, either the left end one or the right end one should be counted,
+    // so it will be revealed by scanning from left and from right in 2 passes.
+    // we can also count negatives in the first loop and avoid if count%2==0
+    public static int maxProduct(int[] nums) {
+        int max = Integer.MIN_VALUE;
+        int product = 1;
+        for (int i = 0; i < nums.length; i++) {
+            product *= nums[i];
+            if (product > max) max = product;
+            if (product == 0) product = 1;
+        }
+        product = 1;
+        for (int j = nums.length - 1; j >= 0; j--) {
+            product *= nums[j];
+            if (product > max) max = product;
+            if (product == 0) product = 1;
+        }
+        return max;
+    }
+
+    //Store previous max and min.
+    //if nums[i] is negative then mulitplying it with a negative min will end up as positive hence min and max are multiplied
+    public static int maxProdSubArray(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        int max = nums[0], min = nums[0], result = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            int temp = max;
+            max = Math.max(Math.max(max * nums[i], min * nums[i]), nums[i]);
+            min = Math.min(Math.min(temp * nums[i], min * nums[i]), nums[i]);
+            if (max > result) {
+                result = max;
+            }
+        }
+        return result;
+    }
+
+    public static int maxProdSubArrayMySol(int[] nums) {
+        int totalProd = 1, firstNegativePosition = -1, maxProd = 0x80000000, productAfterFirstNegative = 1;
+        if (nums.length == 1)
+            return nums[0];
+
+        for (int i = 0; i < nums.length; i++) {
+
+            productAfterFirstNegative *= nums[i];
+            maxProd = Math.max(maxProd, nums[i]); //if 0 is greatest is covered here
+
+            if (firstNegativePosition == -1 && nums[i] < 0) {
+                firstNegativePosition = i;
+                if (i != nums.length - 1)
+                    productAfterFirstNegative = 1;
+            }
+
+            if (nums[i] == 0) {
+                totalProd = 1;
+                firstNegativePosition = -1;
+                if (i != nums.length - 1)
+                    productAfterFirstNegative = 1;
+            } else {
+                totalProd = totalProd * nums[i];
+
+                maxProd = Math.max(maxProd, totalProd);
+            }
+            if (totalProd < 0 && firstNegativePosition != i)
+                maxProd = Math.max(maxProd, productAfterFirstNegative);
+
+        }
+        return Math.max(maxProd, productAfterFirstNegative);
+    }
+
+
+    //since value of a[i]<a.length we can store in array m
+    public static int subarraysWithKDistinct(int[] A, int K) {
+        int res = 0, prefix = 0;
+        int[] charCount = new int[A.length + 1];
+        for (int i = 0, j = 0, distinctCount = 0; i < A.length; ++i) {
+            if (charCount[A[i]] == 0) distinctCount++;
+            charCount[A[i]]++;
+
+            if (distinctCount > K) {
+                charCount[A[j]]--;
+                distinctCount--;
+                prefix = 0;
+                j++;
+            }
+
+            while (charCount[A[j]] > 1) {
+                prefix++;
+                charCount[A[j]]--;
+                j++;
+            }
+            if (distinctCount == K)
+                res += prefix + 1;
+        }
+        return res;
+    }
+
+    //Similar to subarray product less than k but with 2 windows
+    public static int subarraysWithKDistinctWindow(int[] A, int K) {
+        Window window1 = new Window(); // for a valid k char
+        Window window2 = new Window();// for < k char
+        int ans = 0, left1 = 0, left2 = 0;
+
+        for (int right = 0; right < A.length; ++right) {
+            int x = A[right];
+            window1.add(x);
+            window2.add(x);
+
+            while (window1.getDistictCount() > K)
+                window1.remove(A[left1++]);
+            while (window2.getDistictCount() == K)
+                window2.remove(A[left2++]);
+
+            ans += left2 - left1;
+        }
+
+        return ans;
+    }
+
+
+    static class Window {
+        Map<Integer, Integer> count;
+        int distictCount;
+
+        Window() {
+            count = new HashMap();
+            distictCount = 0;
+        }
+
+        void add(int x) {
+            count.put(x, count.getOrDefault(x, 0) + 1);
+            if (count.get(x) == 1)
+                distictCount++;
+        }
+
+        void remove(int x) {
+            count.put(x, count.get(x) - 1);
+            if (count.get(x) == 0)
+                distictCount--;
+        }
+
+        int getDistictCount() {
+            return distictCount;
+        }
+    }
+
+    //doesnt work
+    public static int kDistinctSubstringsCount(String s, int k) {
+        int start = 0, end = 0, distinctCount = 0, ansCount = 0, currentAns=0;
+        int[] characterCount = new int[128];
+        while (end < s.length()) {
+            if (characterCount[s.charAt(end++)]++ == 0) distinctCount++;
+            if (distinctCount == k) {
+//                System.out.println(s.substring(start, end));
+                if (end - start > k) // >string length
+                {
+                    ansCount += currentAns+1;
+                    currentAns++;
+                }
+                else
+                {
+                    ansCount++;
+                    currentAns++;
+                }
+            }
+
+            if (end==s.length() && distinctCount > k) {
+                Arrays.fill(characterCount, 0);
+                end = start = end - k;
+                distinctCount = 0;
+                currentAns=0;
+            }
+        }
+        return ansCount;
+    }
+
+    //here the subarrays monotonically increase for a valid length
+    public static int numSubarrayProductLessThanK(int[] nums, int k) {
+        if (k <= 1) return 0;
+        int prod = 1, ans = 0, left = 0;
+        for (int right = 0; right < nums.length; right++) {
+            prod *= nums[right];
+            while (prod >= k) prod /= nums[left++];
+            ans += right - left + 1;
+        }
+        return ans;
+    }
+
+    //Doesnt work- counts the overlapping intervals
+    //2-10-5-2 k=101, 2-10-5 & 10-5-2, 10-5 is counted twice
+    public static int numSubarrayProductLessThanKMyWay(int[] nums, int k) {
+        int start = 0, end = 0, product = 1, output = 0, elementsLessThanK = 0;
+
+        if (k == 0 || k == 1) return 0;
+
+        for (; end < nums.length; end++) {
+            if (nums[end] < k)
+                elementsLessThanK++;
+
+            product *= nums[end];
+            if (product >= k) {
+                for (int i = 1; i < end - start; i++)
+                    output += i;
+
+                while (product >= k)
+                    product /= nums[start++];
+            }
+        }
+        if (product < k)
+            for (int i = 1; i < end - start; i++)
+                output += i;
+
+        return output + elementsLessThanK;
+    }
+
+    //DP didnt understand
+    public static int[] maxSumOfThreeSubarrays(int[] nums, int subarrayLength) {
+        //W is an array of sums of windows
+        int[] W = new int[nums.length - subarrayLength + 1];
+        int sum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            if (i >= subarrayLength) sum -= nums[i-subarrayLength];
+            if (i >= subarrayLength-1) W[i-subarrayLength+1] = sum;
+        }
+
+        //indices of w from left
+        int[] left = new int[W.length];
+        int best = 0;
+        for (int i = 0; i < W.length; i++) {
+            if (W[i] > W[best]) best = i;
+            left[i] = best;
+        }
+
+        int[] right = new int[W.length];
+        best = W.length - 1;
+        for (int i = W.length - 1; i >= 0; i--) {
+            if (W[i] >= W[best]) best = i;
+            right[i] = best;
+        }
+
+        int[] ans = new int[]{-1, -1, -1};
+        for (int j = subarrayLength; j < W.length - subarrayLength; j++) {
+            int i = left[j - subarrayLength], k = right[j + subarrayLength];
+            if (ans[0] == -1 || W[i] + W[j] + W[k] >
+                    W[ans[0]] + W[ans[1]] + W[ans[2]]) {
+
+                ans[0] = i;
+                ans[1] = j;
+                ans[2] = k;
+            }
+        }
+        return ans;
+    }
+
+    //Can be done in n2 by cumulative sum
+    //rem + k*n = sum.... 7 + 13*3 = 46.....46 % 13 = 7
+    public static boolean checkSubarraySum(int[] nums, int k) {
+        int sum = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        map.put(0, -1);
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            if (k != 0)
+                sum = sum % k; // we do this everytime as if its not divisible we can add the remainder also to the next sum... 40%13=1
+            if (map.containsKey(sum)) {
+                if (i - map.get(sum) > 1) //check min size of array is 2
+                    return true;
+            } else
+                map.put(sum, i);
+        }
+        return false;
+    }
+
+    public static int subarraySumHM(int[] nums, int k) {
+        int count = 0, sum = 0;
+        HashMap < Integer, Integer > map = new HashMap < > ();
+        map.put(0, 1);
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
+            if (map.containsKey(sum - k))
+                count += map.get(sum - k);
+            map.put(sum, map.getOrDefault(sum, 0) + 1);
+        }
+        return count;
+    }
+
+    public static int subarraySumBruteForce(int[] nums, int k) {
+        int count = 0;
+        for (int start = 0; start < nums.length; start++) {
+            int sum=0;
+            for (int end = start; end < nums.length; end++) {
+                sum+=nums[end];
+                if (sum == k)
+                    count++;
+            }
+        }
+        return count;
+    }
+
+    //Doesnt work for negatives
+    public static int subarraySum(int[] nums, int k) {
+        int start = 0,end, count = 0, sum = 0;
+        for ( end = 0; end < nums.length; end++) {
+            sum += nums[end];
+            while (sum > k && start <nums.length) {
+                sum -= nums[start++];
+            }
+            if (start<=end && sum == k) count++;
+        }
+        while (start<end-1){
+            sum-=nums[start++];
+            if (sum == k) count++;
+        }
+        return count;
+    }
+
+
+
+    public static int bulbSwitch(int n) {
+        return (int)Math.sqrt(n);
+    }
     //can eliminate out of range numbers and will be much faster
     private static final char[][] CHAR_PAIRS = new char[][]{{'0', '0'}, {'1', '1'}, {'6', '9'}, {'8', '8'}, {'9', '6'}};
     public static int strobogrammaticInRange(String low, String high) {
@@ -2145,6 +2547,7 @@ public class Test {
 
 
     //Path of binary search passes over the closes values to target
+    //If character counts are equal sort in asc order also helps take different characters
     public static int closestValue(TreeNode root, double target) {
         int val, closest = root.val;
         while (root != null) {
@@ -2501,91 +2904,30 @@ public class Test {
         return sb.toString();
     }
 
-    //DP didnt understand
-    public static int[] maxSumOfThreeSubarrays(int[] nums, int subarrayLength) {
-        //W is an array of sums of windows
-        int[] W = new int[nums.length - subarrayLength + 1];
-        int sum = 0;
-        for (int i = 0; i < nums.length; i++) {
-            sum += nums[i];
-            if (i >= subarrayLength) sum -= nums[i-subarrayLength];
-            if (i >= subarrayLength-1) W[i-subarrayLength+1] = sum;
-        }
-
-        //indices of w from left
-        int[] left = new int[W.length];
-        int best = 0;
-        for (int i = 0; i < W.length; i++) {
-            if (W[i] > W[best]) best = i;
-            left[i] = best;
-        }
-
-        int[] right = new int[W.length];
-        best = W.length - 1;
-        for (int i = W.length - 1; i >= 0; i--) {
-            if (W[i] >= W[best]) best = i;
-            right[i] = best;
-        }
-
-        int[] ans = new int[]{-1, -1, -1};
-        for (int j = subarrayLength; j < W.length - subarrayLength; j++) {
-            int i = left[j - subarrayLength], k = right[j + subarrayLength];
-            if (ans[0] == -1 || W[i] + W[j] + W[k] >
-                    W[ans[0]] + W[ans[1]] + W[ans[2]]) {
-
-                ans[0] = i;
-                ans[1] = j;
-                ans[2] = k;
-            }
-        }
-        return ans;
-    }
-
 
     //Can also covert BST to DLL and iterate over right pointer
     static class BSTIterator {
-
         Stack<TreeNode> stack;
-
         public BSTIterator(TreeNode root) {
-
-            // Stack for the recursion simulation
             stack = new Stack<TreeNode>();
-
-            // Remember that the algorithm starts with a call to the helper function
-            // with the root node as the input
-            _leftmostInorder(root);
+            leftmostInorder(root);
         }
 
-        private void _leftmostInorder(TreeNode root) {
-
-            // For a given node, add all the elements in the leftmost branch of the tree
-            // under it to the stack.
+        private void leftmostInorder(TreeNode root) {
             while (root != null) {
                 stack.push(root);
                 root = root.left;
             }
         }
 
-        /**
-         * @return the next smallest number
-         */
         public int next() {
-            // Node at the top of the stack is the next smallest element
             TreeNode topmostNode = stack.pop();
-
-            // Need to maintain the invariant. If the node has a right child, call the
-            // helper function for the right child
             if (topmostNode.right != null) {
-                _leftmostInorder(topmostNode.right);
+                leftmostInorder(topmostNode.right);
             }
-
             return topmostNode.val;
         }
 
-        /**
-         * @return whether we have a next smallest number
-         */
         public boolean hasNext() {
             return stack.size() > 0;
         }
@@ -2666,24 +3008,45 @@ public class Test {
 
     }
 
-    //Can pop starts when new event starts to reduce memory
+
+    //this wont work if there are gaps in time, then stack will help as it will go to the previous running task
+    public static int[] exclusiveTimeWithoutStack(int n, List <String> logs) {
+        int[] res = new int[n];
+        String[] s = logs.get(0).split(":");
+        int i = 1, prevIndex=0, prevTime = Integer.parseInt(s[2]);
+        while (i < logs.size()) {
+            s = logs.get(i).split(":");
+            if (s[1].equals("start")) {
+                res[prevIndex] += Integer.parseInt(s[2]) - prevTime;
+                prevIndex=Integer.parseInt(s[0]);
+                prevTime = Integer.parseInt(s[2]);
+            } else {
+                res[Integer.parseInt(s[0])] += Integer.parseInt(s[2]) - prevTime + 1;
+                prevIndex=Integer.parseInt(s[0]);
+                prevTime = Integer.parseInt(s[2]) + 1;
+            }
+            i++;
+        }
+        return res;
+    }
+
+    //Can pop the "starts" when new event starts to reduce memory
     public static int[] exclusiveTime(int n, List <String> logs) {
-        Stack<Integer> stack = new Stack<>();
+        Stack<Integer> stack = new Stack<>(); //stack of ids
         int[] res = new int[n];
         String[] s = logs.get(0).split(":");
         stack.push(Integer.parseInt(s[0]));
-        int i = 1, prev = Integer.parseInt(s[2]);
+        int i = 1, prevTime = Integer.parseInt(s[2]);
         while (i < logs.size()) {
             s = logs.get(i).split(":");
             if (s[1].equals("start")) {
                 if (!stack.isEmpty())
-                    res[stack.peek()] += Integer.parseInt(s[2]) - prev;
+                    res[stack.peek()] += Integer.parseInt(s[2]) - prevTime;
                 stack.push(Integer.parseInt(s[0]));
-                prev = Integer.parseInt(s[2]);
+                prevTime = Integer.parseInt(s[2]);
             } else {
-                res[stack.peek()] += Integer.parseInt(s[2]) - prev + 1;
-                stack.pop();
-                prev = Integer.parseInt(s[2]) + 1;
+                res[stack.pop()] += Integer.parseInt(s[2]) - prevTime + 1; //end will always have its start before it no other start
+                prevTime = Integer.parseInt(s[2]) + 1;
             }
             i++;
         }
@@ -2814,24 +3177,6 @@ public class Test {
         }
     }
 
-    //Can be done in n2 by cumulative sum
-    //rem + k*n = sum.... 7 + 13*3 = 46.....46 % 13 = 7
-    public static boolean checkSubarraySum(int[] nums, int k) {
-        int sum = 0;
-        HashMap<Integer, Integer> map = new HashMap<>();
-        map.put(0, -1);
-        for (int i = 0; i < nums.length; i++) {
-            sum += nums[i];
-            if (k != 0)
-                sum = sum % k; // we do this everytime as if its not divisible we can add the remainder also to the next sum... 40%13=1
-            if (map.containsKey(sum)) {
-                if (i - map.get(sum) > 1)
-                    return true;
-            } else
-                map.put(sum, i);
-        }
-        return false;
-    }
 
     public class Read4 {
         /**
@@ -2915,6 +3260,7 @@ public class Test {
         }
     }
 
+    //BST to circular DLL
     public static TreeNode treeToDoublyList(TreeNode root) {
         if (root == null) return null;
 
@@ -3046,8 +3392,9 @@ public class Test {
         return output;
     }
 
-        //bidirectional bfs can also be done but is slower than this
-    //brute force approach is recursion 2^n
+    //bidirectional bfs can also be done but is slower than this
+    //Other approaches- brute force approach is recursion 2^n, brute force with dp
+    //                  target backwards to parent as a node can have only one parent
     public static boolean reachingPointsBackwards(int sx, int sy, int tx, int ty) {
         while (tx >= sx && ty >= sy) {
             if (sx == tx && sy == ty)
@@ -3058,150 +3405,24 @@ public class Test {
         return false;
     }
 
-    //here the subarrays monotonically increase for a valid length
-    public static int numSubarrayProductLessThanK(int[] nums, int k) {
-        if (k <= 1) return 0;
-        int prod = 1, ans = 0, left = 0;
-        for (int right = 0; right < nums.length; right++) {
-            prod *= nums[right];
-            while (prod >= k) prod /= nums[left++];
-            ans += right - left + 1;
-        }
-        return ans;
-    }
-
-    //Doesnt work- counts the overlapping intervals
-    //2-10-5-2 k=101, 2-10-5 & 10-5-2, 10-5 is counted twice
-    public static int numSubarrayProductLessThanKMyWay(int[] nums, int k) {
-        int start = 0, end = 0, product = 1, output = 0, elementsLessThanK = 0;
-
-        if (k == 0 || k == 1) return 0;
-
-        for (; end < nums.length; end++) {
-            if (nums[end] < k)
-                elementsLessThanK++;
-
-            product *= nums[end];
-            if (product >= k) {
-                for (int i = 1; i < end - start; i++)
-                    output += i;
-
-                while (product >= k)
-                    product /= nums[start++];
+    //didnt really get it, but modulo will reduce parent operations
+    public static boolean reachingPointsBackwardsModulo(int sx, int sy, int tx, int ty) {
+        while (tx >= sx && ty >= sy) {
+            if (tx == ty) break;
+            if (tx > ty) {
+                if (ty > sy) tx %= ty;
+                else return (tx - sx) % ty == 0;
+            } else {
+                if (tx > sx) ty %= tx;
+                else return (ty - sy) % tx == 0;
             }
         }
-        if (product < k)
-            for (int i = 1; i < end - start; i++)
-                output += i;
-
-        return output + elementsLessThanK;
+        return (tx == sx && ty == sy);
     }
 
-    //since value of a[i]<a.length we can store in array m
-    public static int subarraysWithKDistinct(int[] A, int K) {
-        int res = 0, prefix = 0;
-        int[] charCount = new int[A.length + 1];
-        for (int i = 0, j = 0, distinctCount = 0; i < A.length; ++i) {
-            if (charCount[A[i]] == 0) distinctCount++;
-            charCount[A[i]]++;
-
-            if (distinctCount > K) {
-                charCount[A[j]]--;
-                distinctCount--;
-                prefix = 0;
-                j++;
-            }
-
-            while (charCount[A[j]] > 1) {
-                prefix++;
-                charCount[A[j]]--;
-                j++;
-            }
-            if (distinctCount == K)
-                res += prefix + 1;
-        }
-        return res;
-    }
-
-    public static int subarraysWithKDistinctWindow(int[] A, int K) {
-        Window window1 = new Window(); // for a valid k char
-        Window window2 = new Window();// for < k char
-        int ans = 0, left1 = 0, left2 = 0;
-
-        for (int right = 0; right < A.length; ++right) {
-            int x = A[right];
-            window1.add(x);
-            window2.add(x);
-
-            while (window1.getDistictCount() > K)
-                window1.remove(A[left1++]);
-            while (window2.getDistictCount() == K)
-                window2.remove(A[left2++]);
-
-            ans += left2 - left1;
-        }
-
-        return ans;
-    }
-
-
-    static class Window {
-        Map<Integer, Integer> count;
-        int distictCount;
-
-        Window() {
-            count = new HashMap();
-            distictCount = 0;
-        }
-
-        void add(int x) {
-            count.put(x, count.getOrDefault(x, 0) + 1);
-            if (count.get(x) == 1)
-                distictCount++;
-        }
-
-        void remove(int x) {
-            count.put(x, count.get(x) - 1);
-            if (count.get(x) == 0)
-                distictCount--;
-        }
-
-        int getDistictCount() {
-            return distictCount;
-        }
-    }
-
-    //doesnt work
-    public static int kDistinctSubstringsCount(String s, int k) {
-        int start = 0, end = 0, distinctCount = 0, ansCount = 0, currentAns=0;
-        int[] characterCount = new int[128];
-        while (end < s.length()) {
-            if (characterCount[s.charAt(end++)]++ == 0) distinctCount++;
-            if (distinctCount == k) {
-//                System.out.println(s.substring(start, end));
-                if (end - start > k) // >string length
-                {
-                    ansCount += currentAns+1;
-                    currentAns++;
-                }
-                else
-                {
-                    ansCount++;
-                    currentAns++;
-                }
-            }
-
-            if (end==s.length() && distinctCount > k) {
-                Arrays.fill(characterCount, 0);
-                end = start = end - k;
-                distinctCount = 0;
-                currentAns=0;
-            }
-        }
-        return ansCount;
-    }
 
     //Regular expression matching
+    //Here the matrix is filled from the end because * patterns are about matches ahead in the string not before
     public static boolean isMatchIterativeDP(String text, String pattern) {
         boolean[][] dp = new boolean[text.length() + 1][pattern.length() + 1];
         dp[text.length()][pattern.length()] = true;
@@ -3266,7 +3487,7 @@ public class Test {
         }
     }
 
-    //Doesnt work for .* etc
+    //Doesnt work for .*a or multiple .* with letter in between means have to check for those letters after .*
     public static boolean isMatchMyWay(String s, String p) {
 
         int i = 0, j = 0;
@@ -3340,9 +3561,27 @@ public class Test {
         return lines;
     }
 
+    //didnt understand
+    public static String makeLargestSpecial(String S) {
+        if (S.length() == 0) return S;
+        int anchor = 0, bal = 0;
+        List<String> mountains = new ArrayList();
+        for (int i = 0; i < S.length(); ++i) {
+            bal += S.charAt(i) == '1' ? 1 : -1;
+            if (bal == 0) {
+                mountains.add("1" + makeLargestSpecial(S.substring(anchor+1, i)) + "0");
+                anchor = i+1;
+            }
+        }
+        Collections.sort(mountains, Collections.reverseOrder());
+        StringBuilder ans = new StringBuilder();
+        for (String mtn: mountains)
+            ans.append(mtn);
+        return ans.toString();
+    }
 
     //??? case of "101100101100" is a mystery
-    //Could it be that one of the smaller intermidiate swaps if continued would be larger than the largest
+    //Could it be that one of the smaller intermediate swaps if continued would be larger than the largest
     public static String makeLargestSpecialMyWayIter(String s) {
         int oneCount = 0, zeroCount = 0;
         HashMap<Integer, HashSet<String>> endIndexMap = new HashMap<>();
@@ -3510,6 +3749,57 @@ public class Test {
     }
 
     //Leetcode solution stores the cycle and uses it for further iterations
+    //Do????
+    public int[] prisonAfterNDaysStoreCycle(int[] cells, int N) {
+        Map<Integer, Integer> seen = new HashMap();
+
+        // state  = integer representing state of prison
+        int state = 0;
+        for (int i = 0; i < 8; ++i) {
+            if (cells[i] > 0)
+                state ^= 1 << i;
+        }
+
+        // While days remaining, simulate a day
+        while (N > 0) {
+            // If this is a cycle, fast forward by
+            // seen.get(state) - N, the period of the cycle.
+            if (seen.containsKey(state)) {
+                N %= seen.get(state) - N;
+            }
+            seen.put(state, N);
+
+            if (N >= 1) {
+                N--;
+                state = nextDay(state);
+            }
+        }
+
+        // Convert the state back to the required answer.
+        int[] ans = new int[8];
+        for (int i = 0; i < 8; ++i) {
+            if (((state >> i) & 1) > 0) {
+                ans[i] = 1;
+            }
+        }
+
+        return ans;
+    }
+
+    public int nextDay(int state) {
+        int ans = 0;
+
+        // We only loop from 1 to 6 because 0 and 7 are impossible,
+        // as those cells only have one neighbor.
+        for (int i = 1; i <= 6; ++i) {
+            if (((state >> (i-1)) & 1) == ((state >> (i+1)) & 1)) {
+                ans ^= 1 << i;
+            }
+        }
+
+        return ans;
+    }
+
     public static int[] prisonAfterNDays(int[] cells, int N) {
 
         if (N==0)
@@ -3518,10 +3808,7 @@ public class Test {
             int prevOutputValue = 0, currentOutputValue = 0;
 
             for (int i = 1; i < cells.length - 1; i++) {
-                if (cells[i - 1] == cells[i + 1])
-                    currentOutputValue = 1;
-                else
-                    currentOutputValue = 0;
+                currentOutputValue = cells[i - 1] == cells[i + 1] ? 1: 0;
 
                 cells[i - 1] = prevOutputValue;
                 prevOutputValue = currentOutputValue;
@@ -3659,6 +3946,7 @@ public class Test {
     }
 
     //???? Complexity O(2^N N^2).
+    //Paths can be memoized so that all nodes are visited only once
     public static List<List<Integer>> allPathsSourceTarget(int[][] graph, int node) {
         int N = graph.length;
         List<List<Integer>> ans = new ArrayList();
@@ -3852,7 +4140,6 @@ public class Test {
         }
     }
 
-
     static class LFUCache {
         HashMap<Integer, Integer> keyToVal;
         HashMap<Integer, Integer> keyToCount;
@@ -4036,6 +4323,10 @@ public class Test {
         return 0;
     }
 
+    //Naive way is keep a PQ/tree set for minimum
+    //But only min at each stage is required. So keep an array of [element,min] in the stack.
+    //but that also wont scale there will unnecessary min stored if there is not change in min.
+    //So push min only when there's a change
     static class MinStack {
         static int min = Integer.MAX_VALUE;
         static Stack<Integer> stack = new Stack<Integer>();
@@ -4244,6 +4535,7 @@ public class Test {
     }
 
     //get pairs that equal a target
+    //can also be done by putting the shorter list in a tree map K- value & Value-List of indices. Iterate over the longer one and TM floor will quickly give nearest sum
     //https://leetcode.com/discuss/interview-question/373202
     private static List<int[]> getPairs(List<int[]> a, List<int[]> b, int target) {
         Collections.sort(a, (i,j) -> i[1] - j[1]);
@@ -4293,6 +4585,9 @@ public class Test {
         return logs;
     }
 
+    //have to keep them sorted
+    //naive way is to sort every time for a median
+    //another way, sort while inserting
      static class MedianFinder {
         static PriorityQueue<Integer> lo=new PriorityQueue<>();
         static PriorityQueue<Integer> hi=new PriorityQueue<>(Collections.reverseOrder());
@@ -4786,53 +5081,6 @@ public class Test {
         // add missing elements from nums2
         System.arraycopy(nums2, 0, nums1, 0, p2 + 1);
     }
-
-
-    public static int subarraySumHM(int[] nums, int k) {
-        int count = 0, sum = 0;
-        HashMap < Integer, Integer > map = new HashMap < > ();
-        map.put(0, 1);
-        for (int i = 0; i < nums.length; i++) {
-            sum += nums[i];
-            if (map.containsKey(sum - k))
-                count += map.get(sum - k);
-            map.put(sum, map.getOrDefault(sum, 0) + 1);
-        }
-        return count;
-    }
-
-    public static int subarraySumBruteForce(int[] nums, int k) {
-        int count = 0;
-        for (int start = 0; start < nums.length; start++) {
-            int sum=0;
-            for (int end = start; end < nums.length; end++) {
-                sum+=nums[end];
-                if (sum == k)
-                    count++;
-            }
-        }
-        return count;
-    }
-
-    //Doesnt work for negatives
-    public static int subarraySum(int[] nums, int k) {
-        int start = 0,end, count = 0, sum = 0;
-        for ( end = 0; end < nums.length; end++) {
-            sum += nums[end];
-            while (sum > k && start <nums.length) {
-                sum -= nums[start++];
-            }
-            if (start<=end && sum == k) count++;
-        }
-        while (start<end-1){
-            sum-=nums[start++];
-            if (sum == k) count++;
-        }
-        return count;
-    }
-
-
-
 
     private static Set<String> validExpressions = new HashSet<String>();
 
@@ -8701,108 +8949,6 @@ public class Test {
 
     }
 
-    //This is faster than the below one
-    //It's really about odd or even negative numbers,
-    // if it's odd, either the left end one or the right end one should be counted,
-    // so it will be revealed by scanning from left and from right in 2 passes.
-    // we can also count negatives in the first loop and avoid if count%2==0
-    public static int maxProduct(int[] nums) {
-        int max = Integer.MIN_VALUE;
-        int product = 1;
-        for (int i = 0; i < nums.length; i++) {
-            product *= nums[i];
-            if (product > max) max = product;
-            if (product == 0) product = 1;
-        }
-        product = 1;
-        for (int j = nums.length - 1; j >= 0; j--) {
-            product *= nums[j];
-            if (product > max) max = product;
-            if (product == 0) product = 1;
-        }
-        return max;
-    }
-
-    //Store previous max and min.
-    public static int maxProdSubArray(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
-        }
-        int max = nums[0], min = nums[0], result = nums[0];
-        for (int i = 1; i < nums.length; i++) {
-            int temp = max;
-            max = Math.max(Math.max(max * nums[i], min * nums[i]), nums[i]);
-            min = Math.min(Math.min(temp * nums[i], min * nums[i]), nums[i]);
-            if (max > result) {
-                result = max;
-            }
-        }
-        return result;
-    }
-
-    public static int maxProdSubArrayMySol(int[] nums) {
-        int totalProd = 1, firstNegativePosition = -1, maxProd = 0x80000000, productAfterFirstNegative = 1;
-        if (nums.length == 1)
-            return nums[0];
-
-        for (int i = 0; i < nums.length; i++) {
-
-            productAfterFirstNegative *= nums[i];
-            maxProd = Math.max(maxProd, nums[i]); //if 0 is greatest is covered here
-
-            if (firstNegativePosition == -1 && nums[i] < 0) {
-                firstNegativePosition = i;
-                if (i != nums.length - 1)
-                    productAfterFirstNegative = 1;
-            }
-
-            if (nums[i] == 0) {
-                totalProd = 1;
-                firstNegativePosition = -1;
-                if (i != nums.length - 1)
-                    productAfterFirstNegative = 1;
-            } else {
-                totalProd = totalProd * nums[i];
-
-                maxProd = Math.max(maxProd, totalProd);
-            }
-            if (totalProd < 0 && firstNegativePosition != i)
-                maxProd = Math.max(maxProd, productAfterFirstNegative);
-
-        }
-        return Math.max(maxProd, productAfterFirstNegative);
-    }
-
-    private static int maxSubArray(int[] nums) {
-        int sum = 0, smax = 0x80000000;
-        for (int num : nums) {
-            sum += num;
-            smax = Math.max(smax, sum);
-            if (sum < 0) {
-                sum = 0;
-            }
-        }
-        return smax;
-    }
-
-    private static int maxSubArrayDivideNConquer(int[] nums, int l, int r) {
-        if (l > r) {
-            return 0x80000000;
-        }
-        int m = l + (r - l) / 2;
-        int lmax = maxSubArrayDivideNConquer(nums, l, m - 1);
-        int rmax = maxSubArrayDivideNConquer(nums, m + 1, r);
-        int smaxl = 0, smaxr = 0;
-        for (int i = m - 1, sum = 0; i >= l; i--) {
-            sum += nums[i];
-            smaxl = Math.max(smaxl, sum);
-        }
-        for (int i = m + 1, sum = 0; i <= r; i++) {
-            sum += nums[i];
-            smaxr = Math.max(smaxr, sum);
-        }
-        return Math.max(Math.max(lmax, rmax), smaxl + smaxr + nums[m]);
-    }
 
     public static void threeSum(int[] nums) {
         Arrays.sort(nums);

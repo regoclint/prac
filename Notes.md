@@ -14,6 +14,8 @@ Graph representations
 
 Graph BFS or DFS doesnt matter if its undirected or directed
 BFS is better than DFS in grid
+Target to source can use BFS from both ends
+Multiple sources can use multi source BFS
 
 Shallow copy - contains references to the copy from element
 Deep copy - New objects are created
@@ -39,9 +41,18 @@ PQ and TreeSet
     Both O(log(N)) time complexity for adding, removing, and searching elements
     PQ can have duplicates, TreeSet cannot
     Iteration in TreeSet is ordered PQ is random
-DL - faster insertions and removals, lookup by index is slow. HM can be used for faster lookup
+DL - faster insertions and removals, lookup by index is slow. HM can be used for faster lookup. LRU cache
 ArrayList - slower insertions and removals, faster lookup by index    
             Can do a binary search if sorted.
+Sorted AL vs BST vs Hashmap for searches and inserts
+Balanced search trees - AVL, Red black, B-Tree
+B Tree 
+    It has data sorted and is used in DB. B tree of order M means it can have maximum m children and min 2
+    It is a balanced tree
+    B+ tree slightly different with connections between leaves
+TreeMap is a red black tree implementation    
+    
+    
 
 Subset is not a substring or subarray. Subsets are combinations and are supersets to substrings
 Substrings are contiguous subsets.
@@ -54,10 +65,11 @@ Tarjan's algo - Bridges
 Array deque can be used for front and back operations. sliding window    
 new HashSet(Collection<? extends E) a collection can quickly be copied into a hashset
 Enhanced for loop over stack gives it in sequential order unlike pop
-Path of binary search passes over the closes values to target
+Path of binary search passes over the closest values to target
 To access parent nodes of binary 
     convert tree to graph
     make a parent map for each node
+For DP if one dimension of the array can go negative then instead of matrix can use an array of hashmaps (longest arith seq)
 
  
 
@@ -131,21 +143,22 @@ Optimization problems:-
 State space tree
 
 MST 
-- is a tree with minimum cost of edges. Edges = Vertex -1 to prevent a cycle
-- works for only undirected graph
-     
-Prim's Algo
+- is a tree with minimum cost of edges. Edges = Vertex -1 to prevent a cycle and form a tree
+- works for only connected and undirected graph. Doesnt work for 2 disconnected graphs
+Greedy methods     
+1.Prim's Algo
 - Select minimum cost edge
-- Next minimum cost edge should be connected to existing edges(keep forming a tree)
+- Next minimum cost edge should be connected to existing vertices(keep forming a tree)
 - Time complexity  
 
-Kruskal's Algo
-- Select next minimum cost edge always
+2.Kruskal's Algo
+- Always select next minimum cost edge whether connected or not 
 - If it forms a cycle ignore it 
 - Time complexity nlogn with PQ
     
 
 AB testing - create 2 versions and gauge the response to finalize the version 
+Ternary search does more comparisons than binary in worst case. hence binary is preferred. True for nary search
 
 
 
@@ -167,6 +180,11 @@ Twitter (News Feed) https://www.youtube.com/watch?v=KmAyPUv9gOY
     - HTTP Get -> LB -> get fastest timeline from 3 redis instances         
 - Following
     - Active followers table is checked before precomputing the tweet into timelines
+-Sharding
+    Posts - Cannot be shard on user cuz for hot users it could create an unbalanced load. Shard based on epoch time & sequence
+    Timeline - Since its in memory and has limited posts per user, we can shard on userid and use CH
+    News feeds have hot users unlike other design hence userids are not that good for CH
+Feed ranking    
 - Search
     - During the tweet operation the tweet is also sent to a Search engine to be indexed and be searchable
 - Advertising
@@ -273,16 +291,129 @@ Netflix (Streaming service) https://www.youtube.com/watch?v=psQzyFfsUGU
     - Collaborative filtering - What a similar user watched 
     - Content based filtering - What content type the user is interested in from the past
 
+
+Web crawler https://www.youtube.com/watch?v=BKZxZwUgL3Y
+
+ - Flow: Seed URL -> URL Frontier -> Fetcher + Renderer (DNS resolver + Redis + Storage) -> URL Extractor + Duplicate detection + ...
+        -> URL filter -> Is Crawled?(Bloom filter - youtube.com/watch?v=RSwjdlTp108) 
+
+ - URL Frontier:- Prioritizer -> front Qs(1 Q per priority) -> Back Q router -> Back Qs (1 per thread and per domain to maintain politeness)
+                ->Heap(to select earliest politeness)    
+                Prioritizer will have priority on type of content(like news),freshness etc
+                Back Q Router will create mapping of hostid to Back Q id
+                Heap will update time after picking the url for politness          
+ - Fetcher & renderer:- fetches urls from back Qs when its free. It also renders the pages also now we have single page applications like angular which need rendering
+                It stores the pages in compressed forms in DB and some in uncompressed form in redis(because uncompressing can take time for some) 
+ - Detect updates:- HEAD requests to find update time
+        duplicates:- MD5 hash works only entire match, SimHash of 2 pages gives similarity %(near duplicate for people who copy content)
+ - Storage:- Google cloud big table build on GFS etc. No sql DB for PBs of data                 
+        
+    
+Rate limiter https://www.youtube.com/watch?v=mhUQe4BKZXs
+ - Flow:- Clients -> Web Server -><- Rate Limiter Svc -> Redis & DBMS 
+                             -><- App Service        
+ - High availability, low latency system
+ - Algos
+    Fixed window 
+    Rolling window - this is better
+ - Keep redis as storage for the tokens. Userid : Count : Epoch time
+ - Every access is read and write. Use write back cache as its not critical data and has low latency.
+ - LRU cache for eviction policy
+ - In a distributed system there can be concurrency issue/race condition(Atomicity of read & write)- Optimistic locking can solve it     
+ - Storage space required for 1 million users ~ 1.6GB
+ - Shard per user id and per api. Consistent hashing for fault tolerance and replication
+ - Rate limit by both user & ip - Only IP then other users will also be blocked
+                               Only User then login api will not get rate limited      
+
+Dropbox https://www.youtube.com/watch?v=U0xTu6E2CT8
+ - Flow- Client -> EBS storage
+                -> Message Qs -><- Sync Svc -> Metadata store
+                     |
+         Client2 <---|
+         Client3 <---|            
+ - Write and read heavy system
+ - SQL cuz of ACID will help in consistency. NoSQL eventual consistency will be messy
+ - Client
+        Watcher watches for changes in current folders, hashing can be used to check file differences
+        Chunker - Breaks file into smaller chunks for better bandwidth, time, storage, throughput
+        Indexer - receives events from watcher and updates DB, also shares changes with Sync svc
+        Internal DB - Keep track of offline changes,    
+ - Metadata server
+    Info about Chunks, Files, User, Devices, Workspace (sync folders)
+    Hash file id with CH
+ - Synchronisation server
+ - Message Queue Service
+    One request queue may be because of ordering, might be possible to have one queue per file 
+    Separate response Qs because of many devices so each device needs to get an update of the the file
+    Helps persist data if devices are offline
+ - Block Cloud storage like EBS       
+       
        
 Tiny URL
-
-
+ - Flow:- client -> LB -> App server -> LB -> Cache
+                                        -> DB                 <- Cleanup Svc
+                                  -> Key gen svc -> Key DB    <-     
+ - Unique id generation
+    Generate 6 letter random alpha-numeric keys in advance via MD5 or SH-256
+    2 tables for used and unused keys
+    Lock the key so that multiple servers wont give same key
+    Rate limit creation to prevent abusive usage of all keys
+ - LB - Round robin with CPU load check. Between client, App server, cache and db
+ - Caching
+    Data is only read from caches, no updates by users.
+    If there is a cache miss, read from db and update all caches
+    LRU
+    Create replicas so load is uniformly distributed and no SPF
+ - Purging
+    When expired link is accessed delete it and make it reusable
+    Can run cleanup tasks during low traffic. 
+    Could store id and expiration time in another table 
+    Cleanup should be another micro-service
+ - HTTP 302 to redirect and 404 not found  
     
 Maximus (upload and download)
 
+Type Ahead Suggestions
+ - Flow:- Gateway -> LB -> Cache
+                        -> Trie Svc  -> File system Backup
+                             ^       -> Logs                   -> Update Svs
+                             | ---------------------------------------|                                                                   
+ - Use tries to store words. Can consolidate ones that have a single branch
+ - Each node store top suggestions and their counts
+ - Frequency of search can be used for top 10 terms. additionally location, personalization,
+ - Can store top 10 suggestion in each node as multiple keywords can lead to deeper search levels in trie
+ - go recursively and from bottom generate suggestions so each parent can get their top 10
+ - To update the trie for freq, log the counts, Use MAp reduce job every hour to read the counts and update a slave, then make it master.
+        Counts need to be updatted for each node recursively for a given period
+ - Rebuild trie by storing it a file in level order C2,A2,R1,T,P,O1,D
+ - Cache top searches       
+ - Client
+    Allow type ahead only after a couple of searches
+    Limit calls to every 50ms
+    Store history
+    pre-fetch
 
+Search
+    Pre processing
+        crawl -> index
+        Page rank - 200+ factors based on visits, rank of users, search keywords appears together rather than far away
+                    location, context
+    Flow:- User searches -> find closest DC -> ||ly sent to different machines -> return batches -> sort by best rank
+    https://www.deepcrawl.com/knowledge/technical-seo-library/search-engine-indexing/
+     
+     
+     
+Concepts
 
-
+Indexing sorts a particular set of data so that it can be binary searched. This results in faster searches than that of unsorted data.
+    A separate sorted col is created in the DB per index which links to the actual record. A separate col is created bcuz its faster than sorting all the data
+    -Index favours read and not write. In write it has to update indexes for all the indexed columns and then the write is complete.
+    -Over-indexing transactional tables is not good for the writes
+    -When there are a lot of unique values it makes sense(Cardinality)
+    -When the indexed rows are used more often for querying its useful otherwise its more of a negative for writes
+    https://www.youtube.com/watch?v=zDzu6vka0rQ
+    https://www.youtube.com/watch?v=WmJuhKLQMA4
+   
 HTTP - is synchronous, client to server protocol
 TCP - is asynchronous
 XMPP or Websockets - Peer to peer protocol -Stateful and long lived TCP connection    
@@ -303,18 +434,36 @@ Gateway/Proxy servers help in
     -Routing
 NGINX is a software based reverse proxy, better than hardware based ones  
 Precomputing could generally mean make updates when the update activity is done before run time of the actual activity
+Block Storage vs Object storage
+    Block for heavy read and write. EBS. Can replace parts for updates.
+    Object for low write and heavy read. S3. Whole object is replaced.
 
-Consistent hashing 
-    Way to distribute load uniformly by hashing many times for more virtual servers
-    So when servers are added or deleted or fail the load is properly distributed
-    Hash so that only few servers are affected and caches of previous requests are not dumped
+Encryption is a two-way function where information is scrambled in such a way that it can be unscrambled later. Like whatsapp messages
+Hashing is a one-way function where data is mapped to a fixed-length value. Hashing is primarily used for authentication. For passwords but not that safe.
+Salting is an additional step during hashing, typically seen in association to hashed passwords, that adds an additional value to the end of the password that changes the hash value produced.
+    This is better for password storage. Eg. bcrypt and scrypt.
+SHA-256 vs MD5
+    Both are hashing algos which are used to check file integrity.
+    SHA-256 https://www.baeldung.com/sha-256-hashing-java
+        Secure Hash algorithm is 256 bit
+    MD5 is 128 bit and hence faster butt less secure
+Base64 32 etc are encoding techniques for reducing size and have no encryption in it. not for security    
 
+Basic auth vs Oauth2.0
+
+Consistent hashing  https://www.youtube.com/watch?v=bBK_So1u9ew
+- Mostly Used for storing data for quick searches in DS like distributed cashing systems
+- Choose random keys for servers -> Keep them in a ring form -> Hash the key(dont mod it with servers) -> when a key comes in choose the next clockwise server id 
+- To distribute load uniformly set many virtual instances of the servers. By using different hash function(s)
+- Adding or removing servers makes the new keys go to the next server and only affected keys(keys of adjacent servers) to be rehashed
+- Code - https://www.acodersjourney.com/system-design-interview-consistent-hashing/
+    
 Sharding (DB servers)
-    it is technique of distributing data in a relational database on a particular field
-    Indexes can be created on another field so that queries are more optimised 
-    Consistent hashing can be used to allocate new shards
-    Master slave configs provide better availability and consistency as writes happen only to master and then it fans out, read can happen anywhere
-    Drawbacks - Joins, Shards are fixed, hierarchical sharding further divides shards into smaller shards
+- it is technique of distributing data in a relational database on a particular field
+- Indexes can be created on another field so that queries are more optimised 
+- Consistent hashing can be used to allocate new shards
+- Master slave configs provide better availability and consistency as writes happen only to master and then it fans out, read can happen anywhere
+- Drawbacks - Joins, Shards are fixed, hierarchical sharding further divides shards into smaller shards
 
 Load balancing helps you scale horizontally across an ever-increasing number of servers
 
@@ -342,6 +491,13 @@ Optimistic concurrency lock - No locks, while committing a change check whether 
 - Idempotent - No matter how many times you call the operation, the result will be the same.
 
 ACID - Atomicity, Consistency, Isolation, and Durability
+NoSQL vs SQL https://www.youtube.com/watch?v=p4C0n3afZdk
+    performance & scalability vs transaction(ACID compliant)
+    scaling horiz vs joins
+Types of NoSQL db - key Value - Redis, Vodemort, Dynamo.
+                  - Document based - MongoDB. can do nested queries
+                  - Wide-Column - For big data as they look at column families instead of all columns. Cassandra, Hbase
+                  - Graph - best for many relations. Neo4j    
 
 - Kafka vs Message queues
     - https://hackernoon.com/a-super-quick-comparison-between-kafka-and-message-queues-e69742d855a8
@@ -351,6 +507,17 @@ ACID - Atomicity, Consistency, Isolation, and Durability
     - Publish-subscribe allows you broadcast data to multiple processes, but has no way of scaling processing since every message goes to every subscriber
     - Kafka's model is that every topic has both these properties—it can scale processing and is also multi-subscriber
     - Kafka messages are retained even after they are consumed
+
+HTTP Methods
+    GET
+    POST
+    PUT - idempotent, put multiple times shouldnt affect the state
+    DELETE
+    HEAD - 
+    PATCH - similar to put and post but only for partial updates
+    OPTIONS              
+HTTP status “429 - Too many requests"
+
 
 
 
