@@ -101,7 +101,7 @@ class Ken extends Fighter
     static Ken obj;
     private Ken(){}
 
-    static Ken getInstance(KickBehavior kickBehavior,
+    synchronized static Ken getInstance(KickBehavior kickBehavior,
                            JumpBehavior jumpBehavior){
         if(obj==null)
             return new Ken(kickBehavior,jumpBehavior);

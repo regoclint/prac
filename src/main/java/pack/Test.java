@@ -886,6 +886,7 @@ public class Test {
 ////        String s="()())()";
 //        String s="o(()()()m()((()t";
 ////        String s=")(a";
+//        String s="(()";
 //        maxValidString= validParenthesisCount(s);
 //        long startTime=System.currentTimeMillis();
 //        removeParentheses(new StringBuffer(),output,s.toCharArray(),0,0,0);
@@ -1479,9 +1480,890 @@ public class Test {
 //////////// Find K Closest Elements
 //        System.out.println(findClosestElements(Arrays.asList(1,2,3,4,5),3,4));
 
+//////////// Top N buzzwords
+//        int numToys = 6, topToys = 2;
+//        String[] toys = {"elmo", "elsa", "legos", "drone", "tablet", "warcraft"};
+//        int numQuotes = 6;
+//        String[] quotes = {
+//                "Elmo is the hottest of the season! Elmo will be on every kid's wishlist!",
+//                "The new Elmo dolls are super high quality",
+//                "Expect the Elsa dolls to be tablet tablet tablet tablet very popular this year, Elsa!",
+//                "Elsa and Elmo are the toys I'll be buying for my kids, Elsa is good",
+//                "For parents of older kids, look into buying them a drone",
+//                "Warcraft is slowly rising in popularity ahead of the holiday season"
+//        };
+//        popularToys(numToys,topToys,toys,quotes);
+
+//////////// Rotting oranges
+//        int[][] grid = new int[][]{{2, 1, 1}, {1, 1, 0}, {0, 1, 1}};
+//        System.out.println(orangesRotting(grid));
+
+//////////// Search Suggestions System
+//        System.out.println(suggestedProducts(new String[]{"mobile","mouse","moneypot","monitor","mousepad"},"mouse"));
+//        System.out.println(suggestedProductsWithoutTrie(new String[]{"mobile","mouse","moneypot","monitor","mousepad"},"mouse"));
+//        System.out.println(suggestedProductsBinarySearch(new String[]{"mobile","mouse","moneypot","monitor","mousepad"},"mouse"));
+
+//////////// Subtree with Maximum Average
+//        Node n1=new Node(20);
+//        Node n2=new Node(12);
+//        Node n3=new Node(18);
+//        Node n4=new Node(11);
+//        Node n5=new Node(2);
+//        Node n6=new Node(3);
+//        Node n7=new Node(15);
+//        Node n8=new Node(8);
+//        n1.children.add(n2);
+//        n1.children.add(n3);
+//        n2.children.add(n4);
+//        n2.children.add(n5);
+//        n2.children.add(n6);
+//        n3.children.add(n7);
+//        n3.children.add(n8);
+//        subtreeMaxAvg(n1);
+//        System.out.println(maxSubTree);
+
+//////////// Partition Labels
+//        System.out.println(partitionLabels("ababcbacadefegdehijhklij"));
+
+//////////// Battleship
+//        int N1 = 4;
+//        String S1 = "1B 2C,2D 4D", T1 = "2B 2D 3D 4D 4A";
+//        System.out.println(Arrays.toString(getResult(S1, T1)));
+//        int N2 = 3;
+//        String S2 = "1A 1B,2C 2C", T2 = "1B";
+//        System.out.println(Arrays.toString(getResult(S2, T2)));
+//        int N3 = 12;
+//        String S3 = "1A 2A,12A 12A", T3 = "12A";
+//        System.out.println(Arrays.toString(getResult(S3, T3)));
+
+//////////// Generate Parenthesis
+//        System.out.println(generateParenthesis(3));
+
+//////////// Shortest Word Distance II
+//        WordDistance wordDistance=new WordDistance(new String[]{"practice", "makes", "perfect", "coding", "makes"});
+//        System.out.println(wordDistance.shortest("makes","coding"));
+
+//////////// Nested List Weight Sum II
+//        depthSumInverse()
+
+//////////// All O`one Data Structure
+//        AllOne allOne=new AllOne();
+//        allOne.inc("a");
+//        allOne.inc("b");
+//        allOne.inc("c");
+//        allOne.inc("a");
+//        allOne.inc("a");
+//        allOne.inc("b");
+//        System.out.println(allOne.getMaxKey());
+//        System.out.println(allOne.getMinKey());
+
+//////////// Find Leaves of Binary Tree
+//        TreeNode n1=new TreeNode(1);
+//        TreeNode n2=new TreeNode(2);
+//        TreeNode n3=new TreeNode(3);
+//        TreeNode n4=new TreeNode(4);
+//        TreeNode n5=new TreeNode(5);
+//        n1.left=n2;
+//        n1.right=n3;
+//        n2.left=n4;
+//        n2.right=n5;
+//        System.out.println(findLeaves(n1));
+
+//////////// Closest Binary Search Tree Value II
+//        TreeNode n1=new TreeNode(1);
+//        TreeNode n2=new TreeNode(2);
+//        TreeNode n3=new TreeNode(3);
+//        TreeNode n4=new TreeNode(4);
+//        TreeNode n5=new TreeNode(5);
+//        n4.left=n2;
+//        n4.right=n5;
+//        n2.left=n1;
+//        n2.right=n3;
+//        System.out.println(closestKValues(n4,3.7,2));
+
+//////////// Factor Combinations
+//        System.out.println(getFactors(16));
+
+//////////// Binary Tree Upside Down
+//        TreeNode n1=new TreeNode(1);
+//        TreeNode n2=new TreeNode(2);
+//        TreeNode n3=new TreeNode(3);
+//        TreeNode n4=new TreeNode(4);
+//        TreeNode n5=new TreeNode(5);
+//        n1.left=n2;
+//        n1.right=n3;
+//        n2.left=n4;
+//        n2.right=n5;
+//        upsideDownBinaryTree(n1);
+
+//////////// Find K Pairs with Smallest Sums
+//        System.out.println(kSmallestPairs(new int[]{1,1,2},new int[]{1,2,3},2));
+
+//////////// Evaluate Reverse Polish Notation
+//        System.out.println(evalRPN(new String[]{"2", "1", "+", "3", "*"}));
+
+//////////// Insert Delete GetRandom O(1)
+//        RandomizedSet randomizedSet=new RandomizedSet();
+//        // Init an empty set.
+//        RandomizedSet randomSet = new RandomizedSet();
+//        // Inserts 1 to the set. Returns true as 1 was inserted successfully.
+//        System.out.println(randomSet.insert(1));
+//        // Returns false as 2 does not exist in the set.
+//        System.out.println(randomSet.remove(2));
+//        // Inserts 2 to the set, returns true. Set now contains [1,2].
+//        System.out.println(randomSet.insert(2));
+//        // getRandom should return either 1 or 2 randomly.
+//        System.out.println(randomSet.getRandom());
+//        // Removes 1 from the set, returns true. Set now contains [2].
+//        System.out.println(randomSet.remove(1));
+//        // 2 was already in the set, so return false.
+//        System.out.println(randomSet.insert(2));
+//        // Since 2 is the only number in the set, getRandom always return 2.
+//        System.out.println(randomSet.getRandom());
+
+//////////// Valid Tic-Tac-Toe State
+//        System.out.println(validTicTacToe(new String[]{"XXX", "XOO", "XOO"}));
+
+//////////// Flatten Nested List Iterator
+//            NestedIterator nestedIterator=new NestedIterator();
+
+//////////// Peeking iterator
+//        PeekingIterator peekingIterator=new PeekingIterator();
+
+//////////// Partition to K Equal Sum Subsets
+//        System.out.println(canPartitionKSubsets(new int[]{1,2,2,1},2));
+
+
+
     }
     //Check iterator over List of List
 
+
+    public static boolean search(int[] groups, int row, int[] nums, int target) {
+        if (row < 0) return true;
+        int v = nums[row--];
+        for (int i = 0; i < groups.length; i++) {
+            if (groups[i] + v <= target) {
+                groups[i] += v;
+                if (search(groups, row, nums, target)) return true;
+                groups[i] -= v;
+            }
+            if (groups[i] == 0) break; // this means if the bucket is empty and still havent found a combination its useless trying other buckets
+        }
+        return false;
+    }
+
+    public static boolean canPartitionKSubsets(int[] nums, int k) {
+        int sum = Arrays.stream(nums).sum();
+        if (sum % k > 0) return false;
+        int target = sum / k;
+
+        Arrays.sort(nums);
+        int row = nums.length - 1;
+        if (nums[row] > target) return false;
+        while (row >= 0 && nums[row] == target) {
+            row--;
+            k--;
+        }
+        return search(new int[k], row, nums, target);
+    }
+
+    static class PeekingIterator implements Iterator<Integer> {
+        private Integer next = null;
+        private Iterator<Integer> iter;
+
+        public PeekingIterator(Iterator<Integer> iterator) {
+            // initialize any member here.
+            iter = iterator;
+            if (iter.hasNext())
+                next = iter.next();
+        }
+
+        // Returns the next element in the iteration without advancing the iterator.
+        public Integer peek() {
+            return next;
+        }
+
+        // hasNext() and next() should behave the same as in the Iterator interface.
+        // Override them if needed.
+        @Override
+        public Integer next() {
+            Integer res = next;
+            next = iter.hasNext() ? iter.next() : null;
+            return res;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return next != null;
+        }
+    }
+
+    public class NestedIterator implements Iterator<Integer> {
+        Stack<NestedInteger> stack = new Stack<>();
+        public NestedIterator(List<NestedInteger> nestedList) {
+            for(int i = nestedList.size() - 1; i >= 0; i--) {
+                stack.push(nestedList.get(i));
+            }
+        }
+
+        @Override
+        public Integer next() {
+            return stack.pop().getInteger();
+        }
+
+        @Override
+        public boolean hasNext() {
+            while(!stack.isEmpty()) {
+                NestedInteger curr = stack.peek();
+                if(curr.isInteger()) {
+                    return true;
+                }
+                stack.pop();
+                for(int i = curr.getList().size() - 1; i >= 0; i--) {
+                    stack.push(curr.getList().get(i));
+                }
+            }
+            return false;
+        }
+    }
+
+    //When O wins countX == countO
+    public static boolean validTicTacToe(String[] board) {
+        int xCount = 0, oCount = 0;
+        for (String row: board)
+            for (char c: row.toCharArray()) {
+                if (c == 'X') xCount++;
+                if (c == 'O') oCount++;
+            }
+
+        if (oCount != xCount && oCount != xCount - 1) return false;
+        if (win(board, 'X') && oCount != xCount - 1) return false;
+        if (win(board, 'O') && oCount != xCount) return false;
+        return true;
+    }
+
+    public static boolean win(String[] B, char P) {
+        // B: board, P: player
+        for (int i = 0; i < 3; ++i) {
+            if (P == B[0].charAt(i) && P == B[1].charAt(i) && P == B[2].charAt(i))
+                return true;
+            if (P == B[i].charAt(0) && P == B[i].charAt(1) && P == B[i].charAt(2))
+                return true;
+        }
+        if (P == B[0].charAt(0) && P == B[1].charAt(1) && P == B[2].charAt(2))
+            return true;
+        if (P == B[0].charAt(2) && P == B[1].charAt(1) && P == B[2].charAt(0))
+            return true;
+        return false;
+    }
+
+    //list.set function is new here
+    static class RandomizedSet {
+        Map<Integer, Integer> dict;
+        List<Integer> list;
+        Random rand = new Random();
+
+        /** Initialize your data structure here. */
+        public RandomizedSet() {
+            dict = new HashMap();
+            list = new ArrayList();
+        }
+
+        /** Inserts a value to the set. Returns true if the set did not already contain the specified element. */
+        public boolean insert(int val) {
+            if (dict.containsKey(val)) return false;
+
+            dict.put(val, list.size());
+            list.add(list.size(), val);
+            return true;
+        }
+
+        /** Removes a value from the set. Returns true if the set contained the specified element. */
+        public boolean remove(int val) {
+            if (! dict.containsKey(val)) return false;
+
+            // move the last element to the place idx of the element to delete
+            int lastElement = list.get(list.size() - 1);
+            int idx = dict.get(val);
+            list.set(idx, lastElement);
+            dict.put(lastElement, idx);
+            // delete the last element
+            list.remove(list.size() - 1);
+            dict.remove(val);
+            return true;
+        }
+
+        /** Get a random element from the set. */
+        public int getRandom() {
+            return list.get(rand.nextInt(list.size()));
+        }
+    }
+
+    public static int evalRPN(String[] tokens) {
+        String ops = "+-*/";
+        Stack<Integer> stack = new Stack<>();
+        for ( String t : tokens ) {
+            if ( ops.contains(t)) {
+                int n2 = stack.pop(), n1 = stack.pop();
+                stack.push(apply(n1 , n2, t));
+            } else {
+                stack.push(Integer.parseInt(t));
+            }
+        }
+        return stack.peek();
+    }
+
+    static int apply(int n1 , int n2, String op) {
+        if ( op.equals("*")) return n1 * n2;
+        else if ( op.equals("/")) return n1/ n2;
+        else if ( op.equals("+")) return n1 + n2;
+        else return n1 - n2;
+    }
+
+
+    public static List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        PriorityQueue<List<Integer>> que = new PriorityQueue<>((a,b)->a.get(0)+a.get(1)-b.get(0)-b.get(1));
+        List<List<Integer>> res = new ArrayList<>();
+        if(nums1.length==0 || nums2.length==0 || k==0) return res;
+        for(int i=0; i<nums1.length && i<k; i++) que.offer(Arrays.asList(nums1[i], nums2[0], 0));
+        while(k-- > 0 && !que.isEmpty()){
+            List<Integer> cur = que.poll();
+            res.add(Arrays.asList(cur.get(0), cur.get(1)));
+            if(cur.get(2) == nums2.length-1) continue;
+            que.offer(Arrays.asList(cur.get(0),nums2[cur.get(2)+1], cur.get(2)+1));
+        }
+        return res;
+    }
+    
+    public TreeNode upsideDownBinaryTreeIterative(TreeNode root) {
+        TreeNode curr = root;
+        TreeNode prev = null;
+        TreeNode next = null;
+        TreeNode temp = null;
+
+        while (curr != null) {
+            next = curr.left;
+            curr.left = temp;
+            temp = curr.right;
+            curr.right = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        return prev;
+    }
+
+    public static TreeNode upsideDownBinaryTree(TreeNode root) {
+        if (root == null || root.left == null && root.right == null)
+            return root;
+
+        TreeNode newRoot = upsideDownBinaryTree(root.left);
+
+        root.left.left = root.right;
+        root.left.right = root;
+
+        root.left = null;
+        root.right = null;
+
+        return newRoot;
+    }
+
+    //passing i in the recursion prevents duplicates
+    //square root can be used as max limit
+    public static List<List<Integer>> getFactors(int n) {
+        List<List<Integer>> res = new LinkedList<>();
+        backtrack(2, n, new LinkedList<>(), res);
+        return res;
+    }
+
+    static void backtrack(int start, int n, List<Integer> list, List<List<Integer>> res) {
+        for(int i = start; i * i <= n; i++) {
+            if(n % i == 0) {
+                list.add(i);
+                list.add(n / i);
+                res.add(new LinkedList<>(list));
+                list.remove(list.size() - 1);
+                backtrack(i, n / i, list, res);
+                list.remove(list.size() - 1);
+            }
+        }
+    }
+
+    public static List<List<Integer>> findLeaves(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        height(root, res);
+        return res;
+    }
+
+    public static int height(TreeNode node, List<List<Integer>> res){
+        if(null==node)  return -1;
+        int level = 1 + Math.max(height(node.left, res), height(node.right, res));
+        if(res.size()<level+1)  res.add(new ArrayList<>());
+        res.get(level).add(node.val);
+        return level;
+    }
+
+    static class AllOne {
+
+        // 18ms - 98%
+        class Node{
+            int val;
+            Set<String> keySet;
+            Node left, right;
+            Node(String key, int val){
+                this.val = val;
+                if ( key != null){
+                    keySet = new HashSet<>();
+                    keySet.add(key);
+                }
+            }
+        }
+
+        Map<String, Node> map;
+        Node head, tail;
+
+        /** Initialize your data structure here. */
+        public AllOne() {
+            map = new HashMap<>();
+            head = new Node(null, Integer.MIN_VALUE);
+            tail = new Node(null, Integer.MAX_VALUE);
+            head.right = tail;
+            tail.left = head;
+        }
+
+        /** Inserts a new key <Key> with value 1. Or increments an existing key by 1. */
+        public void inc(String key) {
+            if( map.containsKey(key)) {
+                Node n = map.get(key);
+                insert(key, n.val+1, n, n.right);
+                remove(key, n);
+            }else {
+                insert(key, 1, head, head.right);
+            }
+        }
+
+        /** Decrements an existing key by 1. If Key's value is 1, remove it from the data structure. */
+        public void dec(String key) {
+            if( !map.containsKey(key))
+                return;
+
+            Node n = map.get(key);
+            if ( n.val > 1)
+                insert(key, n.val-1, n.left, n);
+            else
+                map.remove(key); ///
+            remove(key, n);
+        }
+
+        /** Returns one of the keys with maximal value. */
+        public String getMaxKey() {
+            if( head.right == tail)
+                return "";
+            return tail.left.keySet.iterator().next();
+        }
+
+        /** Returns one of the keys with Minimal value. */
+        public String getMinKey() {
+            if(head.right == tail)
+                return "";
+            return head.right.keySet.iterator().next();
+        }
+
+        private void insert(String key, int val, Node left, Node right){
+            if( val == left.val){
+                left.keySet.add(key);
+                map.put(key, left);
+            } else if ( val == right.val){
+                right.keySet.add(key);
+                map.put(key, right);
+            } else {
+                Node newNode = new Node(key, val);
+                left.right = newNode;
+                newNode.left = left;
+                newNode.right = right;
+                right.left = newNode;
+                map.put(key, newNode);
+            }
+        }
+        private void remove(String key, Node n){
+            n.keySet.remove(key);
+            if( n.keySet.isEmpty()){
+                n.left.right = n.right;
+                n.right.left = n.left;
+            }
+        }
+    }
+
+    //Here the idea is to add the previous/parent level sum again per level and that will be = multiplying it with its level
+    public int depthSumInverse(List<NestedInteger> nestedList) {
+        if (nestedList == null) return 0;
+        Queue<NestedInteger> queue = new LinkedList<NestedInteger>();
+        int previousLevelSum = 0;
+        int levelSum = 0;
+        for (NestedInteger next : nestedList) {
+            queue.offer(next);
+        }
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+
+            for (int i = 0; i < size; i++) {
+                NestedInteger current = queue.poll();
+                if (current.isInteger()) levelSum += current.getInteger();
+                List<NestedInteger> nextList = current.getList();
+                if (nextList != null) {
+                    for (NestedInteger next : nextList) {
+                        queue.offer(next);
+                    }
+                }
+            }
+
+            previousLevelSum += levelSum;
+        }
+        return previousLevelSum;
+    }
+
+    //Can use binary search for the initial start position of either l1 or l2 which ever is larger or basically if the 2 starts have a huge difference
+    //eg l1 1,2,....100,130,150 and l2 70,80
+    static class WordDistance {
+
+        HashMap<String, ArrayList<Integer>> locations;
+
+        public  WordDistance(String[] words) {
+            this.locations = new HashMap<String, ArrayList<Integer>>();
+
+            // Prepare a mapping from a word to all it's locations (indices).
+            for (int i = 0; i < words.length; i++) {
+                ArrayList<Integer> loc = this.locations.getOrDefault(words[i], new ArrayList<Integer>());
+                loc.add(i);
+                this.locations.put(words[i], loc);
+            }
+        }
+
+        public int shortest(String word1, String word2) {
+            ArrayList<Integer> loc1, loc2;
+
+            // Location lists for both the words
+            // the indices will be in SORTED order by default
+            loc1 = this.locations.get(word1);
+            loc2 = this.locations.get(word2);
+
+            int l1 = 0, l2 = 0, minDiff = Integer.MAX_VALUE;
+            while (l1 < loc1.size() && l2 < loc2.size()) {
+                minDiff = Math.min(minDiff, Math.abs(loc1.get(l1) - loc2.get(l2)));
+                if (loc1.get(l1) < loc2.get(l2)) {
+                    l1++;
+                } else {
+                    l2++;
+                }
+            }
+
+            return minDiff;
+        }
+    }
+
+    public static List<String> generateParenthesis(int n) {
+        List<String> ans = new ArrayList();
+        backtrack(ans, "", 0, 0, n);
+        return ans;
+    }
+
+    public static void backtrack(List<String> ans, String cur, int open, int close, int max){
+        if (cur.length() == max * 2) {
+            ans.add(cur);
+            return;
+        }
+
+        if (open < max)
+            backtrack(ans, cur+"(", open+1, close, max);
+        if (close < open)
+            backtrack(ans, cur+")", open, close+1, max);
+    }
+
+    private static int[] getResult(String s, String t) {
+        int[] res = new int[2];
+        String[] ships = s.split(",");
+        Set<String> visited = new HashSet<>();
+        for(String ship : ships) {
+            String[] xAndY = ship.split(" ");
+            int topX = Integer.parseInt(xAndY[0].substring(0, xAndY[0].length() - 1));
+            char topY = xAndY[0].charAt(xAndY[0].length() - 1);
+            int bottomX = Integer.parseInt(xAndY[1].substring(0, xAndY[1].length() - 1));
+            char bottomY = xAndY[1].charAt(xAndY[1].length() - 1);
+            int cnt = 0;
+            for(String cell : t.split(" ")) {
+                if(visited.contains(cell))
+                    continue;
+                int x = Integer.parseInt(cell.substring(0, cell.length() - 1));
+                char y = cell.charAt(cell.length() - 1);
+                if(x >= topX && y >= topY && x <= bottomX && y <= bottomY) {
+                    cnt++;
+                    visited.add(cell);
+                }
+            }
+            if(cnt == (bottomX - topX+1) * (bottomY - topY+1)) {
+                res[0]++;
+                continue;
+            }
+            if(cnt > 0)
+                res[1]++;
+        }
+        return res;
+    }
+
+    public static List<Integer> partitionLabels(String S) {
+        int[] last = new int[26];
+        for (int i = 0; i < S.length(); ++i)
+            last[S.charAt(i) - 'a'] = i;
+
+        int j = 0, anchor = 0;
+        List<Integer> ans = new ArrayList();
+        for (int i = 0; i < S.length(); ++i) {
+            j = Math.max(j, last[S.charAt(i) - 'a']);
+            if (i == j) {
+                ans.add(i - anchor + 1);
+                anchor = i + 1;
+            }
+        }
+        return ans;
+    }
+
+    static int maxSubTree=-1;
+    public static int[] subtreeMaxAvg(Node root) {
+
+        if (root == null) return new int[]{0, 0};
+        int sum = root.val;
+        int totalNodes = 1;
+        for (Node child : root.children) {
+            int[] sumAndNodes = subtreeMaxAvg(child);
+            sum += sumAndNodes[0];
+            totalNodes += sumAndNodes[1];
+        }
+
+        if (sum / (totalNodes) > maxSubTree && root.children.size() > 0)
+            maxSubTree = root.val;
+
+        return new int[]{sum, totalNodes};
+    }
+
+    //not useful for a stream of products, as it sorts them in the beginning
+    public static List<List<String>> suggestedProductsBinarySearch(String[] products, String searchWord) {
+        List<List<String>> result = new ArrayList<>();
+        Arrays.sort(products);
+        String key = "";
+        for (int i = 0; i < searchWord.length(); i++) {
+            key = key + searchWord.charAt(i);
+            int index = Arrays.binarySearch(products, key);
+            if (index > 0) {
+                while (index > 0 && products[index - 1].equals(key)) {
+                    index--; // find the first same element
+                }
+            } else if (index < 0) {
+                index = -index - 1; // first element larger than the key
+            }
+            List<String> suggestions = new ArrayList<>();
+            for (int j = 0; j < 3; j++) {
+                if (index + j < products.length && products[index + j].startsWith(key)) {
+                    suggestions.add(products[index + j]);
+                } else {
+                    break;
+                }
+            }
+            result.add(suggestions);
+        }
+        return result;
+    }
+
+    public static List<List<String>> suggestedProductsTreeMap(String[] products, String searchWord) {
+        List<List<String>> res = new ArrayList<>();
+        TreeMap<String, Integer> map = new TreeMap<>();
+        Arrays.sort(products);
+        List<String> productsList = Arrays.asList(products);
+
+        for (int i = 0; i < products.length; i++) {
+            map.put(products[i], i);
+        }
+
+        String key = "";
+        for (char c : searchWord.toCharArray()) {
+            key += c;
+            String ceiling = map.ceilingKey(key);
+            String floor = map.floorKey(key + "~");
+            if (ceiling == null || floor == null) break;
+            res.add(productsList.subList(map.get(ceiling), Math.min(map.get(ceiling) + 3, map.get(floor) + 1)));
+        }
+
+        while (res.size() < searchWord.length()) res.add(new ArrayList<>());
+        return res;
+    }
+
+    //Can be done with TreeSet also
+    public static List<List<String>> suggestedProducts(String[] products, String searchWord) {
+        TrieNode root = new TrieNode(26);
+        for (String p : products) { // build Trie.
+            TrieNode t = root;
+            for (char c : p.toCharArray()) { // insert current product into Trie.
+                if (t.next[c - 'a'] == null)
+                    t.next[c - 'a'] = new TrieNode(26);
+                t = t.next[c - 'a'];
+                t.suggestion.offer(p); // put products with same prefix into suggestion list.
+                Collections.sort(t.suggestion); // sort products.
+                if (t.suggestion.size() > 3) // maintain 3 lexicographically minimum strings.
+                    t.suggestion.pollLast();
+            }
+        }
+        List<List<String>> ans = new ArrayList<>();
+        for (char c : searchWord.toCharArray()) { // search product.
+            if (root != null) // if current Trie is NOT null.
+                root = root.next[c - 'a'];
+            ans.add(root == null ? Arrays.asList() : root.suggestion); // add it if there exist products with current prefix.
+        }
+        return ans;
+    }
+
+    public static List<List<String>> suggestedProductsMyWay(String[] products, String searchWord) {
+
+        TrieNode root = new TrieNode(26);
+        for (String product : products)
+            buildTrie(product, root, 0);
+
+        return getSearchResult(searchWord, root);
+    }
+
+    public static void buildTrie(String product, TrieNode root, int index) {
+
+        for (int i = 0; i < product.length(); i++) {
+            if (root.next[product.charAt(i) - 'a'] == null)
+                root.next[product.charAt(i) - 'a'] = new TrieNode(26);
+            if (root.topThreeSuggesstions.size() > 3)
+                root.topThreeSuggesstions.remove(root.topThreeSuggesstions.last());
+            root = root.next[product.charAt(i) - 'a'];
+            root.topThreeSuggesstions.add(product);
+        }
+    }
+
+    public static List<List<String>> getSearchResult(String searchWord, TrieNode root) {
+        List<List<String>> suggestions = new ArrayList<>();
+        for (int i = 0; i < searchWord.length(); i++) {
+            if (root.next[searchWord.charAt(i) - 'a'] == null)
+                suggestions.add(new ArrayList<>());
+            else
+                suggestions.add(new ArrayList<>(root.next[searchWord.charAt(i) - 'a'].topThreeSuggesstions));
+            root = root.next[searchWord.charAt(i) - 'a'];
+        }
+        return suggestions;
+    }
+
+//    public static TrieNode buildTrieRecur(String product,TrieNode root, int index) {
+//
+//        if(index==product.length())
+//        {root.topThreeSuggesstions.add(product);
+////            return top
+//        }
+//        if (root.next[product.charAt(index) - 'a'] == null)
+//            root.next[product.charAt(index) - 'a'] = new TrieNode(26);
+//        buildTrie(product, root.next[product.charAt(index) - 'a'], index+1);
+//    }
+
+    public static int orangesRotting(int[][] grid) {
+        int[] dr = new int[]{-1, 0, 1, 0};
+        int[] dc = new int[]{0, -1, 0, 1};
+        int R = grid.length, C = grid[0].length;
+
+        // queue : all starting cells with rotten oranges
+        Queue<Integer> queue = new ArrayDeque();
+        Map<Integer, Integer> depth = new HashMap();
+        for (int r = 0; r < R; ++r)
+            for (int c = 0; c < C; ++c)
+                if (grid[r][c] == 2) {
+                    int code = r * C + c;
+                    queue.add(code);
+                    depth.put(code, 0);
+                }
+
+        int ans = 0;
+        while (!queue.isEmpty()) {
+            int code = queue.remove();
+            int r = code / C, c = code % C;
+            for (int k = 0; k < 4; ++k) {
+                int nr = r + dr[k];
+                int nc = c + dc[k];
+                if (0 <= nr && nr < R && 0 <= nc && nc < C && grid[nr][nc] == 1) {
+                    grid[nr][nc] = 2;
+                    int ncode = nr * C + nc;
+                    queue.add(ncode);
+                    depth.put(ncode, depth.get(code) + 1);
+                    ans = depth.get(ncode);
+                }
+            }
+        }
+
+        for (int[] row: grid)
+            for (int v: row)
+                if (v == 1)
+                    return -1;
+        return ans;
+
+    }
+
+    public static String[] popularToys(int numToys, int topToys, String[] toys, String[] quotes){
+        HashMap<String, Toy> toysToCount=new HashMap<>();
+        for(String toy: toys) toysToCount.put(toy, new Toy(toy,0,0));
+
+        for (String quote:quotes) {
+            HashSet<String> visited = new HashSet<>();
+            for (String word : quote.toLowerCase().replaceAll("!", "").split(" ")){
+                if (toysToCount.containsKey(word)) {
+                    Toy toy = toysToCount.get(word);
+                    toy.totalCount++;
+                    if (!visited.contains(word)) {
+                        toy.countPerQuote++;
+                        visited.add(word);
+                    }
+                }
+            }
+        }
+
+        //This may be a little slower than below cuz of n + nlogn vs nlogn
+//        LinkedList<Toy> list=new LinkedList<>();
+//        list.addAll(toysToCount.values());
+//        Collections.sort(list,(a,b)->
+//        {
+//            int totalCountCompare=b.totalCount - a.totalCount;
+//            if(totalCountCompare==0)
+//                return b.countPerQuote-a.countPerQuote;
+//            return totalCountCompare;
+//        });
+
+
+        PriorityQueue<Toy> pq=new PriorityQueue<Toy>((a,b)->
+        {
+            int totalCountCompare=b.totalCount - a.totalCount;
+            if(totalCountCompare==0)
+                return b.countPerQuote-a.countPerQuote;
+            return totalCountCompare;
+        });
+        for(Toy toy:toysToCount.values())
+            pq.offer(toy);
+
+        String[] toyOutput=new String[topToys];
+        for (int i = 0; i < topToys; i++) {
+            toyOutput[i]=pq.poll().toyName;
+        }
+        return toyOutput;
+    }
+    static class Toy{
+        String toyName;
+        int totalCount;
+        int countPerQuote;
+
+        public Toy(String toyName, int totalCount, int countPerQuote) {
+            this.toyName = toyName;
+            this.totalCount = totalCount;
+            this.countPerQuote = countPerQuote;
+        }
+    }
     public static List<Integer> findClosestElements(List<Integer> arr, int k, int x) {
         int n = arr.size();
         if (x <= arr.get(0)) {
@@ -2545,6 +3427,27 @@ public class Test {
         return res;
     }
 
+    //This came out faster.
+    //Can also be done with binary search and PQ
+    public static List<Integer> closestKValues(TreeNode root, double target, int k) {
+        LinkedList<Integer> res = new LinkedList<>();
+        collect(root, target, k, res);
+        return res;
+    }
+
+    public static void collect(TreeNode root, double target, int k, LinkedList<Integer> res) {
+        if (root == null) return;
+        collect(root.left, target, k, res);
+
+        if (res.size() == k) {
+            //if size k, add curent and remove head if it's optimal, otherwise return
+            if (Math.abs(target - root.val) < Math.abs(target - res.peekFirst()))
+                res.removeFirst();
+            else return;
+        }
+        res.add(root.val);
+        collect(root.right, target, k, res);
+    }
 
     //Path of binary search passes over the closes values to target
     //If character counts are equal sort in asc order also helps take different characters
@@ -4096,34 +4999,35 @@ public class Test {
     }
 
     //Tarjan's bridge-finding algorithm
+    //https://www.youtube.com/watch?v=TyWtx7q2D7Y&t=702s
     public static class Bridges {
         private int id;
         private int[] visited;
-        private int[] low;
+        private int[] lowLink;
         private List<Integer>[] graph;
 
         public List<List<Integer>> findBridges(int n, int[][] edges) {
             List<List<Integer>> bridges = new ArrayList<>();
             graph = buildGraph(n, edges);
             visited = new int[n + 1];
-            low = new int[n + 1];
+            lowLink = new int[n + 1];
             id = 1;
             visit(1, -1, bridges);
             return bridges;
         }
 
         private void visit(int curr, int parent, List<List<Integer>> bridges) {
-            low[curr] = visited[curr] = id++;
+            lowLink[curr] = visited[curr] = id++;
             for (int next : graph[curr]) {
                 if (next == parent) continue;
                 if (visited[next] == 0) { // not visited
                     visit(next, curr, bridges);
-                    low[curr] = Math.min(low[curr], low[next]); //making sure on the way back to consolidate to a cycle
-                    if (visited[curr] < low[next]) // this means next doesnt belong to current's cycle, so there's a bridge
+                    lowLink[curr] = Math.min(lowLink[curr], lowLink[next]); //making sure on the way back to consolidate to a cycle
+                    if (visited[curr] < lowLink[next]) // this means next doesnt belong to current's cycle, so there's a bridge
                         bridges.add(Arrays.asList(curr, next));
 
                 } else
-                    low[curr] = Math.min(low[curr], visited[next]); // consolidating cycles
+                    lowLink[curr] = Math.min(lowLink[curr], visited[next]); // consolidating cycles
             }
         }
 
@@ -4140,6 +5044,7 @@ public class Test {
         }
     }
 
+    //May be possible to do with DLL and one hashmap like All O one question
     static class LFUCache {
         HashMap<Integer, Integer> keyToVal;
         HashMap<Integer, Integer> keyToCount;
@@ -5090,37 +5995,26 @@ public class Test {
         // valid or not and also if we have removed the total number of left and right
         // parentheses that we should have removed.
         if (index == s.length()) {
-            if (leftRem == 0 && rightRem == 0) {
+            if (leftRem == 0 && rightRem == 0)
                 validExpressions.add(expression.toString());
-            }
-
         } else {
             char character = s.charAt(index);
             int length = expression.length();
 
             // The discard case. Note that here we have our pruning condition.
             // We don't recurse if the remaining count for that parenthesis is == 0.
-            if ((character == '(' && leftRem > 0) || (character == ')' && rightRem > 0)) {
+            if ((character == '(' && leftRem > 0) || (character == ')' && rightRem > 0))
                 recurse(s, index + 1, leftCount, rightCount, leftRem - (character == '(' ? 1 : 0), rightRem - (character == ')' ? 1 : 0), expression);
-            }
 
             expression.append(character);
 
             // Simply recurse one step further if the current character is not a parenthesis.
-            if (character != '(' && character != ')') {
-
+            if (character != '(' && character != ')')
                 recurse(s, index + 1, leftCount, rightCount, leftRem, rightRem, expression);
-
-            } else if (character == '(') {
-
-                // Consider an opening bracket.
-                recurse(s, index + 1, leftCount + 1, rightCount, leftRem, rightRem, expression);
-
-            } else if (rightCount < leftCount) {
-
-                // Consider a closing bracket.
-                recurse(s, index + 1, leftCount, rightCount + 1, leftRem, rightRem, expression);
-            }
+            else if (character == '(')
+                recurse(s, index + 1, leftCount + 1, rightCount, leftRem, rightRem, expression); // Consider an opening bracket.
+            else if (rightCount < leftCount)
+                recurse(s, index + 1, leftCount, rightCount + 1, leftRem, rightRem, expression); // Consider a closing bracket.
 
             // Delete for backtracking.
             expression.deleteCharAt(length);
@@ -5449,8 +6343,8 @@ public class Test {
         return l + r + 1;
     }
 
-
     //constant space and time. You can also get past getHits() by adding condition timestamp > times[i] && ....
+    //This may be good for concurrency because concurrently accessing the array element is same as int
     static class HitCounterArrays {
         private int[] times;
         private int[] hits;
@@ -5538,7 +6432,7 @@ public class Test {
         /** Return the number of hits in the past 5 minutes.
          @param timestamp - The current timestamp (in seconds granularity). */
         public int getHits(int timestamp) {
-            return count-1 - (map.floorKey(timestamp-300) == null ? 0 : map.get(map.floorKey(timestamp-300)));
+            return count-1 - (map.floorKey(timestamp-300) == null ? 0 : map.floorEntry(timestamp-300).getValue());
         }
     }
 
@@ -5593,7 +6487,6 @@ public class Test {
         }
     }
 
-
     //use value as index to mark presence
     static void printRepeating(int arr[])
     {
@@ -5610,6 +6503,8 @@ public class Test {
     }
 
     //Can also be done with an array of hashSets containing value 1 & -1
+    //Basically check if each char has the same out degree and in degree.
+    // the cases that shouldn't have are. Char pointing to 2 char or a char being pointed by 2 chars
     public static boolean isIsomorphic(String s, String t) {
         int m1[] = new int[256], m2[] = new int[256], n = s.length();
         for (int i = 0; i < n; ++i) {
@@ -5656,6 +6551,7 @@ public class Test {
         return head;
     }
 
+    //similar to trapping water
     public static int[] productExceptSelf(int[] nums) {
 
         int length = nums.length;
@@ -6955,7 +7851,7 @@ public class Test {
         return new ArrayList(ans.values());
     }
 
-//    Red black trees…properties
+    //    Red black trees…properties
 //    Balance a binary tree or BST…do with inorder
 //    Check if balanced binary tree…check by height subtractions
 
@@ -7666,73 +8562,45 @@ public class Test {
         return root;
     }
 
+    private static final String splitter = ",";
+    private static final String SIGN = "#";
+
     // Encodes a tree to a single string.
-    public static String serialize(TreeNode root) {
-        return serialize(root, "");
+    //Use string builder
+    public String serialize(TreeNode root) {
+        StringBuilder sb = new StringBuilder();
+        buildString(root, sb);
+        return sb.toString();
     }
 
-    public static String serialize(TreeNode root, String str) {
-        // Recursive serialization.
-        if (root == null) {
-            str += "null,";
-        } else {
-            if (dfsTraversalOrder.equals("preorder"))
-                str += str.valueOf(root.val) + ",";
-
-            str = serialize(root.left, str);
-            if (dfsTraversalOrder.equals("inorder"))
-                str += str.valueOf(root.val) + ",";
-
-            str = serialize(root.right, str);
-
-            if (dfsTraversalOrder.equals("postorder"))
-                str += str.valueOf(root.val) + ",";
-
+    private void buildString(TreeNode root, StringBuilder sb) {
+        if (root == null) sb.append(SIGN).append(splitter);
+        else {
+            sb.append(root.val).append(splitter);
+            buildString(root.left, sb);
+            buildString(root.right, sb);
         }
-        return str;
-    }
-
-    //For deserializing, the position of root is very important.
-    //for Preorder, its in the start so start from start, post- at the end and inorder-root position should be given
-    public static int deserializePreOrder(TreeNode root, String[] preOrderString, int index) {
-
-        index++;
-        if (!preOrderString[index].equals("null")) {
-            root.left = new TreeNode(Integer.parseInt(preOrderString[index]));
-            index = deserializePreOrder(root.left, preOrderString, index);
-        } else
-            index++;
-
-        if (!preOrderString[index].equals("null")) {
-            root.right = new TreeNode(Integer.parseInt(preOrderString[index]));
-            index = deserializePreOrder(root.right, preOrderString, index);
-        } else
-            index++;
-
-        return index;
-    }
-
-
-    public static TreeNode deserialize(List<String> l) {
-        // Recursive deserialization.
-        if (l.get(0).equals("null")) {
-            l.remove(0);
-            return null;
-        }
-
-        TreeNode root = new TreeNode(Integer.valueOf(l.get(0)));
-        l.remove(0);
-        root.left = deserialize(l);
-        root.right = deserialize(l);
-
-        return root;
     }
 
     // Decodes your encoded data to tree.
-    public static TreeNode deserialize(String data) {
-        String[] data_array = data.split(",");
-        List<String> data_list = new LinkedList<String>(Arrays.asList(data_array));
-        return deserialize(data_list);
+    //Deque is faster
+    //For deserializing, the position of root is very important.
+    //for Preorder, its in the start so start from start, post- at the end and inorder-root position should be given
+    public TreeNode deserialize(String data) {
+        Deque<String> nodes = new LinkedList();
+        nodes.addAll(Arrays.asList(data.split(splitter)));
+        return buildTree(nodes);
+    }
+
+    private TreeNode buildTree(Deque<String> nodes) {
+        String val = nodes.remove();
+        if (val.equals(SIGN)) return null;
+        else {
+            TreeNode cur = new TreeNode(Integer.valueOf(val));
+            cur.left = buildTree(nodes);
+            cur.right = buildTree(nodes);
+            return cur;
+        }
     }
 
     //>>>>Rev

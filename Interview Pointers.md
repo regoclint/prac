@@ -1,4 +1,45 @@
-Values
+**My pointers**
+
+Ariba
+Product stuff
+- Postman test suite
+- Performance tuned 
+Backend APIs - n3 complexities
+Frontend - Tweaked long polling in maximus activity page on a condition
+Build time - Unit tests rewrite, h2 db, admin ui dev
+Jenkins build - multi thread
+
+Dev stuff
+- Chrome extension
+- Admin ui development time
+- Jrebel
+
+Challenges
+- Postman testsuite
+- Long polling was bad, suggested websockets, settled with long polling with a condition
+- Performance on discovery API, did the research
+- Collaborating with multiple teams for Pna, learning and imparting
+- Suggested refresh token and access token be done automatically in SDK
+- Looking into core stack code and fixing bugs
+
+faced something and how did u improve
+    Performance PnA
+Faced some issue and had to redo
+    Design changes SB
+
+My questions
+-What would be the project, tech stack, location, volume of users
+ 
+
+
+**About Companies**
+
+Workday - Enterprise solutions for Financial management, Human resources
+Adaptive Insights
+- Business financial planning software
+
+
+Atlassian
 
 1. Open company, no bullshit
 How have you had to have difficult conversations and what was your approach to this?

@@ -36,6 +36,7 @@ BST do inorder iteratively with stack
 Inorder in BST is ascending order and modify inorder for descending
 For nary tree serialize deserialize need children count
 For binary tree serialize deserialize need null values
+Easier to serialize and deserialize via pre order
 For preorder subtree need # at start
 PQ and TreeSet
     Both O(log(N)) time complexity for adding, removing, and searching elements
@@ -132,11 +133,11 @@ Optimization problems:-
 - Greedy
     - local optimal is global optimal
     - Faster than DP
-- DP
+- Dynamic programming
     - Considers all solutions
     - Optimal substructure property
     - Overlapping sub-problems property
-    - Approach - Recursive(top down) or Iterative(mostly bottom up) with tabulation
+    - Approach - Recursive(top down with memoization ) or Iterative(bottom up with tabulation)
 - Branch and bound
     - It's BFS and backtracking is DFS
     
@@ -181,7 +182,7 @@ Twitter (News Feed) https://www.youtube.com/watch?v=KmAyPUv9gOY
 - Following
     - Active followers table is checked before precomputing the tweet into timelines
 -Sharding
-    Posts - Cannot be shard on user cuz for hot users it could create an unbalanced load. Shard based on epoch time & sequence
+    Posts - Cannot be sharded on user cuz for hot users it could create an unbalanced load. Shard based on epoch time & sequence
     Timeline - Since its in memory and has limited posts per user, we can shard on userid and use CH
     News feeds have hot users unlike other design hence userids are not that good for CH
 Feed ranking    
@@ -190,7 +191,6 @@ Feed ranking
 - Advertising
 - Eventual consistency
     
-    
  
 Instagram (News Feed) 
 - Precomputing like count is better so store the aggregation counts in another table  
@@ -198,6 +198,8 @@ Instagram (News Feed)
 - Cache and precompute news
 - Push notifications for users posts and pull for celebrities (or rate limit pushes) 
 - Web sockets to push notifications
+- Store Images/Videos in S3
+
     
 Whatsapp (Chat service)
 - https://www.youtube.com/watch?v=vvhC64hQZMk
@@ -324,7 +326,10 @@ Rate limiter https://www.youtube.com/watch?v=mhUQe4BKZXs
  - Shard per user id and per api. Consistent hashing for fault tolerance and replication
  - Rate limit by both user & ip - Only IP then other users will also be blocked
                                Only User then login api will not get rate limited      
-
+ - Similar to hit counter, but differences are -
+    Hit counter is not per user so one Q is fine
+    It has 2 operations, getHits() is not a synchronous low latency response  
+ 
 Dropbox https://www.youtube.com/watch?v=U0xTu6E2CT8
  - Flow- Client -> EBS storage
                 -> Message Qs -><- Sync Svc -> Metadata store
@@ -351,8 +356,8 @@ Dropbox https://www.youtube.com/watch?v=U0xTu6E2CT8
        
 Tiny URL
  - Flow:- client -> LB -> App server -> LB -> Cache
-                                        -> DB                 <- Cleanup Svc
-                                  -> Key gen svc -> Key DB    <-     
+                                           -> DB                 <- Cleanup Svc
+                                     -> Key gen svc -> Key DB    <-     
  - Unique id generation
     Generate 6 letter random alpha-numeric keys in advance via MD5 or SH-256
     2 tables for used and unused keys
@@ -364,12 +369,17 @@ Tiny URL
     If there is a cache miss, read from db and update all caches
     LRU
     Create replicas so load is uniformly distributed and no SPF
+- DB NoSQL is better because millions of records and only 2 tables URL and User. CH based on the uniqueid for partitioning    
  - Purging
     When expired link is accessed delete it and make it reusable
     Can run cleanup tasks during low traffic. 
     Could store id and expiration time in another table 
     Cleanup should be another micro-service
  - HTTP 302 to redirect and 404 not found  
+   
+Patebin
+- Same like URL shortening except read requests are lower and Object storage S3 is used
+- Why S3, why not S3 and CLOB. S3 is automatically scallable
     
 Maximus (upload and download)
 
@@ -413,7 +423,19 @@ Indexing sorts a particular set of data so that it can be binary searched. This 
     -When the indexed rows are used more often for querying its useful otherwise its more of a negative for writes
     https://www.youtube.com/watch?v=zDzu6vka0rQ
     https://www.youtube.com/watch?v=WmJuhKLQMA4
-   
+ 
+SOAP vs REST vs GraphQL
+    - REST was supersceeded by SOAP was superceeded by CORBA
+    - SOAP is a protocol(developed by Microsoft), REST & GraphQL(developed by Fb) is an architectural pattern
+    - SOAP uses XML, REST can use anything
+    - GraphQl has one endpoint and the rest is a query and you can specify exactly what data u need on the fly
+    - GraphQL can get complex for rate limiting, api request logging etc. It is best when data requirements are changing frequently
+    
+APIs best practices
+    - 
+    - API versioning for major breaking changes, use URI, custom header
+    
+      
 HTTP - is synchronous, client to server protocol
 TCP - is asynchronous
 XMPP or Websockets - Peer to peer protocol -Stateful and long lived TCP connection    
@@ -433,11 +455,14 @@ Gateway/Proxy servers help in
     -Load balancing
     -Routing
 NGINX is a software based reverse proxy, better than hardware based ones  
-Precomputing could generally mean make updates when the update activity is done before run time of the actual activity
-Block Storage vs Object storage
-    Block for heavy read and write. EBS. Can replace parts for updates.
-    Object for low write and heavy read. S3. Whole object is replaced.
-
+Precomputing could generally mean, make updates when the update activity is done before run time of the actual activity
+Block Storage vs Object storage vs DFS
+    - Block for heavy read and write. EBS. Can replace parts for updates.
+    - Object for low write and heavy read. S3. Whole object is replaced. S3 is a key:value pair NoSQL db
+    - HDFS is faster in read and write compared to S3 as its local and has no size limitations
+    - S3 has 5GB size limitation but S3 more scalable, cheaper and durable compared to HDFS 
+    - https://www.xplenty.com/blog/storing-apache-hadoop-data-cloud-hdfs-vs-s3/#performance
+  
 Encryption is a two-way function where information is scrambled in such a way that it can be unscrambled later. Like whatsapp messages
 Hashing is a one-way function where data is mapped to a fixed-length value. Hashing is primarily used for authentication. For passwords but not that safe.
 Salting is an additional step during hashing, typically seen in association to hashed passwords, that adds an additional value to the end of the password that changes the hash value produced.
@@ -449,8 +474,37 @@ SHA-256 vs MD5
     MD5 is 128 bit and hence faster butt less secure
 Base64 32 etc are encoding techniques for reducing size and have no encryption in it. not for security    
 
-Basic auth vs Oauth2.0
-
+Authorization/Authentication types
+- HTTP is stateless, needs all info all the time
+- Banking needs to be stateful
+- Authentication is login, Authorization is granting access to a 3rd party
+- Basic
+    - Basic Base64(username:password)
+    - Over https, not good for banking etc
+- SAML Security Assertion Markup Language
+    - XML, complex, used by large companies. Service provider and identity provider, supports single sign on
+- OAuth 1.0 
+    Sign each request every time
+- OAuth 2.0 (Stateless)
+    - It is an authorization technique(framework) for granting access to another party
+    - Basic call to get token -> Bearer token
+    - Access token, refresh token. Access token expires. Refresh is longer
+    - Refresh token call will additionally have grant_type=refresh_token
+- JWT JSON Web Tokens (Stateless)
+    - is a Protocol, structure- Header, Payload, Signature(HMAC256 signed with a secret)
+    - is sent in header as bearer token
+    - used for authorization after authenticating with may be OAuth
+    - No sensitive info should be in payload
+    - Can be JWE encrypted
+- Sessions (Stateful)
+    - After loging in the server issues a session id via cookie. On logout it destroys the session and clears the cookie from the client
+    - Session is stored on server side(stateful) in may be redis
+    - Cookies are signed(HMAC) so it cannot be tampered
+    - Used in session management, personalization, tracking 
+- Cookie
+    - 50 cookies per domain, all together 4KB max size                  
+   
+    
 Consistent hashing  https://www.youtube.com/watch?v=bBK_So1u9ew
 - Mostly Used for storing data for quick searches in DS like distributed cashing systems
 - Choose random keys for servers -> Keep them in a ring form -> Hash the key(dont mod it with servers) -> when a key comes in choose the next clockwise server id 
@@ -466,6 +520,9 @@ Sharding (DB servers)
 - Drawbacks - Joins, Shards are fixed, hierarchical sharding further divides shards into smaller shards
 
 Load balancing helps you scale horizontally across an ever-increasing number of servers
+    - Any part of the system that's distributed requires a load balancer
+    - Load balancer should also have master slave design to prevent SPF
+Reliability is to do with business operations. Availability is being online. A reliable sys is available not necessarily vice versa
 
 CAP theorem
 Consistency - Data should be same in read for all users
@@ -494,6 +551,7 @@ ACID - Atomicity, Consistency, Isolation, and Durability
 NoSQL vs SQL https://www.youtube.com/watch?v=p4C0n3afZdk
     performance & scalability vs transaction(ACID compliant)
     scaling horiz vs joins
+    
 Types of NoSQL db - key Value - Redis, Vodemort, Dynamo.
                   - Document based - MongoDB. can do nested queries
                   - Wide-Column - For big data as they look at column families instead of all columns. Cassandra, Hbase
@@ -517,47 +575,52 @@ HTTP Methods
     PATCH - similar to put and post but only for partial updates
     OPTIONS              
 HTTP status “429 - Too many requests"
-
+Redis can be in master/slave or cluster mode 
+Hosted vs Cloud services- In hosted there may not be multiple tenants or scale can be limited.
 
 
 
 **Design Patterns**
 
-Abstract class is so that no object can be created of it and you can have common functions defined so that
-inherited classes can reuse.
+Abstract class is so that no object can be created of it and you can have common functions defined so that inherited classes can reuse.
 
 Abstract classes can have abstract functions which will have no body so the inherited classes must define it
 
 Singleton
-    static getInstance
-    private constructor
+- static getInstance synchronise to prevent multiple initial creation
+- private constructor
     
 Factory
-    Class to create objects so that the creation logic is not handled by clients
-    so client doesnt need to be recompiled
+- Class to create objects so that the creation logic is not handled by clients
+- so client doesnt need to be recompiled
    
   
 Template
-    a process flow that needs to be done for many base classes
-    Abstract template class
-    final template method
-    abstract methods which each sub class will define separately
+- a process flow that needs to be done for many base classes
+- Abstract template class, final template method, that contains abstract methods which each sub class will define separately
             
 Strategy design pattern
-    https://www.geeksforgeeks.org/strategy-pattern-set-1/
-    https://www.geeksforgeeks.org/strategy-pattern-set-2/
-    Used for optional behaviours
-    If a behaviour definition is common and required for all classes use abstract classes
-    But, If a behaviour definition is common but not required for all classes use Strategy pattern
+- https://www.geeksforgeeks.org/strategy-pattern-set-1/
+- https://www.geeksforgeeks.org/strategy-pattern-set-2/
+- Used for optional behaviours
+- If a behaviour definition is common and required for all classes use abstract classes
+- But, If a behaviour definition is common but not required for all classes use Strategy pattern
+- Assign an interface to a base class and have concrete implementation of the interfaces
     
-""
+Observer
+- Used when multiple objects(Observers) are dependent on the state of one object(Subject)
+- Eg. Followers get notified, subscriptions, whatsapp group, anything that involves broadcasting a state
+- Coding to interfaces helps generalize stuff and can add more classes later on
+
+
 
 
 **Java**
 
 Future Task, ExecutorService, ThreadPoolExecutor, Async(Spring)
-ExecutorService uses ThreadPoolExecutor and can choose the type of threading
-FutureTask blocks current execution
+- ExecutorService uses ThreadPoolExecutor and can choose the type of threading
+- FutureTask blocks current execution
+
 Enumerations serve the purpose of representing a group of named constants like types -days of the week,
 planets,colors etc
 
@@ -566,51 +629,81 @@ Stream, Lambda
 Abstract class - 
     has to have one abstract method - this method would differ for the sub classes hence abstract
     increases reuseability through inheritance using common non-abstract method definitions
-    has to be extended
-    Cant creat object cuz there are abstract methods in it
-    It is inherited
+    has to be extended. Cant create an object cuz there are abstract methods in it
     Not good to keep uncommon functions in abstract class(use Strategy pattern instead)
      
 Interface 
     All methods are abstract 
     All methods must be implemented in implementing class
     Cant create object cuz all methods are abstract
-    It is implemented
     
 String buffer - is synchronized, slow
 String builder - is not synchronized, twice as fast
 
 Final
-    classes - Cannot be inherited...This can confer security eg. java.lang.system
+    classes - Cannot be inherited...This can confer security eg. String.java
     methods - cannot be overridden
     variables - are constant
-    
+
+Overriding is for inheritance and overloading is different arguments    
 Generics 
-- <T> used for type safety. 
-- Also helps reducing the number of overloaded functions
-- Used for 
-    
+- <T> used for type safety during compilation
+- T stands mostly for type
+- ? means any type. Eg. <? extends T>
+- <T extends Number> to allow only classes that extend Number to be passed. Super will be the reverse.
+- Used to get rid of overloaded methods
+      
 Reflection
 - Get all definitions in a class via java.lang.reflect such as methods, fields, super classes
  
 Threads
-- Created via extending Thread class or implementing Runnable and define run function
-- ExecutorService can be used as a thread pool
-    - It can use future.get which returns null when its over
-    - It can be implemented via Callable instead of Runnable and return a result via future.get()
- 
+- Created via extending Thread class or implementing Runnable and define run function. Thread class also implements Runnable. the class that implements Runnable are passed to Thread constructor 
+- The start method should be called not run. Calling run will execute it in a single threaded manner.
+- Inter-thread communication - wait(),notify(), notifyAll()
+- Synchronised blocks can be used for methods that are not synchronisable
+- Threadpools FixedThreadPool, SingleThreadPool, CachedThreadPool(creates new ones threads or reuses old), ScheduleThreadPool 
+- ExecutorService is used to run a threadpool. Internally uses a blocking queue which is thread safe
+    - Can execute() Runnables or submit() Callables. Runnable doesnt have a return type. Callable can return
+    - Future is used as placeholder for Callable returns
+    - Future.get() returns the value of the callable and if callable hasn't finished yet it blocks the current thread. It can have a timeout
+    https://www.youtube.com/watch?v=NEZ2ASoP_nY
+- Completable future 
 Apache Velocity templating engine, can be used for email templates
 Javax.mail - mail api
+
+Equals and Hashcode
+- Overriding equals should also override hashCode
+- equals(Object o) method checks 
+    - this == o
+    - o instanceof className
+    - Type cast o and compare all class variables
+- hashcode returns int and should be unique for the set of values in the object
+- If hashcode is different the equals() is not checked
+    if hashcode is same equals() is checked
+- String1.equals(string2) calls this method
+
+HashMap working
+    - Array and Linked List Node(key, value, hash, next)
+    - Put operation -> generate hash and index -> store at that index
+    - Get operation -> generate hash and index -> Go thru the LL first check hash, then key 
+    - TREEIFY_THRESHOLD = 8 after this converts to binary tree
+        
+Java 7 vs 8
+    - Lamda function - Function as arguments
+    - Streams in collection 
 
  
 **Spring**
 
 Spring is a framework over Servlets
 
-Cyclic dependency - if set a bean in constructor
+Cyclic dependency A->B->A. 
+    - Can be remove by @Lazy, Setter, @PostConstruct
 
 Dependency injection - Helps in loosely coupling and mocking classes(testing)
-
+    - A dependency injection container helps create objects and autowire them
+    - To create a mock object you need loosely coupled components
+    
 Bean scope - As a rule of thumb, you should use the prototype scope for all beans that are stateful, 
 while the singleton scope should be used for stateless beans.
 
@@ -636,12 +729,14 @@ Filter
 Interceptors
         
 
-@Transactional - will rollback failures
+@Transactional - will rollback in case of failures
 Live reload
 Actuator 
 
 Redirect - https://www.baeldung.com/spring-redirect-and-forward
-
+    Redirect happens on the browser side with a 302
+    Forward happens on the server side
+    
 Spring testing
 @RunWith(SpringRunner.class) only is required for spring
 @RunWith(MockitoJunitRunner.class) is for non-spring context
@@ -649,7 +744,9 @@ Spring testing
 @MockBean - for mocking beans, automatically injects them
 @SpyBean - for mocking only certain parts
 @Mock , @Spy - for non spring boot context
-@InjectMocks used by normal mockito to inject mocks into service/class
+@InjectMocks used by regular(Non-spring) mockito to inject mocks into service/class
+
+@PreAuthorize helps authorize access to APIs base on roles
 
 
 **Misc**
