@@ -4,10 +4,10 @@ Ariba
 Product stuff
 - Postman test suite
 - Performance tuned 
-Backend APIs - n3 complexities
-Frontend - Tweaked long polling in maximus activity page on a condition
-Build time - Unit tests rewrite, h2 db, admin ui dev
-Jenkins build - multi thread
+    Backend APIs - Object mappers, logs, n3 complexities, 
+    Build time - admin ui dev, Unit tests rewrite, h2 db, 
+    Frontend - Tweaked long polling in maximus activity page on a condition
+    Jenkins build - multi thread
 
 Dev stuff
 - Chrome extension
@@ -21,11 +21,17 @@ Challenges
 - Collaborating with multiple teams for Pna, learning and imparting
 - Suggested refresh token and access token be done automatically in SDK
 - Looking into core stack code and fixing bugs
-
+- LiveReload
+- Tech debt
+    - Open sessions, converted sessions to JPA
+    
 faced something and how did u improve
     Performance PnA
 Faced some issue and had to redo
     Design changes SB
+
+Strengths
+- Curiosity, improving performance, solving problems, finding solutions and improving experiences, reducing efforts
 
 My questions
 -What would be the project, tech stack, location, volume of users

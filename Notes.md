@@ -21,6 +21,7 @@ Shallow copy - contains references to the copy from element
 Deep copy - New objects are created
 
 Fail-fast - fail earlier in the process. Iterator fails fast in case of concurrent modification
+Fail-safe - Iterator doesnt fail concurrent modification because they work on a copy. Eg using just iterator or ConcurrentHashMap or CopyOnWriteArrayList
 Use iterator to remove elements while iterating over a list
 To Remove from list - break after removal or use iterator to avoid comod error
 
@@ -309,11 +310,11 @@ Web crawler https://www.youtube.com/watch?v=BKZxZwUgL3Y
  - Detect updates:- HEAD requests to find update time
         duplicates:- MD5 hash works only entire match, SimHash of 2 pages gives similarity %(near duplicate for people who copy content)
  - Storage:- Google cloud big table build on GFS etc. No sql DB for PBs of data                 
-        
+       
     
 Rate limiter https://www.youtube.com/watch?v=mhUQe4BKZXs
  - Flow:- Clients -> Web Server -><- Rate Limiter Svc -> Redis & DBMS 
-                             -><- App Service        
+                                -><- App Service        
  - High availability, low latency system
  - Algos
     Fixed window 
@@ -328,7 +329,7 @@ Rate limiter https://www.youtube.com/watch?v=mhUQe4BKZXs
                                Only User then login api will not get rate limited      
  - Similar to hit counter, but differences are -
     Hit counter is not per user so one Q is fine
-    It has 2 operations, getHits() is not a synchronous low latency response  
+    It has 2 operations, getHits() is not a multi-threaded low latency response  
  
 Dropbox https://www.youtube.com/watch?v=U0xTu6E2CT8
  - Flow- Client -> EBS storage
@@ -377,9 +378,9 @@ Tiny URL
     Cleanup should be another micro-service
  - HTTP 302 to redirect and 404 not found  
    
-Patebin
+Pastebin
 - Same like URL shortening except read requests are lower and Object storage S3 is used
-- Why S3, why not S3 and CLOB. S3 is automatically scallable
+- Why S3, why not S3 and CLOB. S3 is automatically scaleable
     
 Maximus (upload and download)
 
@@ -393,8 +394,8 @@ Type Ahead Suggestions
  - Frequency of search can be used for top 10 terms. additionally location, personalization,
  - Can store top 10 suggestion in each node as multiple keywords can lead to deeper search levels in trie
  - go recursively and from bottom generate suggestions so each parent can get their top 10
- - To update the trie for freq, log the counts, Use MAp reduce job every hour to read the counts and update a slave, then make it master.
-        Counts need to be updatted for each node recursively for a given period
+ - To update the trie for freq, log the counts, Use Map reduce job every hour to read the counts and update a slave, then make it master.
+        Counts need to be updated for each node recursively for a given period
  - Rebuild trie by storing it a file in level order C2,A2,R1,T,P,O1,D
  - Cache top searches       
  - Client
@@ -416,18 +417,19 @@ Search
 Concepts
 
 Indexing sorts a particular set of data so that it can be binary searched. This results in faster searches than that of unsorted data.
-    A separate sorted col is created in the DB per index which links to the actual record. A separate col is created bcuz its faster than sorting all the data
-    -Index favours read and not write. In write it has to update indexes for all the indexed columns and then the write is complete.
-    -Over-indexing transactional tables is not good for the writes
-    -When there are a lot of unique values it makes sense(Cardinality)
-    -When the indexed rows are used more often for querying its useful otherwise its more of a negative for writes
+    - A separate sorted col is created in the DB per index which links to the actual record. A separate col is created bcuz its faster than sorting all the data
+    - Index favours read and not write. In write it has to update indexes for all the indexed columns and then the write is complete.
+    - Over-indexing transactional tables is not good for the writes
+    - When there are a lot of unique values it makes sense(Cardinality)
+    - When the indexed rows are used more often for querying its useful otherwise its more of a negative for writes
     https://www.youtube.com/watch?v=zDzu6vka0rQ
     https://www.youtube.com/watch?v=WmJuhKLQMA4
  
 SOAP vs REST vs GraphQL
     - REST was supersceeded by SOAP was superceeded by CORBA
-    - SOAP is a protocol(developed by Microsoft), REST & GraphQL(developed by Fb) is an architectural pattern
+    - SOAP is a protocol(developed by Microsoft),  GraphQL(developed by Fb) & REST are an architectural pattern
     - SOAP uses XML, REST can use anything
+    - REST is stateless
     - GraphQl has one endpoint and the rest is a query and you can specify exactly what data u need on the fly
     - GraphQL can get complex for rate limiting, api request logging etc. It is best when data requirements are changing frequently
     
@@ -437,7 +439,7 @@ APIs best practices
     
       
 HTTP - is synchronous, client to server protocol
-TCP - is asynchronous
+TCP - is asynchronous, is stateful
 XMPP or Websockets - Peer to peer protocol -Stateful and long lived TCP connection    
 CDN - Build to reduce response times by creating copies in different geographical locations
 Eventual consistency
@@ -476,6 +478,8 @@ Base64 32 etc are encoding techniques for reducing size and have no encryption i
 
 Authorization/Authentication types
 - HTTP is stateless, needs all info all the time
+- HTTPS is HTTP with a secure mechanism i.e either SSL or TLS. 
+- TLS is the successor to SSL and TLS 1.3 is the latest and the fastest with one round trip for the handshake using Deffie Hellman algo
 - Banking needs to be stateful
 - Authentication is login, Authorization is granting access to a 3rd party
 - Basic
@@ -497,7 +501,7 @@ Authorization/Authentication types
     - No sensitive info should be in payload
     - Can be JWE encrypted
 - Sessions (Stateful)
-    - After loging in the server issues a session id via cookie. On logout it destroys the session and clears the cookie from the client
+    - After logging in the server issues a session id via cookie. On logout it destroys the session and clears the cookie from the client
     - Session is stored on server side(stateful) in may be redis
     - Cookies are signed(HMAC) so it cannot be tampered
     - Used in session management, personalization, tracking 
@@ -506,8 +510,8 @@ Authorization/Authentication types
    
     
 Consistent hashing  https://www.youtube.com/watch?v=bBK_So1u9ew
-- Mostly Used for storing data for quick searches in DS like distributed cashing systems
-- Choose random keys for servers -> Keep them in a ring form -> Hash the key(dont mod it with servers) -> when a key comes in choose the next clockwise server id 
+- Mostly Used for storing data for quick searches in DS like distributed caching systems
+- Choose random keys for servers -> Keep them in a ring form -> Hash the incoming request id(dont mod it with servers) -> choose the next clockwise server id to store it 
 - To distribute load uniformly set many virtual instances of the servers. By using different hash function(s)
 - Adding or removing servers makes the new keys go to the next server and only affected keys(keys of adjacent servers) to be rehashed
 - Code - https://www.acodersjourney.com/system-design-interview-consistent-hashing/
@@ -561,19 +565,19 @@ Types of NoSQL db - key Value - Redis, Vodemort, Dynamo.
     - https://hackernoon.com/a-super-quick-comparison-between-kafka-and-message-queues-e69742d855a8
     - https://kafka.apache.org/intro.html
     - Messaging traditionally has two models: queuing and publish-subscribe
-    - queues aren't multi-subscriber—once one process reads the data it's gone
+    - queues aren't multi-subscriber—once, once a process reads the data it's gone
     - Publish-subscribe allows you broadcast data to multiple processes, but has no way of scaling processing since every message goes to every subscriber
     - Kafka's model is that every topic has both these properties—it can scale processing and is also multi-subscriber
     - Kafka messages are retained even after they are consumed
 
 HTTP Methods
-    GET
-    POST
-    PUT - idempotent, put multiple times shouldnt affect the state
-    DELETE
-    HEAD - 
+    GET - only to get info not update
+    POST - to update or create
+    PUT - idempotent, put multiple times shouldn't affect the state
+    DELETE - to only delete. Its idempotent
+    HEAD - HEAD requests to find update time
     PATCH - similar to put and post but only for partial updates
-    OPTIONS              
+    OPTIONS - to find available options on the endpoint              
 HTTP status “429 - Too many requests"
 Redis can be in master/slave or cluster mode 
 Hosted vs Cloud services- In hosted there may not be multiple tenants or scale can be limited.
@@ -583,23 +587,22 @@ Hosted vs Cloud services- In hosted there may not be multiple tenants or scale c
 **Design Patterns**
 
 Abstract class is so that no object can be created of it and you can have common functions defined so that inherited classes can reuse.
-
 Abstract classes can have abstract functions which will have no body so the inherited classes must define it
 
-Singleton
-- static getInstance synchronise to prevent multiple initial creation
+Singleton - Creational
+- static getInstance and synchronise to prevent multiple initial creations
 - private constructor
     
-Factory
+Factory - Creational
 - Class to create objects so that the creation logic is not handled by clients
 - so client doesnt need to be recompiled
-   
+- Also there is loose coupling in the client cuz of using the interface class   
   
-Template
+Template - Behavioral
 - a process flow that needs to be done for many base classes
 - Abstract template class, final template method, that contains abstract methods which each sub class will define separately
             
-Strategy design pattern
+Strategy design pattern - Behavioral
 - https://www.geeksforgeeks.org/strategy-pattern-set-1/
 - https://www.geeksforgeeks.org/strategy-pattern-set-2/
 - Used for optional behaviours
@@ -607,19 +610,32 @@ Strategy design pattern
 - But, If a behaviour definition is common but not required for all classes use Strategy pattern
 - Assign an interface to a base class and have concrete implementation of the interfaces
     
-Observer
+Observer - Behavioral
 - Used when multiple objects(Observers) are dependent on the state of one object(Subject)
 - Eg. Followers get notified, subscriptions, whatsapp group, anything that involves broadcasting a state
 - Coding to interfaces helps generalize stuff and can add more classes later on
 
+Adapter - Structural
+- Used to take some existing/legacy code and modify a part of it in the adapter for the new code
+- Eg. Android to iphone charger, US car speed in m/hr to UK speed km/hr
+- To convert A into an object B having some A functionality. Pass A to the constructor of the Adapter and use that object in a function coming from B's interface
+- Adapter pattern improves compatibility between 2 incompatible interfaces
 
+Builder - Creational
+- Instead of giving all values in the constructor as a must or telescopic constructors we use builder pattern
+- Eg. StringBuilder, MockMvcBuilder
+
+Decorator - Structural
+- https://www.youtube.com/watch?v=vqy8BL0xV0c&t=352s
+- Keep a basic object to be created as a must. 
+  The decorator class is abstract and has the main object. 
+  Classes that extend the decorator will call super and add functionality/decorate it.
+- At run time we can add features by decorating each object
+- Pizza and their toppings, Basic phone smartphone nokia android phone.
 
 
 **Java**
 
-Future Task, ExecutorService, ThreadPoolExecutor, Async(Spring)
-- ExecutorService uses ThreadPoolExecutor and can choose the type of threading
-- FutureTask blocks current execution
 
 Enumerations serve the purpose of representing a group of named constants like types -days of the week,
 planets,colors etc
@@ -663,42 +679,79 @@ Threads
 - Synchronised blocks can be used for methods that are not synchronisable
 - Threadpools FixedThreadPool, SingleThreadPool, CachedThreadPool(creates new ones threads or reuses old), ScheduleThreadPool 
 - ExecutorService is used to run a threadpool. Internally uses a blocking queue which is thread safe
-    - Can execute() Runnables or submit() Callables. Runnable doesnt have a return type. Callable can return
+    - Can .execute(Runnables) or .submit(Callables). Runnable doesnt have a return type. Callable can return
     - Future is used as placeholder for Callable returns
     - Future.get() returns the value of the callable and if callable hasn't finished yet it blocks the current thread. It can have a timeout
     https://www.youtube.com/watch?v=NEZ2ASoP_nY
 - Completable future 
+- ThreadLocal
+    - Creates variables/objects for each thread rather than task and remains local to that thread till its killed
+    - Has a static object, initialValue() and get() functions
+    - Lamda way is- static ThreadLocal<SimpleDateFormat> df = ThreadLocal.withInitial(()) -> new SimpleDateFormat());
+    - Helps reduce memory footprint for large number of tasks
+
 Apache Velocity templating engine, can be used for email templates
 Javax.mail - mail api
 
 Equals and Hashcode
-- Overriding equals should also override hashCode
-- equals(Object o) method checks 
-    - this == o
-    - o instanceof className
-    - Type cast o and compare all class variables
-- hashcode returns int and should be unique for the set of values in the object
-- If hashcode is different the equals() is not checked
-    if hashcode is same equals() is checked
-- String1.equals(string2) calls this method
+    - Overriding equals should also override hashCode
+    - equals(Object o) method checks 
+        - this == o
+        - o instanceof className
+        - Type cast o and compare all class variables
+    - hashcode returns int and should be unique for the set of values in the object
+    - If hashcode is different the equals() is not checked
+        if hashcode is same equals() is checked
+    - String1.equals(string2) calls this method
 
 HashMap working
     - Array and Linked List Node(key, value, hash, next)
     - Put operation -> generate hash and index -> store at that index
     - Get operation -> generate hash and index -> Go thru the LL first check hash, then key 
     - TREEIFY_THRESHOLD = 8 after this converts to binary tree
-        
+ 
+Object class
+    - functions like hashcode(), equals(), toString(), clone()
+    - default toString() has classname@hashcode as return value 
+    - clone()
+        - can be a deep copy or shallow copy depending on the implementation of the clone method 
+        - Shallow copy just do super.clone()
+        - Deepy copy create a new object for sub objects or call their clone too
+        - https://www.geeksforgeeks.org/clone-method-in-java-2/
+             
 Java 7 vs 8
     - Lamda function - Function as arguments
     - Streams in collection 
+@Transient 
+    - In java it means dont serialize and in DBMS means dont store
+    - static and final fields are class variables and not object/instance so they will always have their default value
+      and are not serialized. Making them transient is useless. 
+    - Can be used for sensitive info like passwords and derivative fields to speed serialization
+Serialization
+    - Converts object to stream of bytes for storage/transmission
+    - serial version uid can be generated automatically by the JVM but is compiler dependent, hence setting it manually via IDE is better
+    - ObjectMapper from Jackson helps serialize and deserialize JSON
+Checked vs Unchecked exceptions
+    Unchecked is like Runtime Exception eg. Divide by 0
+    Checked is compile time  
 
+Integer vs int or Boolean vs boolean etc
+    - object vs primitive type, Integer is useful for type conversions, Integer is nullable, int is faster
+BigDecimal is better for precision/monetary stuff compared to double or float, but slower
+ 
+Interface vs Inheritance vs Enum
+- Interface you want everything to have a different implementation but common signatures
+- Inheritance - "is a" relationship. Extensible for arbitary number of types and to use common functionality
+- Composition - "has a" relationship. Helps in code reuse Car-Engine & Trunk-Engine. Can hide visibility of composed class.
+- Enum are named constants, can only be string. They are for fixed possibilities and wouldn't require extra functionality or extensibility in the future
+ 
  
 **Spring**
 
 Spring is a framework over Servlets
 
 Cyclic dependency A->B->A. 
-    - Can be remove by @Lazy, Setter, @PostConstruct
+    - Can be removed by @Lazy, Setter, @PostConstruct
 
 Dependency injection - Helps in loosely coupling and mocking classes(testing)
     - A dependency injection container helps create objects and autowire them
@@ -711,7 +764,10 @@ while the singleton scope should be used for stateless beans.
 Scheduling - Quartz
 @Async
 Async functions need to be public like @Transactional
-https://dzone.com/articles/spring-and-threads-async
+    - https://dzone.com/articles/spring-and-threads-async
+    - Simpler than writing taskExecutor for standalone asynchronous tasks
+    - If a task executor is present it will go to it, if specific taskExectutor is mentioned will run in that
+      or otherwise will run a default one.
 
 AOP
 
@@ -723,13 +779,16 @@ Aspects
 
 Filter
 - Filters are provided as a part of tomcat for Servlets. Spring implements tomcat's Filter
-- Tomcat filter lifecycle - init() -> doFilter(){ chain.doFilter()} -> destroy()
+- lifecycle - init() -> doFilter(){ log(request); chain.doFilter(); log(response)} -> destroy()
 - Executes in web layer only
 
 Interceptors
         
 
-@Transactional - will rollback in case of failures
+@Transactional 
+    - will rollback in case of unchecked exceptions(Runtime exp,) but can be configured for checked also
+    - method needs to be public
+    
 Live reload
 Actuator 
 
@@ -747,7 +806,20 @@ Spring testing
 @InjectMocks used by regular(Non-spring) mockito to inject mocks into service/class
 
 @PreAuthorize helps authorize access to APIs base on roles
+ObjectMapper from Jackson helps serialize and deserialize JSON
 
+Fault Tolerance vs Resilience
+- Slow threads make every thing else slow, so make them timeout
+- Too many timeouts occur, still can make everything else slow, so create a circuit breaker pattern(Hystrix)
+- Circuit Breaker parameters - Number of requests, number of failed requests, time duration of requests
+- After breaking the circuit, 3 Fallback options - Return cached response, Return default response, Return error
+- Bulkhead pattern- like a ship separate the parts that could cause an issue. Set separate hystrix pools
+
+Microservices
+- Monolith is a all in one, SOA is many services but still in one, MS is multiple services in separate instances
+- Advantages - diff development cycles and languages, diff scaling, fault tolerant, modular POCs
+- Disadvantages - Latency, authentication, load balancing, debugging 
+- In case of many MS, debugging can be done better with a correlation id per request(timestamp_threadname)
 
 **Misc**
 Agile methodology uses scrum framework 

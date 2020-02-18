@@ -2,6 +2,7 @@ package pack;
 import javafx.util.Pair;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -1633,11 +1634,221 @@ public class Test {
 //////////// Partition to K Equal Sum Subsets
 //        System.out.println(canPartitionKSubsets(new int[]{1,2,2,1},2));
 
+//////////// Max Points on a Line
+//        MaxPointsLine maxPointsLine=new MaxPointsLine();
+//        System.out.println(maxPointsLine.maxPoints(new int[][]{{1,1},{3,2},{5,3},{4,1},{2,3},{1,4}}));
+//        System.out.println(maxPointsLine.maxPoints(new int[][]{{-4,1},{-7,7},{-1,5},{9,-25}}));
+//        System.out.println(maxPointsLine.maxPoints(new int[][]{{4,0},{4,-1},{4,5}}));
+
+//////////// Decode String
+//        System.out.println(decodeString("3[a2[c]]"));
+//        System.out.println(decodeString("100[leetcode]"));
+//        System.out.println(decodeString2Stacks("100[leetcode]"));
+
+//////////// Count Different Palindromic Subsequences
+
+//////////// Paint House
+//        System.out.println(minCost(new int[][]{{1,2,3},{3,10,11},{1,25,26}}));
+
+//////////// Paint House II
+//        System.out.println(minCostII(new int[][]{{10, 6, 16, 25, 7, 28}, {7, 16, 18, 30, 16, 25}, {8, 26, 6, 22, 26, 19}, {10, 23, 14, 17, 23, 9}, {12, 14, 27, 7, 8, 9}}));
 
 
     }
+
+    public static int minCostII(int[][] costs) {
+
+        if (costs.length == 0) return 0;
+        int k = costs[0].length;
+        int n = costs.length;
+
+
+        /* Firstly, we need to determine the 2 lowest costs of
+         * the first row. We also need to remember the color of
+         * the lowest. */
+        int prevMin = -1; int prevSecondMin = -1; int prevMinColor = -1;
+        for (int color = 0; color < k; color++) {
+            int cost = costs[0][color];
+            if (prevMin == -1 || cost < prevMin) {
+                prevSecondMin = prevMin;
+                prevMinColor = color;
+                prevMin = cost;
+            } else if (prevSecondMin == -1 || cost < prevSecondMin) {
+                prevSecondMin = cost;
+            }
+        }
+
+        // And now, we need to work our way down, keeping track of the minimums.
+        for (int house = 1; house < n; house++) {
+            int min = -1; int secondMin = -1; int minColor = -1;
+            for (int color = 0; color < k; color++) {
+                // Determine the cost for this cell (without writing it in).
+                int cost = costs[house][color];
+                if (color == prevMinColor) {
+                    cost += prevSecondMin;
+                } else {
+                    cost += prevMin;
+                }
+                // Determine whether or not this current cost is also a minimum.
+                if (min == -1 || cost < min) {
+                    secondMin = min;
+                    min = cost;
+                    minColor = color;
+                } else if (secondMin == -1 || cost < secondMin) {
+                    secondMin = cost;
+                }
+            }
+            // Transfer current mins to be previous mins.
+            prevMin = min;
+            prevSecondMin = secondMin;
+            prevMinColor = minColor;
+        }
+
+        return prevMin;
+    }
+
+
+    //Can also be done by backtracking, top down with memo
+    public static int minCost(int[][] costs) {
+
+        for (int n = costs.length - 2; n >= 0; n--) {
+            // Total cost of painting the nth house red.
+            costs[n][0] += Math.min(costs[n + 1][1], costs[n + 1][2]);
+            // Total cost of painting the nth house green.
+            costs[n][1] += Math.min(costs[n + 1][0], costs[n + 1][2]);
+            // Total cost of painting the nth house blue.
+            costs[n][2] += Math.min(costs[n + 1][0], costs[n + 1][1]);
+        }
+
+        if (costs.length == 0) return 0;
+
+        return Math.min(Math.min(costs[0][0], costs[0][1]), costs[0][2]);
+    }
+
     //Check iterator over List of List
 
+    public static String decodeString2Stacks(String s) {
+        Stack<Integer> numberStack = new Stack<>();
+        Stack<String> charStack = new Stack<>();
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (Character.isDigit(c)) {
+                int num = c - '0';
+                while (Character.isDigit(c = s.charAt(++i))) {
+                    num = num * 10 + (c - '0');
+                }
+                i--;
+                numberStack.add(num);
+            } else if (c == '[') {
+                charStack.add(sb.toString());
+                sb = new StringBuilder();
+            } else if (c == ']') {
+                StringBuilder newSB = new StringBuilder(charStack.pop());
+                int num = numberStack.pop();
+                String currS = sb.toString();
+                while (num-- > 0) {
+                    newSB.append(currS);
+                }
+                sb = new StringBuilder(newSB.toString());
+            } else {
+                sb.append(c);
+            }
+
+        }
+
+        return sb.toString();
+    }
+
+    //slower due to multiple conversions
+    public static String decodeString(String s) {
+        Stack<String> stack = new Stack<>();
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == ']') {
+                int repeat = Integer.parseInt(stack.pop());
+                StringBuilder repeatedString = new StringBuilder();
+                for (int j = 0; j < repeat; j++)
+                    repeatedString.append(sb);
+                if (!stack.isEmpty() && Character.isAlphabetic(stack.peek().charAt(0))) {
+                    repeatedString.insert(0, stack.pop());
+                }
+                sb = repeatedString;
+
+            } else if (c == '[') {
+                if (sb.length() > 0) {
+                    stack.push(sb.toString());
+                }
+                stack.push(count + "");
+                sb.setLength(0);
+                count = 0;
+            } else if (Character.isDigit(c)) {
+                count = c - '0';
+                while (i < s.length() - 1 && Character.isDigit(s.charAt(i + 1))) {
+                    i++;
+                    count = count * 10 + (s.charAt(i)-'0');
+                }
+            } else
+                sb.append(c);
+        }
+        return sb.toString();
+    }
+
+    //1.0 makes it decimal , 0.0 removes -0.0 i.e -0.0 +0.0 = 0.0
+    static class MaxPointsLine {
+
+        int[][] points;
+        int n;
+        HashMap<Double, Integer> lines = new HashMap<Double, Integer>();
+        int horizontal_lines;
+
+        public Pair<Integer, Integer> add_line(int i, int j, int count, int duplicates) {
+            int x1 = points[i][0], y1 = points[i][1], x2 = points[j][0], y2 = points[j][1];
+            if ((x1 == x2) && (y1 == y2))
+                duplicates++;
+            else if (y1 == y2) {
+                horizontal_lines += 1;
+                count = Math.max(horizontal_lines, count);
+            }
+            else {
+                double slope = 1.0 * (x1 - x2) / (y1 - y2) + 0.0;
+                lines.put(slope, lines.getOrDefault(slope, 1) + 1);
+                count = Math.max(lines.get(slope), count);
+            }
+            return new Pair(count, duplicates);
+        }
+
+        public int max_points_on_a_line_containing_point_i(int i) {
+            lines.clear();
+            horizontal_lines = 1;
+            int count = 1;
+            int duplicates = 0;
+
+            for (int j = i + 1; j < n; j++) {
+                Pair<Integer, Integer> p = add_line(i, j, count, duplicates);
+                count = p.getKey();
+                duplicates = p.getValue();
+            }
+            return count + duplicates;
+        }
+
+        public int maxPoints(int[][] points) {
+            this.points = points;
+
+            n = points.length;
+            if (n < 3)
+                return n;
+
+            int max_count = 1;
+
+            for (int i = 0; i < n - 1; i++)
+                max_count = Math.max(max_points_on_a_line_containing_point_i(i), max_count);
+            return max_count;
+        }
+    }
 
     public static boolean search(int[] groups, int row, int[] nums, int target) {
         if (row < 0) return true;
@@ -10022,6 +10233,7 @@ public class Test {
     }
 
     //Word break dfs using startsWith() and the dictionary
+    //Can be
     public boolean wordBreak(String s, List<String> wordDict) {
         if(s == null || s.length()==0)
             return false;
