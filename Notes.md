@@ -588,6 +588,7 @@ Hosted vs Cloud services- In hosted there may not be multiple tenants or scale c
 
 Abstract class is so that no object can be created of it and you can have common functions defined so that inherited classes can reuse.
 Abstract classes can have abstract functions which will have no body so the inherited classes must define it
+When abstract class and when interface - abstract class when you have common functions also, interfaces when function names/process only might be same not function definitions
 
 Singleton - Creational
 - static getInstance and synchronise to prevent multiple initial creations
@@ -597,6 +598,7 @@ Factory - Creational
 - Class to create objects so that the creation logic is not handled by clients
 - so client doesnt need to be recompiled
 - Also there is loose coupling in the client cuz of using the interface class   
+- A factory class with a method to return new objects based on the input parameter with return type of the interface
   
 Template - Behavioral
 - a process flow that needs to be done for many base classes
@@ -620,18 +622,24 @@ Adapter - Structural
 - Eg. Android to iphone charger, US car speed in m/hr to UK speed km/hr
 - To convert A into an object B having some A functionality. Pass A to the constructor of the Adapter and use that object in a function coming from B's interface
 - Adapter pattern improves compatibility between 2 incompatible interfaces
+- https://stackify.com/design-patterns-explained-adapter-pattern-with-code-examples/
 
 Builder - Creational
-- Instead of giving all values in the constructor as a must or telescopic constructors we use builder pattern
+- Should be used only when you want to build different immutable objects using same object building process.
+- Instead of giving all values in the constructor as a must or telescopic constructors we use builder pattern.
+- one inner static class with public methods to set values, no setters for outer class, all final members for outer class(immutability), one build method in the inner class which creates an object of the outer class with itself as a parameter so that
+    values can be transferred from inner to outer class  
 - Eg. StringBuilder, MockMvcBuilder
+- https://www.youtube.com/watch?v=YmEVYvELt28&t=822s
 
 Decorator - Structural
 - https://www.youtube.com/watch?v=vqy8BL0xV0c&t=352s
-- Keep a basic object to be created as a must. 
+- Keep an interface which will be general to all types 
+  Keep a basic object to be created as a must. 
   The decorator class is abstract and has the main object. 
   Classes that extend the decorator will call super and add functionality/decorate it.
 - At run time we can add features by decorating each object
-- Pizza and their toppings, Basic phone smartphone nokia android phone.
+- Pizza and their toppings, nokia android phone
 
 
 **Java**
@@ -683,7 +691,9 @@ Threads
     - Future is used as placeholder for Callable returns
     - Future.get() returns the value of the callable and if callable hasn't finished yet it blocks the current thread. It can have a timeout
     https://www.youtube.com/watch?v=NEZ2ASoP_nY
-- Completable future 
+- Completable future
+    - Runs a new thread and supports chaining of completable futures or running them in parallel in different thread pools and exception handling compared to Futures
+    - runAsync for void return type and supplyAsync for return values 
 - ThreadLocal
     - Creates variables/objects for each thread rather than task and remains local to that thread till its killed
     - Has a static object, initialValue() and get() functions
@@ -729,19 +739,24 @@ Java 7 vs 8
     - Can be used for sensitive info like passwords and derivative fields to speed serialization
 Serialization
     - Converts object to stream of bytes for storage/transmission
-    - serial version uid can be generated automatically by the JVM but is compiler dependent, hence setting it manually via IDE is better
+    - serial version uid can be generated automatically by the JVM but is compiler version dependent, hence setting it manually via IDE is better
     - ObjectMapper from Jackson helps serialize and deserialize JSON
 Checked vs Unchecked exceptions
-    Unchecked is like Runtime Exception eg. Divide by 0
-    Checked is compile time  
+    - Unchecked is like Runtime Exception eg. Divide by 0
+    - Checked is compile time  
 
 Integer vs int or Boolean vs boolean etc
     - object vs primitive type, Integer is useful for type conversions, Integer is nullable, int is faster
 BigDecimal is better for precision/monetary stuff compared to double or float, but slower
  
+Static inner class and inner class
+- Inner classes can access all outer class variables including private
+- If a class is not used by any other classes it can be kept inside.
+
+ 
 Interface vs Inheritance vs Enum
 - Interface you want everything to have a different implementation but common signatures
-- Inheritance - "is a" relationship. Extensible for arbitary number of types and to use common functionality
+- Inheritance - "is a" relationship. Extensible for arbitrary number of types and to use common functionality
 - Composition - "has a" relationship. Helps in code reuse Car-Engine & Trunk-Engine. Can hide visibility of composed class.
 - Enum are named constants, can only be string. They are for fixed possibilities and wouldn't require extra functionality or extensibility in the future
  
@@ -755,7 +770,9 @@ Cyclic dependency A->B->A.
 
 Dependency injection - Helps in loosely coupling and mocking classes(testing)
     - A dependency injection container helps create objects and autowire them
-    - To create a mock object you need loosely coupled components
+    - Instead of creating objects with "new" manually and having them tightly coupled, the container creates them and autowires them, making them mockable too
+    - By creating a mock bean the container know it has to autowire this bean instead of the actual one. To create a mock objects you need loosely coupled components
+    - @Qualifier helps differentiate between similar been types
     
 Bean scope - As a rule of thumb, you should use the prototype scope for all beans that are stateful, 
 while the singleton scope should be used for stateless beans.
@@ -772,7 +789,7 @@ Async functions need to be public like @Transactional
 AOP
 
 Aspects 
-- Advice- Before, After, Around, After returning and After throwing
+- Advice - Before, After, Around, After returning and After throwing
 - Pointcuts - Conditions
 - JoinPoint - program execution
 - Aspects(concerns) consists of Advice and pointcuts. Advice uses pointcuts

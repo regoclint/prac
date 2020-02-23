@@ -44,6 +44,7 @@ class BirdAdapter implements ToyDuck
 {
     // You need to implement the interface your
     // client expects to use.
+    //Here bird is reused, and would be an example of legacy code
     Bird bird;
     public BirdAdapter(Bird bird)
     {

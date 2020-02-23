@@ -2,12 +2,17 @@
 
 Ariba
 Product stuff
+
 - Postman test suite
-- Performance tuned 
-    Backend APIs - Object mappers, logs, n3 complexities, 
-    Build time - admin ui dev, Unit tests rewrite, h2 db, 
+- Performance tuned
+    - open connections reduced spring. Session factories were created multiple times and missing close()
+    -  
+    - Backend APIs - Object mappers, logs, n3 complexities, 
+    - Build time - admin ui dev, h2 db, Unit tests rewrite 
     Frontend - Tweaked long polling in maximus activity page on a condition
-    Jenkins build - multi thread
+    Jenkins build - h2 db and multi thread
+    
+    
 
 Dev stuff
 - Chrome extension
@@ -24,6 +29,7 @@ Challenges
 - LiveReload
 - Tech debt
     - Open sessions, converted sessions to JPA
+
     
 faced something and how did u improve
     Performance PnA

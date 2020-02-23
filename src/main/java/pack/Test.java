@@ -2,7 +2,6 @@ package pack;
 import javafx.util.Pair;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -137,7 +136,7 @@ public class Test {
 //////////// Median of Sorted Arrays
 //        System.out.println(findMedianSortedArrays(new int[]{1,2,4},new int[]{2,5}));
 
-//////////// merge K Lists
+//////////// merge K Lists and Merge Two Sorted Lists
 //        ListNode l1=new ListNode(1);
 //        ListNode l2=new ListNode(2);
 //        ListNode l3=new ListNode(3);
@@ -254,7 +253,7 @@ public class Test {
 //        matrix[1][2]=5;
 //        setZeroes(matrix);
 
-//////////// Spiral Matrix
+//////////// Spiral Matrix I and II
 //        int[][] matrix=new int[3][3];
 //        matrix[0][0]=1;
 //        matrix[0][1]=2;
@@ -266,6 +265,7 @@ public class Test {
 //        matrix[2][1]=8;
 //        matrix[2][2]=9;
 //        spiralOrder(matrix);
+//        generateMatrix(4);
 
 //////////// Rotate Image
 //        int[][] matrix=new int[4][4];
@@ -364,7 +364,7 @@ public class Test {
 //        TreeFromPreorderInorder.buildTree(preorder,inorder);
 
 
-//////////// Sub tree
+//////////// Subtree of Another Tree
 //        TreeNode t5 = new TreeNode(2, null, null);
 //        TreeNode t4 = new TreeNode(1, null, null);
 //        TreeNode t3 = new TreeNode(5, null, null);
@@ -738,7 +738,7 @@ public class Test {
 //        Node result=deserializeNaryTree(serialize(t1));
 
 
-//////////// Search in 2D Matrix
+//////////// Search a 2D Matrix II
 //        int[][] matrix=new int[][]{{1,4,7,11,15},
 //                                    {2,5,8,12,19},
 //                                    {3,6,9,16,22},
@@ -998,7 +998,7 @@ public class Test {
 //        MedianFinder.addNum(3);
 //        System.out.println(MedianFinder.findMedian()); // 2
 
-//////////// Reorder log files
+//////////// Reorder data in log files
 //        String[] output = reorderLogFiles(new String[]{"dig1 8 1 5 1","let1 art can","dig2 3 6","let2 own kit dig","let3 art aero"});
 
 //////////// Optimal Utilization
@@ -1448,7 +1448,7 @@ public class Test {
 //        System.out.println(numSubarrayProductLessThanK(new int[]{10,5}, 100));
 //        System.out.println(numSubarrayProductLessThanK(new int[]{10,2,2,5,4,4,4,3,7,7}, 289));
 
-//////////// count Subarray with k distinct characters
+//////////// count Substrings with exactly K distinct chars or Subarrays with K Different Integers
 //        System.out.println(kDistinctSubstringsCount("pqrpqrq1",3));
 //        System.out.println(kDistinctSubstringsCount("aabab",3));
 
@@ -1457,6 +1457,8 @@ public class Test {
 //        System.out.println(subarraysWithKDistinctWindow(new int[]{1,2,1,3,4},3));
 //        System.out.println(subarraysWithKDistinctWindow(new int[]{1,1,1,3,4,4,4},3));
 //        System.out.println(subarraysWithKDistinctWindow(new int[]{1,1,3,4,4,4},3));
+//        System.out.println(subarraysWithKDistinctCharWindow("pqpqs",2));
+//        System.out.println(subarraysWithKDistinctCharWindow("aabab",3));
 //        System.out.println(subarraysWithKDistinct(new int[]{1,2,1},2));
 
   //////////// Max Prod Subarray
@@ -1653,7 +1655,40 @@ public class Test {
 //////////// Paint House II
 //        System.out.println(minCostII(new int[][]{{10, 6, 16, 25, 7, 28}, {7, 16, 18, 30, 16, 25}, {8, 26, 6, 22, 26, 19}, {10, 23, 14, 17, 23, 9}, {12, 14, 27, 7, 8, 9}}));
 
+//////////// Favorite Genres
 
+    }
+
+    public static Map<String, List<String>> favoritegenre(Map<String, List<String>> userMap, Map<String, List<String>> genreMap) {
+        Map<String, List<String>> res = new HashMap<>();
+        Map<String, String> songstogenre = new HashMap<>();
+
+        for(String genre : genreMap.keySet()) {
+            List<String> songs = genreMap.get(genre);
+            for(String song : songs) {
+                songstogenre.put(song, genre);
+            }
+        }
+        Map<String, Integer> count = new HashMap();
+        int max = 0;
+        for(String user : userMap.keySet()) {
+            count = new HashMap();
+            max = 0;
+            res.put(user, new ArrayList());
+            List<String> songs = userMap.get(user);
+            for(String song : songs) {
+                String genre = songstogenre.get(song);
+                int c = count.getOrDefault(genre, 0) + 1;
+                count.put(genre, c);
+                max = Math.max(c, max);
+            }
+            for (String key : count.keySet()) {
+                if (count.get(key) == max) {
+                    res.get(user).add(key);
+                }
+            }
+        }
+        return res;
     }
 
     public static int minCostII(int[][] costs) {
@@ -1706,7 +1741,6 @@ public class Test {
 
         return prevMin;
     }
-
 
     //Can also be done by backtracking, top down with memo
     public static int minCost(int[][] costs) {
@@ -2478,55 +2512,52 @@ public class Test {
 //    }
 
     public static int orangesRotting(int[][] grid) {
-        int[] dr = new int[]{-1, 0, 1, 0};
-        int[] dc = new int[]{0, -1, 0, 1};
-        int R = grid.length, C = grid[0].length;
-
-        // queue : all starting cells with rotten oranges
-        Queue<Integer> queue = new ArrayDeque();
-        Map<Integer, Integer> depth = new HashMap();
-        for (int r = 0; r < R; ++r)
-            for (int c = 0; c < C; ++c)
-                if (grid[r][c] == 2) {
-                    int code = r * C + c;
-                    queue.add(code);
-                    depth.put(code, 0);
-                }
-
-        int ans = 0;
-        while (!queue.isEmpty()) {
-            int code = queue.remove();
-            int r = code / C, c = code % C;
-            for (int k = 0; k < 4; ++k) {
-                int nr = r + dr[k];
-                int nc = c + dc[k];
-                if (0 <= nr && nr < R && 0 <= nc && nc < C && grid[nr][nc] == 1) {
-                    grid[nr][nc] = 2;
-                    int ncode = nr * C + nc;
-                    queue.add(ncode);
-                    depth.put(ncode, depth.get(code) + 1);
-                    ans = depth.get(ncode);
+        if (grid == null || grid.length == 0 || grid[0].length == 0)
+            return -1;
+        int fresh = 0, row = grid.length, col = grid[0].length;
+        Queue<int[]> candidates = new LinkedList<>();
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j] == 1)
+                    fresh++;
+                else if (grid[i][j] == 2) {
+                    candidates.add(new int[]{i, j});
                 }
             }
         }
-
-        for (int[] row: grid)
-            for (int v: row)
-                if (v == 1)
-                    return -1;
-        return ans;
+        int day = 0;
+        while (!candidates.isEmpty()) {
+            if (fresh == 0)
+                return day;
+            int[][] dirs = {{0,1},{0,-1},{1,0},{-1,0}};
+            int size = candidates.size();
+            for (int i = 0; i < size; i++) {
+                int[] cur = candidates.poll();
+                for (int[] dir : dirs) {
+                    int x = dir[0] + cur[0];
+                    int y = dir[1] + cur[1];
+                    if (x >= 0 && y >= 0 && x < row && y < col && grid[x][y] == 1) {
+                        grid[x][y] = 2;
+                        fresh--;
+                        candidates.add(new int[]{x, y});
+                    }
+                }
+            }
+            day++;
+        }
+        return fresh == 0 ? day : -1;
 
     }
 
     public static String[] popularToys(int numToys, int topToys, String[] toys, String[] quotes){
-        HashMap<String, Toy> toysToCount=new HashMap<>();
-        for(String toy: toys) toysToCount.put(toy, new Toy(toy,0,0));
+        HashMap<String, Toy> toyNameToToy=new HashMap<>();
+        for(String toy: toys) toyNameToToy.put(toy, new Toy(toy,0,0));
 
         for (String quote:quotes) {
             HashSet<String> visited = new HashSet<>();
             for (String word : quote.toLowerCase().replaceAll("!", "").split(" ")){
-                if (toysToCount.containsKey(word)) {
-                    Toy toy = toysToCount.get(word);
+                if (toyNameToToy.containsKey(word)) {
+                    Toy toy = toyNameToToy.get(word);
                     toy.totalCount++;
                     if (!visited.contains(word)) {
                         toy.countPerQuote++;
@@ -2555,7 +2586,7 @@ public class Test {
                 return b.countPerQuote-a.countPerQuote;
             return totalCountCompare;
         });
-        for(Toy toy:toysToCount.values())
+        for(Toy toy:toyNameToToy.values())
             pq.offer(toy);
 
         String[] toyOutput=new String[topToys];
@@ -2749,9 +2780,9 @@ public class Test {
             window1.add(x);
             window2.add(x);
 
-            while (window1.getDistictCount() > K)
+            while (window1.getDistinctCount() > K)
                 window1.remove(A[left1++]);
-            while (window2.getDistictCount() == K)
+            while (window2.getDistinctCount() == K)
                 window2.remove(A[left2++]);
 
             ans += left2 - left1;
@@ -2760,30 +2791,76 @@ public class Test {
         return ans;
     }
 
-
     static class Window {
         Map<Integer, Integer> count;
-        int distictCount;
+        int distinctCount;
 
         Window() {
             count = new HashMap();
-            distictCount = 0;
+            distinctCount = 0;
         }
 
         void add(int x) {
             count.put(x, count.getOrDefault(x, 0) + 1);
             if (count.get(x) == 1)
-                distictCount++;
+                distinctCount++;
         }
 
         void remove(int x) {
             count.put(x, count.get(x) - 1);
             if (count.get(x) == 0)
-                distictCount--;
+                distinctCount--;
         }
 
-        int getDistictCount() {
-            return distictCount;
+        int getDistinctCount() {
+            return distinctCount;
+        }
+    }
+
+    public static int subarraysWithKDistinctCharWindow(String A, int K) {
+        SlidingWindowChar window1 = new SlidingWindowChar(); // for a valid k char
+        SlidingWindowChar window2 = new SlidingWindowChar();// for < k char
+        int ans = 0, left1 = 0, left2 = 0;
+
+        for (int right = 0; right < A.length(); ++right) {
+            char x = A.charAt(right);
+            window1.add(x);
+            window2.add(x);
+
+            while (window1.getDistinctCount() > K)
+                window1.remove(A.charAt(left1++));
+            while (window2.getDistinctCount() == K)
+                window2.remove(A.charAt(left2++));
+
+            ans += left2 - left1;
+        }
+
+        return ans;
+    }
+
+    static class SlidingWindowChar {
+        Map<Character, Integer> charToCount;
+        int distinctCount;
+
+        SlidingWindowChar() {
+            charToCount = new HashMap();
+            distinctCount = 0;
+        }
+
+        void add(char x) {
+            charToCount.put(x, charToCount.getOrDefault(x, 0) + 1);
+            if (charToCount.get(x) == 1)
+                distinctCount++;
+        }
+
+        void remove(char x) {
+            charToCount.put(x, charToCount.get(x) - 1);
+            if (charToCount.get(x) == 0)
+                distinctCount--;
+        }
+
+        int getDistinctCount() {
+            return distinctCount;
         }
     }
 
@@ -5081,7 +5158,7 @@ public class Test {
     }
 
     public static int maximumMinimumPath(int[][] A) {
-        int[][] directions = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+        int[][] directions = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}}; //this may be only 2 dir
         int n = A.length;
         int m = A[0].length;
         boolean[][] visited = new boolean[n][m];
@@ -5097,6 +5174,7 @@ public class Test {
             int row = cell[0];
             int col = cell[1];
 
+            //this may be on this 2nd last squares
             if (row == n - 1 && col == m - 1) {
                 return cell[2];
             }
@@ -7068,7 +7146,7 @@ public class Test {
         }
     }
 
-
+    //can be done from bottom left or top right as from these points u can inc or dec
     public static boolean searchIn2DMatrix(int[][] matrix, int target) {
         // start our "pointer" in the bottom-left
         int row = matrix.length - 1;
@@ -9068,7 +9146,6 @@ public class Test {
         }
     }
 
-
     public static void rotateImageTransposenReverse(int[][] matrix) {
         int n = matrix.length;
 
@@ -9107,6 +9184,40 @@ public class Test {
             colStart++;
             colEnd--;
         }
+    }
+
+    public static int[][] generateMatrix(int n) {
+        // Declaration
+        int[][] matrix = new int[n][n];
+        if (n == 0) return matrix;
+
+        int rowStart = 0,rowEnd = n-1,colStart = 0,colEnd = n-1,num = 1; //change
+
+        while (rowStart <= rowEnd && colStart <= colEnd) {
+            for (int i = colStart; i <= colEnd; i ++)
+                matrix[rowStart][i] = num ++; //change
+
+            rowStart ++;
+
+            for (int i = rowStart; i <= rowEnd; i ++)
+                matrix[i][colEnd] = num ++; //change
+
+            colEnd --;
+
+            for (int i = colEnd; i >= colStart; i --)
+                if (rowStart <= rowEnd)
+                    matrix[rowEnd][i] = num ++; //change
+
+            rowEnd --;
+
+            for (int i = rowEnd; i >= rowStart; i --)
+                if (colStart <= colEnd)
+                    matrix[i][colStart] = num ++; //change
+
+            colStart ++;
+        }
+
+        return matrix;
     }
 
     public static void setZeroes(int[][] matrix) {
