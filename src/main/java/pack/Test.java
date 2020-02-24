@@ -114,7 +114,7 @@ public class Test {
 //        System.out.println(telephoneKnightDP(1,2));
 //        System.out.println(knightDialerDP(3));
 
-//////////// Longest Palindrome
+//////////// Longest Palindromic Substring
 //        Find substrings of those with >= 2 occurences.
 
 //         Expand around the center
@@ -1461,6 +1461,9 @@ public class Test {
 //        System.out.println(subarraysWithKDistinctCharWindow("aabab",3));
 //        System.out.println(subarraysWithKDistinct(new int[]{1,2,1},2));
 
+//////////// Substrings of size K with K distinct chars
+//        System.out.println(substringSizeKWithKDistinctChars("abcabc",3));
+
   //////////// Max Prod Subarray
 //        int arr[] = new int[]{-2,1,-1,-3,-2};
 //        int arr[] = new int[]{-2,0,-1,-3,-2};
@@ -1506,24 +1509,24 @@ public class Test {
 //        System.out.println(suggestedProductsWithoutTrie(new String[]{"mobile","mouse","moneypot","monitor","mousepad"},"mouse"));
 //        System.out.println(suggestedProductsBinarySearch(new String[]{"mobile","mouse","moneypot","monitor","mousepad"},"mouse"));
 
-//////////// Subtree with Maximum Average
-//        Node n1=new Node(20);
-//        Node n2=new Node(12);
-//        Node n3=new Node(18);
-//        Node n4=new Node(11);
-//        Node n5=new Node(2);
-//        Node n6=new Node(3);
-//        Node n7=new Node(15);
-//        Node n8=new Node(8);
-//        n1.children.add(n2);
-//        n1.children.add(n3);
-//        n2.children.add(n4);
-//        n2.children.add(n5);
-//        n2.children.add(n6);
-//        n3.children.add(n7);
-//        n3.children.add(n8);
-//        subtreeMaxAvg(n1);
-//        System.out.println(maxSubTree);
+//////////// Maximum Average Subtree
+        Node n1=new Node(20);
+        Node n2=new Node(12);
+        Node n3=new Node(8);
+        Node n4=new Node(11);
+        Node n5=new Node(2);
+        Node n6=new Node(3);
+        Node n7=new Node(15);
+        Node n8=new Node(18);
+        n1.children.add(n2);
+        n1.children.add(n3);
+        n2.children.add(n4);
+        n2.children.add(n5);
+        n2.children.add(n6);
+        n3.children.add(n7);
+        n3.children.add(n8);
+        subtreeMaxAvg(n1);
+        System.out.println(maxSubTree);
 
 //////////// Partition Labels
 //        System.out.println(partitionLabels("ababcbacadefegdehijhklij"));
@@ -1539,7 +1542,7 @@ public class Test {
 //        String S3 = "1A 2A,12A 12A", T3 = "12A";
 //        System.out.println(Arrays.toString(getResult(S3, T3)));
 
-//////////// Generate Parenthesis
+//////////// Generate Parentheses
 //        System.out.println(generateParenthesis(3));
 
 //////////// Shortest Word Distance II
@@ -1657,6 +1660,39 @@ public class Test {
 
 //////////// Favorite Genres
 
+//////////// Most Common Word
+//        System.out.println(mostCommonWord("Bob hit a ball, the hit BALL flew far after it was hit.",new String[]{"hit"}));
+
+    }
+
+    public static String mostCommonWord(String paragraph, String[] banned) {
+        paragraph += ".";
+
+        Set<String> banset = new HashSet();
+        for (String word: banned) banset.add(word);
+        Map<String, Integer> count = new HashMap();
+
+        String ans = "";
+        int ansfreq = 0;
+
+        StringBuilder word = new StringBuilder();
+        for (char c: paragraph.toCharArray()) {
+            if (Character.isLetter(c)) {
+                word.append(Character.toLowerCase(c));
+            } else if (word.length() > 0) {
+                String finalword = word.toString();
+                if (!banset.contains(finalword)) {
+                    count.put(finalword, count.getOrDefault(finalword, 0) + 1);
+                    if (count.get(finalword) > ansfreq) {
+                        ans = finalword;
+                        ansfreq = count.get(finalword);
+                    }
+                }
+                word = new StringBuilder();
+            }
+        }
+
+        return ans;
     }
 
     public static Map<String, List<String>> favoritegenre(Map<String, List<String>> userMap, Map<String, List<String>> genreMap) {
@@ -2375,6 +2411,7 @@ public class Test {
     }
 
     static int maxSubTree=-1;
+    //Correct the comparison of avg with maxAvg
     public static int[] subtreeMaxAvg(Node root) {
 
         if (root == null) return new int[]{0, 0};
@@ -2742,6 +2779,32 @@ public class Test {
         return Math.max(maxProd, productAfterFirstNegative);
     }
 
+    public static List<String> substringSizeKWithKDistinctChars(String S,int k){
+        int distinct=0,i=0;
+        int [] memo=new int[26];
+        Set<String> set=new HashSet<>();
+        for (;i<k;i++){
+            if (memo[S.charAt(i)-'a']==0)
+                distinct+=1;
+            memo[S.charAt(i)-'a']++;
+        }
+        if (distinct==k) {
+            set.add(S.substring(i-k,i));
+        }
+        while (i<S.length()){
+            if (memo[S.charAt(i)-'a']==0)
+                distinct+=1;
+            memo[S.charAt(i)-'a']++;
+            memo[S.charAt(i-k)-'a']--;
+            if (memo[S.charAt(i-k)-'a']==0)
+                distinct-=1;
+            if (distinct==k)
+                set.add(S.substring(i-k+1,i+1));
+            i++;
+        }
+
+        return new ArrayList<>(set);
+    }
 
     //since value of a[i]<a.length we can store in array m
     public static int subarraysWithKDistinct(int[] A, int K) {
@@ -5313,7 +5376,7 @@ public class Test {
                     visit(next, curr, bridges);
                     lowLink[curr] = Math.min(lowLink[curr], lowLink[next]); //making sure on the way back to consolidate to a cycle
                     if (visited[curr] < lowLink[next]) // this means next doesnt belong to current's cycle, so there's a bridge
-                        bridges.add(Arrays.asList(curr, next));
+                        bridges.add(Arrays.asList(curr, next)); //curr might be the critical node
 
                 } else
                     lowLink[curr] = Math.min(lowLink[curr], visited[next]); // consolidating cycles
