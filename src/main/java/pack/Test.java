@@ -1510,23 +1510,23 @@ public class Test {
 //        System.out.println(suggestedProductsBinarySearch(new String[]{"mobile","mouse","moneypot","monitor","mousepad"},"mouse"));
 
 //////////// Maximum Average Subtree
-        Node n1=new Node(20);
-        Node n2=new Node(12);
-        Node n3=new Node(8);
-        Node n4=new Node(11);
-        Node n5=new Node(2);
-        Node n6=new Node(3);
-        Node n7=new Node(15);
-        Node n8=new Node(18);
-        n1.children.add(n2);
-        n1.children.add(n3);
-        n2.children.add(n4);
-        n2.children.add(n5);
-        n2.children.add(n6);
-        n3.children.add(n7);
-        n3.children.add(n8);
-        subtreeMaxAvg(n1);
-        System.out.println(maxSubTree);
+//        Node n1=new Node(20);
+//        Node n2=new Node(12);
+//        Node n3=new Node(8);
+//        Node n4=new Node(11);
+//        Node n5=new Node(2);
+//        Node n6=new Node(3);
+//        Node n7=new Node(15);
+//        Node n8=new Node(18);
+//        n1.children.add(n2);
+//        n1.children.add(n3);
+//        n2.children.add(n4);
+//        n2.children.add(n5);
+//        n2.children.add(n6);
+//        n3.children.add(n7);
+//        n3.children.add(n8);
+//        subtreeMaxAvg(n1);
+//        System.out.println(maxSubTree);
 
 //////////// Partition Labels
 //        System.out.println(partitionLabels("ababcbacadefegdehijhklij"));
@@ -1627,6 +1627,44 @@ public class Test {
 //        // Since 2 is the only number in the set, getRandom always return 2.
 //        System.out.println(randomSet.getRandom());
 
+//////////// Insert Delete GetRandom O(1) - Duplicates allowed
+        // Init an empty collection.
+//        RandomizedCollection collection = new RandomizedCollection();
+        // Inserts 1 to the collection. Returns true as the collection did not contain 1.
+//        System.out.println(collection.insert(1));
+//        // Inserts another 1 to the collection. Returns false as the collection contained 1. Collection now contains [1,1].
+//        System.out.println(collection.insert(1));
+//        // Inserts 2 to the collection, returns true. Collection now contains [1,1,2].
+//        System.out.println(collection.insert(2));
+//        // getRandom should return 1 with the probability 2/3, and returns 2 with the probability 1/3.
+//        System.out.println(collection.getRandom());
+//        // Removes 1 from the collection, returns true. Collection now contains [1,2].
+//        System.out.println(collection.remove(1));
+//        // getRandom should return 1 and 2 both equally likely.
+//        System.out.println(collection.getRandom());
+
+
+//        System.out.println(collection.insert(0));
+//        System.out.println(collection.insert(1));
+//        System.out.println(collection.remove(0));
+//        System.out.println(collection.insert(2));
+//        System.out.println(collection.remove(1));
+//        System.out.println(collection.getRandom());
+
+//        System.out.println(collection.insert(1));
+//        System.out.println(collection.remove(1));
+//        System.out.println(collection.insert(1));
+
+//        System.out.println(collection.insert(4));
+//        System.out.println(collection.insert(3));
+//        System.out.println(collection.insert(4));
+//        System.out.println(collection.insert(2));
+//        System.out.println(collection.insert(4));
+//        System.out.println(collection.remove(4));
+//        System.out.println(collection.remove(3));
+//        System.out.println(collection.remove(4));
+//        System.out.println(collection.remove(4));
+
 //////////// Valid Tic-Tac-Toe State
 //        System.out.println(validTicTacToe(new String[]{"XXX", "XOO", "XOO"}));
 
@@ -1663,6 +1701,668 @@ public class Test {
 //////////// Most Common Word
 //        System.out.println(mostCommonWord("Bob hit a ball, the hit BALL flew far after it was hit.",new String[]{"hit"}));
 
+//////////// Second Minimum Node In a Binary Tree
+//        TreeNode n1=new TreeNode(2);
+//        TreeNode n2=new TreeNode(2);
+//        TreeNode n3=new TreeNode(5);
+//        TreeNode n4=new TreeNode(5);
+//        TreeNode n5=new TreeNode(7);
+//        n1.left=n2;
+//        n1.right=n3;
+//        n3.left=n4;
+//        n3.right=n5;
+//        System.out.println(findSecondMinimumValue(n1));
+
+//////////// Populating Next Right Pointers in Each Node
+//        TreeNode n1=new TreeNode(1);
+//        TreeNode n2=new TreeNode(2);
+//        TreeNode n3=new TreeNode(3);
+//        TreeNode n4=new TreeNode(4);
+//        TreeNode n5=new TreeNode(5);
+//        TreeNode n6=new TreeNode(6);
+//        TreeNode n7=new TreeNode(7);
+//        n1.left=n2;
+//        n1.right=n3;
+//        n2.left=n4;
+//        n2.right=n5;
+//        n3.left=n6;
+//        n3.right=n7;
+//        connect(n1);
+//        connectRecur(n1);
+
+//////////// Top K Frequent Elements
+//        System.out.println(topKFrequent(new int[]{1,1,1,2,2,3},2));
+
+//////////// Binary Tree Zigzag Level Order Traversal
+//        TreeNode n1=new TreeNode(1);
+//        TreeNode n2=new TreeNode(2);
+//        TreeNode n3=new TreeNode(3);
+//        TreeNode n4=new TreeNode(4);
+//        TreeNode n5=new TreeNode(5);
+//        TreeNode n6=new TreeNode(6);
+//        TreeNode n7=new TreeNode(7);
+//        n1.left=n2;
+//        n1.right=n3;
+//        n2.left=n4;
+//        n2.right=n5;
+//        n3.left=n6;
+//        n3.right=n7;
+//        System.out.println(zigzagLevelOrderBFS(n1));
+//        System.out.println(zigzagLevelOrderDFS(n1));
+
+//////////// Valid Sudoku
+//        char[][] board =   {{'8','3','.','.','7','.','.','.','.'},
+//                            {'6','.','.','1','9','5','.','.','.'},
+//                            {'.','9','8','.','.','.','.','6','.'},
+//                            {'8','.','.','.','6','.','.','.','3'},
+//                            {'4','.','.','8','.','3','.','.','1'},
+//                            {'7','.','.','.','2','.','.','.','6'},
+//                            {'.','6','.','.','.','.','2','8','.'},
+//                            {'.','.','.','4','1','9','.','.','5'},
+//                            {'.','.','.','.','8','.','.','7','9'}};
+//        System.out.println(isValidSudoku(board));
+
+//////////// Minesweeper
+//        char[][] board = {{'E','E','E','E','E'},{'E','E','M','E','E'},{'E','E','E','E','E'},{'E','E','E','E','E'}};
+//        updateBoardDFS(board,new int[]{3,0});
+//        updateBoardBFS(board,new int[]{3,0});
+
+//////////// Shortest Bridge
+
+
+//////////// Find coordinates of image of 0s
+
+//        int[][] image1 = {
+//                {1, 1, 1, 1, 1, 1, 1},
+//                {1, 1, 1, 1, 1, 1, 1},
+//                {1, 1, 1, 0, 0, 0, 1},
+//                {1, 1, 1, 0, 0, 0, 1},
+//                {1, 1, 1, 1, 1, 1, 1}
+//        };
+//
+////        Sample output variations (only one is necessary):
+////
+////        findRectangle(image1) =>
+////        x: 3, y: 2, width: 3, height: 2
+////        2,3 3,5 -- row,column of the top-left and bottom-right corners
+//
+//
+//        int[][] image2 = {
+//                {1, 1, 1, 1, 1, 1, 1},
+//                {1, 1, 1, 1, 1, 1, 1},
+//                {1, 1, 1, 1, 1, 1, 1},
+//                {1, 1, 1, 1, 1, 1, 1},
+//                {1, 1, 1, 1, 1, 1, 0}
+//        };
+////        findRectangle(image2) =>
+////        x: 6, y: 4, width: 1, height: 1
+////        4,6 4,6
+//
+//        int[][] image3 = {
+//                {1, 1, 1, 1, 1, 1, 1},
+//                {1, 1, 1, 1, 1, 1, 1},
+//                {1, 1, 1, 1, 1, 1, 1},
+//                {1, 1, 1, 1, 1, 0, 0},
+//                {1, 1, 1, 1, 1, 0, 0}
+//        };
+//
+////        findRectangle(image3) =>
+////        x: 5, y: 3, width: 2, height: 2
+////        3,5 4,6
+//
+//        int[][] image4 = {
+//                {0, 1, 1, 1, 1, 1, 1},
+//                {1, 1, 1, 1, 1, 1, 1},
+//                {1, 1, 1, 1, 1, 1, 1},
+//                {1, 1, 1, 1, 1, 1, 1},
+//                {1, 1, 1, 1, 1, 1, 1}
+//        };
+//
+////        findRectangle(image4) =>
+////        x: 0, y: 0, width: 1, height: 1
+////        0,0 0,0
+//
+//        int[][] image5 = {
+//                {0}
+//        };
+//
+////        findRectangle(image5) =>
+////        x: 0, y: 0, width: 1, height: 1
+////        0,0 0,0
+//
+////        for(int i : findDimensions(image1))
+////            System.out.println(i);
+//
+//        for (int i : findDimensionsDFS(image1))
+//            System.out.println(i);
+//        for (int i : findDimensionsDFS(image2))
+//            System.out.println(i);
+//        for (int i : findDimensionsDFS(image3))
+//            System.out.println(i);
+//        for (int i : findDimensionsDFS(image4))
+//            System.out.println(i);
+//        for (int i : findDimensionsDFS(image5))
+//            System.out.println(i);
+
+//////////// Longest Valid Parentheses
+//        System.out.println(longestValidParenthesesStack(")()())"));
+//        System.out.println(longestValidParentheses(")()())"));
+
+
+    }
+
+    //Left n right count
+    public static int longestValidParentheses(String s) {
+        int left = 0, right = 0, maxlength = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') {
+                left++;
+            } else {
+                right++;
+            }
+            if (left == right) {
+                maxlength = Math.max(maxlength, 2 * right);
+            } else if (right >= left) {
+                left = right = 0;
+            }
+        }
+        left = right = 0;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s.charAt(i) == '(') {
+                left++;
+            } else {
+                right++;
+            }
+            if (left == right) {
+                maxlength = Math.max(maxlength, 2 * left);
+            } else if (left >= right) {
+                left = right = 0;
+            }
+        }
+        return maxlength;
+    }
+
+    public static int longestValidParenthesesStack(String s) {
+        int maxans = 0;
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') {
+                stack.push(i);
+            } else {
+                stack.pop();
+                if (stack.empty()) {
+                    stack.push(i);
+                } else {
+                    maxans = Math.max(maxans, i - stack.peek());
+                }
+            }
+        }
+        return maxans;
+    }
+
+    public static int[] findDimensionsDFS(int[][] input) {
+
+        int[] output = new int[4];
+        boolean firstZeroFound = false;
+        for (int i = 0; i < input.length; i++) {
+            for (int j = 0; j < input[0].length; j++) {
+                if (input[i][j] == 0) {
+                    output[0] = i;
+                    output[2] = i;
+                    output[1] = j;
+                    output[3] = j;
+                    firstZeroFound = true;
+                    break;
+                }
+            }
+            if (firstZeroFound)
+                break;
+        }
+
+        Pair<Integer, Integer> pair = new Pair<Integer, Integer>(output[0], output[1]);
+        while (true) {
+            int i = pair.getKey();
+            int j = pair.getValue();
+            if (boundaryCheck(input, i + 1, j + 1))
+                pair = new Pair<>(i + 1, j + 1);
+            else if (boundaryCheck(input, i, j + 1))
+                pair = new Pair<>(i, j + 1);
+            else if (boundaryCheck(input, i + 1, j))
+                pair = new Pair<>(i + 1, j);
+            else
+                break;
+        }
+        output[2] = pair.getKey();
+        output[3] = pair.getValue();
+        return output;
+    }
+
+
+    public static boolean boundaryCheck(int[][] input,int i ,int j){
+        if(i<input.length && j<input[0].length && input[i][j]==0)
+            return true;
+        else
+            return false;
+    }
+
+    //Glassdoor question
+    public static int[] findDimensions(int[][] input){
+
+        int[] output=new int[4];
+        boolean firstZeroFound=false;
+        HashSet<String> visited=new HashSet<String>();
+        Queue<Pair<Integer,Integer>> queue=new LinkedList<Pair<Integer,Integer>>();
+        for(int i=0; i<input.length;i++)
+        {
+            for(int j=0; j<input[0].length;j++)
+            {
+                if(input[i][j]==0){
+                    output[0]=i;
+                    output[2]=i;
+                    output[1]=j;
+                    output[3]=j;
+                    queue.offer(new Pair(i,j));
+                    firstZeroFound=true;
+                    break;
+                }
+            }
+            if(firstZeroFound)
+                break;
+        }
+
+        int i=0;
+        int j=0;
+        while(!queue.isEmpty()){
+
+            Pair<Integer, Integer> pair=queue.poll();
+            i=pair.getKey();
+            j=pair.getValue();
+            visited.add(i+","+j);
+
+            if(check(input,visited, queue, i+1,j+1, output))
+                continue;
+            if(!check(input,visited, queue, i,j+1, output))
+                check(input,visited, queue, i+1,j, output);
+
+//            check(input,visited, queue, i,j+1, output);
+//            check(input,visited, queue, i+1,j+1, output);
+//            check(input,visited, queue, i+1,j, output);
+
+        }
+        return output;
+    }
+
+    public static boolean check(int[][] input, HashSet<String> visited, Queue<Pair<Integer,Integer>> queue, int i, int j, int[] output)
+    {
+        if(i<input.length && j<input[0].length && !visited.contains(i+","+j) && input[i][j] == 0 )
+        {
+            queue.offer(new Pair(i,j));
+            output[2]=i;
+            output[3]=j;
+            return true;
+        }
+        return false;
+    }
+
+    public static int shortestBridge(int[][] A) {
+        int R = A.length, C = A[0].length;
+        int[][] colors = getComponents(A);
+
+        Queue<ShortestBridgeNode> queue = new LinkedList();
+        Set<Integer> target = new HashSet();
+
+        for (int r = 0; r < R; ++r)
+            for (int c = 0; c < C; ++c) {
+                if (colors[r][c] == 1) {
+                    queue.add(new ShortestBridgeNode(r, c, 0));
+                } else if (colors[r][c] == 2) {
+                    target.add(r * C + c);
+                }
+            }
+
+        while (!queue.isEmpty()) {
+            ShortestBridgeNode node = queue.poll();
+            if (target.contains(node.r * C + node.c))
+                return node.depth - 1;
+            for (int nei: neighbors(A, node.r, node.c)) {
+                int nr = nei / C, nc = nei % C;
+                if (colors[nr][nc] != 1) {
+                    queue.add(new ShortestBridgeNode(nr, nc, node.depth + 1));
+                    colors[nr][nc] = 1;
+                }
+            }
+        }
+
+        throw null;
+    }
+
+    public static int[][] getComponents(int[][] A) {
+        int R = A.length, C = A[0].length;
+        int[][] colors = new int[R][C];
+        int islandNumber = 0;
+
+        for (int r0 = 0; r0 < R; ++r0)
+            for (int c0 = 0; c0 < C; ++c0)
+                if (colors[r0][c0] == 0 && A[r0][c0] == 1) {
+                    // Start dfs
+                    Stack<Integer> stack = new Stack();
+                    stack.push(r0 * C + c0);
+                    colors[r0][c0] = ++islandNumber;
+
+                    while (!stack.isEmpty()) {
+                        int node = stack.pop();
+                        int r = node / C, c = node % C;
+                        for (int nei: neighbors(A, r, c)) {
+                            int nr = nei / C, nc = nei % C;
+                            if (A[nr][nc] == 1 && colors[nr][nc] == 0) {
+                                colors[nr][nc] = islandNumber;
+                                stack.push(nr * C + nc);
+                            }
+                        }
+                    }
+                }
+
+        return colors;
+    }
+
+    public static List<Integer> neighbors(int[][] A, int r, int c) {
+        int R = A.length, C = A[0].length;
+        List<Integer> ans = new ArrayList();
+        if (0 <= r-1) ans.add((r-1) * R + c);
+        if (0 <= c-1) ans.add(r * R + (c-1));
+        if (r+1 < R) ans.add((r+1) * R + c);
+        if (c+1 < C) ans.add(r * R + (c+1));
+        return ans;
+    }
+
+    static class ShortestBridgeNode {
+        int r, c, depth;
+        ShortestBridgeNode(int r, int c, int d) {
+            this.r = r;
+            this.c = c;
+            depth = d;
+        }
+    }
+
+    //In BFS the marking of visited is kinda important so that nothing is redone.
+    public static char[][] updateBoardBFS(char[][] board, int[] click) {
+        int m = board.length , n = board[0].length;
+        int[][] dir = new int[][] {{-1,0},{1,0},{0,-1},{0,1},{-1,-1},{1,1},{-1,1},{1,-1}};
+        Queue<int[]> q = new LinkedList<>();
+        q.add(click);
+        if(board[click[0]][click[1]] == 'M'){
+            board[click[0]][click[1]] = 'X';
+            return board;
+        }
+        while(!q.isEmpty()){
+            int[] curr = q.poll();
+            int row = curr[0],col = curr[1] ,count = 0 ;
+            for(int[] d : dir){
+                int r = row + d[0],c = col + d[1];
+                if(r >= m || c >= n || r < 0 || c < 0) continue;
+                if(board[r][c] == 'M') count++;
+            }
+            if(count > 0)
+                board[row][col] = (char)(count + '0');
+            else{
+                board[row][col] = 'B';
+                for(int[] d : dir){
+                    int r = row + d[0] , c = col + d[1];
+                    if(r >= m || c >= n || r < 0 || c < 0) continue;
+                    if(board[r][c] == 'E'){
+                        q.add(new int[] {r,c});
+                        board[r][c] = 'B'; //to prevent revisiting might be overwritten if it has adj mines
+                    }
+                }
+            }
+
+        }
+        return board;
+    }
+
+    public static char[][] updateBoardDFS(char[][] board, int[] click) {
+        if (board.length == 0 || board[0].length == 0 || click.length != 2) return board;
+        int x = click[0], y = click[1], m = board.length, n = board[0].length;
+        if (board[x][y] == 'M') {
+            board[x][y] = 'X';
+        } else {
+            int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
+            dfs(board, x, y, m, n, dirs);
+        }
+        return board;
+    }
+
+    private static void dfs(char[][] board, int x, int y, int m, int n, int[][] dirs) {
+        if (x < 0 || x >= m || y < 0 || y >= n || board[x][y] != 'E') return;
+        int mine = adjMine(board, x, y, m, n);
+        if (mine > 0) {
+            board[x][y] = (char) ('0' + mine);
+        } else {
+            board[x][y] = 'B';
+            for (int[] d : dirs) {
+                dfs(board, x + d[0], y + d[1], m, n, dirs);
+            }
+        }
+    }
+
+    private static int adjMine(char[][] board, int x, int y, int m, int n) {
+        int cnt = 0;
+        for (int i = x - 1; i <= x + 1; i++) {
+            for (int j = y - 1; j <= y + 1; j++) {
+                if (0 <= i && i < m && 0 <= j && j < n && board[i][j] == 'M')
+                    cnt++;
+            }
+        }
+        return cnt;
+    }
+
+    //Can be done with hashset and since its going over the grid for every row, only one row hashset is needed instead of 9
+    public static boolean isValidSudoku(char[][] board) {
+        // init data
+        HashMap<Integer, Integer> [] rows = new HashMap[9];
+        HashMap<Integer, Integer> [] columns = new HashMap[9];
+        HashMap<Integer, Integer> [] boxes = new HashMap[9];
+        for (int i = 0; i < 9; i++) {
+            rows[i] = new HashMap<Integer, Integer>();
+            columns[i] = new HashMap<Integer, Integer>();
+            boxes[i] = new HashMap<Integer, Integer>();
+        }
+
+        // validate a board
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                char num = board[i][j];
+                if (num != '.') {
+                    int n = (int)num;
+                    int box_index = (i / 3 ) * 3 + j / 3;
+
+                    // keep the current cell value
+                    rows[i].put(n, rows[i].getOrDefault(n, 0) + 1);
+                    columns[j].put(n, columns[j].getOrDefault(n, 0) + 1);
+                    boxes[box_index].put(n, boxes[box_index].getOrDefault(n, 0) + 1);
+
+                    // check if this value has been already seen before
+                    if (rows[i].get(n) > 1 || columns[j].get(n) > 1 || boxes[box_index].get(n) > 1)
+                        return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    protected static void DFS(TreeNode node, int level, List<List<Integer>> results) {
+        if (level >= results.size()) {
+            LinkedList<Integer> newLevel = new LinkedList<Integer>();
+            newLevel.add(node.val);
+            results.add(newLevel);
+        } else {
+            if (level % 2 == 0)
+                results.get(level).add(node.val);
+            else
+                results.get(level).add(0, node.val);
+        }
+
+        if (node.left != null) DFS(node.left, level + 1, results);
+        if (node.right != null) DFS(node.right, level + 1, results);
+    }
+
+    public static List<List<Integer>> zigzagLevelOrderDFS(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<List<Integer>>();
+        }
+        List<List<Integer>> results = new ArrayList<List<Integer>>();
+        DFS(root, 0, results);
+        return results;
+    }
+
+    public static List<List<Integer>> zigzagLevelOrderBFS(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) return res;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        boolean zigzag = false;
+        while (!queue.isEmpty()) {
+            List<Integer> level = new LinkedList<>();
+            int cnt = queue.size();
+            for (int i = 0; i < cnt; i++) {
+                TreeNode node = queue.poll();
+                if (zigzag) {
+                    level.add(0, node.val);
+                }
+                else {
+                    level.add(node.val);
+                }
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+            }
+            res.add(level);
+            zigzag = !zigzag;
+        }
+        return res;
+    }
+
+    //here the remove then add then remove order is important if there is only one element in the set
+    public class RandomizedCollection {
+        ArrayList<Integer> lst;
+        HashMap<Integer, Set<Integer>> idx;
+        java.util.Random rand = new java.util.Random();
+        /** Initialize your data structure here. */
+
+        public RandomizedCollection() {
+            lst = new ArrayList<Integer>();
+            idx = new HashMap<Integer, Set<Integer>>();
+        }
+
+        /** Inserts a value to the collection. Returns true if the collection did not already contain the specified element. */
+        public boolean insert(int val) {
+            if (!idx.containsKey(val)) idx.put(val, new HashSet<Integer>());
+            idx.get(val).add(lst.size());
+            lst.add(val);
+            return idx.get(val).size() == 1;
+        }
+
+        /** Removes a value from the collection. Returns true if the collection contained the specified element. */
+        public boolean remove(int val) {
+            if (!idx.containsKey(val) || idx.get(val).size() == 0) return false;
+            int remove_idx = idx.get(val).iterator().next();
+            idx.get(val).remove(remove_idx);
+            int last = lst.get(lst.size() - 1);
+            lst.set(remove_idx, last);
+            idx.get(last).add(remove_idx);
+            idx.get(last).remove(lst.size() - 1);
+
+            lst.remove(lst.size() - 1);
+            return true;
+        }
+
+        /** Get a random element from the collection. */
+        public int getRandom() {
+            return lst.get(rand.nextInt(lst.size()));
+        }
+    }
+
+    //kLogn
+    public static List<Integer> topKFrequent(int[] nums, int k) {
+        // build hash map : character and how often it appears
+        HashMap<Integer, Integer> count = new HashMap();
+        for (int n: nums)
+            count.put(n, count.getOrDefault(n, 0) + 1);
+
+
+        // init heap 'the less frequent element first'
+        PriorityQueue<Integer> heap =
+                new PriorityQueue<Integer>((n1, n2) -> count.get(n1) - count.get(n2));
+
+        // keep k top frequent elements in the heap
+        for (int n: count.keySet()) {
+            heap.add(n);
+            if (heap.size() > k)
+                heap.poll();
+        }
+
+        //Can populate an array list backwards instead
+        // build output list
+        List<Integer> top_k = new LinkedList();
+        while (!heap.isEmpty())
+            top_k.add(heap.poll());
+        Collections.reverse(top_k);
+        return top_k;
+    }
+
+    public static void connectRecur(TreeNode root) {
+
+        if(root==null || root.left==null)
+            return;
+        root.left.next=root.right;
+        TreeNode leftChild=root.left;
+        TreeNode rightChild=root.right;
+        while(leftChild.right!=null){
+            leftChild=leftChild.right;
+            rightChild=rightChild.left;
+            leftChild.next=rightChild;
+        }
+        connectRecur(root.left);
+        connectRecur(root.right);
+    }
+
+    //going through each curr node in a level and keeping a level start pointer to start the next level
+    public static TreeNode connect(TreeNode root) {
+        TreeNode level_start=root;
+        while(level_start!=null){
+            TreeNode cur=level_start;
+            while(cur!=null){
+                if(cur.left!=null) cur.left.next=cur.right; else return root;
+                if(cur.right!=null && cur.next!=null) cur.right.next=cur.next.left;
+
+                cur=cur.next;
+            }
+            level_start=level_start.left;
+        }
+        return root;
+    }
+
+    static long secondMin = Long.MAX_VALUE;
+
+    public static void dfs(TreeNode root, int headValue) {
+        if (root != null) {
+            if (headValue < root.val && root.val < secondMin) {
+                secondMin = root.val;
+            } else if (headValue == root.val) {
+                dfs(root.left,headValue);
+                dfs(root.right,headValue);
+            }
+        }
+    }
+
+    public static int findSecondMinimumValue(TreeNode root) {
+        dfs(root, root.val);
+        return secondMin < Long.MAX_VALUE ? (int) secondMin : -1;
     }
 
     public static String mostCommonWord(String paragraph, String[] banned) {
@@ -3866,6 +4566,8 @@ public class Test {
         }
     }
 
+    //can also be done without the extra col
+    //Similar to range query 1D
     static class NumMatrixCachingRows {
 
         private int[][] dp;
@@ -5698,6 +6400,7 @@ public class Test {
         return dist;
     }
 
+    //The important part here is the initial filling with max value and then checking if a new lesser value is available
     //Multi source BFS, multiple ways to reach target node(s)
     //starting BFS from 1s can only be done one 1 at a time, the other 1s in this path may not have the same closest 0
     //Starting with multiple 1s cannot be done cuz of marking visited
@@ -6696,7 +7399,7 @@ public class Test {
     }
 
     //constant space and time. You can also get past getHits() by adding condition timestamp > times[i] && ....
-    //This may be good for concurrency because concurrently accessing the array element is same as int
+    //This may not be good for concurrency because concurrently accessing the array element is same as int
     static class HitCounterArrays {
         private int[] times;
         private int[] hits;

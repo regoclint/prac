@@ -72,8 +72,9 @@ To access parent nodes of binary
     convert tree to graph
     make a parent map for each node
 For DP if one dimension of the array can go negative then instead of matrix can use an array of hashmaps (longest arith seq)
+PQ can be optimised by storing only required size -> Klogn 
+To store array index in row * C + col. To retrieve the index row= storedValue / C and col = storedValue % C 
 
- 
 
 Utility funcs
 
@@ -317,9 +318,11 @@ Rate limiter https://www.youtube.com/watch?v=mhUQe4BKZXs
                                 -><- App Service        
  - High availability, low latency system
  - Algos
-    Fixed window 
-    Rolling window - this is better
- - Keep redis as storage for the tokens. Userid : Count : Epoch time
+    Fixed window - leads to waste of time slots
+    Rolling window - this is better as necessary timeslots are stored. But last 5 mins requests can be more than the limit. use Redis with lock
+    Sliding window - Store all timestamps, delete older ones every time. Has too many entries. Redis sorted set
+    Sliding window with counters - sliding window for 1 hour and rolling window for each min(max 60 rolling windows) i.e timestamp with count. Keep a TTL for each entry. Redis hash
+ - Keep redis as storage for the tokens. Userid : Count : Epoch time(number of milliseconds since 1 Jan 1970)
  - Every access is read and write. Use write back cache as its not critical data and has low latency.
  - LRU cache for eviction policy
  - In a distributed system there can be concurrency issue/race condition(Atomicity of read & write)- Optimistic locking can solve it     
@@ -759,7 +762,8 @@ Interface vs Inheritance vs Enum
 - Inheritance - "is a" relationship. Extensible for arbitrary number of types and to use common functionality
 - Composition - "has a" relationship. Helps in code reuse Car-Engine & Trunk-Engine. Can hide visibility of composed class.
 - Enum are named constants, can only be string. They are for fixed possibilities and wouldn't require extra functionality or extensibility in the future
- 
+
+StringBuilder is pass by reference, Integer is not 
  
 **Spring**
 
