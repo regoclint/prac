@@ -111,3 +111,50 @@ Questions
 
 CEO
 Mike Cannon-Brookes and Scott Faraquar
+
+
+Amazon
+
+LP
+1. Customer obsession
+
+2. Ownership
+
+3. Invent and simplify
+- chrome ext
+- postman testsuite
+- formatter
+- admin dev stuff
+- h2 db 
+
+4. Leaders are right a lot
+- push back SB PnA
+
+5. Learn and be curious
+- 
+
+6. Hire and develop the best
+- guide junior developers and not give them solutions even tough I knew/could do so 
+
+7. Insist on highest standards
+
+8. Think Big (Common)
+
+9. Bias for action
+
+10. Frugality
+
+11. Earn trust
+
+12. Dive deep
+
+13. Have backbone: disagree and commit
+
+14. Deliver results
+
+
+
+
+
+
+

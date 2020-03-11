@@ -74,6 +74,12 @@ To access parent nodes of binary
 For DP if one dimension of the array can go negative then instead of matrix can use an array of hashmaps (longest arith seq)
 PQ can be optimised by storing only required size -> Klogn 
 To store array index in row * C + col. To retrieve the index row= storedValue / C and col = storedValue % C 
+LCA
+    For BST - its where the values divide
+    For Binary & Nary - return the node if the return node count is >1 the root is new lca
+    For multi parent(graph) - Build adj matrix, traverse from child to parent for both the targets 
+Integer arrays are faster than Arraylist because arraylist converts primitive types to objects(auto boxing) and then stores the objects which are not contiguous
+    hence for primitive types arrays are better. For objects both are same. 
 
 
 Utility funcs
@@ -219,6 +225,27 @@ Whatsapp (Chat service)
 - Image service
 - Email/SMS service
 
+Facebook (Chat service with storage)
+- FR - 1-1 chat, online status, chat storage,group chat, push notifications
+- NFR - low latency, no data loss and high consistency
+- Message handling 
+    - push model through web sockets or HTTP long polling
+    - keep track of user to connection box
+    - 500M active connections so 10K servers with each having 50K connection capacity
+    - Storing the message in DB can be done parallely
+    - Message id is epoch time + seq
+- Message storage
+    - HBase as there are a large number of small entries
+    - Fetching data should be by Pagination based on the viewport of the user's device
+    - cache few messages of frequent users spoken to for a particular each user
+- User status
+    - User comes online or offline, broadcast to viewers
+    - Fetch top users in a user's chat when the app is open
+    - set status after waiting for a couple of seconds to prevent offline and online rapid changes    
+- Partitioning based on userid or groupid
+- Fault tolerence - if chat server fails. allow user to reconnect
+
+                        
 
 Tinder (Dating)
 https://www.youtube.com/watch?v=tndzLznxq40&list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX&index=9
@@ -432,7 +459,8 @@ SOAP vs REST vs GraphQL
     - REST was supersceeded by SOAP was superceeded by CORBA
     - SOAP is a protocol(developed by Microsoft),  GraphQL(developed by Fb) & REST are an architectural pattern
     - SOAP uses XML, REST can use anything
-    - REST is stateless
+    - REST architectural pattern is to be stateless and use HTTP status codes
+    - https://restfulapi.net/statelessness/
     - GraphQl has one endpoint and the rest is a query and you can specify exactly what data u need on the fly
     - GraphQL can get complex for rate limiting, api request logging etc. It is best when data requirements are changing frequently
     
@@ -702,6 +730,21 @@ Threads
     - Has a static object, initialValue() and get() functions
     - Lamda way is- static ThreadLocal<SimpleDateFormat> df = ThreadLocal.withInitial(()) -> new SimpleDateFormat());
     - Helps reduce memory footprint for large number of tasks
+- Accessing shared resources https://www.baeldung.com/java-mutex
+    - Critical section is a section that accesses a shared resource
+    - Mutex is a lock to prevent race conditions over critical sections, can be implemented in the foll ways
+    - synchronised - one thread at a time
+    - ReentrantLock 
+        - one thread at a time but with flexibility of conditions
+        - lock.lock() outside the try and lock.unlock() in finally
+        - Condition.await() and Condition.signal()
+        - very similar to synchronised cuz of lock and unlock at the start and end of the function
+    - Semaphore
+        - Allows a fixed number of threads to access a critical section
+        - if capacity is set to 1 then it behaves like a mutex
+        - acquire() and release()
+    - ReadWriteLock
+        - for multiple ReadLocks or one WriteLock. Read and write cannot happen at the same time
 
 Apache Velocity templating engine, can be used for email templates
 Javax.mail - mail api

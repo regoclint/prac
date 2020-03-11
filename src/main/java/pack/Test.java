@@ -1,9 +1,15 @@
 package pack;
 import javafx.util.Pair;
 
+import java.awt.*;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.util.*;
+import java.util.List;
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
 
 public class Test {
@@ -57,7 +63,7 @@ public class Test {
 //        System.out.println(numberOfPncsCoinChange(new int[]{2,3,4},7));
 //        System.out.println(coinChangeGreedy(new int[]{9,6,5,1},11));
 
-//////////// Wordbreak
+//////////// Word break
 //        lookup=getLookup(wordDict);
 //        System.out.println(wordBreak("catsandog",wordDict));
 
@@ -408,7 +414,7 @@ public class Test {
 //        TreeNode result=insertIntoBST(t1,2);
 //        result=deleteBST(t1,2);
 
-//////////// kth Smallest element in BST
+//////////// Lowest Common Ancestor of a Binary Search Tree
 //        TreeNode t5 = new TreeNode(6, null, null);
 //        TreeNode t4 = new TreeNode(4, null, null);
 //        TreeNode t3 = new TreeNode(5, t4, t5);
@@ -416,6 +422,15 @@ public class Test {
 //        TreeNode t1 = new TreeNode(3, t2, t3);
 //        System.out.println(lowestCommonAncestorIter(t1,t3,t4).val);
 //        System.out.println(lowestCommonAncestorRecur(t1,t3,t4).val);
+
+//////////// Lowest Common Ancestor of a Binary Tree
+//        TreeNode t5 = new TreeNode(6, null, null);
+//        TreeNode t4 = new TreeNode(4, null, null);
+//        TreeNode t3 = new TreeNode(5, t4, t5);
+//        TreeNode t2 = new TreeNode(1, null, null);
+//        TreeNode t1 = new TreeNode(3, t2, t3);
+//        System.out.println(lowestCommonAncestorBinaryTree(t1,t3,t4).val);
+
 
 //////////// Longest Repeating Character Replacement
 //        String s="AABABBA";
@@ -1604,6 +1619,10 @@ public class Test {
 
 //////////// Find K Pairs with Smallest Sums
 //        System.out.println(kSmallestPairs(new int[]{1,1,2},new int[]{1,2,3},2));
+//        System.out.println(kSmallestPairsMyWay(new int[]{1,7,11},new int[]{2,4,6},3));
+//        System.out.println(kSmallestPairsMyWay(new int[]{1,1,2},new int[]{1,2,3},2));
+//        System.out.println(kSmallestPairsMyWay(new int[]{1,2},new int[]{3},2));
+        System.out.println(kSmallestPairsMyWay(new int[]{1,1,2},new int[]{1,2,3},10));
 
 //////////// Evaluate Reverse Polish Notation
 //        System.out.println(evalRPN(new String[]{"2", "1", "+", "3", "*"}));
@@ -1848,7 +1867,276 @@ public class Test {
 //        System.out.println(longestValidParenthesesStack(")()())"));
 //        System.out.println(longestValidParentheses(")()())"));
 
+//////////// Flatten a Multilevel Doubly Linked List
+//        ListNode n1=new ListNode(1);
+//        ListNode n2=new ListNode(2);
+//        ListNode n3=new ListNode(3);
+//        ListNode n4=new ListNode(4);
+//        n1.next=n2;
+//        n2.next=n3;
+//        n2.child=n4;
+//        flatten(n1);
 
+//////////// Image Overlap
+//        System.out.println(largestOverlapCountDelta(new int[][]{{1,1,0},{0,1,0},{0,1,0}},
+//                                            new int[][]{{0,0,0},{1,1,0},{0,1,0}}));
+
+//////////// Design Bounded Blocking Queue
+
+//////////// Design In-Memory File System
+//        FileSystem obj = new FileSystem();
+//        List<String> param_1 = obj.ls("/");
+//        obj.mkdir("/a/b/c");
+//        obj.addContentToFile("/a/b/c/d","hello");
+//        System.out.println(obj.readContentFromFile("/a/b/c/d"));
+
+//////////// Building H2O
+
+
+    }
+
+    static class FileSystem {
+        class Dir {
+            HashMap<String, Dir> dirs = new HashMap<>();
+            HashMap<String, String> files = new HashMap<>();
+        }
+
+        Dir root;
+
+        public FileSystem() {
+            root = new Dir();
+        }
+
+        public List<String> ls(String path) {
+            Dir t = root;
+            List<String> files = new ArrayList<>();
+            if (!path.equals("/")) {
+                String[] d = path.split("/");
+                for (int i = 1; i < d.length - 1; i++) {
+                    t = t.dirs.get(d[i]);
+                }
+                if (t.files.containsKey(d[d.length - 1])) {
+                    files.add(d[d.length - 1]);
+                    return files;
+                } else {
+                    t = t.dirs.get(d[d.length - 1]);
+                }
+            }
+            files.addAll(new ArrayList<>(t.dirs.keySet()));
+            files.addAll(new ArrayList<>(t.files.keySet()));
+            Collections.sort(files);
+            return files;
+        }
+
+        public void mkdir(String path) {
+            Dir t = root;
+            String[] d = path.split("/");
+            for (int i = 1; i < d.length; i++) {
+                if (!t.dirs.containsKey(d[i]))
+                    t.dirs.put(d[i], new Dir());
+                t = t.dirs.get(d[i]);
+            }
+        }
+
+        public void addContentToFile(String filePath, String content) {
+            Dir t = root;
+            String[] d = filePath.split("/");
+            for (int i = 1; i < d.length - 1; i++) {
+                t = t.dirs.get(d[i]);
+            }
+            t.files.put(d[d.length - 1], t.files.getOrDefault(d[d.length - 1], "") + content);
+        }
+
+        public String readContentFromFile(String filePath) {
+            Dir t = root;
+            String[] d = filePath.split("/");
+            for (int i = 1; i < d.length - 1; i++) {
+                t = t.dirs.get(d[i]);
+            }
+            return t.files.get(d[d.length - 1]);
+        }
+    }
+
+    public class BoundedBlockingQueueSemaphore {
+
+        private Semaphore enq;
+
+        private Semaphore deq;
+
+        ConcurrentLinkedDeque<Integer> q;
+
+        public BoundedBlockingQueueSemaphore(int capacity) {
+            q =  new ConcurrentLinkedDeque<>();
+            enq = new Semaphore(capacity);
+            deq = new Semaphore(0);
+        }
+
+        public void enqueue(int element) throws InterruptedException {
+            enq.acquire();
+            q.add(element);
+            deq.release();
+        }
+
+        public int dequeue() throws InterruptedException {
+            deq.acquire();
+            int val = q.poll();
+            enq.release();
+            return val;
+        }
+
+        public int size() {
+            return q.size();
+        }
+    }
+
+    class BoundedBlockingQueueReentrantLock {
+        private ReentrantLock lock = new ReentrantLock();
+        private Condition full = lock.newCondition();
+        private Condition empty = lock.newCondition();
+        private int[] queue;
+        private int tail = 0;
+        private int head = 0;
+        private int size = 0;
+        public BoundedBlockingQueueReentrantLock(int capacity) {
+            queue = new int[capacity];
+        }
+
+        public void enqueue(int element) throws InterruptedException {
+            lock.lock();
+            try {
+                while(size == queue.length) {
+                    full.await();
+                }
+                queue[tail++] = element;
+                tail %= queue.length;
+                size++;
+                empty.signal();
+            } finally {
+                lock.unlock();
+            }
+        }
+
+        public int dequeue() throws InterruptedException {
+            lock.lock();
+            try {
+                while(size == 0) {
+                    empty.await();
+                }
+                int res = queue[head++];
+                head %= queue.length;
+                size--;
+                full.signal();
+                return res;
+            } finally {
+                lock.unlock();
+            }
+        }
+
+        public int size() throws InterruptedException {
+            lock.lock();
+            try {
+                return this.size;
+            } finally {
+                lock.unlock();
+            }
+        }
+    }
+
+    //works but horribly slow
+    public static int largestOverlapMap(int[][] A, int[][] B) {
+        int N = A.length;
+        int max=0;
+        HashMap<String,Integer> deltaToCount=new HashMap<String,Integer>();
+        for (int i = 0; i < N; ++i)
+            for (int j = 0; j < N; ++j)
+                if (A[i][j] == 1)
+                    for (int i2 = 0; i2 < N; ++i2)
+                        for (int j2 = 0; j2 < N; ++j2)
+                            if (B[i2][j2] == 1) {
+                                Integer val=deltaToCount.put((i - i2) + "," + (j - j2),
+                                        deltaToCount.getOrDefault((i - i2) + "," + (j - j2), 0) + 1);
+                                max=Math.max(max,val==null ? 1: val+1);
+                            }
+        return max;
+    }
+
+    //stores every delta
+    //N^4 and N^2
+    public static int largestOverlapCountDelta(int[][] A, int[][] B) {
+        int N = A.length;
+        int[][] count = new int[2*N+1][2*N+1];
+        for (int i = 0; i < N; ++i)
+            for (int j = 0; j < N; ++j)
+                if (A[i][j] == 1)
+                    for (int i2 = 0; i2 < N; ++i2)
+                        for (int j2 = 0; j2 < N; ++j2)
+                            if (B[i2][j2] == 1)
+                                count[i-i2 +N][j-j2 +N] += 1;
+
+        int ans = 0;
+        for (int[] row: count)
+            for (int v: row)
+                ans = Math.max(ans, v);
+        return ans;
+    }
+
+    //the seen set prevents re-calculating same deltas
+    //N^6 and space N^2
+    public static int largestOverlapTranslateDelta(int[][] A, int[][] B) {
+        int N = A.length;
+        List<Point> A2 = new ArrayList(), B2 = new ArrayList();
+        //this loop can be done with regular i and j
+        for (int i = 0; i < N * N; ++i) {
+            if (A[i / N][i % N] == 1) A2.add(new Point(i / N, i % N));
+            if (B[i / N][i % N] == 1) B2.add(new Point(i / N, i % N));
+        }
+
+        Set<Point> Bset = new HashSet(B2);
+
+        int ans = 0;
+        Set<Point> seen = new HashSet();
+        for (Point a : A2)                                                      //n^2
+            for (Point b : B2) {                                                //n^2
+                Point delta = new Point(b.x - a.x, b.y - a.y);
+                if (!seen.contains(delta)) {
+                    seen.add(delta);
+                    int cand = 0;
+                    for (Point p : A2)                                          //n^2
+                        if (Bset.contains(new Point(p.x + delta.x, p.y + delta.y)))
+                            cand++;
+                    ans = Math.max(ans, cand);
+                }
+            }
+
+        return ans;
+    }
+
+    public static ListNode flatten(ListNode head) {
+        if (head == null) return head;
+        // pseudo head to ensure the `prev` pointer is never none
+        ListNode pseudoHead = new ListNode(0, null, head, null);
+
+        flattenDFS(pseudoHead, head);
+
+        // detach the pseudo head from the real head
+        pseudoHead.next.prev = null;
+        return pseudoHead.next;
+    }
+
+    /* return the tail of the flatten list */
+    public static ListNode flattenDFS(ListNode prev, ListNode curr) {
+        if (curr == null) return prev;
+        curr.prev = prev;
+        prev.next = curr;
+
+        // the curr.next would be tempered in the recursive function
+        ListNode tempNext = curr.next;
+
+        //go for child
+        ListNode tail = flattenDFS(curr, curr.child);
+        curr.child = null;
+
+        return flattenDFS(tail, tempNext);//go for next
     }
 
     //Left n right count
@@ -2287,7 +2575,7 @@ public class Test {
         }
     }
 
-    //kLogn
+    //nLogk
     public static List<Integer> topKFrequent(int[] nums, int k) {
         // build hash map : character and how often it appears
         HashMap<Integer, Integer> count = new HashMap();
@@ -2802,17 +3090,64 @@ public class Test {
         else return n1 - n2;
     }
 
+    //Do???
+    //Doesnt pass all test cases 18/27
+    //taking pivot pairs
+    public static List<List<Integer>> kSmallestPairsMyWay(int[] nums1, int[] nums2, int k) {
+        int[] pivotIAndJ= {0,0}, pivotJAndI={0,0};
+        List<List<Integer>> res = new ArrayList<>();
+        HashSet<String> visited=new HashSet<String>();
+        if(nums1.length==0 || nums2.length==0) return res;
 
-    public static List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
-        PriorityQueue<List<Integer>> que = new PriorityQueue<>((a,b)->a.get(0)+a.get(1)-b.get(0)-b.get(1));
+        while(k>0 && pivotIAndJ[0]<nums1.length && pivotJAndI[0]<nums2.length) {
+
+
+            if (nums1[pivotIAndJ[0]] + nums2[pivotIAndJ[1]] < nums2[pivotJAndI[0]] + nums1[pivotJAndI[1]]){
+                if(!visited.contains(pivotIAndJ[0]+","+ pivotIAndJ[1]))
+                {
+                    res.add(Arrays.asList(nums1[pivotIAndJ[0]], nums2[pivotIAndJ[1]]));
+                    visited.add(pivotIAndJ[0]+","+ pivotIAndJ[1]);
+                    k--;
+                }
+                pivotIAndJ[1]++;
+            }
+            else {
+                if(!visited.contains(pivotJAndI[1]+","+ pivotJAndI[0]))
+                {
+                    res.add(Arrays.asList(nums1[pivotJAndI[1]],nums2[pivotJAndI[0]]));
+                    visited.add(pivotJAndI[1]+","+ pivotJAndI[0]);
+                    k--;
+                }
+                pivotJAndI[1]++;
+            }
+            if(pivotIAndJ[1]==nums2.length)
+            {
+                pivotIAndJ[0]++;
+                pivotIAndJ[1]=0;
+            }
+            if(pivotJAndI[1]==nums1.length)
+            {
+                pivotJAndI[0]++;
+                pivotJAndI[1]=0;
+            }
+        }
+
+        return res;
+    }
+
+    //the last index of the array is the j increment for every pivot i
+    //So every time a poll is done
+    //here integer array is faster to use instead of ArrayList
+    public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
+        PriorityQueue<int[]> que = new PriorityQueue<>((a,b)->(a[0] + a[1]) - (b[0] + b[1]));
         List<List<Integer>> res = new ArrayList<>();
         if(nums1.length==0 || nums2.length==0 || k==0) return res;
-        for(int i=0; i<nums1.length && i<k; i++) que.offer(Arrays.asList(nums1[i], nums2[0], 0));
+        for(int i=0; i<nums1.length && i<k; i++) que.offer(new int[]{nums1[i], nums2[0], 0});
         while(k-- > 0 && !que.isEmpty()){
-            List<Integer> cur = que.poll();
-            res.add(Arrays.asList(cur.get(0), cur.get(1)));
-            if(cur.get(2) == nums2.length-1) continue;
-            que.offer(Arrays.asList(cur.get(0),nums2[cur.get(2)+1], cur.get(2)+1));
+            int[] cur = que.poll();
+            res.add(Arrays.asList(cur[0], cur[1]));
+            if(cur[2] == nums2.length-1) continue;
+            que.offer(new int[]{cur[0],nums2[cur[2]+1], cur[2]+1});
         }
         return res;
     }
@@ -9280,6 +9615,42 @@ public class Test {
         return s.length() - start;// the window of length-start is taken forward always and we try to see if we can better from that number for each end index.
     }
 
+    //To get LCA of a multi parent(graph) like hierarchy, create a adj map, store the path of the target nodes and compare them is one way
+    //Another way is to ||ly traverse the parents of the target nodes(Glassdoor question)
+    //The below question of Nary tree can also be asked for multiple target nodes
+    public static Node lowestCommonAncestorNaryTree(Node root, Node p, Node q) {
+        if (root == null || root == p || root == q)
+            return root;
+
+        int count = 0;
+        Node lca = null;
+        for (Node child : root.children) {
+            Node returnNode = lowestCommonAncestorNaryTree(child, p, q);
+            if (returnNode != null) {
+                lca = returnNode; //storing for only 1 node thats found
+                count++;
+            }
+        }
+        if (count > 1)
+            return root;
+        else
+            return lca;
+    }
+
+    public static TreeNode lowestCommonAncestorBinaryTree(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root == p || root == q) {
+            return root;
+        }
+
+        TreeNode left = lowestCommonAncestorBinaryTree(root.left, p, q);
+        TreeNode right = lowestCommonAncestorBinaryTree(root.right, p, q);
+        if (left != null && right != null) {
+            return root;
+        } else {
+            return left != null ? left : right;
+        }
+    }
+
     //In BST iterative, may not need stack as u can move through searching
     //LCA can be asked for BT also, there whole tree needs to be searched except for inside a node that has matched.
     public static TreeNode lowestCommonAncestorRecur(TreeNode root, TreeNode p, TreeNode q) {
@@ -11091,6 +11462,25 @@ public class Test {
         }
 
         return f[s.length()];
+    }
+
+    public static List<String> wordBreakIIDP(String s, Set<String> wordDict) {
+        LinkedList<String>[] dp = new LinkedList[s.length() + 1];
+        LinkedList<String> initial = new LinkedList<>();
+        initial.add("");
+        dp[0] = initial;
+        for (int i = 1; i <= s.length(); i++) {
+            LinkedList<String> list = new LinkedList<>();
+            for (int j = 0; j < i; j++) {
+                if (dp[j].size() > 0 && wordDict.contains(s.substring(j, i))) {
+                    for (String l : dp[j]) {
+                        list.add(l + (l.equals("") ? "" : " ") + s.substring(j, i));
+                    }
+                }
+            }
+            dp[i] = list;
+        }
+        return dp[s.length()];
     }
 
     // with memo its n^2 and without n^n
