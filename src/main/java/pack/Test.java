@@ -893,7 +893,7 @@ public class Test {
 //        System.out.println(output[0].toString());
 //        System.out.println(Arrays.asList(output[1]));
 
-//////////// Number to words
+//////////// Integer to English Words
 //        NumberToWords numberToWords=new NumberToWords();
 //        System.out.println(numberToWords.numberToWords(123456));
 
@@ -1164,7 +1164,7 @@ public class Test {
 //        System.out.println(makeLargestSpecial(largestNumber));
 
 //////////// Text justification
-//        String[] input =new String[]{"This", "is", "an", "example", "of", "text", "justification."};
+//        String[] input =new String[]{"This", "is", "an", "example", "of", "text", "justification."," hi", "ok"};
 //        System.out.println(fullJustify(input,16));
 
 
@@ -1180,6 +1180,9 @@ public class Test {
 //        System.out.println(isMatchRecurDP("mississippi","mis*is*p*."));
 //        System.out.println(isMatchIterativeDP("mississippi","mis*is*p*."));
 //        System.out.println(isMatchIterativeDP("aab","c*a*b"));
+//        System.out.println(isMatchIterativeDPReverse("aa","a*"));
+//        System.out.println(isMatchIterativeDPReverse("aab","c*a*b"));
+//        System.out.println(isMatchIterativeDPReverse("a","ab*a"));
 
 
 
@@ -1293,6 +1296,7 @@ public class Test {
 //////////// Find First and Last Position of Element in Sorted Array
 //        System.out.println(searchRange(new int[]{5,6},3));
 //        System.out.println(searchRange(new int[]{1,4},4));
+//        System.out.println(searchRange(new int[]{1,3,4},3));
 
 //////////// Vertical Order Traversal of a Binary Tree
 //        TreeNode n1=new TreeNode(1);
@@ -1437,9 +1441,9 @@ public class Test {
 //        System.out.println(pick(arr,2,rand));
 
 //////////// Strobogrammatic Number II
-//        System.out.println(findStrobogrammaticRecur(3,3));
+//        System.out.println(findStrobogrammaticII(3,3));
 
-//////////// Strobogrammatic Number II
+//////////// Strobogrammatic Number III
 //        System.out.println(strobogrammaticInRange("9999","10000"));
 
 //////////// Bulb Switcher
@@ -1622,7 +1626,7 @@ public class Test {
 //        System.out.println(kSmallestPairsMyWay(new int[]{1,7,11},new int[]{2,4,6},3));
 //        System.out.println(kSmallestPairsMyWay(new int[]{1,1,2},new int[]{1,2,3},2));
 //        System.out.println(kSmallestPairsMyWay(new int[]{1,2},new int[]{3},2));
-        System.out.println(kSmallestPairsMyWay(new int[]{1,1,2},new int[]{1,2,3},10));
+//        System.out.println(kSmallestPairsMyWay(new int[]{1,1,2},new int[]{1,2,3},10));
 
 //////////// Evaluate Reverse Polish Notation
 //        System.out.println(evalRPN(new String[]{"2", "1", "+", "3", "*"}));
@@ -1893,6 +1897,1591 @@ public class Test {
 //////////// Building H2O
 
 
+//////////// Sparse Matrix Multiplication
+//       int[][] array= multiply(new int[][]{{2,2},{-1,1},{1,-1}},
+//                new int[][]{{2,3,4},{5,6,7}});
+
+//////////// Number of Islands II
+//        System.out.println(numIslands2(3,3,new int[][]{{0,0}, {0,1}, {1,2}, {2,1}}));
+//        System.out.println(numIslands2(3,3,new int[][]{{0,1},{1,2},{2,1},{1,0},{0,2},{0,0},{1,1}}));
+
+
+//////////// Daily Temperatures
+//       dailyTemperatures(new int[]{73, 74, 75, 71, 69, 72, 76, 73});
+
+//////////// Next Greater Element I
+//        nextGreaterElement(new int[]{1,3,4,2},new int[]{4,1,2})
+
+//////////// Next Greater Element II
+//        nextGreaterElementsII(new int[]{3,8,4,1,2});
+
+//////////// Graph Valid Tree
+//        ValidTree  validTree=new ValidTree();
+
+//////////// Valid Triangle Number
+//        System.out.println(triangleNumber(new int[]{2,2,3,4}));
+
+//////////// Edit Distance
+//        System.out.println(editDistance("but","bat"));
+//        System.out.println(editDistanceRecur("but","bat"));
+
+//////////// Validate Stack Sequences
+//        System.out.println(validateStackSequences(new int[]{1,2,3,4,5},new int[]{4,3,5,1,2}));
+//        System.out.println(validateStackSequencesNoStack(new int[]{1,2,3,4,5},new int[]{4,3,5,1,2}));
+
+//////////// Pow(x, n)
+//        System.out.println(myPow(2,16));
+
+//////////// Shuffle an Array
+//        Shuffle s=new Shuffle(new int[]{1,2,3});
+
+//////////// Range Module
+//        RangeModule rangeModule=new RangeModule();
+//        rangeModule.addRange(10, 20); //null
+//        rangeModule.removeRange(14, 16); //null
+//        rangeModule.queryRange(10, 14); //true (Every number in [10, 14) is being tracked)
+//        rangeModule.queryRange(13, 15); //false (Numbers like 14, 14.03, 14.17 in [13, 15) are not being tracked)
+//        rangeModule.queryRange(16, 17); //true (The number 16 in [16, 17) is still being tracked, despite the remove operation)
+
+//////////// Can I Win
+//        System.out.println(canIWin(10, 13));
+//        CanWin canWin=new CanWin();
+//        canWin.canIWin(10, 13);
+//        System.out.println(canIWin2(10, 13));
+
+//////////// Integer to Roman
+//        System.out.println(intToRoman(645));
+
+//////////// Find the Celebrity
+//        findCelebrity(4);
+//        findCelebrityCaching(4);
+
+//////////// Profitable Schemes
+//        System.out.println(profitableSchemesDP(5,3,new int[]{2,2},new int[]{2,3}));
+//        System.out.println(profitableSchemesDP(10,5,new int[]{2,3,5},new int[]{6,7,8}));
+//        System.out.println(profitableSchemesDP(1,1,new int[]{2,2,2,2,2},new int[]{1,2,1,1,0}));
+
+//////////// Intersection of Two Linked Lists
+//        getIntersectionNode()
+//        getIntersectionNodeLength()
+
+//////////// Roman to Integer
+//        System.out.println(romanToInt("LVI"));
+
+//////////// Friend Circles
+//        FindCirclesUnionFind
+//            findCircleNum()
+
+//////////// Implement Rand10() Using Rand7()
+//        System.out.println(rand10());
+
+//////////// Data Stream as Disjoint Intervals
+//        SummaryRanges summaryRanges=new SummaryRanges();
+//        summaryRanges.addNum(1);
+//        summaryRanges.addNum(3);
+//        summaryRanges.addNum(7);
+//        summaryRanges.addNum(2);
+//        summaryRanges.addNum(6);
+//        List<Interval> output=summaryRanges.getIntervals();
+
+//////////// Time Based Key-Value Store
+//        TimeMap timeMap=new TimeMap();
+
+//////////// Logger Rate Limiter
+//        Logger logger = new Logger();
+//        logger.shouldPrintMessage(1, "foo"); //returns true;
+//        logger.shouldPrintMessage(2,"bar"); //returns true;
+//        logger.shouldPrintMessage(3,"foo"); //returns false;
+//        logger.shouldPrintMessage(8,"bar"); //returns false;
+//        logger.shouldPrintMessage(10,"foo"); //returns false;
+//        logger.shouldPrintMessage(11,"foo"); //returns true;
+
+//////////// Perfect Squares
+//        System.out.println(numSquaresDP(12));
+//        System.out.println(numSquaresGreedy(12));
+
+//////////// New Users Daily Count
+//        select firstLogin as login_date, count(*) as user_count
+//        from (select user_id, min(activity_date) as firstLogin
+//                from traffic
+//                where activity = 'login'
+//                group by user_id) as minLogin
+//        where datediff('2019-06-30', firstLogin) <= 90
+//        group by firstLogin
+
+//////////// Find All Anagrams in a String
+//        System.out.println(findAnagrams("cbaebabacd","abc"));
+
+//////////// Minimum Remove to Make Valid Parentheses
+//        System.out.println(minRemoveToMakeValid("lee(t(c)o)de)"));
+//        System.out.println(minRemoveToMakeValid2("lee(t(c)o)de)"));
+
+//////////// Diagonal Traverse
+//        int[] output=findDiagonalOrder(new int[][]{{1,2,3},{4,5,6},{7,8,9}});
+
+
+    }
+
+    public static int[] findDiagonalOrder(int[][] matrix) {
+        if (matrix == null || matrix.length == 0) {
+            return new int[0];
+        }
+        int N = matrix.length;
+        int M = matrix[0].length;
+        int row = 0, column = 0;
+        int direction = 1;
+        int[] result = new int[N * M];
+        int r = 0;
+
+        while (row < N && column < M) {
+            result[r++] = matrix[row][column];
+            int new_row = row + (direction == 1 ? -1 : 1);
+            int new_column = column + (direction == 1 ? 1 : -1);
+
+            if (new_row < 0 || new_row == N || new_column < 0 || new_column == M) {
+
+                if (direction == 1) {
+                    row += (column == M - 1 ? 1 : 0);
+                    column += (column == M - 1 ? 0 : 1);
+                } else {
+                    column += (row == N - 1 ? 1 : 0);
+                    row += (row == N - 1 ? 0 : 1);
+                }
+
+                direction = 1 - direction;
+            } else {
+                row = new_row;
+                column = new_column;
+            }
+        }
+        return result;
+    }
+
+    public static String minRemoveToMakeValid2(String s) {
+
+        // Parse 1: Remove all invalid ")"
+        StringBuilder sb = new StringBuilder();
+        int openSeen = 0;
+        int balance = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '(') {
+                openSeen++;
+                balance++;
+            } if (c == ')') {
+                if (balance == 0) continue;
+                balance--;
+            }
+            sb.append(c);
+        }
+
+        // Parse 2: Remove the rightmost "("
+        StringBuilder result = new StringBuilder();
+        int openToKeep = openSeen - balance;
+        for (int i = 0; i < sb.length(); i++) {
+            char c = sb.charAt(i);
+            if (c == '(') {
+                openToKeep--;
+                if (openToKeep < 0) continue;
+            }
+            result.append(c);
+        }
+
+        return result.toString();
+    }
+
+    private static StringBuilder removeInvalidClosing(CharSequence string, char open, char close) {
+        StringBuilder sb = new StringBuilder();
+        int balance = 0;
+        for (int i = 0; i < string.length(); i++) {
+            char c = string.charAt(i);
+            if (c == open) {
+                balance++;
+            } if (c == close) {
+                if (balance == 0) continue;
+                balance--;
+            }
+            sb.append(c);
+        }
+        return sb;
+    }
+
+    //here the result was reversed, can also have a reversed loop instead but would need some code modification
+    public static String minRemoveToMakeValid(String s) {
+        StringBuilder result = removeInvalidClosing(s, '(', ')');
+        result = removeInvalidClosing(result.reverse(), ')', '(');
+        return result.reverse().toString();
+    }
+
+    protected static boolean is_divided_by(int n, int count,Set<Integer> square_nums) {
+        if (count == 1) {
+            return square_nums.contains(n);
+        }
+
+        for (Integer square : square_nums) {
+            if (is_divided_by(n - square, count - 1,square_nums)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //this methods greedily goes over the combination counts
+    public static int numSquaresGreedy(int n) {
+        Set<Integer> square_nums = new HashSet<Integer>();
+
+        square_nums.clear();
+
+        for (int i = 1; i * i <= n; ++i) {
+            square_nums.add(i * i);
+        }
+
+        int count = 1;
+        for (; count <= n; ++count) {
+            if (is_divided_by(n, count,square_nums))
+                return count;
+        }
+        return count;
+    }
+
+    public static int numSquaresDP(int n) {
+        int dp[] = new int[n + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        // bottom case
+        dp[0] = 0;
+
+        // pre-calculate the square numbers.
+        int max_square_index = (int) Math.sqrt(n) + 1;
+        int square_nums[] = new int[max_square_index];
+        for (int i = 1; i < max_square_index; ++i) {
+            square_nums[i] = i * i;
+        }
+
+        for (int i = 1; i <= n; ++i) {
+            for (int s = 1; s < max_square_index; ++s) {
+                if (i < square_nums[s])
+                    break;
+                dp[i] = Math.min(dp[i], dp[i - square_nums[s]] + 1);
+            }
+        }
+        return dp[n];
+    }
+
+    //can be done with tree map also
+    //Map<String, TreeMap<Integer, String>> M;
+    //here the Collections.binarySearch function is different
+    static class TimeMap {
+        Map<String, List<Pair<Integer, String>>> M;
+
+        public TimeMap() {
+            M = new HashMap();
+        }
+
+        public void set(String key, String value, int timestamp) {
+            if (!M.containsKey(key))
+                M.put(key, new ArrayList<Pair<Integer, String>>());
+
+            M.get(key).add(new Pair(timestamp, value));
+        }
+
+        public String get(String key, int timestamp) {
+            if (!M.containsKey(key)) return "";
+
+            List<Pair<Integer, String>> A = M.get(key);
+            int i = Collections.binarySearch(A, new Pair<Integer, String>(timestamp, "{"),
+                    (a, b) -> Integer.compare(a.getKey(), b.getKey()));
+
+            if (i >= 0)
+                return A.get(i).getValue();
+            else if (i == -1)
+                return "";
+            else
+                return A.get(-i-2).getValue();
+        }
+    }
+
+    static class SummaryRanges {
+        TreeMap<Integer, Interval> tree;
+
+        public SummaryRanges() {
+            tree = new TreeMap<>();
+        }
+
+        public void addNum(int val) {
+            if(tree.containsKey(val)) return;
+            Integer l = tree.lowerKey(val);
+            Integer h = tree.higherKey(val);
+            if(l != null && h != null && tree.get(l).end + 1 == val && h == val + 1) {
+                tree.get(l).end = tree.get(h).end;
+                tree.remove(h);
+            } else if(l != null && tree.get(l).end + 1 >= val) {
+                tree.get(l).end = Math.max(tree.get(l).end, val);
+            } else if(h != null && h == val + 1) {
+                tree.put(val, new Interval(val, tree.get(h).end));
+                tree.remove(h);
+            } else {
+                tree.put(val, new Interval(val, val));
+            }
+        }
+
+        public List<Interval> getIntervals() {
+            return new ArrayList<>(tree.values());
+        }
+    }
+
+    public static int rand10() {
+        int row, col, idx;
+        do {
+            row = rand7();
+            col = rand7();
+            idx = col + (row - 1) * 7;
+        } while (idx > 40);
+        return 1 + (idx - 1) % 10;
+    }
+    public static int rand7(){
+        return new Random().nextInt(7);
+    }
+
+    public static void dfsFindCircle(int[][] M, int[] visited, int i) {
+        for (int j = 0; j < M.length; j++) {
+            if (M[i][j] == 1 && visited[j] == 0) {
+                visited[j] = 1;
+                dfsFindCircle(M, visited, j);
+            }
+        }
+    }
+    //n^2
+    public static int findCircleNum(int[][] M) {
+        int[] visited = new int[M.length];
+        int count = 0;
+        for (int i = 0; i < M.length; i++) {
+            if (visited[i] == 0) {
+                dfsFindCircle(M, visited, i);
+                count++;
+            }
+        }
+        return count;
+    }
+
+    //n^3 worst
+    public class FindCirclesUnionFind {
+        int count=0;
+        int find(int parent[], int i) {
+            if (parent[i] == -1)
+                return i;
+            return parent[i]=find(parent, parent[i]);
+        }
+
+        void union(int parent[], int x, int y) {
+            int xset = find(parent, x);
+            int yset = find(parent, y);
+            if (xset != yset)
+            {parent[xset] = yset;count--;}
+        }
+        public int findCircleNum(int[][] M) {
+            int[] parent = new int[M.length];
+            count=M.length;
+            Arrays.fill(parent, -1);
+            for (int i = 0; i < M.length; i++) {
+                for (int j = 0; j < M.length; j++) {
+                    if (M[i][j] == 1 && i != j) {
+                        union(parent, i, j);
+                    }
+                }
+            }
+            return count;
+        }
+    }
+
+    //faster, but is actually m+n+m(m being the longer one)
+    public static ListNode getIntersectionNodeLength(ListNode headA, ListNode headB) {
+        int lenA = 0; int lenB = 0;
+        ListNode curr = headA;
+        while(curr != null){
+            lenA++; curr = curr.next;
+        }
+        curr = headB;
+        while(curr != null){
+            lenB++; curr = curr.next;
+        }
+        while(lenA > lenB){
+            headA = headA.next;
+            lenA--;
+        }
+        while(lenB > lenA){
+            headB = headB.next;
+            lenB--;
+        }
+        while(headA != headB){
+            headA = headA.next;
+            headB = headB.next;
+        }
+        return headB;
+    }
+
+    //m+n
+    public static ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode pa = headA, pb = headB;
+        while (pa != pb) {
+            pa = (pa != null) ? pa.next : headB;
+            pb = (pb != null) ? pb.next : headA;
+        }
+        return pa;
+    }
+
+    public static int profitableSchemesDP(int G, int P, int[] group, int[] profit) {
+        int MOD = 1_000_000_007;
+        int N = group.length;
+        long[][][] dp = new long[2][P+1][G+1];
+        dp[0][0][0] = 1;
+
+        for (int i = 0; i < N; ++i) {
+            int p0 = profit[i];  // the current crime profit
+            int g0 = group[i];  // the current crime group size
+
+            long[][] cur = dp[i % 2];
+            long[][] cur2 = dp[(i + 1) % 2];
+
+            // Deep copy cur into cur2
+            for (int jp = 0; jp <= P; ++jp)
+                for (int jg = 0; jg <= G; ++jg)
+                    cur2[jp][jg] = cur[jp][jg];
+
+            for (int p1 = 0; p1 <= P; ++p1) {  // p1 : the current profit
+                // p2 : the new profit after committing this crime
+                int p2 = Math.min(p1 + p0, P);
+                for (int g1 = 0; g1 <= G - g0; ++g1) {  // g1 : the current group size
+                    // g2 : the new group size after committing this crime
+                    int g2 = g1 + g0;
+                    cur2[p2][g2] += cur[p1][g1];
+                    cur2[p2][g2] %= MOD;
+                }
+            }
+        }
+
+        // Sum all schemes with profit P and group size 0 <= g <= G.
+        long ans = 0;
+        for (long x: dp[N%2][P])
+            ans += x;
+
+        return (int) ans;
+    }
+
+    //MLE
+    public static int profitableSchemesDPMyWay(int G, int P, int[] group, int[] profit) {
+        //int [totalProfit] [total Members]
+        ArrayList<ArrayList<Integer[]>> dp = new ArrayList<>();
+        if(profit.length==0) return 0;
+        if(profit.length==1) return profit[0] >= P && group[0] <= G ?  1 : 0 ;
+
+        ArrayList<Integer[]> list = new ArrayList<Integer[]>();
+        list.add(new Integer[]{profit[0], group[0]});
+        dp.add(list);
+        for (int i = 1; i < profit.length; i++) {
+            ArrayList<Integer[]> previousOutput = dp.get(i - 1);
+            ArrayList<Integer[]> currentOutput = new ArrayList<>(previousOutput);
+            dp.add(currentOutput);
+
+            if (i < profit.length - 1 && group[i] <= G)
+                currentOutput.add(new Integer[]{profit[i], group[i]});
+            if (i == profit.length - 1 && group[i] <= G && profit[i] >= P)
+                currentOutput.add(new Integer[]{profit[i], group[i]});
+
+            int index = 0;
+            for (Integer[] arr : previousOutput) {
+                int newProfit = arr[0] + profit[i];
+                int newMembers = arr[1] + group[i];
+
+                if (i == profit.length - 1) {
+                    if (arr[0] < P || arr[1]> G) currentOutput.remove(index);
+                    if (newProfit >= P && newMembers <= G) currentOutput.add(new Integer[]{newProfit, newMembers});
+                } else if (newMembers <= G) {
+                    currentOutput.add(new Integer[]{newProfit, newMembers});
+                }
+                index++;
+            }
+            previousOutput.clear();
+        }
+        return dp.get(profit.length - 1).size();
+    }
+
+    //TLE
+    public static int profitableSchemes(int G, int P, int[] group, int[] profit) {
+        List<List<Integer>> output=new LinkedList<>();
+        recurProfit( G,  P,  group,  profit,output,new LinkedList<>(),0,0,0);
+        return output.size();
+    }
+
+    public static void recurProfit(int G, int P, int[] group, int[] profit, List<List<Integer>> output, List<Integer> temp, int totalProfit,int totalMembers,int start) {
+        if (totalMembers > G) return;
+        if (totalProfit >= P)
+            output.add(new LinkedList<>(temp));
+
+        for (int i = start; i < profit.length; i++) {
+            temp.add(i);
+            recurProfit(G, P, group, profit, output, temp, totalProfit + profit[i], totalMembers + group[i], i + 1);
+            temp.remove(temp.size() - 1);
+        }
+    }
+    
+    static Map<Pair<Integer, Integer>, Boolean> knowsCache = new HashMap<>();
+
+    //can clear map when new celeb is found as prev entries are not required anymore except 1, the current entry
+    public static int findCelebrityCaching(int n) {
+        int numberOfPeople = n;
+        int celebrityCandidate = 0;
+        for (int i = 0; i < n; i++) {
+            if (knowsWrapper(celebrityCandidate, i)) {
+                celebrityCandidate = i;
+            }
+        }
+        if (isCelebrityWithKnowsWrapper(celebrityCandidate,numberOfPeople)) {
+            return celebrityCandidate;
+        }
+        return -1;
+    }
+
+    public static boolean knowsWrapper(int a, int b) {
+        if (!knowsCache.containsKey(new Pair(a, b))) {
+            knowsCache.put(new Pair(a, b), knows(a, b));
+        }
+        return knowsCache.get(new Pair(a, b));
+    }
+
+    private static boolean isCelebrityWithKnowsWrapper(int i, int numberOfPeople) {
+        for (int j = 0; j < numberOfPeople; j++) {
+            if (i == j) continue; // Don't ask if they know themselves.
+            if (knowsWrapper(i, j) || !knowsWrapper(j, i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //some extra calls here
+    public static int findCelebrity(int n) {
+        int numberOfPeople = n;
+        int celebrityCandidate = 0;
+        for (int i = 0; i < n; i++) {
+            if (knows(celebrityCandidate, i)) {
+                celebrityCandidate = i;
+            }
+        }
+        if (isCelebrity(celebrityCandidate,numberOfPeople)) {
+            return celebrityCandidate;
+        }
+        return -1;
+    }
+
+    private static boolean isCelebrity(int i, int numberOfPeople) {
+        for (int j = 0; j < numberOfPeople; j++) {
+            if (i == j) continue; // Don't ask if they know themselves.
+            if (knows(i, j) || !knows(j, i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //sample func
+    public static boolean knows(int i, int j){
+        return true;
+    }
+
+    //could store all the 40 90 ones also. All complexities are O(1)
+    public static int romanToInt(String s) {
+        Map<String, Integer> values = new HashMap<>();
+        values.put("M", 1000);
+        values.put("D", 500);
+        values.put("C", 100);
+        values.put("L", 50);
+        values.put("X", 10);
+        values.put("V", 5);
+        values.put("I", 1);
+        int sum = 0;
+        int i = 0;
+        while (i < s.length()) {
+            String currentSymbol = s.substring(i, i + 1);
+            int currentValue = values.get(currentSymbol);
+            int nextValue = 0;
+            if (i + 1 < s.length()) {
+                String nextSymbol = s.substring(i + 1, i + 2);
+                nextValue = values.get(nextSymbol);
+            }
+
+            if (currentValue < nextValue) {
+                sum += (nextValue - currentValue);
+                i += 2;
+            } else {
+                sum += currentValue;
+                i += 1;
+            }
+
+        }
+        return sum;
+    }
+
+    public static String intToRoman(int num) {
+
+        String[] thousands = {"", "M", "MM", "MMM"};
+        String[] hundreds = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+        String[] tens = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+        String[] ones = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+
+        return thousands[num / 1000] + hundreds[num % 1000 / 100] + tens[num % 100 / 10] + ones[num % 10];
+    }
+
+    //faster
+    class NumberToWords2 {
+
+        String[] below10 = {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
+        String[] below20 = {"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
+        String[] below100 = {"", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+
+        public void numberToWords3(StringBuilder sb, int num) {
+            if (num >= 20 || num == 10) {
+                if (sb.length() > 0) {
+                    sb.append(" ");
+                }
+                sb.append(below100[num / 10]);
+                num %= 10;
+            }
+            if (num > 10) {
+                if (sb.length() > 0) {
+                    sb.append(" ");
+                }
+                sb.append(below20[num - 10]);
+            } else if (num > 0) {
+                if (sb.length() > 0) {
+                    sb.append(" ");
+                }
+                sb.append(below10[num]);
+            }
+        }
+
+        public void numberToWords2(StringBuilder sb, int num) {
+            if (num >= 100) {
+                numberToWords3(sb, num / 100);
+                sb.append(" Hundred");
+                num %= 100;
+            }
+            numberToWords3(sb, num);
+        }
+
+        public String numberToWords(int num) {
+            if (num == 0) return "Zero";
+            StringBuilder sb = new StringBuilder();
+            if (num >= 1000_000_000) {
+                numberToWords2(sb, num / 1000_000_000);
+                sb.append(" Billion");
+                num %= 1000_000_000;
+            }
+            if (num >= 1000_000) {
+                numberToWords2(sb, num / 1000_000);
+                sb.append(" Million");
+                num %= 1000_000;
+            }
+            if (num >= 1000) {
+                numberToWords2(sb, num / 1000);
+                sb.append(" Thousand");
+                num %= 1000;
+            }
+
+            numberToWords2(sb, num);
+            return sb.toString();
+        }
+    }
+
+    //slower
+    static class NumberToWords {
+        String[] below10 = {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
+        String[] below20 = {"Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
+        String[] below100 = {"", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"};
+
+        public String two(int num) {
+            if (num == 0)
+                return "";
+            else if (num < 10)
+                return below10[num];
+            else if (num < 20)
+                return below20[num % 10];
+            else {
+                int tenner = num / 10;
+                int rest = num - tenner * 10;
+                if (rest != 0)
+                    return below100[tenner] + " " + below10[rest];
+                else
+                    return below100[tenner];
+            }
+        }
+
+        public String three(int num) {
+            int hundred = num / 100;
+            int rest = num - hundred * 100;
+            String res = "";
+            if (hundred * rest != 0)
+                res = below10[hundred] + " Hundred " + two(rest);
+            else if ((hundred == 0) && (rest != 0))
+                res = two(rest);
+            else if ((hundred != 0) && (rest == 0))
+                res = below10[hundred] + " Hundred";
+            return res;
+        }
+
+        public String numberToWords(int num) {
+            if (num == 0)
+                return "Zero";
+
+            int billion = num / 1_000_000_000;
+            int million = (num % 1_000_000_000) / 1_000_000;
+            int thousand = (num % 1_000_000) / 1000;
+            int rest = num % 1000;
+
+            StringBuilder result = new StringBuilder();
+            if (billion != 0)
+                result.append(three(billion)).append(" Billion");
+            if (million != 0) {
+                if (result.length() > 0)
+                    result.append(" ");
+                result.append(three(million)).append(" Million");
+            }
+            if (thousand != 0) {
+                if (result.length() > 0)
+                    result.append(" ");
+                result.append(three(thousand)).append(" Thousand");
+            }
+            if (rest != 0) {
+                if (result.length() > 0)
+                    result.append(" ");
+                result.append(three(rest));
+            }
+            return result.toString();
+        }
+    }
+
+    public static boolean canIWin2(int maxChoosableInteger, int desiredTotal) {
+        if (desiredTotal <= 0) return true;
+        if (maxChoosableInteger * (maxChoosableInteger + 1) / 2 < desiredTotal) return false;
+        char state[] = new char[maxChoosableInteger];
+        for (int i = 0; i < maxChoosableInteger; i++) state[i] = '0';
+        return dfs(desiredTotal, state, new HashMap<>());
+    }
+
+    private static boolean dfs(int total, char[] state, HashMap<String, Boolean> hashMap) {
+        String key = new String(state);
+        if (hashMap.containsKey(key))
+            return hashMap.get(key);
+        for (int i = 0; i < state.length; i++) {
+            if (state[i] == '0') {
+                state[i] = '1';
+                if (total <= i + 1 || !dfs(total - (i + 1), state, hashMap)) {
+                    hashMap.put(key, true);
+                    state[i] = '0';
+                    return true;
+                }
+                state[i] = '0';
+            }
+        }
+        hashMap.put(key, false);
+        return false;
+    }
+
+    public static class CanWin {
+        Map<Integer, Boolean> map;
+        boolean[] used;
+        public boolean canIWin(int maxChoosableInteger, int desiredTotal) {
+            int sum = (1+maxChoosableInteger)*maxChoosableInteger/2;
+            if(sum < desiredTotal) return false;
+            if(desiredTotal <= 0) return true;
+
+            map = new HashMap();
+            used = new boolean[maxChoosableInteger+1];
+            return helper(desiredTotal);
+        }
+
+        public boolean helper(int desiredTotal){
+            if(desiredTotal <= 0) return false;
+            int key = format(used);
+            if(!map.containsKey(key)){
+                // try every unchosen number as next step
+                for(int i=1; i<used.length; i++){
+                    if(!used[i]){
+                        used[i] = true;
+                        // check whether this lead to a win (i.e. the other player lose)
+                        if(!helper(desiredTotal-i)){
+                            map.put(key, true);
+                            used[i] = false;
+                            return true;
+                        }
+                        used[i] = false;
+                    }
+                }
+                map.put(key, false);
+            }
+            return map.get(key);
+        }
+
+        // transfer boolean[] to an Integer
+        public int format(boolean[] used){
+            int num = 0;
+            for(boolean b: used){
+                num <<= 1;
+                if(b) num |= 1;
+            }
+            return num;
+        }
+    }
+
+    public static boolean canIWin(int maxChoosableInteger, int desiredTotal) {
+        Map<Integer, Boolean> map = new HashMap<>();
+        if (maxChoosableInteger >= desiredTotal)
+            return true;
+        if ((1 + maxChoosableInteger) * maxChoosableInteger < desiredTotal)
+            return false;
+        return dfs(maxChoosableInteger, desiredTotal, 0, map);
+    }
+
+    static boolean dfs(int max, int total, int used, Map<Integer, Boolean> map)
+    {
+        if (map.containsKey(used))
+            return map.get(used);
+        for (int i = 1; i <= max; ++i)
+        {
+            if (((1 << i) & used) == 0)
+            {
+                if (i >= total || !dfs(max, total - i, (1 << i) | used, map))
+                {
+                    map.put(used, true);
+                    return true;
+                }
+
+            }
+        }
+        map.put(used, false);
+        return false;
+    }
+
+    //here taking floor key of right value is key, makes things simpler
+    static class RangeModule {
+
+        private final TreeMap<Integer, Integer> map = new TreeMap<>();
+
+        public RangeModule() {
+        }
+
+        public void addRange(int left, int right) {
+            while (true) {
+                Map.Entry<Integer, Integer> lentry = map.floorEntry(right);
+                if (lentry == null || lentry.getValue() < left) {
+                    map.put(left, right);
+                    return;
+                }
+                left = Math.min(left, lentry.getKey());
+                right = Math.max(right, lentry.getValue());
+                map.remove(lentry.getKey());
+            }
+        }
+
+        public boolean queryRange(int left, int right) {
+            Map.Entry<Integer, Integer> lentry = map.lowerEntry(right);
+            return !(lentry == null || lentry.getValue() < right ||
+                    lentry.getKey() > left);
+        }
+
+        //here removing first makes it slightly cleaner
+        public void removeRange(int left, int right) {
+            while (true) {
+                Map.Entry<Integer, Integer> lentry = map.lowerEntry(right);
+                if (lentry == null || lentry.getValue() <= left) {
+                    return;
+                }
+                map.remove(lentry.getKey());
+                if (lentry.getKey() < left) {
+                    map.put(lentry.getKey(), left);
+                }
+                if (lentry.getValue() > right) {
+                    map.put(right, lentry.getValue());
+                }
+            }
+        }
+    }
+
+    //the random function and clone are key things here
+    static class Shuffle {
+        private int[] array;
+        private int[] original;
+
+        Random rand = new Random();
+
+        private int randRange(int min, int max) {
+            return rand.nextInt(max - min) + min;
+        }
+
+        private void swapAt(int i, int j) {
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+
+        public Shuffle(int[] nums) {
+            array = nums;
+            original = nums.clone();
+        }
+
+        public int[] reset() {
+//            array = original;
+//            original = original.clone();
+            return original;
+        }
+
+        public int[] shuffle() {
+            for (int i = 0; i < array.length; i++) {
+                swapAt(i, randRange(i, array.length));
+            }
+            return array;
+        }
+    }
+    //cannot do iterative cuz we dont know the different n/2 values
+    private static double fastPow(double x, long n) {
+        if (n == 0)
+            return 1.0;
+
+        double half = fastPow(x, n / 2);
+        if (n % 2 == 0) {
+            return half * half;
+        } else {
+            return half * half * x;
+        }
+    }
+
+    public static double myPow(double x, int n) {
+        long N = n;
+        if (N < 0) {
+            x = 1 / x;
+            N = -N;
+        }
+
+        return fastPow(x, N);
+    }
+
+    public static boolean validateStackSequencesNoStack(int[] pushed, int[] popped) {
+        //simultation
+        int j = 0;
+        int i = 0;
+        for(int item:pushed){
+            pushed[i++]=item;
+            while(i!=0&&j<popped.length&&pushed[i-1]==popped[j]){
+                j++;
+                i--;
+            }
+        }
+        return i==0;
+
+    }
+
+    //Deque might be faster
+    public static boolean validateStackSequences(int[] pushed, int[] popped) {
+        int N = pushed.length;
+        Stack<Integer> stack = new Stack();
+
+        int popPointer = 0;
+        for (int x: pushed) {
+            stack.push(x);
+            while (!stack.isEmpty() && popPointer < N && stack.peek() == popped[popPointer]) {
+                stack.pop();
+                popPointer++;
+            }
+        }
+
+        return popPointer == N;
+    }
+
+    public static int editDistance(String s1, String s2) {
+        int[][] dp = new int[s1.length()+1][s2.length()+1];
+
+        // if s2 is empty, we can remove all the characters of s1 to make it empty too
+        for(int i1=0; i1 <= s1.length(); i1++)
+            dp[i1][0] = i1;
+
+        // if s1 is empty, we have to insert all the characters of s2
+        for(int i2=0; i2 <= s2.length(); i2++)
+            dp[0][i2] = i2;
+
+        for(int i1=1; i1 <= s1.length(); i1++) {
+            for(int i2=1; i2 <= s2.length(); i2++) {
+                // If the strings have a matching character, we can recursively match for the remaining lengths
+                if(s1.charAt(i1-1) == s2.charAt(i2-1))
+                    dp[i1][i2] = dp[i1-1][i2-1];
+                else
+                    dp[i1][i2] = 1 + Math.min(dp[i1-1][i2], //delete
+                            Math.min(dp[i1][i2-1], //insert
+                                    dp[i1-1][i2-1])); //replace
+            }
+        }
+
+        return dp[s1.length()][s2.length()];
+    }
+
+    //3^(m+n)
+    private static int editDistanceRecur(Integer[][] dp, String s1, String s2, int i1, int i2) {
+
+        if(dp[i1][i2] == null) {
+            // if we have reached the end of s1, then we have to insert all the remaining characters of s2
+            if(i1 == s1.length())
+                dp[i1][i2] = s2.length() - i2;
+
+                // if we have reached the end of s2, then we have to delete all the remaining characters of s1
+            else if(i2 == s2.length())
+                dp[i1][i2] = s1.length() - i1;
+
+                // If the strings have a matching character, we can recursively match for the remaining lengths
+            else if(s1.charAt(i1) == s2.charAt(i2))
+                dp[i1][i2] = editDistanceRecur(dp, s1, s2, i1+1, i2+1);
+            else {
+                int c1 = editDistanceRecur(dp, s1, s2, i1+1, i2); //delete
+                int c2 = editDistanceRecur(dp, s1, s2, i1, i2+1); //insert
+                int c3 = editDistanceRecur(dp, s1, s2, i1+1, i2+1); //replace
+                dp[i1][i2] = 1 + Math.min(c1, Math.min(c2, c3));
+            }
+        }
+
+        return dp[i1][i2];
+    }
+
+    //here count gets reset
+    //the top down with memo requires 3D array with count in it
+    public static int longestCommonSubstring(String s1, String s2) {
+        int[][] dp = new int[s1.length()+1][s2.length()+1];
+        int maxLength = 0;
+        for(int i=1; i <= s1.length(); i++) {
+            for(int j=1; j <= s2.length(); j++) {
+                if(s1.charAt(i-1) == s2.charAt(j-1)) {
+                    dp[i][j] = 1 + dp[i-1][j-1];
+                    maxLength = Math.max(maxLength, dp[i][j]);
+                }
+            }
+        }
+        return maxLength;
+    }
+
+    //top down with memo requires 3D array with count in it
+    //here 3 recursive calls need to be made cuz even after a match there could exist another longer match
+    //can also be done with for loops
+    static int longestCommonSubstringRecursive(Integer[][][] dp, String s1, String s2, int i1, int i2, int count) {
+        if(i1 == s1.length() || i2 == s2.length())
+            return count;
+
+        if(dp[i1][i2][count] == null) {
+            int c1 = count;
+            if(s1.charAt(i1) == s2.charAt(i2))
+                c1 = longestCommonSubstringRecursive(dp, s1, s2, i1+1, i2+1, count+1);
+            int c2 = longestCommonSubstringRecursive(dp, s1, s2, i1, i2+1, 0);
+            int c3 = longestCommonSubstringRecursive(dp, s1, s2, i1+1, i2, 0);
+            dp[i1][i2][count] = Math.max(c1, Math.max(c2, c3));
+        }
+
+        return dp[i1][i2][count];
+    }
+
+    //faster, makes use of the max values
+    public int longestArithSeqLengthWithMaxLength(int[] A) {
+        int res = 0;
+        //array to keep differences and sequence length. dp[i][j] meaning is
+        //sequence of length i and difference j. Because of the problem restrictions we can
+        //allocate array for differences beforehand (0 <= A[i] <= 10000)
+        int[][] dp = new int[A.length][20001];
+
+        //set the right border of the sequence
+        for (int i = 0; i < A.length; i++) {
+            //start checking sequences by moving left border, so sequences from 0..i to i-1..i will
+            //be checked
+            for (int j = 0; j < i; j++) {
+                //get the difference i and j elements, apply 10.000 shift so we can use array indexes
+                int dif = (A[i] - A[j]) + 10000;
+                //check if we have seen this difference before, if not - make it of length 2 (i and j makes at least
+                //2 elements sequence)
+                dp[i][dif] = (dp[j][dif] == 0 ? 1 : dp[j][dif]) + 1;
+                //keep running max so we dont have to scan our dp matrix at the end
+                res = Math.max(res, dp[i][dif]);
+            }
+        }
+        return res;
+    }
+
+    //Same like LIS
+    public static int longestArithSeqLength(int[] A) {
+        int res = 2, n = A.length;
+        HashMap<Integer, Integer>[] dp = new HashMap[n];
+        for (int j = 0; j < A.length; j++) {
+            dp[j] = new HashMap<>();
+            for (int i = 0; i < j; i++) {
+                int d = A[j] - A[i];
+                dp[j].put(d, dp[i].getOrDefault(d, 1) + 1);
+                res = Math.max(res, dp[j].get(d));
+            }
+        }
+        return res;
+    }
+
+    //here count keeps building
+    static int longestCommonSubsequence(String a,String b)
+    {
+        int m = a.length();
+        int n = b.length();
+
+        int[][] dp =new int[m+1][n+1];//Keeping space for empty strings
+
+        for(int i=1; i<=m; i++)
+            for(int j=1; j<=n; j++) {
+//                dp[i][j] = a.charAt(i-1)==b.charAt(j-1) ? dp[i-1][j-1]+1 : Math.max(dp[i-1][j],dp[i][j-1]);
+                if(a.charAt(i-1) == b.charAt(j-1))
+                    dp[i][j] = 1 + dp[i-1][j-1];
+                else
+                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+            }
+        return dp[m][n];
+    }
+
+    //here the else is required as if there is a match there is no need to check mismatches
+    private static int longestCommonSubseqRecursive(Integer[][] dp, String s1, String s2, int i1, int i2) {
+        if (i1 == s1.length() || i2 == s2.length())
+            return 0;
+
+        if (dp[i1][i2] == null) {
+            if (s1.charAt(i1) == s2.charAt(i2))
+                dp[i1][i2] = 1 + longestCommonSubseqRecursive(dp, s1, s2, i1 + 1, i2 + 1);
+            else {
+                int c1 = longestCommonSubseqRecursive(dp, s1, s2, i1, i2 + 1);
+                int c2 = longestCommonSubseqRecursive(dp, s1, s2, i1 + 1, i2);
+                dp[i1][i2] = Math.max(c1, c2);
+            }
+        }
+
+        return dp[i1][i2];
+    }
+
+
+    static int minDistance(String word1, String word2) {
+        return word1.length() + word2.length()- 2 * longestCommonSubsequence(word1,word2);
+    }
+
+    //nlogn
+    public static int lengthOfLIS(int[] nums) {
+        int[] dp = new int[nums.length];
+        int len = 0;
+        for (int num : nums) {
+            int i = Arrays.binarySearch(dp, 0, len, num);
+            if (i < 0) {
+                i = -(i + 1);
+            }
+            dp[i] = num;
+            if (i == len) {
+                len++;
+            }
+        }
+        return len;
+    }
+
+    //n^2
+    public static int LisDP(int[] input) {
+        int finalMax = 1;
+        int[] dp = new int[input.length];
+        for (int i = input.length - 1; i >= 0; i--) {
+            int currentMax = 0;
+            for (int j = i + 1; j < input.length; j++) {
+                if (input[j] > input[i]) {
+                    currentMax = Math.max(currentMax, dp[j]);
+                    if(dp[j]==finalMax) break;
+                }
+            }
+            dp[i] = currentMax + 1;
+            if (dp[i] > finalMax) finalMax = dp[i];
+        }
+        return finalMax;
+    }
+
+    //2^n
+    public static int LIS(int start, int[] input) {
+        int maxCount = 1;
+        for (int i = start; i < input.length; i++) {
+            for (int j = i + 1; j < input.length; j++) {
+                if (input[j] > input[i]) {
+                    maxCount = Math.max(LIS(j, input) + 1, maxCount);
+                }
+            }
+        }
+        return maxCount;
+
+    }
+
+    //linearly searching for k can be better as for the entire j loop k only goes over n once
+    //n^2
+    public static int triangleNumberWithoutBinarySearch(int[] nums) {
+        int count = 0;
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 2; i++) {
+            int k = i + 2;
+            for (int j = i + 1; j < nums.length - 1 && nums[i] != 0; j++) {
+                while (k < nums.length && nums[i] + nums[j] > nums[k])
+                    k++;
+                count += k - j - 1;
+            }
+        }
+        return count;
+    }
+
+    static int binarySearch(int nums[], int l, int r, int x) {
+        while (r >= l ) {
+            int mid = (l + r) / 2;
+            if (nums[mid] >= x)
+                r = mid - 1;
+            else
+                l = mid + 1;
+        }
+        return l;
+    }
+
+    //n^3 is the brute force solution
+    //this is n^2 logn
+    //the binary search is tricky has = sign in while loop
+    public static int triangleNumber(int[] nums) {
+        int count = 0;
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 2; i++) {
+            int k = i + 2;
+            for (int j = i + 1; j < nums.length - 1 && nums[i] != 0; j++) {
+                k = binarySearch(nums, k, nums.length - 1, nums[i] + nums[j]);
+                count += k - j - 1;
+            }
+        }
+        return count;
+    }
+
+    class UnionFind {
+
+        private int[] parent;
+        private int[] size; // We use this to keep track of the size of each set.
+
+        // For efficiency, we aren't using makeset, but instead initialising
+        // all the sets at the same time in the constructor.
+        public UnionFind(int n) {
+            parent = new int[n];
+            size = new int[n];
+            for (int node = 0; node < n; node++) {
+                parent[node] = node;
+                size[node] = 1;
+            }
+        }
+
+        // The find method, with path compression. There are ways of implementing
+        // this elegantly with recursion, but the iterative version is easier for
+        // most people to understand!
+        public int find(int A) {
+            // Step 1: Find the root.
+            int root = A;
+            while (parent[root] != root) {
+                root = parent[root];
+            }
+            // Step 2: Do a second traversal, this time setting each node to point
+            // directly at A as we go.
+            while (A != root) {
+                int oldRoot = parent[A];
+                parent[A] = root;
+                A = oldRoot;
+            }
+            return root;
+        }
+
+        // The union method, with optimization union by size. It returns True if a
+        // merge happened, False if otherwise.
+        public boolean union(int A, int B) {
+            // Find the roots for A and B.
+            int rootA = find(A);
+            int rootB = find(B);
+            // Check if A and B are already in the same set.
+            if (rootA == rootB) {
+                return false;
+            }
+            // We want to ensure the larger set remains the root.
+            if (size[rootA] < size[rootB]) {
+                // Make rootB the overall root.
+                parent[rootA] = rootB;
+                // The size of the set rooted at B is the sum of the 2.
+                size[rootB] += size[rootA];
+            }
+            else {
+                // Make rootA the overall root.
+                parent[rootB] = rootA;
+                // The size of the set rooted at A is the sum of the 2.
+                size[rootA] += size[rootB];
+            }
+            return true;
+        }
+    }
+
+    //Can be done with BFS and DFS also. In them all seen nodes should be = total nodes
+    class ValidTree {
+
+        public boolean validTree(int n, int[][] edges) {
+
+            // Condition 1: The graph must contain n - 1 edges.
+            if (edges.length != n - 1) return false;
+
+            // Condition 2: The graph must contain a single connected component.
+            // Create a new UnionFind object with n nodes.
+            UnionFind unionFind = new UnionFind(n);
+            // Add each edge. Check if a merge happened, because if it
+            // didn't, there must be a cycle.
+            for (int[] edge : edges) {
+                int A = edge[0];
+                int B = edge[1];
+                if (!unionFind.union(A, B)) {
+                    return false;
+                }
+            }
+
+            // If we got this far, there's no cycles!
+            return true;
+        }
+
+    }
+
+    //Next Greater Element III question is same as next permutation
+    public static int[] nextGreaterElementsII(int[] nums) {
+        int[] res = new int[nums.length];
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 2 * nums.length - 1; i >= 0; --i) {
+            while (!stack.empty() && nums[stack.peek()] <= nums[i % nums.length]) {
+                stack.pop();
+            }
+            res[i % nums.length] = stack.empty() ? -1 : nums[stack.peek()];
+            stack.push(i % nums.length);
+        }
+        return res;
+    }
+
+    //similar to below question(daily temps) but in forward direction of loop
+    public static int[] nextGreaterElement(int[] findNums, int[] nums) {
+        Stack < Integer > stack = new Stack < > ();
+        HashMap < Integer, Integer > map = new HashMap < > ();
+        int[] res = new int[findNums.length];
+        for (int i = 0; i < nums.length; i++) {
+            while (!stack.empty() && nums[i] > stack.peek())
+                map.put(stack.pop(), nums[i]);
+            stack.push(nums[i]);
+        }
+        while (!stack.empty())
+            map.put(stack.pop(), -1);
+        for (int i = 0; i < findNums.length; i++) {
+            res[i] = map.get(findNums[i]);
+        }
+        return res;
+    }
+
+    //here starting from back focuses only of the next increasing elements
+    //if current element is greater then pop
+    //faster
+    public static int[] dailyTemperatures(int[] T) {
+        int[] ans = new int[T.length];
+        Stack<Integer> stack = new Stack();
+        for (int i = T.length - 1; i >= 0; --i) {
+            while (!stack.isEmpty() && T[i] >= T[stack.peek()]) stack.pop();
+            ans[i] = stack.isEmpty() ? 0 : stack.peek() - i;
+            stack.push(i);
+        }
+        return ans;
+    }
+
+    //traverse form behind and set indices
+    //the inner for loop only goes for warmer temps
+    //O(N)
+    public static int[] dailyTemperaturesN2Solution(int[] T) {
+        int[] ans = new int[T.length];
+        int[] temperatureIndex = new int[101];
+        Arrays.fill(temperatureIndex, Integer.MAX_VALUE);
+        for (int i = T.length - 1; i >= 0; --i) {
+            int warmer_index = Integer.MAX_VALUE;
+            for (int t = T[i] + 1; t <= 100; ++t) {
+                if (temperatureIndex[t] < warmer_index)
+                    warmer_index = temperatureIndex[t];
+            }
+            if (warmer_index < Integer.MAX_VALUE)
+                ans[i] = warmer_index - i;
+            temperatureIndex[T[i]] = i;
+        }
+        return ans;
+    }
+
+    public static void clean_deque(int i, int k,int[] nums,ArrayDeque<Integer> deq) {
+        // removes the maximum element not in the sliding window
+        if (!deq.isEmpty() && deq.getFirst() == i - k)
+            deq.removeFirst();
+
+        // remove from deq indexes of all elements
+        // which are smaller than current element nums[i]
+        while (!deq.isEmpty() && nums[i] > nums[deq.getLast()])
+            deq.removeLast();
+    }
+
+    public static int[] maxSlidingWindow(int[] nums, int k) {
+        int n = nums.length;
+        if (n * k == 0) return new int[0];
+        if (k == 1) return nums;
+        ArrayDeque<Integer> deq = new ArrayDeque<Integer>();
+
+        // init deque and output
+        int max_idx = 0;
+        for (int i = 0; i < k; i++) {
+            clean_deque(i, k,nums,deq);
+            deq.addLast(i);
+            // compute max in nums[:k]
+            if (nums[i] > nums[max_idx]) max_idx = i;
+        }
+        int [] output = new int[n - k + 1];
+        output[0] = nums[max_idx];
+
+        // build output
+        for (int i  = k; i < n; i++) {
+            clean_deque(i, k,nums,deq);
+            deq.addLast(i);
+            output[i - k + 1] = nums[deq.getFirst()];
+        }
+        return output;
+    }
+
+    public static void clean_dequeMaxHeap(int i, int k,int[] nums,PriorityQueue<Integer> deq) {
+
+        // removes the maximum element not in the sliding window
+        if (!deq.isEmpty() && deq.peek() == i - k)
+            deq.poll();
+
+        // remove from deq indexes of all elements
+        // which are smaller than current element nums[i]
+        if (!deq.isEmpty() && nums[i] > nums[deq.peek()])
+            deq.clear();
+    }
+
+    //one test case doesnt pass
+    public static int[] maxSlidingWindowMaxHeap(int[] nums, int k) {
+
+        PriorityQueue<Integer> deq = new PriorityQueue<>((a, b) -> nums[b] - nums[a]);
+        int max_idx = 0;
+
+        for (int i = 0; i < k; i++) {
+            clean_dequeMaxHeap(i, k,nums,deq);
+            deq.add(i);
+            // compute max in nums[:k]
+            if (nums[i] > nums[max_idx]) max_idx = i;
+        }
+
+        int [] output = new int[nums.length - k + 1];
+        output[0] = nums[max_idx];
+
+        // build output
+        for (int i  = k; i < nums.length; i++) {
+            clean_dequeMaxHeap(i, k,nums,deq);
+            deq.add(i);
+            output[i - k + 1] = nums[deq.peek()];
+        }
+        return output;
+    }
+
+    //mn + k
+    public static List<Integer> numIslands2(int m, int n, int[][] positions) {
+        List<Integer> result = new ArrayList<>();
+        if (m <= 0 || n <= 0) return result;
+
+        int count = 0;                      // number of islands
+        int[] roots = new int[m * n];       // one island = one tree
+        int[][] dirs = {{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
+        Arrays.fill(roots, -1);
+
+        for (int[] p : positions) {
+            int root = n * p[0] + p[1];     // assume new point is isolated island
+            if (roots[root] == -1) {
+                roots[root] = root;             // add new island
+                count++;
+
+                for (int[] dir : dirs) {
+                    int x = p[0] + dir[0];
+                    int y = p[1] + dir[1];
+                    int nb = n * x + y;
+                    if (x < 0 || x >= m || y < 0 || y >= n || roots[nb] == -1) continue;
+
+                    int rootNb = findIsland(roots, nb);
+                     int currentParent = findIsland(roots, root);
+                    if (currentParent != rootNb) {        // if neighbor is in another island
+                        roots[currentParent] = rootNb;   // union two islands
+                        count--;
+                    }
+                }
+            }
+            result.add(count);
+        }
+        return result;
+    }
+
+    public static int findIsland(int[] roots, int id) {
+        if(id != roots[id]) roots[id]=findIsland(roots,roots[id]);
+        return roots[id];
+    }
+
+    //here the if condition prevents nB checks if the value is 0
+    public static int[][] multiply(int[][] A, int[][] B) {
+        int m = A.length, n = A[0].length, nB = B[0].length;
+        int[][] C = new int[m][nB];
+
+        for(int i = 0; i < m; i++) {
+            for(int k = 0; k < n; k++) {
+                if (A[i][k] != 0) {
+                    for (int j = 0; j < nB; j++) {
+                        if (B[k][j] != 0) C[i][j] += A[i][k] * B[k][j];
+                    }
+                }
+            }
+        }
+        return C;
+    }
+
+    public static int[][] multiplyStandardWay(int[][] A, int[][] B) {
+        int m = A.length, n = A[0].length, nB = B[0].length;
+        int[][] C = new int[m][nB];
+
+        for(int i = 0; i < m; i++) {
+            for (int j = 0; j < nB; j++) {
+                for(int k = 0; k < n; k++) {
+                    C[i][j] += A[i][k] * B[k][j];
+                }
+            }
+        }
+        return C;
+    }
+
+    class H2O {
+        Semaphore hydrogen;
+        Semaphore oxygen;
+        ConcurrentLinkedDeque<Runnable> q;
+
+        public H2O() {
+            hydrogen=new Semaphore(2);
+            oxygen=new Semaphore(0);
+            q =  new ConcurrentLinkedDeque<>();
+        }
+
+        public void hydrogen(Runnable releaseHydrogen) throws InterruptedException {
+            hydrogen.acquire();
+            q.add(releaseHydrogen);
+            if(hydrogen.availablePermits()==0 && q.size()==2)
+                oxygen.release();
+        }
+
+        public void oxygen(Runnable releaseOxygen) throws InterruptedException {
+            oxygen.acquire();
+            releaseOxygen.run();
+            q.poll().run();
+            q.poll().run();
+            hydrogen.release(2);
+        }
     }
 
     static class FileSystem {
@@ -2908,35 +4497,6 @@ public class Test {
         }
     }
 
-    public static boolean search(int[] groups, int row, int[] nums, int target) {
-        if (row < 0) return true;
-        int v = nums[row--];
-        for (int i = 0; i < groups.length; i++) {
-            if (groups[i] + v <= target) {
-                groups[i] += v;
-                if (search(groups, row, nums, target)) return true;
-                groups[i] -= v;
-            }
-            if (groups[i] == 0) break; // this means if the bucket is empty and still havent found a combination its useless trying other buckets
-        }
-        return false;
-    }
-
-    public static boolean canPartitionKSubsets(int[] nums, int k) {
-        int sum = Arrays.stream(nums).sum();
-        if (sum % k > 0) return false;
-        int target = sum / k;
-
-        Arrays.sort(nums);
-        int row = nums.length - 1;
-        if (nums[row] > target) return false;
-        while (row >= 0 && nums[row] == target) {
-            row--;
-            k--;
-        }
-        return search(new int[k], row, nums, target);
-    }
-
     static class PeekingIterator implements Iterator<Integer> {
         private Integer next = null;
         private Iterator<Integer> iter;
@@ -3678,6 +5238,7 @@ public class Test {
             this.countPerQuote = countPerQuote;
         }
     }
+
     public static List<Integer> findClosestElements(List<Integer> arr, int k, int x) {
         int n = arr.size();
         if (x <= arr.get(0)) {
@@ -4133,11 +5694,10 @@ public class Test {
         return count;
     }
 
-
-
     public static int bulbSwitch(int n) {
         return (int)Math.sqrt(n);
     }
+
     //can eliminate out of range numbers and will be much faster
     private static final char[][] CHAR_PAIRS = new char[][]{{'0', '0'}, {'1', '1'}, {'6', '9'}, {'8', '8'}, {'9', '6'}};
     public static int strobogrammaticInRange(String low, String high) {
@@ -4230,29 +5790,6 @@ public class Test {
         }
     }
 
-    //Can be done iteratively by storing last 2 lists
-    static List<String> findStrobogrammaticRecur(int n, int m) {
-        if (n == 0) return new ArrayList<String>(Arrays.asList(""));
-        if (n == 1) return new ArrayList<String>(Arrays.asList("0", "1", "8"));
-
-        List<String> list = findStrobogrammaticRecur(n - 2, m);
-
-        List<String> res = new ArrayList<String>();
-
-        for (int i = 0; i < list.size(); i++) {
-            String s = list.get(i);
-
-            if (n != m) res.add("0" + s + "0");
-
-            res.add("1" + s + "1");
-            res.add("6" + s + "9");
-            res.add("8" + s + "8");
-            res.add("9" + s + "6");
-        }
-
-        return res;
-    }
-
     //????Didnt get the equal probability
     public static int pick(int[] a,int target,Random rand) {
         int count = 0;
@@ -4268,6 +5805,38 @@ public class Test {
         return 0; // shouldn't come here
     }
 
+    //Here the sort helps speed up computation
+    //need k buckets as we need to make sure each bucket is correctly filled unlike below question
+    public static boolean canPartitionKSubsets(int[] nums, int k) {
+        int sum = Arrays.stream(nums).sum();
+        if (sum % k > 0) return false;
+        int target = sum / k;
+
+        Arrays.sort(nums);
+        int row = nums.length - 1;
+        if (nums[row] > target) return false;
+        while (row >= 0 && nums[row] == target) {
+            row--;
+            k--;
+        }
+        return search(new int[k], row, nums, target);
+    }
+
+    public static boolean search(int[] groups, int row, int[] nums, int target) {
+        if (row < 0) return true;
+        int v = nums[row--];
+        for (int i = 0; i < groups.length; i++) {
+            if (groups[i] + v <= target) {
+                groups[i] += v;
+                if (search(groups, row, nums, target)) return true;
+                groups[i] -= v;
+            }
+            if (groups[i] == 0) break; // this means if the bucket is empty and still havent found a combination its useless trying other buckets
+        }
+        return false;
+    }
+
+    //here going in the descending order of "sum" helps get the previous iteration values unlike going in ascending
     public static boolean canPartitionBottomUp1dArray(int[] nums) {
         int sum = 0;
 
@@ -4289,12 +5858,14 @@ public class Test {
                 if (i >= num) {
                     dp[i] = dp[i] || dp[i-num];
                 }
+                if(dp[sum]) return true;//early termination
             }
         }
 
         return dp[sum];
     }
 
+    //this first row is filled because 1 min previous row(row-1) is required to start or use extra row like below comments method
     public static boolean canPartitionBottomUp(int[] nums) {
         int sum = 0;
         for (int number : nums)
@@ -4336,18 +5907,25 @@ public class Test {
         return dp[nums.length - 1][sum / 2];
     }
 
-    // TLE
-    public static boolean canPartitionTopDown(int[] nums) {
+    // checking if a number is greater than sum/2 helps terminate early
+    public static boolean canPartitionTopDown(int[] num) {
         int sum = 0;
+        //Conversion for sorting
+        Integer[] nums = Arrays.stream(num) // IntStream
+                .boxed()				// Stream<Integer>
+                .toArray(Integer[]::new);
+        //sorting to check if a number is greater than sum/2 to terminate early
+        Arrays.sort(nums,Collections.reverseOrder());
         for (int number : nums)
             sum += number;
 
+        if(nums[0]>sum/2) return false;
         if (sum % 2 != 0) return false;
         boolean[][] dp = new boolean[nums.length][sum / 2 + 1];
         return pick(nums, 0, sum / 2, dp);
     }
 
-    public static boolean pick(int[] nums,int currentIndex, int sum, boolean[][] dp) {
+    public static boolean pick(Integer[] nums,int currentIndex, int sum, boolean[][] dp) {
         if (sum == 0) return true;
         if (currentIndex == nums.length) return false;
         if (dp[currentIndex][sum]) return true;
@@ -4361,6 +5939,7 @@ public class Test {
             return false;
     }
 
+    //3 cases over here are important
     public static ListNode insert(ListNode head, int insertVal) {
         if (head == null) {
             ListNode newNode = new ListNode(insertVal, null);
@@ -4510,6 +6089,7 @@ public class Test {
     public static List<List<String>> accountsMergeDFS(List<List<String>> accounts) {
         Map<String, String> emailToName = new HashMap();
         Map<String, ArrayList<String>> graph = new HashMap();
+        //create bi-directional graph
         for (List<String> account: accounts) {
             String name = "";
             for (String email: account) {
@@ -4523,6 +6103,7 @@ public class Test {
             }
         }
 
+        //Iterative way of DFS
         Set<String> seen = new HashSet();
         List<List<String>> ans = new ArrayList();
         for (String email: graph.keySet()) {
@@ -4605,7 +6186,6 @@ public class Test {
             Collections.sort(accounts.get(destinationIndex));
     }
 
-
     //Can keep node count and compare it with code and terminate earlier
     //Can do bfs and keep track of only previous code, if diff > 1 return false
     //Can do bfs and keep track of null node and if more nodes are left
@@ -4624,7 +6204,6 @@ public class Test {
         return nodes.get(i - 1).code == nodes.size();
     }
 
-
     static class ANode {  // Annotated Node
         TreeNode node;
         int code;
@@ -4634,6 +6213,7 @@ public class Test {
             this.code = code;
         }
     }
+
     //fastest, quick termination, goes only after necessary nodes
     public static List<Integer> distanceK(TreeNode root, TreeNode target, int K) {
         List<Integer> ans = new LinkedList();
@@ -4773,46 +6353,6 @@ public class Test {
         }
     }
 
-
-    //faster
-    public int longestArithSeqLengthWithMaxLength(int[] A) {
-        int res = 0;
-        //array to keep differences and sequence length. dp[i][j] meaning is
-        //sequence of length i and difference j. Because of the problem restrictions we can
-        //allocate array for differences beforehand (0 <= A[i] <= 10000)
-        int[][] dp = new int[A.length][20001];
-
-        //set the right border of the sequence
-        for (int i = 0; i < A.length; i++) {
-            //start checking sequences by moving left border, so sequences from 0..i to i-1..i will
-            //be checked
-            for (int j = 0; j < i; j++) {
-                //get the difference i and j elements, apply 10.000 shift so we can use array indexes
-                int dif = (A[i] - A[j]) + 10000;
-                //check if we have seen this difference before, if not - make it of length 2 (i and j makes at least
-                //2 elements sequence)
-                dp[i][dif] = (dp[j][dif] == 0 ? 1 : dp[j][dif]) + 1;
-                //keep running max so we dont have to scan our dp matrix at the end
-                res = Math.max(res, dp[i][dif]);
-            }
-        }
-        return res;
-    }
-
-    public static int longestArithSeqLength(int[] A) {
-        int res = 2, n = A.length;
-        HashMap<Integer, Integer>[] dp = new HashMap[n];
-        for (int j = 0; j < A.length; j++) {
-            dp[j] = new HashMap<>();
-            for (int i = 0; i < j; i++) {
-                int d = A[j] - A[i];
-                dp[j].put(d, dp[i].getOrDefault(d, 1) + 1);
-                res = Math.max(res, dp[j].get(d));
-            }
-        }
-        return res;
-    }
-
     //This came out faster.
     //Can also be done with binary search and PQ
     public static List<Integer> closestKValues(TreeNode root, double target, int k) {
@@ -4835,8 +6375,7 @@ public class Test {
         collect(root.right, target, k, res);
     }
 
-    //Path of binary search passes over the closes values to target
-    //If character counts are equal sort in asc order also helps take different characters
+    //Path of binary search passes over the closest values to target
     public static int closestValue(TreeNode root, double target) {
         int val, closest = root.val;
         while (root != null) {
@@ -4848,6 +6387,7 @@ public class Test {
     }
 
     // the key exit here is character count > half of length return ""
+    //If character counts are equal sort in asc order also helps take different characters
     public static String reorganizeString(String S) {
         int N = S.length();
         int[] count = new int[128];
@@ -5195,8 +6735,8 @@ public class Test {
         return sb.toString();
     }
 
-
-    //Can also covert BST to DLL and iterate over right pointer
+    //Can also covert BST to DLL and iterate over right pointer, but iterators are not supposed to modify
+    //This approach is basically iterative approach of BST traversal
     static class BSTIterator {
         Stack<TreeNode> stack;
         public BSTIterator(TreeNode root) {
@@ -5224,6 +6764,7 @@ public class Test {
         }
     }
 
+    //can get min and max age and reduce loops
     public static int numFriendRequests(int[] ages) {
         int[] count = new int[121];
         for (int age: ages) count[age]++;
@@ -5242,6 +6783,7 @@ public class Test {
         return ans;
     }
 
+    //monotonically increasing
     public static int numFriendRequestsMyWay(int[] ages) {
 
         int j = 0, i = 1, output = 0;
@@ -5299,8 +6841,8 @@ public class Test {
 
     }
 
-
-    //this wont work if there are gaps in time, then stack will help as it will go to the previous running task
+    //Doesnt work if there are gaps in time, then stack will help as it will go to the previous running task
+    //Eg. 0:start:0 1:start:5 1:end:10 2:start:15 ...The gap between 1 and 2 goes to 0
     public static int[] exclusiveTimeWithoutStack(int n, List <String> logs) {
         int[] res = new int[n];
         String[] s = logs.get(0).split(":");
@@ -5321,7 +6863,7 @@ public class Test {
         return res;
     }
 
-    //Can pop the "starts" when new event starts to reduce memory
+    //here the peek and pop usage is interesting
     public static int[] exclusiveTime(int n, List <String> logs) {
         Stack<Integer> stack = new Stack<>(); //stack of ids
         int[] res = new int[n];
@@ -5384,6 +6926,8 @@ public class Test {
         return idle_slots > 0 ? idle_slots + tasks.length : tasks.length;
     }
 
+    //here using the higher frequency first reduces idle time
+    //also after choosing one task its put into a templist to not pick it up again until cooling time
     public static int leastIntervalPQ(char[] tasks, int n) {
         int[] map = new int[26];
         for (char c : tasks)
@@ -5414,7 +6958,6 @@ public class Test {
         }
         return time;
     }
-
 
     //Incorrect doesnt pick based on sorted value
     public static int leastIntervalMyWay(char[] tasks, int n) {
@@ -5468,7 +7011,6 @@ public class Test {
         }
     }
 
-
     public class Read4 {
         /**
          * @param buf Destination buffer
@@ -5503,7 +7045,7 @@ public class Test {
 
     }
 
-    public static void dfs(List<String> res, StringBuilder sb, char[] num, int pos, int target, long prev, long multi) {
+    public static void dfs(List<String> res, StringBuilder sb, char[] num, int pos, int target, long prev, long product) {
         if(pos == num.length) {
             if(target == prev) res.add(sb.toString());
             return;
@@ -5522,10 +7064,87 @@ public class Test {
                 sb.setLength(len);
                 dfs(res, sb.append("-").append(curr), num, i + 1, target, prev - curr, -curr);
                 sb.setLength(len);
-                dfs(res, sb.append("*").append(curr), num, i + 1, target, prev - multi + multi * curr, multi * curr);
+                dfs(res, sb.append("*").append(curr), num, i + 1, target, prev - product + product * curr, product * curr);
                 sb.setLength(len);
             }
         }
+    }
+
+    //Keep + - together in result and /* in tail
+    //here the key is to calculate after completing a number, so that either a sign is assigned or multi/div is done
+    public static int calculateII(String s) {
+        int tail = 0;
+        char operator = '+';
+        int res = 0;
+        // char[] charArray = s.toCharArray(); // no need of char array as String is stored as char array
+        int num = 0;
+        int n = s.length();
+
+
+        for(int i = 0 ; i < n; i++){
+            char c = s.charAt(i); //charAt works on an array
+            if(c == ' ') continue;
+            if (Character.isDigit(c)){
+                num =  c-'0';
+                while(i + 1 < n && Character.isDigit(s.charAt(i+1))){
+                    num = num * 10 + (s.charAt(i+1) - '0');
+                    i++;
+                }
+                switch (operator){
+                    case '+':
+                        res +=tail;
+                        tail = num;
+                        break;
+                    case '-':
+                        res += tail;
+                        tail = -num;
+                        break;
+                    case '*':
+                        tail*=num;
+                        break;
+                    case '/':
+                        tail/=num;
+                        break;
+                }
+            } else {
+                operator = c;
+            }
+        }
+        return res + tail;
+    }
+
+    public static int calculateI(String s) {
+
+        Stack<Integer> stack = new Stack<Integer>();
+        int operand = 0;
+        int result = 0; // For the on-going result
+        int sign = 1;  // 1 means positive, -1 means negative
+
+        for (int i = 0; i < s.length(); i++) {
+
+            char ch = s.charAt(i);
+            if (Character.isDigit(ch))
+                operand = 10 * operand + (int) (ch - '0');
+
+            else if (ch == '+' || ch == '-') {
+                result += sign * operand; //calculate the left part of this sign
+                sign = ch == '+' ? 1 : -1; //assign sign for next operation
+                operand = 0;
+
+            } else if (ch == '(') {
+                stack.push(result); //push result first
+                stack.push(sign);
+                sign = 1;
+                result = 0;
+
+            } else if (ch == ')') {
+                result += sign * operand; //complete current bracket
+                result *= stack.pop(); //pop sign first
+                result += stack.pop();
+                operand = 0;
+            }
+        }
+        return result + (sign * operand);
     }
 
     // the smallest (first) and the largest (last) nodes
@@ -5562,6 +7181,7 @@ public class Test {
         return first;
     }
 
+    //here setting length=-1 is as good as breaking out of the loop
     public static boolean isAlienSorted(String[] words, String order) {
         int[] index = new int[26];
         for (int i = 0; i < order.length(); i++)
@@ -5580,7 +7200,7 @@ public class Test {
         return true;
     }
 
-    //Do
+    //Do ?????
     public static String addBinaryBitManip(String a, String b) {
         BigInteger x = new BigInteger(a, 2);
         BigInteger y = new BigInteger(b, 2);
@@ -5607,80 +7227,6 @@ public class Test {
         }
         if (carry != 0) sb.append(carry);
         return sb.reverse().toString();
-    }
-
-    public static void clean_deque(int i, int k,int[] nums,ArrayDeque<Integer> deq) {
-        // removes the maximum element not in the sliding window
-        if (!deq.isEmpty() && deq.getFirst() == i - k)
-            deq.removeFirst();
-
-        // remove from deq indexes of all elements
-        // which are smaller than current element nums[i]
-        while (!deq.isEmpty() && nums[i] > nums[deq.getLast()])
-            deq.removeLast();
-    }
-
-    public static int[] maxSlidingWindow(int[] nums, int k) {
-        int n = nums.length;
-        if (n * k == 0) return new int[0];
-        if (k == 1) return nums;
-        ArrayDeque<Integer> deq = new ArrayDeque<Integer>();
-
-        // init deque and output
-        int max_idx = 0;
-        for (int i = 0; i < k; i++) {
-            clean_deque(i, k,nums,deq);
-            deq.addLast(i);
-            // compute max in nums[:k]
-            if (nums[i] > nums[max_idx]) max_idx = i;
-        }
-        int [] output = new int[n - k + 1];
-        output[0] = nums[max_idx];
-
-        // build output
-        for (int i  = k; i < n; i++) {
-            clean_deque(i, k,nums,deq);
-            deq.addLast(i);
-            output[i - k + 1] = nums[deq.getFirst()];
-        }
-        return output;
-    }
-
-    public static void clean_dequeMaxHeap(int i, int k,int[] nums,PriorityQueue<Integer> deq) {
-
-        // removes the maximum element not in the sliding window
-        if (!deq.isEmpty() && deq.peek() == i - k)
-            deq.poll();
-
-        // remove from deq indexes of all elements
-        // which are smaller than current element nums[i]
-        if (!deq.isEmpty() && nums[i] > nums[deq.peek()])
-            deq.clear();
-    }
-
-    //one test case doesnt pass
-    public static int[] maxSlidingWindowMaxHeap(int[] nums, int k) {
-
-        PriorityQueue<Integer> deq = new PriorityQueue<>((a, b) -> nums[b] - nums[a]);
-        int max_idx = 0;
-
-        for (int i = 0; i < k; i++) {
-            clean_dequeMaxHeap(i, k,nums,deq);
-            deq.add(i);
-            // compute max in nums[:k]
-            if (nums[i] > nums[max_idx]) max_idx = i;
-        }
-
-        int [] output = new int[nums.length - k + 1];
-        output[0] = nums[max_idx];
-
-        // build output
-        for (int i  = k; i < nums.length; i++) {
-            clean_dequeMaxHeap(i, k,nums,deq);
-            deq.add(i);
-            output[i - k + 1] = nums[deq.peek()];
-        }
-        return output;
     }
 
     //bidirectional bfs can also be done but is slower than this
@@ -5711,7 +7257,6 @@ public class Test {
         return (tx == sx && ty == sy);
     }
 
-
     //Regular expression matching
     //Here the matrix is filled from the end because * patterns are about matches ahead in the string not before
     public static boolean isMatchIterativeDP(String text, String pattern) {
@@ -5723,7 +7268,7 @@ public class Test {
                 boolean first_match = (i < text.length() &&
                         (pattern.charAt(j) == text.charAt(i) ||
                                 pattern.charAt(j) == '.'));
-                if (j + 1 < pattern.length() && pattern.charAt(j+1) == '*'){
+                if (j + 2 <= pattern.length() && pattern.charAt(j+1) == '*'){
                     dp[i][j] = dp[i][j+2] || first_match && dp[i+1][j];
                 } else {
                     dp[i][j] = first_match && dp[i+1][j+1];
@@ -5731,6 +7276,31 @@ public class Test {
             }
         }
         return dp[0][0];
+    }
+
+    public static boolean isMatchIterativeDPReverse(String text, String pattern) {
+        boolean[][] dp = new boolean[text.length() + 1][pattern.length() + 1];
+        dp[0][0] = true;
+
+        for (int i = 0; i < dp[0].length; i++) {
+            if(i-2 >=0 && pattern.charAt(i-1)=='*')
+                dp[0][i]=dp[0][i-2];
+        }
+        for (int i = 1; i <dp.length; i++){
+            for (int j = 1; j < dp[0].length; j++){
+                boolean first_match = (
+                        (pattern.charAt(j-1) == text.charAt(i-1) ||
+                                pattern.charAt(j-1) == '.'));
+                if (j-2 >= 0 && pattern.charAt(j-1) == '*'){
+                    first_match=(pattern.charAt(j-2) == text.charAt(i-1)) ||
+                            pattern.charAt(j-2) == '.';
+                    dp[i][j] =  first_match && dp[i-1][j] || dp[i][j-2];
+                } else {
+                    dp[i][j] = first_match && dp[i-1][j-1];
+                }
+            }
+        }
+        return dp[text.length()][pattern.length()];
     }
 
     enum Result{
@@ -5806,25 +7376,24 @@ public class Test {
 
     }
 
-
     public static List<String> fullJustify(String[] words, int maxWidth) {
         List<String> lines = new ArrayList<String>();
 
-        int index = 0;
-        while (index < words.length) {
-            int count = words[index].length();
-            int last = index + 1;
-            while (last < words.length) {
-                if (words[last].length() + count + 1 > maxWidth) break;
-                count += words[last].length() + 1;
-                last++;
+        int startWordIndex = 0;
+        while (startWordIndex < words.length) {
+            int count = words[startWordIndex].length();//number of letters
+            int lastWordIndex = startWordIndex + 1;
+            while (lastWordIndex < words.length) {
+                if (words[lastWordIndex].length() + count + 1 > maxWidth) break;
+                count += words[lastWordIndex].length() + 1;
+                lastWordIndex++;
             }
 
             StringBuilder builder = new StringBuilder();
-            int diff = last - index - 1;
+            int numberOfWords = lastWordIndex - startWordIndex - 1;
             // if last line or number of words in the line is 1, left-justified
-            if (last == words.length || diff == 0) {
-                for (int i = index; i < last; i++) {
+            if (lastWordIndex == words.length || numberOfWords == 0) {
+                for (int i = startWordIndex; i < lastWordIndex; i++) {
                     builder.append(words[i] + " ");
                 }
                 builder.deleteCharAt(builder.length() - 1);
@@ -5833,19 +7402,19 @@ public class Test {
                 }
             } else {
                 // middle justified
-                int spaces = (maxWidth - count) / diff;
-                int r = (maxWidth - count) % diff;
-                for (int i = index; i < last; i++) {
+                int spaces = (maxWidth - count) / numberOfWords;
+                int r = (maxWidth - count) % numberOfWords;// this is the remaining which will be distributed among 1 to (numberOfWords - 1) slots by a count of 1
+                for (int i = startWordIndex; i < lastWordIndex; i++) {
                     builder.append(words[i]);
-                    if (i < last - 1) {
-                        for (int j = 0; j <= (spaces + ((i - index) < r ? 1 : 0)); j++) {
+                    if (i < lastWordIndex - 1) {
+                        for (int j = 0; j <= (spaces + ((i - startWordIndex) < r ? 1 : 0)); j++) {
                             builder.append(" ");
                         }
                     }
                 }
             }
             lines.add(builder.toString());
-            index = last;
+            startWordIndex = lastWordIndex;
         }
 
 
@@ -5963,6 +7532,7 @@ public class Test {
 
     }
 
+    //Assume a minimum and if there is a new minimum then take the diff and * i
     public static int minMovesMyWay1Pass(int[] nums) {
         int min = nums[0], count = 0;
         for (int i = 1; i < nums.length; i++) {
@@ -5975,6 +7545,7 @@ public class Test {
         return count;
     }
 
+    //min value is key
     public static int minMovesMyWay2Pass(int[] nums) {
         int moves = 0, min = Integer.MAX_VALUE;
         for (int i = 0; i < nums.length; i++)
@@ -7440,31 +9011,12 @@ public class Test {
         return new ArrayList<String>(validExpressions);
     }
 
-
     static int maxValidString=0;
     static int leftBracketTotalCount =0;
     static int rightBracketTotalCount=0;
 
     //Find number of invalid parentheses question created from this
     //Check for removing combinations when its not brackets
-    public static void removeParentheses(StringBuffer tempList, Set<String> output, char[] input, int start, int leftBracketCount, int rightBracketCount) {
-
-        for (int i = start; i < input.length; i++) {
-            if (input[i] == ')') rightBracketCount++;
-            else if (input[i] == '(') leftBracketCount++;
-
-            if (rightBracketCount <= leftBracketCount && rightBracketCount<=rightBracketTotalCount && leftBracketCount<=leftBracketTotalCount) {
-                tempList.append(input[i]);
-                if (tempList.length() == maxValidString && rightBracketCount==rightBracketTotalCount && leftBracketCount== leftBracketTotalCount)
-                    output.add(tempList.toString());
-                removeParentheses(tempList, output, input, i + 1, leftBracketCount, rightBracketCount);
-                tempList.setLength(tempList.length() - 1);
-            }
-            if (input[i] == ')') rightBracketCount--;
-            else if (input[i] == '(') leftBracketCount--;
-        }
-    }
-
     public static int validParenthesisCount(String s) {
 
         int count = 0;
@@ -7489,137 +9041,21 @@ public class Test {
         return count;
     }
 
-    static class NumberToWords {
-        public String one(int num) {
-            switch (num) {
-                case 1:
-                    return "One";
-                case 2:
-                    return "Two";
-                case 3:
-                    return "Three";
-                case 4:
-                    return "Four";
-                case 5:
-                    return "Five";
-                case 6:
-                    return "Six";
-                case 7:
-                    return "Seven";
-                case 8:
-                    return "Eight";
-                case 9:
-                    return "Nine";
-            }
-            return "";
-        }
+    public static void removeParentheses(StringBuffer tempList, Set<String> output, char[] input, int start, int leftBracketCount, int rightBracketCount) {
 
-        public String twoLessThan20(int num) {
-            switch (num) {
-                case 10:
-                    return "Ten";
-                case 11:
-                    return "Eleven";
-                case 12:
-                    return "Twelve";
-                case 13:
-                    return "Thirteen";
-                case 14:
-                    return "Fourteen";
-                case 15:
-                    return "Fifteen";
-                case 16:
-                    return "Sixteen";
-                case 17:
-                    return "Seventeen";
-                case 18:
-                    return "Eighteen";
-                case 19:
-                    return "Nineteen";
-            }
-            return "";
-        }
+        for (int i = start; i < input.length; i++) {
+            if (input[i] == ')') rightBracketCount++;
+            else if (input[i] == '(') leftBracketCount++;
 
-        public String ten(int num) {
-            switch (num) {
-                case 2:
-                    return "Twenty";
-                case 3:
-                    return "Thirty";
-                case 4:
-                    return "Forty";
-                case 5:
-                    return "Fifty";
-                case 6:
-                    return "Sixty";
-                case 7:
-                    return "Seventy";
-                case 8:
-                    return "Eighty";
-                case 9:
-                    return "Ninety";
+            if (rightBracketCount <= leftBracketCount && rightBracketCount<=rightBracketTotalCount && leftBracketCount<=leftBracketTotalCount) {
+                tempList.append(input[i]);
+                if (tempList.length() == maxValidString && rightBracketCount==rightBracketTotalCount && leftBracketCount== leftBracketTotalCount)
+                    output.add(tempList.toString());
+                removeParentheses(tempList, output, input, i + 1, leftBracketCount, rightBracketCount);
+                tempList.setLength(tempList.length() - 1);
             }
-            return "";
-        }
-
-        public String two(int num) {
-            if (num == 0)
-                return "";
-            else if (num < 10)
-                return one(num);
-            else if (num < 20)
-                return twoLessThan20(num);
-            else {
-                int tenner = num / 10;
-                int rest = num - tenner * 10;
-                if (rest != 0)
-                    return ten(tenner) + " " + one(rest);
-                else
-                    return ten(tenner);
-            }
-        }
-
-        public String three(int num) {
-            int hundred = num / 100;
-            int rest = num - hundred * 100;
-            String res = "";
-            if (hundred * rest != 0)
-                res = one(hundred) + " Hundred " + two(rest);
-            else if ((hundred == 0) && (rest != 0))
-                res = two(rest);
-            else if ((hundred != 0) && (rest == 0))
-                res = one(hundred) + " Hundred";
-            return res;
-        }
-
-        public String numberToWords(int num) {
-            if (num == 0)
-                return "Zero";
-
-            int billion = num / 1000000000;
-            int million = (num - billion * 1000000000) / 1000000;
-            int thousand = (num - billion * 1000000000 - million * 1000000) / 1000;
-            int rest = num - billion * 1000000000 - million * 1000000 - thousand * 1000;
-
-            String result = "";
-            if (billion != 0)
-                result = three(billion) + " Billion";
-            if (million != 0) {
-                if (!result.isEmpty())
-                    result += " ";
-                result += three(million) + " Million";
-            }
-            if (thousand != 0) {
-                if (!result.isEmpty())
-                    result += " ";
-                result += three(thousand) + " Thousand";
-            }
-            if (rest != 0) {
-                if (!result.isEmpty())
-                    result += " ";
-                result += three(rest);
-            }
-            return result;
+            if (input[i] == ')') rightBracketCount--;
+            else if (input[i] == '(') leftBracketCount--;
         }
     }
 
@@ -7731,6 +9167,52 @@ public class Test {
             right = r;
         }
         return l + r + 1;
+    }
+
+    //its better done with a hashmap, this example is just for fyi
+    static class Logger {
+        private LinkedList<Pair<String, Integer>> msgQueue;
+        private HashSet<String> msgSet;
+
+        /** Initialize your data structure here. */
+        public Logger() {
+            msgQueue = new LinkedList<Pair<String, Integer>>();
+            msgSet = new HashSet<String>();
+        }
+
+        /**
+         * Returns true if the message should be printed in the given timestamp, otherwise returns false.
+         */
+        public boolean shouldPrintMessage(int timestamp, String message) {
+
+            // clean up.
+            while (msgQueue.size() > 0) {
+                Pair<String, Integer> head = msgQueue.getFirst();
+                if (timestamp - head.second >= 10) {
+                    msgQueue.removeFirst();
+                    msgSet.remove(head.first);
+                } else
+                    break;
+            }
+
+            if (!msgSet.contains(message)) {
+                Pair<String, Integer> newEntry = new Pair<String, Integer>(message, timestamp);
+                msgQueue.addLast(newEntry);
+                msgSet.add(message);
+                return true;
+            } else
+                return false;
+
+        }
+        class Pair<U, V> {
+            public U first;
+            public V second;
+
+            public Pair(U first, V second) {
+                this.first = first;
+                this.second = second;
+            }
+        }
     }
 
     //constant space and time. You can also get past getHits() by adding condition timestamp > times[i] && ....
@@ -8397,83 +9879,6 @@ public class Test {
         System.out.println();
         for (int space = 0; space < spaces; space++)
             System.out.print(" ");
-    }
-
-
-    //Keep + - together in result and /* in tail
-    public static int calculateII(String s) {
-        int tail = 0;
-        char operator = '+';
-        int res = 0;
-        // char[] charArray = s.toCharArray(); // no need of char array as String is stored as char array
-        int num = 0;
-        int n = s.length();
-
-
-        for(int i = 0 ; i < n; i++){
-            char c = s.charAt(i); //charAt works on an array
-            if(c == ' ') continue;
-            if (Character.isDigit(c)){
-                num =  c-'0';
-                while(i + 1 < n && Character.isDigit(s.charAt(i+1))){
-                    num = num * 10 + (s.charAt(i+1) - '0');
-                    i++;
-                }
-                switch (operator){
-                    case '+':
-                        res +=tail;
-                        tail = num;
-                        break;
-                    case '-':
-                        res += tail;
-                        tail = -num;
-                        break;
-                    case '*':
-                        tail*=num;
-                        break;
-                    case '/':
-                        tail/=num;
-                        break;
-                }
-            } else {
-                operator = c;
-            }
-        }
-        return res + tail;
-    }
-
-    public static int calculateI(String s) {
-
-        Stack<Integer> stack = new Stack<Integer>();
-        int operand = 0;
-        int result = 0; // For the on-going result
-        int sign = 1;  // 1 means positive, -1 means negative
-
-        for (int i = 0; i < s.length(); i++) {
-
-            char ch = s.charAt(i);
-            if (Character.isDigit(ch))
-                operand = 10 * operand + (int) (ch - '0');
-
-            else if (ch == '+' || ch == '-') {
-                result += sign * operand; //calculate the left part of this sign
-                sign = ch == '+' ? 1 : -1; //assign sign for next operation
-                operand = 0;
-
-            } else if (ch == '(') {
-                stack.push(result); //push result first
-                stack.push(sign);
-                sign = 1;
-                result = 0;
-
-            } else if (ch == ')') {
-                result += sign * operand; //complete current bracket
-                result *= stack.pop(); //pop sign first
-                result += stack.pop();
-                operand = 0;
-            }
-        }
-        return result + (sign * operand);
     }
 
     static int[] father;
@@ -9400,6 +10805,21 @@ public class Test {
             startIndex += lenghtOfString;
         }
         return orinigalList;
+    }
+
+    //here if useless char is found, things get reset to a new begin
+    //or if valid char count drops below 0
+    public static List<Integer> findAnagrams(String s, String p) {
+        int[] count = new int[256];
+        for(char c : p.toCharArray()) count[c]++;
+        List<Integer> res = new ArrayList<>();
+        char[] c = s.toCharArray();
+        for(int begin = 0, end = 0; end < c.length; end++) {
+            count[c[end]]--;
+            while(count[c[end]] < 0) count[c[begin++]]++;
+            if(end - begin + 1 == p.length()) res.add(begin);
+        }
+        return res;
     }
 
     //Sliding window, can be done with int[] also 26 char, 128 char or 256 extended ASCII
@@ -11863,69 +13283,6 @@ public class Test {
         return true;
     }
 
-    static int longestCommonSubsequence(String a,String b)
-    {
-        int m = a.length();
-        int n = b.length();
-
-        int[][] dp =new int[m+1][n+1];//Keeping space for empty strings
-
-        for(int i=1; i<=m; i++)
-            for(int j=1; j<=n; j++)
-                dp[i][j] = a.charAt(i-1)==b.charAt(j-1) ? dp[i-1][j-1]+1 : Math.max(dp[i-1][j],dp[i][j-1]);
-
-        return dp[m][n];
-    }
-
-    static int minDistance(String word1, String word2) {
-        return word1.length() + word2.length()- 2 * longestCommonSubsequence(word1,word2);
-    }
-
-    public static int lengthOfLIS(int[] nums) {
-        int[] dp = new int[nums.length];
-        int len = 0;
-        for (int num : nums) {
-            int i = Arrays.binarySearch(dp, 0, len, num);
-            if (i < 0) {
-                i = -(i + 1);
-            }
-            dp[i] = num;
-            if (i == len) {
-                len++;
-            }
-        }
-        return len;
-    }
-
-    public static int LisDP(int[] input) {
-        int finalMax = 1;
-        int[] dp = new int[input.length];
-        for (int i = input.length - 1; i >= 0; i--) {
-            int currentMax = 0;
-            for (int j = i + 1; j < input.length; j++) {
-                if (input[j] > input[i]) {
-                    currentMax = Math.max(currentMax, dp[j]);
-                    if(dp[j]==finalMax) break;
-                }
-            }
-            dp[i] = currentMax + 1;
-            if (dp[i] > finalMax) finalMax = dp[i];
-        }
-        return finalMax;
-    }
-
-    public static int LIS(int start, int[] input) {
-        int maxCount = 1;
-        for (int i = start; i < input.length; i++) {
-            for (int j = i + 1; j < input.length; j++) {
-                if (input[j] > input[i]) {
-                    maxCount = Math.max(LIS(j, input) + 1, maxCount);
-                }
-            }
-        }
-        return maxCount;
-
-    }
 
     static int rob(int[] nums) {
         //This DP array can be simplified to few variables

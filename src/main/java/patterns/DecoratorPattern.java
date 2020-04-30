@@ -5,6 +5,7 @@ interface Phone {
     String build();
 }
 
+//decorator class
 abstract class SmartPhone implements Phone {
 
     private final Phone phone;

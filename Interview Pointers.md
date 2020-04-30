@@ -1,6 +1,8 @@
 **My pointers**
 
-Ariba
+Accenture(500k emp)
+SAP(100k emp)
+Ariba(4k emp)
 Product stuff
 
 - Postman test suite
@@ -117,41 +119,84 @@ Amazon
 
 LP
 1. Customer obsession
+handled difficult customer, understand customers needs
+- postman test suite, not able to test without access
+- built pna
+- the link of price update
 
 2. Ownership
+Went above and beyond, Peer struggle, 
+- Postman test suite
+- admin dev time (Peer struggle)
+- h2 db
+- activity refresh ui tweak 
+- simulator setup from dev (Peer struggle)
 
 3. Invent and simplify
-- chrome ext
-- postman testsuite
-- formatter
-- admin dev stuff
+invent, improvements, simple solution to complex problem
+- postman testsuite (invent)
+- chrome ext (invent, improvements)
+- admin dev stuff (simple)
+- simulator setup from dev (simple)
+- formatter (improvements)
 - h2 db 
 
-4. Leaders are right a lot
-- push back SB PnA
+4. are right a lot
+made a bad decision, disagreed with a colleague, decision in the absence of data
+- push back SB PnA (disagreed)
+- caching pna(first in the absence of data)
+- implemented pna in both code (bad decision)
+- disagreed with Sudha on common code for content aux
 
 5. Learn and be curious
-- 
+what can u teach me in 5 mins, influenced change by asking questions, solved by observation
+- postman testsuite, macros in excel, chrome ext, jrebel (teach)
+- variable in singleton n big decimal (observation)
+- buyer exception thrown (observation)
+- caching in pna (by asking questions)
 
 6. Hire and develop the best
+hired someone smarter, how u ensure u hired best person, 
 - guide junior developers and not give them solutions even tough I knew/could do so 
+- person was getting tired of the question (higher best)
+
 
 7. Insist on highest standards
+something u wish u did better, improved quality of something already good
+- excessive logs
+- admin dev stuff
+- performance on discover api
+- accenture (wish had done better)
+- chrome ext and formatter and h2 (improved) 
+
 
 8. Think Big (Common)
+big risk and failed, beyond scope and delivered, radical approach taken, how did u drive adoption, 
+    saw an opportunity to do something much bigger than the actual scope 
+
+
 
 9. Bias for action
+calculated risk when speed was critical, get info from someone unresponsive
 
 10. Frugality
+get more out of less, worked with limited time or resources
+
 
 11. Earn trust
+contributed to improving moral, got critisized what did u do, tell someone else a harsh truth, convince someone who is resisting what u are trying to do
+- admin stuff made other build tools
+- wrote a simulator for a colleague
+- common code for contentaux
 
 12. Dive deep
+data to develop strategy, large problem u helped solve 
 
 13. Have backbone: disagree and commit
+someone didnt agreee, conflict, unpopular descision, u disagreed, challenging situation
 
 14. Deliver results
-
+exceeded goal, most complex problem, worked on something extremely hard and failed
 
 
 

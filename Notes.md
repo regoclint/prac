@@ -42,6 +42,7 @@ For preorder subtree need # at start
 PQ and TreeSet
     Both O(log(N)) time complexity for adding, removing, and searching elements
     PQ can have duplicates, TreeSet cannot
+    PQ cannot hold null values
     Iteration in TreeSet is ordered PQ is random
 DL - faster insertions and removals, lookup by index is slow. HM can be used for faster lookup. LRU cache
 ArrayList - slower insertions and removals, faster lookup by index    
@@ -60,7 +61,7 @@ Subset is not a substring or subarray. Subsets are combinations and are superset
 Substrings are contiguous subsets.
 Substring Template applies to longest/shortest substrings
 For contiguous number of subsets that equal a number, it monotonically increases so its sum of n-1 numbers
-    numSubarrayProductLessThanK()
+    numSubarrayProductLessThanK(), numFriendRequestsMyWay()
 Going reverse in a binary tree has only 1 path unlike going forward - reaching points
 Kadane's algo     
 Tarjan's algo - Bridges
@@ -74,12 +75,33 @@ To access parent nodes of binary
 For DP if one dimension of the array can go negative then instead of matrix can use an array of hashmaps (longest arith seq)
 PQ can be optimised by storing only required size -> Klogn 
 To store array index in row * C + col. To retrieve the index row= storedValue / C and col = storedValue % C 
+
 LCA
     For BST - its where the values divide
     For Binary & Nary - return the node if the return node count is >1 the root is new lca
     For multi parent(graph) - Build adj matrix, traverse from child to parent for both the targets 
-Integer arrays are faster than Arraylist because arraylist converts primitive types to objects(auto boxing) and then stores the objects which are not contiguous
-    hence for primitive types arrays are better. For objects both are same. 
+2 sorted lists get minimum difference use 2 pointers and increment the smaller one to get closer(word distance)
+2 sorted lists find k pairs minimum sum use PQ(K pairs with smallest sum)
+Removing from arraylist and without maintaining sorted order can be done efficiently by replacing the element to remove with the last element
+Adding to a list and maintaining sorted order can be done by heap or tree set(in trees the movement is less compared to lists) 
+Graphs
+    - Cycle in a graph(directed or undirected) can be found by union find. if an edge has same parents/belong to same set, its a cycle. Can also be done by DFS or BFS
+    - In union find, can keep -ve as parent marker and count as number of children if ever needed
+    - topological sort requires acyclic and directed graph
+Subsequence is not contguous, substring is
+LIS, Longest arith seq, LCS(substring and Subsequence) all are similar dp loop checks
+if top down goes with a +1 to next index then bottom up will go with -1. The opposite happens as dp builds on completed areas.     
+For binary search its better tto do l +(r-l)/2 to prevent number out of bounds  
+Bipartite graph
+    - Every edge has one end in one set and other in another
+    - Also it has no odd length cycles
+    - Can be identified by coloring with 2 colors
+Maximum sliding window, daily temperatures...use a stack to get rid of old irrelevant values    
+In two sum, take care of 2 equal numbers(Two sum 3)
+Graph is a tree, if there is only one connected path to all nodes, no cycles
+% 1000 / 100 will give number at hundred position directly
+For a pair the functions are getKey() and getValue()
+Can do Collections.binarySearch on a List of Pairs - TimeMap question
 
 
 Utility funcs
@@ -169,6 +191,9 @@ Greedy methods
 AB testing - create 2 versions and gauge the response to finalize the version 
 Ternary search does more comparisons than binary in worst case. hence binary is preferred. True for nary search
 
+**SQL**
+where is applied first, then group by and then having
+aggregate functions with group by are applied to each group
 
 
 **System Design**
@@ -178,11 +203,12 @@ Twitter (News Feed) https://www.youtube.com/watch?v=KmAyPUv9gOY
 - Tweeting
     - HTTP Put -> Load balancer -> into 3 redis instances(Fan out). Redis because high speed of in-memory and only 140 characters.
     - We need more speed than space.
-    - A tweet updates the followers timeline in redis (precomputing). Based on a frequently logged in user too.
+    - A tweet updates the followers timeline in redis (precomputing). Based on a frequently logged in user too. This is for non-celebrities
     - 3 Redis instances have duplicated data for high availability
-    - A celeb tweet appears on page refresh(from DB rather than Redis) so that comment on the tweet appears in the right order due to the high volume of followers
-        The order would get destroyed if redis is used for celebs, cuz updating the follower's timeline would take time and due to that a comment on a celeb tweet may 
-        appear before the celeb tweet                      
+    - A celeb tweet is added to a user timeline on a pull basis rather than fanout so that comment on the tweet appears in the right order due to the high volume of followers
+        The order would get destroyed if fanout is used for celebs, cuz updating the follower's timeline would take time and due to that a comment on a celeb tweet may 
+        appear before the celeb tweet
+        When a pull request comes in a users celebrities timeline is checked and latest tweets are merged into the user's timeline                      
 - Timeline - User and Home
     - User timeline is simple 
     - Home timeline merge from all followers in chronological order
@@ -190,14 +216,21 @@ Twitter (News Feed) https://www.youtube.com/watch?v=KmAyPUv9gOY
 - Following
     - Active followers table is checked before precomputing the tweet into timelines
 -Sharding
-    Posts - Cannot be sharded on user cuz for hot users it could create an unbalanced load. Shard based on epoch time & sequence
+    Posts - Cassandra. Cannot be sharded on user cuz for hot users it could create an unbalanced load. Shard based on epoch time & sequence
     Timeline - Since its in memory and has limited posts per user, we can shard on userid and use CH
     News feeds have hot users unlike other design hence userids are not that good for CH
+- Trends
+    - Filter(stop words, unwanted hashes, adult)-> parse -> Geolocation count  ___
+                                                                                  |-> Redis
+                                                         -> volume based count ---
+    - based on volume in a given amount of time
+    - Storm is use for stream processing 
 Feed ranking    
 - Search
     - During the tweet operation the tweet is also sent to a Search engine to be indexed and be searchable
 - Advertising
-- Eventual consistency
+- Eventual consistency is fine to have as its not a banking application. A slight delay in showing is fine 
+- Zookeeper to manage the large Redis clusters    
     
  
 Instagram (News Feed) 
@@ -249,15 +282,20 @@ Facebook (Chat service with storage)
 
 Tinder (Dating)
 https://www.youtube.com/watch?v=tndzLznxq40&list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX&index=9
-+ Store Profiles
+https://www.youtube.com/watch?v=nBdTBDJNOh8 (for the diagrams)
++ Store Profiles and Login
     - No of images req?
     - Images stored as File vs BLOB 
         - Files are cheaper, faster, dont need updates. Can use CDN 
     - Images stored in DFS(Distributed File system) based on user id
-    -DB storing user id and file url(CDN ???)
+    - DB storing user id and file url(CDN ???)
+    - token used for authorizing each call instead of sessions as this is not web
     
 - Recommend matches
-    - Recommend based on age, gender, location and have a fast lookup
+    - Recommend based on age, gender, location, active users, bad actors, progressive taxation(if u get too many hits), user grouping(for most likely matchable ppl)
+    - Geosharding - Using Google S2 to find location of servers to be placed and to get recommendations
+    - Servers in different timezones can be used together when one timezone has much lower load 
+    - Elastic search is used to find the sharded data
     - Location is updated every hour then how sharding is done??? 
     - If all 3 columns are indexed, only one index is used at a time and binary search happens on them
         - Casandra or Amazon Dynamo DB - NoSql...better than sharding as sharding is complicated
@@ -265,8 +303,11 @@ https://www.youtube.com/watch?v=tndzLznxq40&list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPy
          
 - Note matches
     - only the user id to user id so that matches can be recovered
-    
-- Direct messaging    
+    - send the match -> web socket and -> queue - > Matching service <--> Redis 
+       Other user   <------|----------<-  queue   <-|
+                                                        
+- Direct messaging      
+
 
 
 Uber (Ride share)
@@ -294,6 +335,20 @@ Amazon (Shopping)
     - Increase servers for availability but maintaining the replicas consistency is difficult
     - Achieving high availability and consistency is difficult
 
+Youtube/Netflix
+-Components - Processing Q, Encoder, Thumbnail generator, Video and User metadata store, Video and Thumbnail store, Video metadata Cache, CDN 
+- Video metadata and user storage can be in MySQL
+- Videos can be stored in HDFS
+- Split read and write traffic
+- Use master slave config for reading videos, a delay in updating all slaves is acceptable as its fine to not show a video for some time
+- Thumbnails are more in number like 5 per video and very small in size(5kb), so BigTable is good along with a cache for hot ones
+- Video uploads should resume from a point if failed
+- Shard for video metadata db based on videoId instead of userId to prevent hot users.
+    So a select all user's videos will aggregate data from all servers and could apply ranking and return the results
+- Video deduplication can be done at preprocessing time rather than later to prevent encoding etc 
+- Can cache based on 80-20 rule for metadata servers
+- Use CDN may be within an ISP like Netflix
+      
 
 Netflix (Streaming service) https://www.youtube.com/watch?v=psQzyFfsUGU
 - Uploading content
@@ -312,7 +367,7 @@ Netflix (Streaming service) https://www.youtube.com/watch?v=psQzyFfsUGU
     Cassandra - for user activity, other big data etc 
                 When user activity data increased, they compresses old data 
     
-- Live Anaylsis
+- Live Analysis
     - Kafka and Chukwa
     - Events such as viewing activity, error logs etc are sent thru kafka
     - ELK used to display search and display activities
@@ -328,13 +383,18 @@ Web crawler https://www.youtube.com/watch?v=BKZxZwUgL3Y
  - Flow: Seed URL -> URL Frontier -> Fetcher + Renderer (DNS resolver + Redis + Storage) -> URL Extractor + Duplicate detection + ...
         -> URL filter -> Is Crawled?(Bloom filter - youtube.com/watch?v=RSwjdlTp108) 
 
+- Seed url from all categories
  - URL Frontier:- Prioritizer -> front Qs(1 Q per priority) -> Back Q router -> Back Qs (1 per thread and per domain to maintain politeness)
                 ->Heap(to select earliest politeness)    
                 Prioritizer will have priority on type of content(like news),freshness etc
                 Back Q Router will create mapping of hostid to Back Q id
-                Heap will update time after picking the url for politness          
+                Heap will update time after picking the url for politness
+                #Back queues = # of threads of fetcher          
+ - DNS Resolver to map hostname to ip can be cached. A custom dns resolver is req as its faster                 
  - Fetcher & renderer:- fetches urls from back Qs when its free. It also renders the pages also now we have single page applications like angular which need rendering
-                It stores the pages in compressed forms in DB and some in uncompressed form in redis(because uncompressing can take time for some) 
+                It stores the pages in compressed forms in DB and some in uncompressed form in redis(because uncompressing can take time for some)
+ - URL extractor - This can be done only after rendering to reveal the total list of URLs
+ - URL filter- only html or only jpeg etc
  - Detect updates:- HEAD requests to find update time
         duplicates:- MD5 hash works only entire match, SimHash of 2 pages gives similarity %(near duplicate for people who copy content)
  - Storage:- Google cloud big table build on GFS etc. No sql DB for PBs of data                 
@@ -434,6 +494,24 @@ Type Ahead Suggestions
     Store history
     pre-fetch
 
+Twitter search
+Index
+-to find tweets that contain search terms
+    Build an in memory Distributed Hashtable of all words to tweetid
+    500k words and having tweet ids of the last 2 years
+    Sharding based on words would lead to unbalanced load due to hot words
+    sharding based on tweetid and aggregating would be balanced. 
+        So first hash on tweetid and then a distributed hashtable of words to tweetid in each server(index server)
+Fault tolerance
+    have a primary and secondary storage
+    if both fail, the index server needs to be rebuilt
+        For that a reverse map of server id to tweet id should be created with backup. This way if a server fails only those tweets can be fetched from the db and reindexed        
+Cache
+    Hot tweets can be stored in memory
+Ranking
+    based on social graph distance, popularity, relevance, etc can be done while aggregating                    
+
+
 Search
     Pre processing
         crawl -> index
@@ -442,9 +520,29 @@ Search
     Flow:- User searches -> find closest DC -> ||ly sent to different machines -> return batches -> sort by best rank
     https://www.deepcrawl.com/knowledge/technical-seo-library/search-engine-indexing/
      
-     
+Yelp
+- Shard based on location id to a quad tree server
+- Quad tree structure per quad tree server
+    Quad tree has 4 children, each time the size of the children exceeds 500 locations it is further divided into 4 children
+- Fault tolerance
+    have a primary and secondary storage
+    if both fail, the index server needs to be rebuilt
+        For that a reverse map of server id to location id should be created with backup. This way if a server fails only those location ids can be fetched from the db and reindexed        
+- Cache
+    Hot searches can be stored in memory
+- Ranking
+    based on popularity, relevance, etc can be done while aggregating                    
+
+
+
+
+Stock alert system     
+
      
 Concepts
+
+Hot users
+
 
 Indexing sorts a particular set of data so that it can be binary searched. This results in faster searches than that of unsorted data.
     - A separate sorted col is created in the DB per index which links to the actual record. A separate col is created bcuz its faster than sorting all the data
@@ -454,6 +552,10 @@ Indexing sorts a particular set of data so that it can be binary searched. This 
     - When the indexed rows are used more often for querying its useful otherwise its more of a negative for writes
     https://www.youtube.com/watch?v=zDzu6vka0rQ
     https://www.youtube.com/watch?v=WmJuhKLQMA4
+Solr vs ElasticSearch
+    - both build on Apache Lucene. Elastic came later
+    - Elastic has built in Zookeeper. SolrCloud needs Zookeeper to manage 
+    - Solr is much more oriented towards text search while Elasticsearch is often used for analytical querying, filtering, and grouping.
  
 SOAP vs REST vs GraphQL
     - REST was supersceeded by SOAP was superceeded by CORBA
@@ -504,14 +606,14 @@ SHA-256 vs MD5
     Both are hashing algos which are used to check file integrity.
     SHA-256 https://www.baeldung.com/sha-256-hashing-java
         Secure Hash algorithm is 256 bit
-    MD5 is 128 bit and hence faster butt less secure
+    MD5 is 128 bit and hence faster but less secure
 Base64 32 etc are encoding techniques for reducing size and have no encryption in it. not for security    
 
 Authorization/Authentication types
 - HTTP is stateless, needs all info all the time
 - HTTPS is HTTP with a secure mechanism i.e either SSL or TLS. 
 - TLS is the successor to SSL and TLS 1.3 is the latest and the fastest with one round trip for the handshake using Deffie Hellman algo
-- Banking needs to be stateful
+- Banking needs to be stateful 
 - Authentication is login, Authorization is granting access to a 3rd party
 - Basic
     - Basic Base64(username:password)
@@ -533,11 +635,18 @@ Authorization/Authentication types
     - Can be JWE encrypted
 - Sessions (Stateful)
     - After logging in the server issues a session id via cookie. On logout it destroys the session and clears the cookie from the client
-    - Session is stored on server side(stateful) in may be redis
+    - 2 types of session management sticky sessions or distributed session management
+    - Sticky sessions is fast but not fault tolerant. DSS is scalable and fault tolerant with a bit of latency
+    - DSS with replication makes it fault tolerant 
     - Cookies are signed(HMAC) so it cannot be tampered
     - Used in session management, personalization, tracking 
 - Cookie
     - 50 cookies per domain, all together 4KB max size                  
+ 
+Web sockets vs Server sent events (SSE)
+- bidirectional vs unidirectional
+- chat apps vs push notifications, newsletters and news feeds.
+- Web sockets tough are more future proof
    
     
 Consistent hashing  https://www.youtube.com/watch?v=bBK_So1u9ew
@@ -553,6 +662,7 @@ Sharding (DB servers)
 - Consistent hashing can be used to allocate new shards
 - Master slave configs provide better availability and consistency as writes happen only to master and then it fans out, read can happen anywhere
 - Drawbacks - Joins, Shards are fixed, hierarchical sharding further divides shards into smaller shards
+- While sharding, its important to remember how yr putting, getting and most frequent get/filter query so as to optimise sharding
 
 Load balancing helps you scale horizontally across an ever-increasing number of servers
     - Any part of the system that's distributed requires a load balancer
@@ -582,15 +692,22 @@ Optimistic concurrency lock - No locks, while committing a change check whether 
 
 - Idempotent - No matter how many times you call the operation, the result will be the same.
 
-ACID - Atomicity, Consistency, Isolation, and Durability
+ACID 
+    - Atomicity, 
+    - Consistency, 
+    - Isolation, and 
+    - Durability
+Data integrity - is accuracy and consistency of data
 NoSQL vs SQL https://www.youtube.com/watch?v=p4C0n3afZdk
     performance & scalability vs transaction(ACID compliant)
     scaling horiz vs joins
     
-Types of NoSQL db - key Value - Redis, Vodemort, Dynamo.
+Types of NoSQL db - key Value - Redis, Vodemort, Dynamodb.
                   - Document based - MongoDB. can do nested queries
-                  - Wide-Column - For big data as they look at column families instead of all columns. Cassandra, Hbase
+                  - Wide-Column - For big data as they look at column families instead of all columns. Cassandra, Hbase, Bigtable
                   - Graph - best for many relations. Neo4j    
+RDBMS offer CA, HBase and Mongo offer CP, Casandra offers AP
+Hbase is preferred in historical analysis, Casandra in IoT, recommendation systems(Netflix), messaging systems(Twitter)
 
 - Kafka vs Message queues
     - https://hackernoon.com/a-super-quick-comparison-between-kafka-and-message-queues-e69742d855a8
@@ -601,6 +718,21 @@ Types of NoSQL db - key Value - Redis, Vodemort, Dynamo.
     - Kafka's model is that every topic has both these properties—it can scale processing and is also multi-subscriber
     - Kafka messages are retained even after they are consumed
 
+Kafka definitions
+- Producer, Consumer, topic, Broker
+- topic is a queue, broker is the server holding the queue
+- A topic broker system can be made into a distributed system for scale
+
+
+Zookeper 
+- is used for coordination in distributed systems
+- Leader election for failure of a leader node
+ 
+Some DS design patterns
+- Sharded
+- Lambda
+- Kafka Streaming pattern  
+ 
 HTTP Methods
     GET - only to get info not update
     POST - to update or create
@@ -610,6 +742,7 @@ HTTP Methods
     PATCH - similar to put and post but only for partial updates
     OPTIONS - to find available options on the endpoint              
 HTTP status “429 - Too many requests"
+
 Redis can be in master/slave or cluster mode 
 Hosted vs Cloud services- In hosted there may not be multiple tenants or scale can be limited.
 
@@ -656,10 +789,11 @@ Adapter - Structural
 - https://stackify.com/design-patterns-explained-adapter-pattern-with-code-examples/
 
 Builder - Creational
-- Should be used only when you want to build different immutable objects using same object building process.
+- Should be used only when you want to build different IMMUTABLE objects using same object building process.
 - Instead of giving all values in the constructor as a must or telescopic constructors we use builder pattern.
 - one inner static class with public methods to set values, no setters for outer class, all final members for outer class(immutability), one build method in the inner class which creates an object of the outer class with itself as a parameter so that
     values can be transferred from inner to outer class  
+- Inner static class cuz it doesnt need access to the outer class variables
 - Eg. StringBuilder, MockMvcBuilder
 - https://www.youtube.com/watch?v=YmEVYvELt28&t=822s
 
@@ -667,7 +801,7 @@ Decorator - Structural
 - https://www.youtube.com/watch?v=vqy8BL0xV0c&t=352s
 - Keep an interface which will be general to all types 
   Keep a basic object to be created as a must. 
-  The decorator class is abstract and has the main object. 
+  The decorator class is abstract and has the common interface 
   Classes that extend the decorator will call super and add functionality/decorate it.
 - At run time we can add features by decorating each object
 - Pizza and their toppings, nokia android phone
@@ -676,13 +810,17 @@ Decorator - Structural
 **Java**
 
 
-Enumerations serve the purpose of representing a group of named constants like types -days of the week,
-planets,colors etc
+Stream https://www.geeksforgeeks.org/stream-in-java/
+- Intermediate Operations: map, filter, sorted
+    They return a stream
+- Terminal Operations: collect, forEach, reduce
+    collect - returns another collection
+    forEach - void return. Can be used to modify a list
+    reduce - reduce to one value  
 
-Stream, Lambda
 
 Abstract class - 
-    has to have one abstract method - this method would differ for the sub classes hence abstract
+    Doesnt have to have one abstract method - this method would differ for the sub classes hence abstract
     increases reuseability through inheritance using common non-abstract method definitions
     has to be extended. Cant create an object cuz there are abstract methods in it
     Not good to keep uncommon functions in abstract class(use Strategy pattern instead)
@@ -694,6 +832,9 @@ Interface
     
 String buffer - is synchronized, slow
 String builder - is not synchronized, twice as fast
+StringBuilder is pass by reference, Integer is not 
+Integer arrays are faster than Arraylist because arraylist converts primitive types to objects(auto boxing) and then stores the objects which are not contiguous
+    hence for primitive types arrays are better. For objects both are same. 
 
 Final
     classes - Cannot be inherited...This can confer security eg. String.java
@@ -706,17 +847,18 @@ Generics
 - T stands mostly for type
 - ? means any type. Eg. <? extends T>
 - <T extends Number> to allow only classes that extend Number to be passed. Super will be the reverse.
-- Used to get rid of overloaded methods
+- Used to get rid of overloaded methods. Eg. adding doubles, floats etc
       
 Reflection
 - Get all definitions in a class via java.lang.reflect such as methods, fields, super classes
+- Reflection might be slow 
  
 Threads
 - Created via extending Thread class or implementing Runnable and define run function. Thread class also implements Runnable. the class that implements Runnable are passed to Thread constructor 
 - The start method should be called not run. Calling run will execute it in a single threaded manner.
 - Inter-thread communication - wait(),notify(), notifyAll()
 - Synchronised blocks can be used for methods that are not synchronisable
-- Threadpools FixedThreadPool, SingleThreadPool, CachedThreadPool(creates new ones threads or reuses old), ScheduleThreadPool 
+- Threadpools - FixedThreadPool, SingleThreadPool, CachedThreadPool(creates new ones threads or reuses old), ScheduleThreadPool 
 - ExecutorService is used to run a threadpool. Internally uses a blocking queue which is thread safe
     - Can .execute(Runnables) or .submit(Callables). Runnable doesnt have a return type. Callable can return
     - Future is used as placeholder for Callable returns
@@ -736,18 +878,18 @@ Threads
     - synchronised - one thread at a time
     - ReentrantLock 
         - one thread at a time but with flexibility of conditions
-        - lock.lock() outside the try and lock.unlock() in finally
+        - lock.lock() outside the try and lock.unlock() in finally is the same as writing synchronised
         - Condition.await() and Condition.signal()
-        - very similar to synchronised cuz of lock and unlock at the start and end of the function
     - Semaphore
         - Allows a fixed number of threads to access a critical section
         - if capacity is set to 1 then it behaves like a mutex
         - acquire() and release()
+        - Used to restrict access to a resource like 100 threads but only 3 at a time are allowed access
     - ReadWriteLock
         - for multiple ReadLocks or one WriteLock. Read and write cannot happen at the same time
 
-Apache Velocity templating engine, can be used for email templates
 Javax.mail - mail api
+Apache Velocity templating engine, can be used for email templates
 
 Equals and Hashcode
     - Overriding equals should also override hashCode
@@ -771,8 +913,8 @@ Object class
     - default toString() has classname@hashcode as return value 
     - clone()
         - can be a deep copy or shallow copy depending on the implementation of the clone method 
-        - Shallow copy just do super.clone()
-        - Deepy copy create a new object for sub objects or call their clone too
+        - Shallow copy - just implement Cloneable and in the clone method do super.clone()
+        - Deep copy create a new object for sub objects or call their clone too
         - https://www.geeksforgeeks.org/clone-method-in-java-2/
              
 Java 7 vs 8
@@ -798,15 +940,17 @@ BigDecimal is better for precision/monetary stuff compared to double or float, b
 Static inner class and inner class
 - Inner classes can access all outer class variables including private
 - If a class is not used by any other classes it can be kept inside.
-
+- Non-static inner classes have access to members of the enclosing class, even private. 
+- Static nested classes do not have access to other members of the enclosing class. Hence its used in builder pattern
+- A static nested class interacts with the instance members of its outer class as the static class exists before the outer class
  
 Interface vs Inheritance vs Enum
 - Interface you want everything to have a different implementation but common signatures
 - Inheritance - "is a" relationship. Extensible for arbitrary number of types and to use common functionality
 - Composition - "has a" relationship. Helps in code reuse Car-Engine & Trunk-Engine. Can hide visibility of composed class.
 - Enum are named constants, can only be string. They are for fixed possibilities and wouldn't require extra functionality or extensibility in the future
+    like days of the week, planets,colors etc
 
-StringBuilder is pass by reference, Integer is not 
  
 **Spring**
 
@@ -818,12 +962,18 @@ Cyclic dependency A->B->A.
 Dependency injection - Helps in loosely coupling and mocking classes(testing)
     - A dependency injection container helps create objects and autowire them
     - Instead of creating objects with "new" manually and having them tightly coupled, the container creates them and autowires them, making them mockable too
-    - By creating a mock bean the container know it has to autowire this bean instead of the actual one. To create a mock objects you need loosely coupled components
-    - @Qualifier helps differentiate between similar been types
-    
-Bean scope - As a rule of thumb, you should use the prototype scope for all beans that are stateful, 
-while the singleton scope should be used for stateless beans.
+    - By creating a mock bean the container knows it has to autowire this bean instead of the actual one. To create a mock objects you need loosely coupled components
+    - @Qualifier helps differentiate between similar bean types
 
+@Autowire a list of interface, autowires all its implementations    
+
+Bean scopes   
+- Singleton scope should be used for stateless beans. Default. Initialized on startup
+- Prototype scope for all beans that are stateful. Unique per reference. Initialized only when getBean() is called.
+    Used when u want spring context in a class but it should have multiple instances. 
+- Request
+- Response
+- to inject prototype bean into singleton we need @Lookup notation to correctly have a prototype bean
 
 Scheduling - Quartz
 @Async
@@ -883,7 +1033,7 @@ Microservices
 - Monolith is a all in one, SOA is many services but still in one, MS is multiple services in separate instances
 - Advantages - diff development cycles and languages, diff scaling, fault tolerant, modular POCs
 - Disadvantages - Latency, authentication, load balancing, debugging 
-- In case of many MS, debugging can be done better with a correlation id per request(timestamp_threadname)
+- In case of many MS, debugging can be done better with a correlation id per request(originating timestamp_threadname)
 
 **Misc**
 Agile methodology uses scrum framework 

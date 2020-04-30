@@ -78,7 +78,7 @@ class StoreOrder extends OrderProcessTemplate
     @Override
     public void doDelivery()
     {
-        System.out.println("Item deliverd to in delivery counter.");
+        System.out.println("Item delivered to in delivery counter.");
     }
 
 }

@@ -16,7 +16,7 @@ class User {
         this.address = builder.address;
     }
 
-    //All getter, and NO setter to provde immutability
+    //All getter, and NO setter to provide immutability
     public String getFirstName() {
         return firstName;
     }
