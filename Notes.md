@@ -8,7 +8,7 @@ Red black tree properties
 Graph representations
     Edge list
     Adjacency List
-    Adjacency matrix
+    Adjacency matrix -  friend circle, 
     HashMap of HashMaps
     List of other neighbour Graph Nodes & node lookup HM
 
@@ -88,10 +88,13 @@ Graphs
     - Cycle in a graph(directed or undirected) can be found by union find. if an edge has same parents/belong to same set, its a cycle. Can also be done by DFS or BFS
     - In union find, can keep -ve as parent marker and count as number of children if ever needed
     - topological sort requires acyclic and directed graph
+    - Tree is a graph if
+        - number of edges exactly = nodes - 1
+        - no cycles
 Subsequence is not contguous, substring is
 LIS, Longest arith seq, LCS(substring and Subsequence) all are similar dp loop checks
 if top down goes with a +1 to next index then bottom up will go with -1. The opposite happens as dp builds on completed areas.     
-For binary search its better tto do l +(r-l)/2 to prevent number out of bounds  
+For binary search its better to do l +(r-l)/2 to prevent number out of bounds  
 Bipartite graph
     - Every edge has one end in one set and other in another
     - Also it has no odd length cycles
@@ -102,6 +105,10 @@ Graph is a tree, if there is only one connected path to all nodes, no cycles
 % 1000 / 100 will give number at hundred position directly
 For a pair the functions are getKey() and getValue()
 Can do Collections.binarySearch on a List of Pairs - TimeMap question
+Random number from a range can be done by low + rand(high - low)
+Stack can be used to continue a previous processing and end intermediate processing. Keep a list of prev maximums/values
+    Daily temp, next greater element, valid parenthesis, maxSlidingWindow have similar needs
+For matrix multiplication each row of A is multiplied with each col of B
 
 
 Utility funcs
@@ -167,7 +174,10 @@ Optimization problems:-
     - Considers all solutions
     - Optimal substructure property
     - Overlapping sub-problems property
-    - Approach - Recursive(top down with memoization ) or Iterative(bottom up with tabulation)
+    - Approach 
+        - Recursive(top down with memoization ) 
+        - Iterative(bottom up with tabulation)
+    - For memoization, memoize the changing values in the recur function parameters        
 - Branch and bound
     - It's BFS and backtracking is DFS
     
@@ -191,9 +201,14 @@ Greedy methods
 AB testing - create 2 versions and gauge the response to finalize the version 
 Ternary search does more comparisons than binary in worst case. hence binary is preferred. True for nary search
 
+
+
+
 **SQL**
 where is applied first, then group by and then having
 aggregate functions with group by are applied to each group
+
+
 
 
 **System Design**
@@ -309,23 +324,6 @@ https://www.youtube.com/watch?v=nBdTBDJNOh8 (for the diagrams)
 - Direct messaging      
 
 
-
-Uber (Ride share)
- - https://www.youtube.com/watch?v=umWABit-wbk
- - Booking a cab
-    - Mapping drivers to riders, cost, time calculations
-    - Make payments
-    - Confirming request with driver
-    - Confirmation sent to customer
- - Mapping (DISCO)
-    lat long, circle drawn, by road time and cost calculation done   
- - Payment
- - Messaging/Call
- - Logging service
- - Surge pricing
- - Fraud detection
- - ML stuff
- 
 
 
 Amazon (Shopping)
@@ -534,12 +532,43 @@ Yelp
     based on popularity, relevance, etc can be done while aggregating                    
 
 
+Uber (Ride share) https://www.youtube.com/watch?v=umWABit-wbk
+ - Booking a cab
+    - Mapping drivers to riders, cost, time calculations
+    - Make payments
+    - Confirming request with driver
+    - Confirmation sent to customer
+ - Mapping (DISCO)
+    lat long, circle drawn, by road time and cost calculation done   
+ - Payment
+ - Messaging/Call
+ - Logging service
+ - Surge pricing
+ - Fraud detection
+ - ML stuff
+ 
+
 
 
 Stock alert system     
 
+
+Ticket master
+NF req
+    - concurrent ticket booking
+    - security of maximum tickets and DDos attacks on booking reservations
+RDBMS is required cuz of transactions and locking    
+ActiveReservationsService - daemon service with a hashmap of LinkedHM
+    - ShowId - (BookingId, start Timestamp)
+WaitingUsersService - daemon service with a hashmap of LinkedHM
+    - ShowId, (UserId, wait start Timestamp)
+- Concurrency should be handled with transaction locks
+- Fault tolerance can be done by master slave design for the daemon services and DB
+- Sharding should be done on showId, as movieId can result in hot movies resulting in unbalanced load
      
-Concepts
+     
+     
+**SD Concepts**
 
 Hot users
 
@@ -575,6 +604,10 @@ HTTP - is synchronous, client to server protocol
 TCP - is asynchronous, is stateful
 XMPP or Websockets - Peer to peer protocol -Stateful and long lived TCP connection    
 CDN - Build to reduce response times by creating copies in different geographical locations
+    - Push CDN - Pushes only when there're changes. Extra work done, harder to implement. Good for blogs etc and low traffic sites so there arent a lot of pushes 
+    - Pull CDN - Pulls content after TTL. Good for high traffic sites. Doesnt have latest info but thats fine
+     
+     
 Eventual consistency
     https://www.youtube.com/watch?v=fIfH-kUaX4c
     Monetary Transactions can be tightly coupled
@@ -663,10 +696,42 @@ Sharding (DB servers)
 - Master slave configs provide better availability and consistency as writes happen only to master and then it fans out, read can happen anywhere
 - Drawbacks - Joins, Shards are fixed, hierarchical sharding further divides shards into smaller shards
 - While sharding, its important to remember how yr putting, getting and most frequent get/filter query so as to optimise sharding
+- Choosing the key to shard should help achieve a balanced load
 
 Load balancing helps you scale horizontally across an ever-increasing number of servers
     - Any part of the system that's distributed requires a load balancer
     - Load balancer should also have master slave design to prevent SPF
+    - Helps prevent requests from going to unhealthy servers
+    - Encrypt and decrypt
+    - X.509 Certf management
+    - Session persistence
+    
+Count min sketch algo https://www.youtube.com/watch?v=ibxXO-b14j4
+    - It is a probabilistic algo, to count frequencies in O(1) space
+    - A sketch(matrix) will have the hash functions as row and col as max value of the hash function
+    - Each input should have a unique value from the hash functions
+    - The minimum value of the values in the matrix is the frequency
+    - can give a higher count due to hash collisions. Then use more hash functions
+
+
+Caching
+    - Caching is done at all levels but often closer to the front end
+    - Additional caching in the node can make it even faster 
+    Cache invalidation/write policy types
+        Write-through cache 
+            - Put into cache and db simultaneously.
+            - 2 write calls so slower. but very persistent
+            - used where latency is not an issue and cache hits are more important
+        Write-around 
+            - First write to db then later cache
+            - Leads to initial cache misses. but persistent
+            - Used where persistence is more important
+        Write-back 
+            - First write to cache then later to db
+            - Very fast. But not very persistent
+            - Used where data is not very critical and reads need to be quick
+    Cache eviction policies - LRU,etc
+    
 Reliability is to do with business operations. Availability is being online. A reliable sys is available not necessarily vice versa
 
 CAP theorem
@@ -682,6 +747,22 @@ Partition tolerance - cluster functions even when some nodes can't communicate w
     CP - data is consistent between all nodes, and maintains partition tolerance (preventing data desync) by becoming unavailable when a node goes down.
     AP - nodes remain online even if they can't communicate with each other and will resync data once the partition is resolved,
        - but you aren't guaranteed that all nodes will have the same data (either during or after the partition)
+
+Types of consistency
+    - Weak consistency - like VOIP or video chats
+    - Eventual consistency - email, timelines
+    - Strong consistency - like DB transactions 
+
+2 Phase commit
+    - every commit happens to 2 DC. High latency, full consistency
+    - NASDAQ uses it
+
+Availability metrics https://kvaes.wordpress.com/2012/05/16/system-reliability-availability/
+- System Availability = MTBF / ( MTBF + MTTR )
+    MTBF (Mean time between failure) and MTTR (Mean time to repair) 
+- Parallel Availability = 1 - ( (1 - Availability X) * (1- Availability Y) * (1 - Availability Z) )
+- Serial Availability = Availability X * Availability Y * Availability Z
+
                  
 Server crash use heartbeats to the service not box and restart nodes
 
@@ -745,6 +826,18 @@ HTTP status “429 - Too many requests"
 
 Redis can be in master/slave or cluster mode 
 Hosted vs Cloud services- In hosted there may not be multiple tenants or scale can be limited.
+
+**DB Design**
+
+- 1st Normal form
+    - Data should be atomic. No grouping of data in one coloumn
+- 2nd Normal form
+    - Data should be functionally dependent on the PK. If some data is dependent on another key then the table should be split
+        If it is not functionally dependent it causes data redundancy leading to Insertion, deletion and updation anomalies.
+- 3rd Normal form
+    - Data shouldnt be stored at multiple places. If done so, modifiying it would happen at different places and could lead to inconsistencies
+    
+
 
 
 
@@ -951,6 +1044,12 @@ Interface vs Inheritance vs Enum
 - Enum are named constants, can only be string. They are for fixed possibilities and wouldn't require extra functionality or extensibility in the future
     like days of the week, planets,colors etc
 
+Lombok - a java framework to remove boilerplate code
+    @Data - provides getter, setter, toString, hascode
+
+try-finally combination is used to free up resources. BoundedBlockingQueueReentrantLock
+ 
+ 
  
 **Spring**
 
@@ -1004,7 +1103,7 @@ Interceptors
     - method needs to be public
     
 Live reload
-Actuator 
+Actuator     
 
 Redirect - https://www.baeldung.com/spring-redirect-and-forward
     Redirect happens on the browser side with a 302
