@@ -84,7 +84,7 @@ LCA
 2 sorted lists find k pairs minimum sum use PQ(K pairs with smallest sum)
 Removing from arraylist and without maintaining sorted order can be done efficiently by replacing the element to remove with the last element
 Adding to a list and maintaining sorted order can be done by heap or tree set(in trees the movement is less compared to lists) 
-Graphs
+Graphs 
     - Cycle in a graph
         - directed - use topo sort
         - undirected can be found by union find. if an edge has same parents/belong to same set, its a cycle. Can also be done by DFS or BFS
