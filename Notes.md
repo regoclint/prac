@@ -85,7 +85,10 @@ LCA
 Removing from arraylist and without maintaining sorted order can be done efficiently by replacing the element to remove with the last element
 Adding to a list and maintaining sorted order can be done by heap or tree set(in trees the movement is less compared to lists) 
 Graphs
-    - Cycle in a graph(directed or undirected) can be found by union find. if an edge has same parents/belong to same set, its a cycle. Can also be done by DFS or BFS
+    - Cycle in a graph
+        - directed - use topo sort
+        - undirected can be found by union find. if an edge has same parents/belong to same set, its a cycle. Can also be done by DFS or BFS
+        A connected component may or may not have a cycle in a directed graph, hence topo sort is used. 
     - In union find, can keep -ve as parent marker and count as number of children if ever needed
     - topological sort requires acyclic and directed graph
     - Tree is a graph if
