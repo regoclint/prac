@@ -20,7 +20,7 @@ Multiple sources can use multi source BFS
 Shallow copy - contains references to the copy from element
 Deep copy - New objects are created
 
-Fail-fast - fail earlier in the process. Iterator fails fast in case of concurrent modification
+Fail-fast - fail earlier in the process. for loop fails fast in case of concurrent modification
 Fail-safe - Iterator doesnt fail concurrent modification because they work on a copy. Eg using just iterator or ConcurrentHashMap or CopyOnWriteArrayList
 Use iterator to remove elements while iterating over a list
 To Remove from list - break after removal or use iterator to avoid comod error
@@ -66,15 +66,15 @@ Going reverse in a binary tree has only 1 path unlike going forward - reaching p
 Kadane's algo     
 Tarjan's algo - Bridges
 Array deque can be used for front and back operations. sliding window    
-new HashSet(Collection<? extends E) a collection can quickly be copied into a hashset
+new HashSet(Collection<? extends E>) a collection can quickly be copied into a hashset
 Enhanced for loop over stack gives it in sequential order unlike pop
 Path of binary search passes over the closest values to target
 To access parent nodes of binary 
     convert tree to graph
     make a parent map for each node
 For DP if one dimension of the array can go negative then instead of matrix can use an array of hashmaps (longest arith seq)
-PQ can be optimised by storing only required size -> Klogn 
-To store array index in row * C + col. To retrieve the index row= storedValue / C and col = storedValue % C 
+PQ can be optimised by storing only required size -> nlogK 
+To store array index in row * C + col. To retrieve the index row= storedValue / C and col = storedValue % C. or store int[2]
 
 LCA
     For BST - its where the values divide
@@ -91,7 +91,7 @@ Graphs
         A connected component may or may not have a cycle in a directed graph, hence topo sort is used. 
     - In union find, can keep -ve as parent marker and count as number of children if ever needed
     - topological sort requires acyclic and directed graph
-    - Tree is a graph if
+    - Graph is a tree if
         - number of edges exactly = nodes - 1
         - no cycles
 Subsequence is not contguous, substring is
@@ -106,12 +106,14 @@ Maximum sliding window, daily temperatures...use a stack to get rid of old irrel
 In two sum, take care of 2 equal numbers(Two sum 3)
 Graph is a tree, if there is only one connected path to all nodes, no cycles
 % 1000 / 100 will give number at hundred position directly
-For a pair the functions are getKey() and getValue()
+For a Pair the functions are getKey() and getValue()
 Can do Collections.binarySearch on a List of Pairs - TimeMap question
 Random number from a range can be done by low + rand(high - low)
 Stack can be used to continue a previous processing and end intermediate processing. Keep a list of prev maximums/values
     Daily temp, next greater element, valid parenthesis, maxSlidingWindow have similar needs
 For matrix multiplication each row of A is multiplied with each col of B
+Assigning a new object to an object variable is not the same as assigning a new value to an array element pointed by an object variable...pass by ref/val
+to keep data sorted continuously can use 2 heaps - Median data stream, of sliding window 
 
 
 Utility funcs
@@ -392,14 +394,17 @@ Web crawler https://www.youtube.com/watch?v=BKZxZwUgL3Y
                 Heap will update time after picking the url for politness
                 #Back queues = # of threads of fetcher          
  - DNS Resolver to map hostname to ip can be cached. A custom dns resolver is req as its faster                 
- - Fetcher & renderer:- fetches urls from back Qs when its free. It also renders the pages also now we have single page applications like angular which need rendering
+ - Fetcher & renderer:- fetches urls from back Qs when its free and fetches the webpage. The user agent should be set as a bot so domains understand 
+                It renders the pages next. Today we have single page applications like angular which need rendering
                 It stores the pages in compressed forms in DB and some in uncompressed form in redis(because uncompressing can take time for some)
- - URL extractor - This can be done only after rendering to reveal the total list of URLs
+ - URL extractor - Extracts urls on a webpage. This can be done only after rendering to reveal the total list of URLs
  - URL filter- only html or only jpeg etc
  - Detect updates:- HEAD requests to find update time
-        duplicates:- MD5 hash works only entire match, SimHash of 2 pages gives similarity %(near duplicate for people who copy content)
+        duplicates of content:- MD5 hash works only entire match, SimHash of 2 pages gives similarity %(near duplicate for people who copy content)
+        duplicates of urls- first checksum(hash) them to reduce space and then bloom filter
  - Storage:- Google cloud big table build on GFS etc. No sql DB for PBs of data                 
-       
+ - Data can be parttittioned based on host name
+ - Fault tolerance - snapshots of queues can be taken  
     
 Rate limiter https://www.youtube.com/watch?v=mhUQe4BKZXs
  - Flow:- Clients -> Web Server -><- Rate Limiter Svc -> Redis & DBMS 
@@ -410,7 +415,7 @@ Rate limiter https://www.youtube.com/watch?v=mhUQe4BKZXs
     Rolling window - this is better as necessary timeslots are stored. But last 5 mins requests can be more than the limit. use Redis with lock
     Sliding window - Store all timestamps, delete older ones every time. Has too many entries. Redis sorted set
     Sliding window with counters - sliding window for 1 hour and rolling window for each min(max 60 rolling windows) i.e timestamp with count. Keep a TTL for each entry. Redis hash
- - Keep redis as storage for the tokens. Userid : Count : Epoch time(number of milliseconds since 1 Jan 1970)
+ - Keep redis as storage for the tokens. Userid : Epoch time(number of milliseconds since 1 Jan 1970) : Count
  - Every access is read and write. Use write back cache as its not critical data and has low latency.
  - LRU cache for eviction policy
  - In a distributed system there can be concurrency issue/race condition(Atomicity of read & write)- Optimistic locking can solve it     
@@ -422,28 +427,33 @@ Rate limiter https://www.youtube.com/watch?v=mhUQe4BKZXs
     Hit counter is not per user so one Q is fine
     It has 2 operations, getHits() is not a multi-threaded low latency response  
  
+ 
 Dropbox https://www.youtube.com/watch?v=U0xTu6E2CT8
- - Flow- Client -> EBS storage
-                -> Message Qs -><- Sync Svc -> Metadata store
-                     |
-         Client2 <---|
-         Client3 <---|            
+ - Flow- 
+         Client -> EBS/S3/CDN storage
+                -> Req Message Qs -> Sync Svc -> Metadata store
+                                         |                     
+         Client2 <--Response Q ----------|
+         Client3 <--Response Q ----------|            
  - Write and read heavy system
  - SQL cuz of ACID will help in consistency. NoSQL eventual consistency will be messy
  - Client
         Watcher watches for changes in current folders, hashing can be used to check file differences
         Chunker - Breaks file into smaller chunks for better bandwidth, time, storage, throughput
         Indexer - receives events from watcher and updates DB, also shares changes with Sync svc
-        Internal DB - Keep track of offline changes,    
- - Metadata server
+        Internal DB - Keep track of offline changes
+   Each client has this structure to rebuild changes on their side      
+ - Metadata server with Cache(MySQL)
     Info about Chunks, Files, User, Devices, Workspace (sync folders)
     Hash file id with CH
+    They built their own Edge wrapper DB with MySQL n cache
  - Synchronisation server
  - Message Queue Service
     One request queue may be because of ordering, might be possible to have one queue per file 
-    Separate response Qs because of many devices so each device needs to get an update of the the file
+    Separate response Qs because of many devices so each device needs to get an update of the file
     Helps persist data if devices are offline
- - Block Cloud storage like EBS       
+ - Caches do deal with hot chunks    
+ - Block Cloud storage like EBS for editing files and S3 & CDN for photos, videos etc        
        
        
 Tiny URL
@@ -459,6 +469,7 @@ Tiny URL
  - Caching
     Data is only read from caches, no updates by users.
     If there is a cache miss, read from db and update all caches
+    Cache 20% of daily traffic
     LRU
     Create replicas so load is uniformly distributed and no SPF
 - DB NoSQL is better because millions of records and only 2 tables URL and User. CH based on the uniqueid for partitioning    
@@ -470,8 +481,9 @@ Tiny URL
  - HTTP 302 to redirect and 404 not found  
    
 Pastebin
-- Same like URL shortening except read requests are lower and Object storage S3 is used
-- Why S3, why not S3 and CLOB. S3 is automatically scaleable
+- Same like URL shortening except read to write is 5:1, Object storage S3 is used for content and Cassandra for metadata(Paste n User table)
+- Why S3, why not S3 and CLOB. S3 is automatically scaleable. 
+- Cache 80-20  
     
 Maximus (upload and download)
 
@@ -486,7 +498,8 @@ Type Ahead Suggestions
  - Can store top 10 suggestion in each node as multiple keywords can lead to deeper search levels in trie
  - go recursively and from bottom generate suggestions so each parent can get their top 10
  - To update the trie for freq, log the counts, Use Map reduce job every hour to read the counts and update a slave, then make it master.
-        Counts need to be updated for each node recursively for a given period
+        Counts need to be updated for each node recursively for a given period. 
+        Also after updating the count the parent's top 10 list may need to be updated, this can be done with a pointer to the parent
  - Rebuild trie by storing it a file in level order C2,A2,R1,T,P,O1,D
  - Cache top searches       
  - Client
@@ -494,6 +507,7 @@ Type Ahead Suggestions
     Limit calls to every 50ms
     Store history
     pre-fetch
+
 
 Twitter search
 Index
@@ -515,12 +529,27 @@ Ranking
 
 Search
     Pre processing
-        crawl -> index
-        Page rank - 200+ factors based on visits, rank of users, search keywords appears together rather than far away
-                    location, context
+        crawl -> index -> search
     Flow:- User searches -> find closest DC -> ||ly sent to different machines -> return batches -> sort by best rank
     https://www.deepcrawl.com/knowledge/technical-seo-library/search-engine-indexing/
-     
+    - Crawl- read, remove stop words, lemmatization
+    - Index - Create inverted index of word to DocId and word position
+    - Search 
+        - conjunctive - all keywords (AND)
+        - Disjunctive - anyone one of the kewords (OR)
+        - Page rank - 200+ factors based on ordering of words,visits, rank of users, search keywords appears together rather than far away
+                            location, context
+                            
+Redis
+    Get/Put -> Event Queue -> Event loop -> Threadpool -> RAM
+    - RAM - would contain a LRU cache for operations
+    - Cache write pattern can be chosen based on the application
+    - Fault tolerance - Snapshots or Log reconstruction
+                        CH
+                        master slave config for data replication. Slaves can be in another DC 
+                        Replication can happen asynchronously for better speed, replication failur sometimes is ok as it can fetch from 
+                             
+                             
 Yelp
 - Shard based on location id to a quad tree server
 - Quad tree structure per quad tree server
@@ -532,7 +561,7 @@ Yelp
 - Cache
     Hot searches can be stored in memory
 - Ranking
-    based on popularity, relevance, etc can be done while aggregating                    
+    based on popularity, relevance, etc can be done while aggregating
 
 
 Uber (Ride share) https://www.youtube.com/watch?v=umWABit-wbk
@@ -553,8 +582,30 @@ Uber (Ride share) https://www.youtube.com/watch?v=umWABit-wbk
 
 
 
-Stock alert system     
-
+Stock trading system https://www.youtube.com/watch?v=dUMWMZmMsVE     
+- Users                                                                                           |->Zookeper
+            -> API Gateway -> Accumulator sequence -> Risk Management System ->TSLA Q             |
+   HFT                                                                       ->GOOG Q   ->Active matching VM ------------>Redis Snapshots
+                                                                                        ->Passive matching VM       |---->Casandra
+                                                                             ->APPL Q             |  
+                                                                                                  |  
+                                                                                                  |  
+        <-    POP servers broad cast servers   <-  Primary data server TICK calc    <- Individual stock Queue
+                                                          |         |
+                                                          |         |
+        <->   Payment Systems             <->           RDBMS    Time series DB(InfluxDB, Prometheus)
+                                                          |         |    
+        <->       CDN      <-     UI / API       <->      |         |         
+                                                        
+    - HFT is a high frequency trading
+    - TICK stack - Telegraf, InfluxDB, Chronograf(visualization) and Kapacitor(Stream processing engine) 
+    - Accumulator sequence gives a sequence number for each trade
+    - Each stock has its queue
+    - Active Matching VM will have min heap and max heap and match the top of the heaps. Passive VM will also do the same thing but will not write to disk
+    - Every minute a snapshot of matches are taken in redis and also matches are recorded in Cassandra
+    - Matches are then sent in respective stock queues which goes to TICK calculator which updates all systems
+    - CDNs are used as historic data will not change                                                       
+Stock alert system can have stock updates come in with different hash functions for each stock type(high med low), so that high stocks dont end up on the same server
 
 Ticket master
 NF req
@@ -573,8 +624,9 @@ WaitingUsersService - daemon service with a hashmap of LinkedHM
      
 **SD Concepts**
 
+When something is read heavy looks like an oppurtunity to cache. Also then good to serve reads from slave dbs.
+ 
 Hot users
-
 
 Indexing sorts a particular set of data so that it can be binary searched. This results in faster searches than that of unsorted data.
     - A separate sorted col is created in the DB per index which links to the actual record. A separate col is created bcuz its faster than sorting all the data
@@ -609,7 +661,8 @@ XMPP or Websockets - Peer to peer protocol -Stateful and long lived TCP connecti
 CDN - Build to reduce response times by creating copies in different geographical locations
     - Push CDN - Pushes only when there're changes. Extra work done, harder to implement. Good for blogs etc and low traffic sites so there arent a lot of pushes 
     - Pull CDN - Pulls content after TTL. Good for high traffic sites. Doesnt have latest info but thats fine
-     
+CDN vs S3
+    https://aws.amazon.com/blogs/networking-and-content-delivery/amazon-s3-amazon-cloudfront-a-match-made-in-the-cloud/     
      
 Eventual consistency
     https://www.youtube.com/watch?v=fIfH-kUaX4c
@@ -629,7 +682,7 @@ NGINX is a software based reverse proxy, better than hardware based ones
 Precomputing could generally mean, make updates when the update activity is done before run time of the actual activity
 Block Storage vs Object storage vs DFS
     - Block for heavy read and write. EBS. Can replace parts for updates.
-    - Object for low write and heavy read. S3. Whole object is replaced. S3 is a key:value pair NoSQL db
+    - Object for low write and heavy read. S3. Whole object is replaced. S3 is a key:value pair NoSQL db. Best for WORM(wrie once read many times)
     - HDFS is faster in read and write compared to S3 as its local and has no size limitations
     - S3 has 5GB size limitation but S3 more scalable, cheaper and durable compared to HDFS 
     - https://www.xplenty.com/blog/storing-apache-hadoop-data-cloud-hdfs-vs-s3/#performance
@@ -638,7 +691,7 @@ Encryption is a two-way function where information is scrambled in such a way th
 Hashing is a one-way function where data is mapped to a fixed-length value. Hashing is primarily used for authentication. For passwords but not that safe.
 Salting is an additional step during hashing, typically seen in association to hashed passwords, that adds an additional value to the end of the password that changes the hash value produced.
     This is better for password storage. Eg. bcrypt and scrypt.
-SHA-256 vs MD5
+SHA-256 vs MD5 checksums
     Both are hashing algos which are used to check file integrity.
     SHA-256 https://www.baeldung.com/sha-256-hashing-java
         Secure Hash algorithm is 256 bit
@@ -708,6 +761,9 @@ Load balancing helps you scale horizontally across an ever-increasing number of 
     - Encrypt and decrypt
     - X.509 Certf management
     - Session persistence
+    Types 
+       Active-Passive
+       Active-Active
     
 Count min sketch algo https://www.youtube.com/watch?v=ibxXO-b14j4
     - It is a probabilistic algo, to count frequencies in O(1) space
@@ -715,8 +771,18 @@ Count min sketch algo https://www.youtube.com/watch?v=ibxXO-b14j4
     - Each input should have a unique value from the hash functions
     - The minimum value of the values in the matrix is the frequency
     - can give a higher count due to hash collisions. Then use more hash functions
+    - Used in counting in a data stream, NLP etc
+    - Boyer moore can be used if we know the number of times a frequency is required
 
-
+Bloom filter https://www.youtube.com/watch?v=Bay3X9PAX5k
+    - Similar to count min sketch but only keeps 1 or 0 as present or absent
+    - Uses an array
+    - Eg. 40 million records, P -> 1 mistake in 10M, 132MB space and 23 hask() functions 
+    - Hbase, Cassandra etc use it to check for records that dont exist and return fast
+    - Google uses it in chrome to return malicious websites
+    - Recommendation of youtube, tinder, nettflix
+    
+    
 Caching
     - Caching is done at all levels but often closer to the front end
     - Additional caching in the node can make it even faster 
@@ -734,6 +800,7 @@ Caching
             - Very fast. But not very persistent
             - Used where data is not very critical and reads need to be quick
     Cache eviction policies - LRU,etc
+    80-20 rule is that 20% of requests(hot requests) cause 80% traffic. So cache it
     
 Reliability is to do with business operations. Availability is being online. A reliable sys is available not necessarily vice versa
 
@@ -770,17 +837,28 @@ Availability metrics https://kvaes.wordpress.com/2012/05/16/system-reliability-a
 Server crash use heartbeats to the service not box and restart nodes
 
 Pessimistic concurrency lock - Lock the resource when accessed
-                                Helpful for multiple simultaneous access  
+                                More conflicts. Helpful for multiple simultaneous access  
 Optimistic concurrency lock - No locks, while committing a change check whether the previous read state == current read state 
-                              Helpful for infrequent multiple simultaneous access  
+                              Fewer conflicts. Good for blogs. Helpful for infrequent multiple simultaneous access  
+Distributed Transactions
+    - 2 Phase Commit 
+        - Prepare phase
+        - Commit phase
+        - Have locks with timeouts
+        - Drawbacks - dependency on Coordinator and lock 
+    - 3 Phase Commit 
+        - Can commit - Get votes from participant micro services
+        - Pre commit - 
+        - Do commit
+    - SAGA(Asynchronously) - queues between services, queues for failed messages so that operations will be rolledback
 
 - Idempotent - No matter how many times you call the operation, the result will be the same.
 
 ACID 
-    - Atomicity, 
-    - Consistency, 
-    - Isolation, and 
-    - Durability
+    - Atomicity- all changes must be successful or not at all
+    - Consistency - data should be left in a consistent state before and after. Like money transfer
+    - Isolation - no current modification. No threading. done by locks
+    - Durability - Data should persist
 Data integrity - is accuracy and consistency of data
 NoSQL vs SQL https://www.youtube.com/watch?v=p4C0n3afZdk
     performance & scalability vs transaction(ACID compliant)
@@ -857,8 +935,8 @@ Singleton - Creational
 Factory - Creational
 - Class to create objects so that the creation logic is not handled by clients
 - so client doesnt need to be recompiled
-- Also there is loose coupling in the client cuz of using the interface class   
-- A factory class with a method to return new objects based on the input parameter with return type of the interface
+- Also there is loose coupling in the client cuz of using the interface/abstract class   
+- A factory class with a method to return new objects based on the input parameter with return type of the interface/abstract class
   
 Template - Behavioral
 - a process flow that needs to be done for many base classes
@@ -913,7 +991,7 @@ Stream https://www.geeksforgeeks.org/stream-in-java/
     collect - returns another collection
     forEach - void return. Can be used to modify a list
     reduce - reduce to one value  
-
+eg. number.stream().map(x-> x*x).collect(Collectors.toList());
 
 Abstract class - 
     Doesnt have to have one abstract method - this method would differ for the sub classes hence abstract
@@ -926,8 +1004,8 @@ Interface
     All methods must be implemented in implementing class
     Cant create object cuz all methods are abstract
     
-String buffer - is synchronized, slow
-String builder - is not synchronized, twice as fast
+StringBuffer - is synchronized, slow
+StringBuilder - is not synchronized, twice as fast
 StringBuilder is pass by reference, Integer is not 
 Integer arrays are faster than Arraylist because arraylist converts primitive types to objects(auto boxing) and then stores the objects which are not contiguous
     hence for primitive types arrays are better. For objects both are same. 
@@ -1048,7 +1126,7 @@ Interface vs Inheritance vs Enum
     like days of the week, planets,colors etc
 
 Lombok - a java framework to remove boilerplate code
-    @Data - provides getter, setter, toString, hascode
+    @Data - provides getter, setter, toString, hashcode
 
 try-finally combination is used to free up resources. BoundedBlockingQueueReentrantLock
  

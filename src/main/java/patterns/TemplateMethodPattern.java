@@ -91,6 +91,6 @@ class TemplateMethodPattern
         netOrder.processOrder(true);
         System.out.println();
         OrderProcessTemplate storeOrder = new StoreOrder();
-        storeOrder.processOrder(true);
+        storeOrder.processOrder(false);
     }
 }

@@ -65,7 +65,6 @@ abstract class Fighter
     }
     public void jump()
     {
-
         // delegate to jump behavior
         jumpBehavior.jump();
     }
@@ -145,6 +144,8 @@ public class StrategyPattern {
         // Make a fighter with desired behaviors
         FighterFactoryPattern fighterFactory=new FighterFactoryPattern();
         Fighter ken = fighterFactory.getFighter("Ken",shortJump,tornadoKick);
+        Fighter ken2 = fighterFactory.getFighter("Ken",shortJump,tornadoKick);
+        Fighter ChunLi = fighterFactory.getFighter("ChunLi",shortJump,tornadoKick);
         ken.display();
 
         // Test behaviors

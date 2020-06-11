@@ -5,7 +5,6 @@ import java.util.*;
 //Inner classes
 //Generics
 //ArrayList wrapper to call iterator function
-//remove if index >0
 public class CustomListIterator {
     public static void main(String args[]) throws Exception {
         EmpList<Emp> empList = new EmpList<Emp>(new ArrayList<>());
@@ -21,6 +20,10 @@ public class CustomListIterator {
         System.out.println(emp4.equals(emp5));
         System.out.println(emp4.hashCode());
         System.out.println(emp5.hashCode());
+        HashSet hashSet=new HashSet();
+        hashSet.add(emp4);
+        hashSet.add(emp5);
+        System.out.println(hashSet);
     }
 }
 
@@ -41,7 +44,7 @@ class EmpList<T> {
     }
 
     class EmpIterator<T> implements Iterator<T> {
-        int currentIndex = 0;
+        int currentIndex = 0;//belongs to an iterator
 
         public boolean hasNext() {
             return currentIndex < data.size();
@@ -51,6 +54,7 @@ class EmpList<T> {
             return (T) data.get(currentIndex++);
         }
 
+        //this is rubbish
         @Override
         public void remove() {
             if(data.size()>0) {
@@ -87,10 +91,10 @@ class Emp {
         return id == emp.id;
     }
 
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(id);
-//    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
 
 

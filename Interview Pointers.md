@@ -7,10 +7,9 @@ Product stuff
 
 - Postman test suite
 - Performance tuned
-    - open connections reduced spring. Session factories were created multiple times and missing close()
-    -  
-    - Backend APIs - Object mappers, logs, n3 complexities, 
+    - open connections reduced spring from 204 to 10. Session factories were created multiple times and missing close()
     - Build time - admin ui dev, h2 db, Unit tests rewrite 
+    - Backend APIs - Object mappers, logs, n3 complexities, 
     Frontend - Tweaked long polling in maximus activity page on a condition
     Jenkins build - h2 db and multi thread
     
@@ -121,6 +120,7 @@ LP
 1. Customer obsession
 handled difficult customer, understand customers needs
 - postman test suite, not able to test without access
+- recon override ui
 - built pna
 - the link of price update
 
@@ -143,14 +143,13 @@ invent, improvements, simple solution to complex problem
 
 4. are right a lot
 made a bad decision, disagreed with a colleague, decision in the absence of data
+- disagreed with Sudha on common code for content aux
 - push back SB PnA (disagreed)
 - caching pna(first in the absence of data)
-- implemented pna in both code (bad decision)
-- disagreed with Sudha on common code for content aux
 
 5. Learn and be curious
 what can u teach me in 5 mins, influenced change by asking questions, solved by observation
-- postman testsuite, macros in excel, chrome ext, jrebel (teach)
+- postman testsuite, macros in excel(instead of java for automation), chrome ext, jrebel (teach)
 - variable in singleton n big decimal (observation)
 - buyer exception thrown (observation)
 - caching in pna (by asking questions)
@@ -188,6 +187,7 @@ contributed to improving moral, got critisized what did u do, tell someone else 
 - admin stuff made other build tools
 - wrote a simulator for a colleague
 - common code for contentaux
+- 
 
 12. Dive deep
 data to develop strategy, large problem u helped solve 

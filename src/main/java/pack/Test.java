@@ -2067,8 +2067,1030 @@ public class Test {
 //////////// Majority Element II
 //        System.out.println(majorityElementII(new int[]{1,1,1,3,3,2,2,2}));
 
+//////////// Group Shifted Strings
+//        System.out.println(groupStrings(new String[]{"abc", "bcd", "acef", "xyz", "az", "ba", "a", "z","bdg","egj","da"}));
+
+//////////// Maximum Swap
+//        System.out.println(maximumSwap(2763));
+
+//////////// Max Consecutive Ones III
+//        System.out.println(longestOnes(new int[]{1,0,1,1,1,0,1,0,0},2));
+
+//////////// Island Perimeter
+//        System.out.println(islandPerimeter(new int[][]));
+
+//////////// Fraction to Recurring Decimal
+//        System.out.println(fractionToDecimal(2,3));
+
+//////////// Design Search Autocomplete System
+//        AutocompleteSystemWithParentLink autocompleteSystemWithParentLink=new AutocompleteSystemWithParentLink(new String[]{"i love you","island","iroman","i love leetcode"},
+//                new int[]{5,3,2,2});
+//        System.out.println(autocompleteSystemWithParentLink.input('i'));
+//        System.out.println(autocompleteSystemWithParentLink.input(' '));
+//        System.out.println(autocompleteSystemWithParentLink.input('a'));
+//        System.out.println(autocompleteSystemWithParentLink.input('#'));
+
+//////////// Design Snake Game
+//        SnakeGameWithSpace snakeGameWithSpace = new SnakeGameWithSpace();
+//        SnakeGame snakeGame=new SnakeGame();
+
+//////////// Encode and Decode TinyURL
+//        String encodeString=encode("https://leetcode.com/problems/design-tinyurl");
+//        System.out.println(encodeString);
+//        System.out.println(decodeTiny(encodeString));
+
+////////////  Recover Binary Search Tree
+//        TreeNode t1=new TreeNode(1);
+//        TreeNode t2=new TreeNode(2);
+//        TreeNode t3=new TreeNode(3);
+//        t1.left=t3;
+//        t3.right=t2;
+//        recoverTree(t1);
+
+//////////// Sliding Window Median
+//        medianSlidingWindow(new int[]{1,3,-1,-3,5,3,6,7},3);
+
+//////////// Longest Repeating Substring or Longest Duplicate Substring
+//        System.out.println(longestRepeatingSubstringDP("abbaba"));
+//        System.out.println(longestRepeatingSubstring("abbaba"));
+
+//////////// Interleaving String
+//        System.out.println(isInterleaveRecur("aabcc","dbbca","aadbbcbcac"));
+//        System.out.println(isInterleaveDp2D("aabcc","dbbca","aadbbcbcac"));
+//        System.out.println(isInterleaveDp1D("aabcc","dbbca","aadbbcbcac"));
+
+//////////// Game of Life
+//        System.out.println(gameOfLife());
+
     }
 
+    public static void gameOfLife(int[][] board) {
+
+        // Neighbors array to find 8 neighboring cells for a given cell
+        int[] neighbors = {0, 1, -1};
+
+        int rows = board.length;
+        int cols = board[0].length;
+
+        // Iterate through board cell by cell.
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+
+                // For each cell count the number of live neighbors.
+                int liveNeighbors = 0;
+
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+
+                        if (!(neighbors[i] == 0 && neighbors[j] == 0)) {
+                            int r = (row + neighbors[i]);
+                            int c = (col + neighbors[j]);
+
+                            // Check the validity of the neighboring cell.
+                            // and whether it was originally a live cell.
+                            if ((r < rows && r >= 0) && (c < cols && c >= 0) && (Math.abs(board[r][c]) == 1)) {
+                                liveNeighbors += 1;
+                            }
+                        }
+                    }
+                }
+
+                // Rule 1 or Rule 3
+                if ((board[row][col] == 1) && (liveNeighbors < 2 || liveNeighbors > 3)) {
+                    // -1 signifies the cell is now dead but originally was live.
+                    board[row][col] = -1;
+                }
+                // Rule 4
+                if (board[row][col] == 0 && liveNeighbors == 3) {
+                    // 2 signifies the cell is now live but was originally dead.
+                    board[row][col] = 2;
+                }
+            }
+        }
+
+        // Get the final representation for the newly updated board.
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (board[row][col] > 0) {
+                    board[row][col] = 1;
+                } else {
+                    board[row][col] = 0;
+                }
+            }
+        }
+    }
+
+    public static boolean isInterleaveDp1D(String s1, String s2, String s3) {
+        if (s3.length() != s1.length() + s2.length()) {
+            return false;
+        }
+        boolean dp[] = new boolean[s2.length() + 1];
+        for (int i = 0; i <= s1.length(); i++) {
+            for (int j = 0; j <= s2.length(); j++) {
+                if (i == 0 && j == 0) {
+                    dp[j] = true;
+                } else if (i == 0) {
+                    dp[j] = dp[j - 1] && s2.charAt(j - 1) == s3.charAt(i + j - 1);
+                } else if (j == 0) {
+                    dp[j] = dp[j] && s1.charAt(i - 1) == s3.charAt(i + j - 1);
+                } else {
+                    dp[j] = (dp[j] && s1.charAt(i - 1) == s3.charAt(i + j - 1)) || (dp[j - 1] && s2.charAt(j - 1) == s3.charAt(i + j - 1));
+                }
+            }
+        }
+        return dp[s2.length()];
+    }
+
+    public static boolean isInterleaveDp2D(String s1, String s2, String s3) {
+        if (s3.length() != s1.length() + s2.length()) {
+            return false;
+        }
+        boolean dp[][] = new boolean[s1.length() + 1][s2.length() + 1];
+        for (int i = 0; i <= s1.length(); i++) {
+            for (int j = 0; j <= s2.length(); j++) {
+                if (i == 0 && j == 0) {
+                    dp[i][j] = true;
+                } else if (i == 0) {
+                    dp[i][j] = dp[i][j - 1] && s2.charAt(j - 1) == s3.charAt(i + j - 1);
+                } else if (j == 0) {
+                    dp[i][j] = dp[i - 1][j] && s1.charAt(i - 1) == s3.charAt(i + j - 1);
+                } else {
+                    dp[i][j] = (dp[i - 1][j] && s1.charAt(i - 1) == s3.charAt(i + j - 1)) || (dp[i][j - 1] && s2.charAt(j - 1) == s3.charAt(i + j - 1));
+                }
+            }
+        }
+        return dp[s1.length()][s2.length()];
+    }
+
+    public static Boolean is_Interleave(String s1, int i, String s2, int j, String s3, int k, Boolean[][] memo) {
+        if (i == s1.length()) {
+            return s2.substring(j).equals(s3.substring(k));
+        }
+        if (j == s2.length()) {
+            return s1.substring(i).equals(s3.substring(k));
+        }
+        if (memo[i][j] !=null) {
+            return memo[i][j] ;
+        }
+        boolean ans = false;
+        if (s3.charAt(k) == s1.charAt(i) && is_Interleave(s1, i + 1, s2, j, s3, k + 1, memo)
+                || s3.charAt(k) == s2.charAt(j) && is_Interleave(s1, i, s2, j + 1, s3, k + 1, memo)) {
+            ans = true;
+        }
+        return memo[i][j] = ans;
+    }
+
+    public static boolean isInterleaveRecur(String s1, String s2, String s3) {
+        Boolean memo[][] = new Boolean[s1.length()][s2.length()];
+        return is_Interleave(s1, 0, s2, 0, s3, 0, memo);
+    }
+
+    public static int search(int L, int n, String S) {
+        HashSet<String> seen = new HashSet();
+        String tmp;
+        for(int start = 0; start < n - L + 1; ++start) {
+            tmp = S.substring(start, start + L);
+            if (seen.contains(tmp))
+                return start;
+            seen.add(tmp);
+        }
+        return -1;
+    }
+
+    //nlogn at best and n^2 at worst
+    //here the tricky part is how left increases on a succesfull duplicate encounter
+    public static int longestRepeatingSubstring(String S) {
+        int n = S.length();
+        // binary search, L = repeating string length
+        int left = 1, right = n;
+        int L;
+        while (left <= right) {
+            L = left + (right - left) / 2;
+            if (search(L, n, S) != -1) left = L + 1;
+            else right = L - 1;
+        }
+
+        return left - 1;
+    }
+
+    //n^2
+    //the i!=j is the diff between LCS
+    public static int longestRepeatingSubstringDP(String s) {
+        int[][] dp = new int[s.length()+1][s.length()+1];
+        int maxLength = 0;
+        for(int i=1; i <= s.length(); i++) {
+            for(int j=1; j <= s.length(); j++) {
+                if(i!=j && s.charAt(i-1) == s.charAt(j-1)) {
+                    dp[i][j] = 1 + dp[i-1][j-1];
+                    maxLength = Math.max(maxLength, dp[i][j]);
+                }
+            }
+        }
+        return maxLength;
+    }
+
+    //a made up question can also be to find 3rd largest element in a stream
+    public static double[] medianSlidingWindow(int[] nums, int k) {
+        double[] medians = new double[nums.length - k + 1];
+        HashMap<Integer, Integer> hash_table = new HashMap<>();
+        PriorityQueue<Integer> lo = new PriorityQueue<>(Collections.reverseOrder());    // max heap
+        PriorityQueue<Integer> hi = new PriorityQueue<>();                              // min heap
+        int numsIndex = 0;      // index of current incoming element being processed
+
+        // initialize the heaps
+        while (numsIndex < k)
+            lo.add(nums[numsIndex++]);
+        for (int j = 0; j < k / 2; j++) {
+            hi.add(lo.poll());
+        }
+
+        int index = 0;
+        while (true) {
+            medians[index++] = (k % 2 != 0 ? lo.peek() : ((double) lo.peek() + (double) hi.peek()) * 0.5);
+
+            if (numsIndex >= nums.length)
+                break;
+
+            int out_num = nums[numsIndex - k],
+                    in_num = nums[numsIndex++],
+                    balance = 0;
+
+            // number `out_num` exits window
+            balance += (out_num <= lo.peek() ? -1 : 1);
+            hash_table.put(out_num, hash_table.getOrDefault(out_num, 0) + 1);
+
+            // number `in_num` enters window
+            if (!lo.isEmpty() && in_num <= lo.peek()) {
+                balance++;
+                lo.add(in_num);
+            } else {
+                balance--;
+                hi.add(in_num);
+            }
+
+            // re-balance heaps
+            if (balance < 0) {                  // `lo` needs more valid elements
+                lo.add(hi.poll());
+                balance++;
+            }
+            if (balance > 0) {                  // `hi` needs more valid elements
+                hi.add(lo.poll());
+                balance--;
+            }
+
+            // remove invalid numbers that should be discarded from heap tops
+            while (hash_table.containsKey(lo.peek()) && hash_table.get(lo.peek()) > 0) {
+                hash_table.put(lo.peek(), hash_table.get(lo.peek()) - 1);
+                lo.poll();
+            }
+            while (!hi.isEmpty() && hash_table.containsKey(hi.peek()) && hash_table.get(hi.peek()) > 0) {
+                hash_table.put(hi.peek(), hash_table.get(hi.peek()) - 1);
+                hi.poll();
+            }
+        }
+        return medians;
+    }
+
+    //Morris inorder traversal
+    public static void recoverTreeNoSpace(TreeNode root) {
+        // predecessor is a Morris predecessor.
+        // In the 'loop' cases it could be equal to the node itself predecessor == root.
+        // pred is a 'true' predecessor,
+        // the previous node in the inorder traversal.
+        TreeNode x = null, y = null, pred = null, predecessor = null;
+
+        while (root != null) {
+            // If there is a left child
+            // then compute the predecessor.
+            // If there is no link predecessor.right = root --> set it.
+            // If there is a link predecessor.right = root --> break it.
+            if (root.left != null) {
+                // Predecessor node is one step left
+                // and then right till you can.
+                predecessor = root.left;
+                while (predecessor.right != null && predecessor.right != root)
+                    predecessor = predecessor.right;
+
+                // set link predecessor.right = root
+                // and go to explore left subtree
+                if (predecessor.right == null) {
+                    predecessor.right = root;
+                    root = root.left;
+                }
+                // break link predecessor.right = root
+                // link is broken : time to change subtree and go right
+                else {
+                    // check for the swapped nodes
+                    if (pred != null && root.val < pred.val) {
+                        y = root;
+                        if (x == null) x = pred;
+                    }
+                    pred = root;
+
+                    predecessor.right = null;
+                    root = root.right;
+                }
+            }
+            // If there is no left child
+            // then just go right.
+            else {
+                // check for the swapped nodes
+                if (pred != null && root.val < pred.val) {
+                    y = root;
+                    if (x == null) x = pred;
+                }
+                pred = root;
+
+                root = root.right;
+            }
+        }
+        //swap
+        int tmp = x.val;
+        x.val = y.val;
+        y.val = tmp;
+    }
+
+    static TreeNode pred;
+    public static void findTwoSwapped(TreeNode root,TreeNode[] array) {
+        if (root == null) return;
+        findTwoSwapped(root.left,array);
+        if (pred != null && root.val < pred.val) {
+            array[1] = root;
+            if (array[0] == null) array[0] = pred;
+            else return;
+        }
+        pred = root;
+        findTwoSwapped(root.right,array);
+        System.out.println("done");
+    }
+
+    public static void recoverTree(TreeNode root) {
+        TreeNode[] array=new TreeNode[2];
+        findTwoSwapped(root,array);
+        int tmp = array[0].val;
+        array[0].val = array[1].val;
+        array[1].val = tmp;
+    }
+
+    static String alphabet = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    static HashMap<String, String> encodingMap = new HashMap<>();
+    static Random randEncod = new Random();
+    static String keyEncod = getRand();
+
+    public static String getRand() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 6; i++) {
+            sb.append(alphabet.charAt(randEncod.nextInt(62)));
+        }
+        return sb.toString();
+    }
+
+    //Some other naive ways - Incremental number, Random numbers,...refer leetcode
+    public static String encode(String longUrl) {
+        while (encodingMap.containsKey(keyEncod)) {
+            keyEncod = getRand();
+        }
+        encodingMap.put(keyEncod, longUrl);
+        return "http://tinyurl.com/" + keyEncod;
+    }
+
+    public static String decodeTiny(String shortUrl) {
+        return encodingMap.get(shortUrl.replace("http://tinyurl.com/", ""));
+    }
+
+    static class Visit {
+        String user;
+        int time;
+        String web;
+
+        public Visit (String user, int time, String web) {
+            this.user = user;
+            this.time = time;
+            this.web = web;
+        }
+    }
+
+    //its better to gather the list and then sort, sorting while gathering is kind of an overkill
+    public static List<String> mostVisitedPattern(String[] username, int[] timestamp, String[] website) {
+        List<Visit> visitList = new ArrayList<>();
+
+        for (int i = 0; i < username.length; i++) {
+            visitList.add(new Visit(username[i], timestamp[i], website[i]));
+        }
+
+        Collections.sort(visitList, (v1, v2) -> { return v1.time - v2.time; });
+
+        Map<String, List<String>> userWebMap = new HashMap<>();
+        for (Visit v : visitList) {
+            List<String> webs = userWebMap.getOrDefault(v.user, new ArrayList<>());
+            webs.add(v.web);
+            userWebMap.put(v.user, webs);
+        }
+
+        Map<List<String>, Integer> countMap = new HashMap<>();
+        int max = 0;
+        List<String> res = new ArrayList<>();
+        for (List<String> webs : userWebMap.values()) {
+            if (webs.size() < 3) {
+                continue;
+            }
+
+            Set<List<String>> seq = generateSeq(webs);
+
+            for (List<String> s : seq) {
+                countMap.put(s, countMap.getOrDefault(s, 0) + 1);
+                if (countMap.get(s) > max) {
+                    max = countMap.get(s);
+                    res = s;
+                } else if (countMap.get(s) == max) {
+                    res = res.toString().compareTo(s.toString()) < 0 ? res : s;
+                }
+            }
+        }
+        return res;
+    }
+
+    private static Set<List<String>> generateSeq (List<String> webs) {
+        Set<List<String>> set = new HashSet<>();
+        for (int i = 0; i < webs.size(); i++) {
+            for (int j = i + 1; j < webs.size(); j++) {
+                for (int k = j + 1; k < webs.size(); k++) {
+                    List<String> list = new ArrayList<>();
+                    list.add(webs.get(i));
+                    list.add(webs.get(j));
+                    list.add(webs.get(k));
+                    set.add(list);
+                }
+            }
+        }
+        return set;
+    }
+
+    class SnakeGame {
+        int height, width, step = 0;
+        int[][] food;
+        LinkedList<int[]> snake;
+
+        public SnakeGame(int width, int height, int[][] food) {
+            this.height = height;
+            this.width = width;
+            this.food = food;
+            this.snake = new LinkedList<>();
+            snake.add(new int[]{0, 0});
+        }
+
+        public int move(String direction) {
+            int[] cur = snake.peek();
+            int x = cur[0], y = cur[1];
+
+            switch (direction) {
+                case "U":
+                    x--;
+                    break;
+                case "L":
+                    y--;
+                    break;
+                case "R":
+                    y++;
+                    break;
+                case "D":
+                    x++;
+                    break;
+            }
+            if(x < 0 || x >= height || y < 0 || y >= width) return -1;
+            int[] next = new int[]{x, y};
+
+            if (step < food.length && food[step][0] == next[0] && food[step][1] == next[1]) step++;
+            else snake.removeLast();
+
+            for (int[] pos: snake) if (pos[0] == next[0] && pos[1] == next[1]) return -1;
+            snake.addFirst(next);
+            return step;
+        }
+    }
+
+    static class SnakeGameWithSpace {
+
+        //2D position info is encoded to 1D and stored as two copies
+        Set<Integer> set; // this copy is good for fast loop-up for eating body case
+        Deque<Integer> body; // this copy is good for updating tail
+        int score;
+        int[][] food;
+        int foodIndex;
+        int width;
+        int height;
+
+        public SnakeGameWithSpace(int width, int height, int[][] food) {
+            this.width = width;
+            this.height = height;
+            this.food = food;
+            set = new HashSet<>();
+            set.add(0); //intially at [0][0]
+            body = new LinkedList<>();
+            body.offerLast(0);
+        }
+
+
+        public int move(String direction) {
+            //case 0: game already over: do nothing
+            if (score == -1) {
+                return -1;
+            }
+
+            // compute new head
+            int rowHead = body.peekFirst() / width;
+            int colHead = body.peekFirst() % width;
+            switch (direction) {
+                case "U" : rowHead--;
+                    break;
+                case "D" : rowHead++;
+                    break;
+                case "L" : colHead--;
+                    break;
+                default :  colHead++;
+            }
+            int head = rowHead * width + colHead;
+
+            //case 1: out of boundary or eating body
+            set.remove(body.peekLast()); // new head is legal to be in old tail's position, remove from set temporarily
+            if (rowHead < 0 || rowHead == height || colHead < 0 || colHead == width || set.contains(head)) {
+                return score = -1;
+            }
+
+            // add head for case2 and case3
+            set.add(head);
+            body.offerFirst(head);
+
+            //case2: eating food, keep tail, add head
+            if (foodIndex < food.length && rowHead == food[foodIndex][0] && colHead == food[foodIndex][1]) {
+                set.add(body.peekLast()); // old tail does not change, so add it back to set
+                foodIndex++;
+                return ++score;
+            }
+
+            //case3: normal move, remove tail, add head
+            body.pollLast();
+            return score;
+
+        }
+    }
+
+    //can be done with a tree map also instead of arraylist at each node which will prevent the need of a global hashmap
+    static class AutocompleteSystemWithParentLink {
+
+        private TrieNode root;
+        private TrieNode type;
+        private StringBuilder sb;
+        private HashMap<String, Integer> count;
+
+        public AutocompleteSystemWithParentLink(String[] sentences, int[] times) {
+            root = new TrieNode(null,null);
+            type = root;
+            sb = new StringBuilder();
+            count = new HashMap<String, Integer>();
+            for(int i=0; i<sentences.length; i++) {
+                count.put(sentences[i], times[i]);
+                update(sentences[i]);
+            }
+        }
+
+        public List<String> input(char c) {
+            if(c == '#') {
+                String s = sb.toString();
+                sb = new StringBuilder();
+                count.put(s, count.getOrDefault(s, 0) + 1);
+                updateParents(s,type);
+//                update(s);
+                type = root;
+                return new ArrayList<String>();
+            } else {
+                sb.append(c);
+                if(type == null) {
+                    return new ArrayList<String>();
+                }
+                int idx = (c == ' ') ? 26 : (c - 'a');
+                TrieNode parent=type;
+                TrieNode child = type.children[idx];
+                if(child == null) {
+                    type.children[idx]=new TrieNode(c,parent);
+//                    return new ArrayList<String>();
+                }
+                type=type.children[idx];
+                return new ArrayList<String>(type.hotlist);
+            }
+        }
+
+        private void updateParents(String s,TrieNode curr) {
+            while(curr!=root){
+                if(!insert2(curr.hotlist, s))
+                    break;
+                curr=curr.parent;
+            }
+
+        }
+        private void update(String s) {
+            TrieNode curr = root;
+            for(int i=0; i<s.length(); i++) {
+                int idx = (s.charAt(i) == ' ') ? 26 : (s.charAt(i) - 'a');
+                if(curr.children[idx] == null) {
+                    curr.children[idx] = new TrieNode(s.charAt(i),curr);
+                }
+                curr = curr.children[idx];
+                insert(curr.hotlist, s);
+            }
+        }
+
+        private void insert(ArrayList<String> hotlist, String s) {
+            int i;
+            for(i=0; i<hotlist.size(); i++) {
+                if(hotlist.get(i).equals(s)) {
+                    hotlist.remove(i);
+                    break;
+                }
+            }
+            for(i=0; i<hotlist.size(); i++) {
+                if(greater(s, hotlist.get(i))) {
+                    hotlist.add(i, s);
+                    break;
+                }
+            }
+            if(i == hotlist.size()) {
+                hotlist.add(i, s);
+            }
+            if(hotlist.size() > 3) {
+                hotlist.remove(hotlist.size() - 1);
+            }
+        }
+
+        private boolean insert2(ArrayList<String> hotlist, String s) {
+            int i;
+            boolean set=false;
+            for(i=0; i<hotlist.size(); i++) {
+                if(hotlist.get(i).equals(s)) {
+                    hotlist.remove(i);
+                    break;
+                }
+            }
+            for(i=0; i<hotlist.size(); i++) {
+                if(greater(s, hotlist.get(i))) {
+                    hotlist.add(i, s);
+                    set=true;
+                    break;
+                }
+            }
+            if(i == hotlist.size()) {
+                if(hotlist.isEmpty() || greater(s, hotlist.get(i-1)) || hotlist.size() < 3) set=true;
+                hotlist.add(i, s);
+            }
+            if(hotlist.size() > 3) {
+                hotlist.remove(hotlist.size() - 1);
+            }
+            return set;
+        }
+
+        private boolean greater(String a, String b) {
+            int cntA = count.get(a);
+            int cntB = count.get(b);
+            if(cntA != cntB) {
+                return cntA > cntB;
+            }
+            int i;
+            for(i=0; i<Math.min(a.length(), b.length()); i++) {
+                if(a.charAt(i) < b.charAt(i)) {
+                    return true;
+                } else if(a.charAt(i) > b.charAt(i)) {
+                    return false;
+                }
+            }
+            return i == a.length();
+        }
+
+        class TrieNode {
+            private TrieNode[] children;
+            private ArrayList<String> hotlist;
+            TrieNode parent;
+            Character c;
+            int count=0;
+            public TrieNode(Character c,TrieNode parent) {
+                children = new TrieNode[27];
+                hotlist = new ArrayList<String>();
+                this.parent=parent;
+                this.c=c;
+            }
+        }
+    }
+
+    //Hashmap of words to counts, hotlist per node.
+    //hotlist is sorted by each time going over all elements
+    //updates happen only on sentence completion
+    static class AutocompleteSystemWithStorage {
+
+        private TrieNode root;
+        private TrieNode type;
+        private StringBuilder sb;
+        private HashMap<String, Integer> count;
+
+        public AutocompleteSystemWithStorage(String[] sentences, int[] times) {
+            root = new TrieNode();
+            type = root;
+            sb = new StringBuilder();
+            count = new HashMap<String, Integer>();
+            for(int i=0; i<sentences.length; i++) {
+                count.put(sentences[i], times[i]);
+                update(sentences[i]);
+            }
+        }
+
+        public List<String> input(char c) {
+            if(c == '#') {
+                String s = sb.toString();
+                sb = new StringBuilder();
+                count.put(s, count.getOrDefault(s, 0) + 1);
+                update(s);
+                type = root;
+                return new ArrayList<String>();
+            } else {
+                sb.append(c);
+                if(type == null) {
+                    return new ArrayList<String>();
+                }
+                int idx = (c == ' ') ? 26 : (c - 'a');
+                type = type.children[idx];
+                if(type == null) {
+                    return new ArrayList<String>();
+                }
+                return new ArrayList<String>(type.hotlist);
+            }
+        }
+
+        private void update(String s) {
+            TrieNode curr = root;
+            for(int i=0; i<s.length(); i++) {
+                int idx = (s.charAt(i) == ' ') ? 26 : (s.charAt(i) - 'a');
+                if(curr.children[idx] == null) {
+                    curr.children[idx] = new TrieNode();
+                }
+                curr = curr.children[idx];
+                insert(curr.hotlist, s);
+            }
+        }
+
+        private void insert(ArrayList<String> hotlist, String s) {
+            int i;
+            for(i=0; i<hotlist.size(); i++) {
+                if(hotlist.get(i).equals(s)) {
+                    return;
+                }
+            }
+            for(i=0; i<hotlist.size(); i++) {
+                if(greater(s, hotlist.get(i))) {
+                    hotlist.add(i, s);
+                    break;
+                }
+            }
+            if(i == hotlist.size()) {
+                hotlist.add(i, s);
+            }
+            if(hotlist.size() > 3) {
+                hotlist.remove(hotlist.size() - 1);
+            }
+        }
+
+        private boolean greater(String a, String b) {
+            int cntA = count.get(a);
+            int cntB = count.get(b);
+            if(cntA != cntB) {
+                return cntA > cntB;
+            }
+            int i;
+            for(i=0; i<Math.min(a.length(), b.length()); i++) {
+                if(a.charAt(i) < b.charAt(i)) {
+                    return true;
+                } else if(a.charAt(i) > b.charAt(i)) {
+                    return false;
+                }
+            }
+            return i == a.length();
+        }
+
+        class TrieNode {
+            private TrieNode[] children;
+            private ArrayList<String> hotlist;
+
+            public TrieNode() {
+                children = new TrieNode[27];
+                hotlist = new ArrayList<String>();
+            }
+        }
+    }
+
+    class AutocompleteSystem {
+
+        class Node {
+            String sentence;
+            int times;
+
+            Node(String st, int t) {
+                sentence = st;
+                times = t;
+            }
+        }
+
+        class Trie {
+            int times;
+            Trie[] branches = new Trie[27];
+        }
+
+        private Trie root;
+        private String cur_sent = "";
+
+        public AutocompleteSystem(String[] sentences, int[] times) {
+            root = new Trie();
+            for (int i = 0; i < sentences.length; i++) {
+                insert(root, sentences[i], times[i]);
+            }
+        }
+
+        private int toInt(char c) {
+            return c == ' ' ? 26 : c - 'a';
+        }
+
+        private void insert(Trie t, String s, int times) {
+            for (int i = 0; i < s.length(); i++) {
+                if (t.branches[toInt(s.charAt(i))] == null) {
+                    t.branches[toInt(s.charAt(i))] = new Trie();
+                }
+                t = t.branches[toInt(s.charAt(i))];
+            }
+            t.times += times;
+        }
+
+        private List<Node> lookup(Trie t, String s) {
+            List<Node> list = new ArrayList<>();
+            for (int i = 0; i < s.length(); i++) {
+                if (t.branches[toInt(s.charAt(i))] == null) {
+                    return new ArrayList<>();
+                }
+                t = t.branches[toInt(s.charAt(i))];
+            }
+            traverse(s, t, list);
+            return list;
+        }
+
+        private void traverse(String s, Trie t, List<Node> list) {
+            if (t.times > 0) list.add(new Node(s, t.times));
+            for (char i = 'a'; i <= 'z'; i++) {
+                if (t.branches[i - 'a'] != null) {
+                    traverse(s + i, t.branches[i - 'a'], list);
+                }
+            }
+            if (t.branches[26] != null) {
+                traverse(s + ' ', t.branches[26], list);
+            }
+        }
+
+        //everytime lookup starts from root, that can be improved to last encountered root
+        public List<String> input(char c) {
+            List<String> res = new ArrayList<>();
+            if (c == '#') {
+                insert(root, cur_sent, 1);
+                cur_sent = "";
+            } else {
+                cur_sent += c;
+                List<Node> list = lookup(root, cur_sent);
+                Collections.sort(
+                        list,
+                        (a, b) -> a.times == b.times ? a.sentence.compareTo(b.sentence) : b.times - a.times);
+                for (int i = 0; i < Math.min(3, list.size()); i++) res.add(list.get(i).sentence);
+            }
+            return res;
+        }
+    }
+
+    public static String fractionToDecimal(int numerator, int denominator) {
+        if (numerator == 0) {
+            return "0";
+        }
+        StringBuilder fraction = new StringBuilder();
+        // If either one is negative (not both)
+        if (numerator < 0 ^ denominator < 0) {
+            fraction.append("-");
+        }
+        // Convert to Long or else abs(-2147483648) overflows
+        long dividend = Math.abs(Long.valueOf(numerator));
+        long divisor = Math.abs(Long.valueOf(denominator));
+        fraction.append(String.valueOf(dividend / divisor));
+        long remainder = dividend % divisor;
+        if (remainder == 0) {
+            return fraction.toString();
+        }
+        fraction.append(".");
+        Map<Long, Integer> map = new HashMap<>();
+        while (remainder != 0) {
+            if (map.containsKey(remainder)) {
+                fraction.insert(map.get(remainder), "(");
+                fraction.append(")");
+                break;
+            }
+            map.put(remainder, fraction.length());
+            remainder *= 10;
+            fraction.append(String.valueOf(remainder / divisor));
+            remainder %= divisor;
+        }
+        return fraction.toString();
+    }
+
+    public static int islandPerimeter(int[][] grid) {
+        if (grid == null || grid.length == 0 || grid[0].length == 0) return 0;
+        int result = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                if (grid[i][j] == 1) {
+                    result += 4;
+                    if (i > 0 && grid[i-1][j] == 1) result -= 2;
+                    if (j > 0 && grid[i][j-1] == 1) result -= 2;
+                }
+            }
+        }
+        return result;
+    }
+
+    public static int longestOnes(int[] A, int K) {
+        int zeroCount=0,start=0,res=0;
+        for(int end=0;end<A.length;end++){
+            if(A[end] == 0) zeroCount++;
+            while(zeroCount > K){
+                if(A[start] == 0) zeroCount--;
+                start++;
+            }
+            res=Math.max(res,end-start+1);
+        }
+        return res;
+    }
+
+    //can also be done with % and / to find the first replacement without extra space
+    public static int maximumSwap(int num) {
+        StringBuilder builder = new StringBuilder(String.valueOf(num));
+        int max = -1;
+        int maxIndex = -1;
+        int left = -1;
+        int right = -1;
+
+        for (int i = builder.length() - 1; i >= 0; i--) {
+            int value = builder.charAt(i) - '0';
+            if (value > max) {
+                max = value;
+                maxIndex = i;
+            }
+            if (value < max) {
+                left = i;
+                right = maxIndex;
+            }
+        }
+
+        if (left != -1) {
+            char temp = builder.charAt(left);
+            builder.setCharAt(left, builder.charAt(right));
+            builder.setCharAt(right, temp);
+        }
+        return Integer.parseInt(builder.toString());
+    }
+
+    public static List<List<String>> groupStrings(String[] strings) {
+        Map<String, List<String>> groups = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+        for (String str : strings) {
+            String key;
+            if (str.isEmpty()) {
+                key = "";
+            } else {
+                char base = str.charAt(0);
+                if (base == 'a') {
+                    key = str;
+                } else {
+                    sb.append('a');
+                    for (int i = 1; i < str.length(); i++) {
+                        int diff = str.charAt(i) - base;
+                        if (diff < 0) diff += 26;
+                        sb.append((char) ('a' + diff));
+                    }
+                    key = sb.toString();
+                    sb.setLength(0);
+                }
+            }
+
+            List<String> group = groups.get(key);
+            if (group == null) {
+                group = new ArrayList<>();
+                groups.put(key, group);
+            }
+            group.add(str);
+        }
+
+        return new ArrayList<>(groups.values());
+    }
+
+    //in the case of 1/n majority there will be a max of n-1 candiates
     public static List<Integer> majorityElementII(int[] nums) {
         if (nums == null || nums.length == 0)
             return new ArrayList<Integer>();
@@ -2106,6 +3128,9 @@ public class Test {
     }
 
     //Slower methods are with hashmap, sorting and counting the mid element
+    //boyer moore voting algo
+    //this assumes that there is a majority element and hence doesnt use another loop to verify it
+    //in the case when there may or may not be a majority, use another loop to verify the candidate
     public static int majorityElement(int[] nums) {
         int count = 0;
         Integer candidate = null;
@@ -2142,7 +3167,7 @@ public class Test {
     }
 
     //here the key is getting the size
-    //
+    //since its in asc order, inorder formation is possible
     static class ListToTree {
         private ListNode head;
         private int findSize(ListNode head) {
@@ -2185,7 +3210,7 @@ public class Test {
         }
     }
 
-    //here the key thing is that divide and conquer of indices helps go over inorder traversal of BT
+    //here the key thing is that divide and conquer of indices helps go over tracerse BT in a height balanced manner
     public static TreeNode sortedListToBSTWithAL(ListNode head) {
         List<Integer> a = new ArrayList<>();
         while(head != null) {
@@ -2385,6 +3410,7 @@ public class Test {
     }
 
     //O(m * n * max(m,n))
+    //mazeII - doesnt need visited, needs shortest dist
     public static int shortestDistance(int[][] maze, int[] start, int[] dest) {
         int[][] distance = new int[maze.length][maze[0].length];
         for (int[] row: distance)
@@ -2413,30 +3439,59 @@ public class Test {
         return distance[dest[0]][dest[1]] == Integer.MAX_VALUE ? -1 : distance[dest[0]][dest[1]];
     }
 
+    //mazeI - needs visited
+    public boolean hasPath(int[][] maze, int[] start, int[] destination) {
+        boolean[][] visited = new boolean[maze.length][maze[0].length];
+        int[][] dirs={{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
+        Queue < int[] > queue = new LinkedList < > ();
+        queue.add(start);
+        visited[start[0]][start[1]] = true;
+        while (!queue.isEmpty()) {
+            int[] s = queue.remove();
+            if (s[0] == destination[0] && s[1] == destination[1])
+                return true;
+            for (int[] dir: dirs) {
+                int x = s[0] + dir[0];
+                int y = s[1] + dir[1];
+                while (x >= 0 && y >= 0 && x < maze.length && y < maze[0].length && maze[x][y] == 0) {
+                    x += dir[0];
+                    y += dir[1];
+                }
+                if (!visited[x - dir[0]][y - dir[1]]) {
+                    queue.add(new int[] {x - dir[0], y - dir[1]});
+                    visited[x - dir[0]][y - dir[1]] = true;
+                }
+            }
+        }
+        return false;
+    }
+
+    //other method with extra space is traverse each diagonal storing it
+    //here keep going in the direction if it goes out then bring it back, continue for all cells
     public static int[] findDiagonalOrder(int[][] matrix) {
         if (matrix == null || matrix.length == 0) {
             return new int[0];
         }
-        int N = matrix.length;
-        int M = matrix[0].length;
+        int M = matrix.length;
+        int N = matrix[0].length;
         int row = 0, column = 0;
         int direction = 1;
-        int[] result = new int[N * M];
+        int[] result = new int[M * N];
         int r = 0;
 
-        while (row < N && column < M) {
+        while (row < M && column < N) {
             result[r++] = matrix[row][column];
             int new_row = row + (direction == 1 ? -1 : 1);
             int new_column = column + (direction == 1 ? 1 : -1);
 
-            if (new_row < 0 || new_row == N || new_column < 0 || new_column == M) {
+            if (new_row < 0 || new_row == M || new_column < 0 || new_column == N) {
 
                 if (direction == 1) {
-                    row += (column == M - 1 ? 1 : 0);
-                    column += (column == M - 1 ? 0 : 1);
+                    row += (column == N - 1 ? 1 : 0);
+                    column += (column == N - 1 ? 0 : 1);
                 } else {
-                    column += (row == N - 1 ? 1 : 0);
-                    row += (row == N - 1 ? 0 : 1);
+                    column += (row == M - 1 ? 1 : 0);
+                    row += (row == M - 1 ? 0 : 1);
                 }
 
                 direction = 1 - direction;
@@ -3368,6 +4423,7 @@ public class Test {
     //top down with memo requires 3D array with count in it
     //here 3 recursive calls need to be made cuz even after a match there could exist another longer match
     //can also be done with for loops
+    //here a 3rd element changes as we can have the same indices start with differenct counts, cuz we have other recur calls that can come up with diff string lengths
     static int longestCommonSubstringRecursive(Integer[][][] dp, String s1, String s2, int i1, int i2, int count) {
         if(i1 == s1.length() || i2 == s2.length())
             return count;
@@ -3425,21 +4481,18 @@ public class Test {
     }
 
     //here count keeps building
-    static int longestCommonSubsequence(String a,String b) {
-        int m = a.length();
-        int n = b.length();
-
-        int[][] dp =new int[m+1][n+1];//Keeping space for empty strings
-
-        for(int i=1; i<=m; i++)
-            for(int j=1; j<=n; j++) {
-//                dp[i][j] = a.charAt(i-1)==b.charAt(j-1) ? dp[i-1][j-1]+1 : Math.max(dp[i-1][j],dp[i][j-1]);
-                if(a.charAt(i-1) == b.charAt(j-1))
+    static int longestCommonSubsequence(String s1,String s2) {
+        int[][] dp = new int[s1.length()+1][s2.length()+1];
+        int maxLength = 0;
+        for(int i=1; i <= s1.length(); i++) {
+            for(int j=1; j <= s2.length(); j++) {
+                if(s1.charAt(i-1) == s2.charAt(j-1)) {
                     dp[i][j] = 1 + dp[i-1][j-1];
-                else
-                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
+                    maxLength = Math.max(maxLength, dp[i][j]);
+                }
             }
-        return dp[m][n];
+        }
+        return maxLength;//max variable is required as last element in the matrix can be zero also
     }
 
     //here the else is required as if there is a match there is no need to check mismatches
@@ -4575,6 +5628,7 @@ public class Test {
         }
     }
 
+    //this will take more space n less time
     public static int[] topKFrequentNoSort(int[] nums, int k) {
         if (nums == null || nums.length == 0) {
             return new int[]{};
@@ -5161,7 +6215,7 @@ public class Test {
         }
         return res;
     }
-    
+
     public TreeNode upsideDownBinaryTreeIterative(TreeNode root) {
         TreeNode curr = root;
         TreeNode prev = null;
@@ -8489,13 +9543,13 @@ public class Test {
                 return;
             if (keyToVal.containsKey(key)) {
                 keyToVal.put(key, value);
-                get(key);   // inrease frequency when same value is put
+                get(key);   // increase frequency when same value is put
                 return;
             }
             if (keyToVal.size() >= cap) {
-                int evit = countToLRUKeys.get(min).iterator().next();// this removes the least used element
-                countToLRUKeys.get(min).remove(evit);
-                keyToVal.remove(evit);
+                int evict = countToLRUKeys.get(min).iterator().next();// this removes the least used element
+                countToLRUKeys.get(min).remove(evict);
+                keyToVal.remove(evict);
             }
             keyToVal.put(key, value);
             keyToCount.put(key, 1);
@@ -9241,7 +10295,6 @@ public class Test {
         return output;
     }
 
-
     public static int[] shortestToCharFastest(String S, char C) {
 
         int[] array = new int[S.length()];
@@ -9531,6 +10584,7 @@ public class Test {
         return point[0] * point[0] + point[1] * point[1];
     }
 
+    //here if the right side is greater, then left max dictates water stored
     static int trap2Pointers(int[] height) {
         int left = 0, right = height.length - 1;
         int ans = 0;
@@ -9587,6 +10641,23 @@ public class Test {
             ans += Math.min(left_max[i], right_max[i]) - height[i];
         }
         return ans;
+    }
+
+    //similar to trapping water
+    public static int[] productExceptSelf(int[] nums) {
+
+        int length = nums.length;
+        int[] answer = new int[length];
+        answer[0] = 1;
+        for (int i = 1; i < length; i++)
+            answer[i] = nums[i - 1] * answer[i - 1];
+
+        int R = 1;
+        for (int i = length - 1; i >= 0; i--) {
+            answer[i] = answer[i] * R;
+            R *= nums[i];
+        }
+        return answer;
     }
 
     static int maxProfit(int prices[]) {
@@ -9871,23 +10942,6 @@ public class Test {
         }
         odd.next = evenHead;
         return head;
-    }
-
-    //similar to trapping water
-    public static int[] productExceptSelf(int[] nums) {
-
-        int length = nums.length;
-        int[] answer = new int[length];
-        answer[0] = 1;
-        for (int i = 1; i < length; i++)
-            answer[i] = nums[i - 1] * answer[i - 1];
-
-        int R = 1;
-        for (int i = length - 1; i >= 0; i--) {
-            answer[i] = answer[i] * R;
-            R *= nums[i];
-        }
-        return answer;
     }
 
     public static RandomListNode copyRandomList(RandomListNode head) {
@@ -12783,7 +13837,7 @@ public class Test {
         return l3.next;
     }
 
-    //Do
+    //here we try to keep j at the right spot,by binary searching i
     public static double findMedianSortedArrays(int[] A, int[] B) {
         int m = A.length;
         int n = B.length;
