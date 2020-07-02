@@ -713,7 +713,7 @@ public class Test {
 //        System.out.println(calculateII("5+20/2/5-1*4*6/2*2"));
 //        System.out.println(calculateII("5-20+1+3+4"));
 
-//////////// Pretty print JSON
+//////////// Pretty print JSON. Intuit question
 //        prettyPrint("{\"key\\\"1\":\"val1\",\"key2\":[\"item1\",{\"item2key\":1.2}]}");
 //        prettyPrint("{\"a\":\"b\",\"c\":\"d\"}");
 //        prettyPrint("{\"id\": \"0001\", \"type\": \"donut\", \"name\": \"Cake\", \"ppu\": 0.55, \"batters\":{\"batter\":[{ \"id\": \"1001\", \"type\": \"Regular\" },{ \"id\": \"1002\", \"type\": \"Chocolate\" }]},\"topping\":[{ \"id\": \"5001\", \"type\": \"None\" },{ \"id\": \"5002\", \"type\": \"Glazed\" }]}");
@@ -2122,62 +2122,231 @@ public class Test {
 //////////// Game of Life
 //        System.out.println(gameOfLife());
 
+//////////// Find And Replace in String
+//        System.out.println(findReplaceString("abcd", new int[]{0, 2}, new String[]{"a", "cd"}, new String[]{"eee", "ffff"}));
+
+//////////// Minimum Deletions & Insertions to Transform a String into another
+
+//        System.out.println(minInsertionAndDeletionRecur("abc", "bc"));
+//        System.out.println(minInsertionAndDeletionRecur("abc", "abc"));
+//        System.out.println(minInsertionAndDeletionRecur("abdca", "cbda"));
+//        System.out.println(minInsertionAndDeletionRecur("passport", "ppsspt"));
+//
+//        System.out.println(minInsertionAndDeletionDpRecur("ab", "b"));
+//        System.out.println(minInsertionAndDeletionDpRecur("abc", "abc"));
+//        System.out.println(minInsertionAndDeletionDpRecur("abdca", "cbda"));
+//        System.out.println(minInsertionAndDeletionDpRecur("passport", "ppsspt"));
+//
+//        System.out.println(minInsertionAndDeletionDpIterative("ab", "b"));
+//        System.out.println(minInsertionAndDeletionDpIterative("abc", "abc"));
+//        System.out.println(minInsertionAndDeletionDpIterative("abdca", "cbda"));
+//        System.out.println(minInsertionAndDeletionDpIterative("passport", "ppsspt"));
+
+//////////// Longest Bitonic Subsequence
+//        System.out.println(findLBSLength(new int[]{}));
+//        System.out.println(findLBSLengthAnotherWay(new int[]{}));
+
+//////////// Longest Alternating Subsequence
+//        System.out.println(findLASLengthDP(new int[]{1,3,2,1,4}));
+//        System.out.println(findLASubstringLengthDP(new int[]{1,3,2,1,4}));
+//        System.out.println(findLASubstringLength(new int[]{1,3,2,1,4}));
+
+//        System.out.println(solveKnapsack(new int[]{1, 6, 10, 16},new int[]{1, 2, 3, 5},7));
+//        System.out.println(solveKnapsack(new int[]{1, 6, 10, 16},new int[]{1, 2, 3, 5},6));
+
+
+//        int[] num = {1, 1, 2, 3};
+//        System.out.println(findTargetSubsets(num, 1));
+//        num = new int[]{1, 2, 7, 1};
+//        System.out.println(findTargetSubsets(num, 9));
+
+        System.out.println(findLPSLength("abdbca"));
+
+
+//////////// Word Break II
+//        WordBreakII wordBreakII=new WordBreakII();
+
     }
 
-    public static void gameOfLife(int[][] board) {
+    //Dont need 2 indices, just previous is sufficient to go back
+    //Time 2^n + N2
+    //Space 2^n *
+    class WordBreakII {
+        protected Set<String> wordSet;
+        protected ArrayList<ArrayList<ArrayList<Integer>>> dp;
 
-        // Neighbors array to find 8 neighboring cells for a given cell
-        int[] neighbors = {0, 1, -1};
+        protected String inputString;
+        protected ArrayList<String> result;
 
-        int rows = board.length;
-        int cols = board[0].length;
+        private void updateCharSet(String s, HashSet<Character> charSet) {
+            for (int i = 0; i < s.length(); ++i)
+                charSet.add(s.charAt(i));
+        }
 
-        // Iterate through board cell by cell.
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
+        public List<String> wordBreak(String s, List<String> wordDict) {
+            HashSet<Character> stringCharSet = new HashSet<Character>();
+            updateCharSet(s, stringCharSet);
 
-                // For each cell count the number of live neighbors.
-                int liveNeighbors = 0;
+            HashSet<Character> wordCharSet = new HashSet<Character>();
+            wordSet = new HashSet<>();
+            for (String word : wordDict) {
+                wordSet.add(word);
+                updateCharSet(word, wordCharSet);
+            }
 
-                for (int i = 0; i < 3; i++) {
-                    for (int j = 0; j < 3; j++) {
+            // quick check on the sets of characters
+            if (!wordCharSet.containsAll(stringCharSet))
+                return new ArrayList();
 
-                        if (!(neighbors[i] == 0 && neighbors[j] == 0)) {
-                            int r = (row + neighbors[i]);
-                            int c = (col + neighbors[j]);
+            inputString = s;
+            dp = new ArrayList<ArrayList<ArrayList<Integer>>>(s.length() + 1);
+            for (int i = 0; i < s.length() + 1; ++i) {
+                ArrayList<ArrayList<Integer>> emptyList = new ArrayList<ArrayList<Integer>>();
+                dp.add(emptyList);
+            }
+            ArrayList<Integer> start = new ArrayList<Integer>();
+            start.add(0);
+            dp.get(0).add(start);
 
-                            // Check the validity of the neighboring cell.
-                            // and whether it was originally a live cell.
-                            if ((r < rows && r >= 0) && (c < cols && c >= 0) && (Math.abs(board[r][c]) == 1)) {
-                                liveNeighbors += 1;
-                            }
-                        }
+            for (int endIndex = 1; endIndex < s.length() + 1; ++endIndex) {
+                ArrayList<ArrayList<Integer>> stops = new ArrayList<ArrayList<Integer>>();
+
+                // fill up the values in the dp array.
+                for (int startIndex = 0; startIndex < endIndex; ++startIndex) {
+                    String word = s.substring(startIndex, endIndex);
+                    if (wordSet.contains(word)) {
+                        ArrayList<Integer> newStop = new ArrayList();
+                        newStop.add(startIndex);
+                        newStop.add(endIndex);
+                        stops.add(newStop);
                     }
                 }
-
-                // Rule 1 or Rule 3
-                if ((board[row][col] == 1) && (liveNeighbors < 2 || liveNeighbors > 3)) {
-                    // -1 signifies the cell is now dead but originally was live.
-                    board[row][col] = -1;
-                }
-                // Rule 4
-                if (board[row][col] == 0 && liveNeighbors == 3) {
-                    // 2 signifies the cell is now live but was originally dead.
-                    board[row][col] = 2;
-                }
+                dp.set(endIndex, stops);
             }
+
+            this.result = new ArrayList<String>();
+            wordDFS("", s.length());
+            return this.result;
         }
 
-        // Get the final representation for the newly updated board.
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                if (board[row][col] > 0) {
-                    board[row][col] = 1;
-                } else {
-                    board[row][col] = 0;
-                }
+        protected void wordDFS(String sentence, Integer dpIndex) {
+            if (dpIndex == 0) {
+                result.add(sentence.trim());
+                return;
+            }
+
+            for (List<Integer> wordIndex : dp.get(dpIndex)) {
+                Integer start = wordIndex.get(0), end = wordIndex.get(1);
+                String newSentence = inputString.substring(start, end) + " " + sentence;
+                wordDFS(newSentence, start);
             }
         }
+    }
+
+    /////////
+
+    public static int findLPSLength(String st) {
+        Integer[][] dp = new Integer[st.length()][st.length()];
+        int i=findLPSLengthRecursive(dp, st, 0, st.length() - 1);
+        return i;
+    }
+
+    private static int findLPSLengthRecursive(Integer[][] dp, String st, int startIndex, int endIndex) {
+        if (startIndex > endIndex)
+            return 0;
+
+        // every string with one character is a palindrome
+        if (startIndex == endIndex)
+            return 1;
+
+        if (dp[startIndex][endIndex] == null) {
+            // case 1: elements at the beginning and the end are the same
+            if (st.charAt(startIndex) == st.charAt(endIndex)) {
+                int remainingLength = endIndex - startIndex - 1;
+                // check if the remaining string is also a palindrome
+                if (remainingLength == findLPSLengthRecursive(dp, st, startIndex + 1, endIndex - 1)) {
+                    dp[startIndex][endIndex] = remainingLength + 2;
+                    return dp[startIndex][endIndex];
+                }
+            }
+
+            // case 2: skip one character either from the beginning or the end
+            int c1 = findLPSLengthRecursive(dp, st, startIndex + 1, endIndex);
+            int c2 = findLPSLengthRecursive(dp, st, startIndex, endIndex - 1);
+            dp[startIndex][endIndex] = Math.max(c1, c2);
+        }
+
+        return dp[startIndex][endIndex];
+    }
+
+
+    public static int findTargetSubsets(int[] num, int s) {
+        int totalSum = 0;
+        for (int n : num)
+            totalSum += n;
+
+        // if 's + totalSum' is odd, we can't find a subset with sum equal to '(s + totalSum) / 2'
+        if(totalSum < s || (s + totalSum) % 2 == 1)
+            return 0;
+
+        HashMap<Integer,Integer>[] dp = new HashMap[num.length];
+        for (int i=0;i< num.length;i++) {
+            dp[i]=new HashMap<Integer,Integer>();
+        }
+        return countSubsetsRecursive(dp, num, 0, 0,s);
+    }
+
+    private static int countSubsetsRecursive(HashMap<Integer,Integer>[] dp, int[] num, int sum, int currentIndex,int target) {
+        // base checks
+        if (currentIndex >= num.length)
+            if(sum == target)
+                return 1;
+            else
+                return 0;
+
+        // if(num.length == 0 || currentIndex >= num.length)
+        //   return 0;
+
+        // check if we have not already processed a similar problem
+        if(!dp[currentIndex].containsKey(sum)) {
+            // recursive call after choosing the number at the currentIndex
+            // if the number at currentIndex exceeds the sum, we shouldn't process this
+            int sum1 = 0;
+            // if( num[currentIndex] <= sum )
+            sum1 = countSubsetsRecursive(dp, num, sum + num[currentIndex], currentIndex + 1,target);
+
+            // recursive call after excluding the number at the currentIndex
+            int sum2 = countSubsetsRecursive(dp, num, sum + num[currentIndex]*(-1), currentIndex + 1,target);
+
+            dp[currentIndex].put(sum, sum1 + sum2);
+        }
+
+        return dp[currentIndex].get(sum);
+    }
+
+    public static int solveKnapsack(int[] profits, int[] weights, int capacity) {
+
+        return knapsackRecursive(profits, weights, 0,0,capacity, 0,new Integer [profits.length+1][capacity+1]);
+    }
+
+    private static int knapsackRecursive(int[] profits, int[] weights, int weight,int profit,int capacity, int currentIndex,Integer dp[][]) {
+        // base checks
+        if (currentIndex == profits.length)
+            return profit;
+
+        if(dp[currentIndex][weight]!=null)
+            return dp[currentIndex][weight];
+        // recursive call after choosing the element at the currentIndex
+        // if the weight of the element at currentIndex exceeds the capacity, we shouldn't process this
+        int profit1 = 0;
+        if( weight + weights[currentIndex] <= capacity )
+            profit1 = knapsackRecursive(profits, weights, weight + weights[currentIndex],
+                    profit+profits[currentIndex],capacity , currentIndex + 1,dp);
+
+        // recursive call after excluding the element at the currentIndex
+        int profit2 = knapsackRecursive(profits, weights, weight,profit,capacity, currentIndex + 1,dp);
+        dp[currentIndex][weight]=Math.max(profit1, profit2);
+        return dp[currentIndex][weight];
     }
 
     public static boolean isInterleaveDp1D(String s1, String s2, String s3) {
@@ -2245,16 +2414,56 @@ public class Test {
         return is_Interleave(s1, 0, s2, 0, s3, 0, memo);
     }
 
-    public static int search(int L, int n, String S) {
-        HashSet<String> seen = new HashSet();
-        String tmp;
-        for(int start = 0; start < n - L + 1; ++start) {
-            tmp = S.substring(start, start + L);
-            if (seen.contains(tmp))
-                return start;
-            seen.add(tmp);
+    public static int editDistance(String s1, String s2) {
+        int[][] dp = new int[s1.length()+1][s2.length()+1];
+
+        // if s2 is empty, we can remove all the characters of s1 to make it empty too
+        for(int i1=0; i1 <= s1.length(); i1++)
+            dp[i1][0] = i1;
+
+        // if s1 is empty, we have to insert all the characters of s2
+        for(int i2=0; i2 <= s2.length(); i2++)
+            dp[0][i2] = i2;
+
+        for(int i1=1; i1 <= s1.length(); i1++) {
+            for(int i2=1; i2 <= s2.length(); i2++) {
+                // If the strings have a matching character, we can recursively match for the remaining lengths
+                if(s1.charAt(i1-1) == s2.charAt(i2-1))
+                    dp[i1][i2] = dp[i1-1][i2-1];
+                else
+                    dp[i1][i2] = 1 + Math.min(dp[i1-1][i2], //delete
+                            Math.min(dp[i1][i2-1], //insert
+                                    dp[i1-1][i2-1])); //replace
+            }
         }
-        return -1;
+
+        return dp[s1.length()][s2.length()];
+    }
+
+    //3^(m+n) without memo
+    private static int editDistanceRecur(Integer[][] dp, String s1, String s2, int i1, int i2) {
+
+        if(dp[i1][i2] == null) {
+            // if we have reached the end of s1, then we have to insert all the remaining characters of s2
+            if(i1 == s1.length())
+                dp[i1][i2] = s2.length() - i2;
+
+                // if we have reached the end of s2, then we have to delete all the remaining characters of s1
+            else if(i2 == s2.length())
+                dp[i1][i2] = s1.length() - i1;
+
+                // If the strings have a matching character, we can recursively match for the remaining lengths
+            else if(s1.charAt(i1) == s2.charAt(i2))
+                dp[i1][i2] = editDistanceRecur(dp, s1, s2, i1+1, i2+1);
+            else {
+                int c1 = editDistanceRecur(dp, s1, s2, i1+1, i2); //delete
+                int c2 = editDistanceRecur(dp, s1, s2, i1, i2+1); //insert
+                int c3 = editDistanceRecur(dp, s1, s2, i1+1, i2+1); //replace
+                dp[i1][i2] = 1 + Math.min(c1, Math.min(c2, c3));
+            }
+        }
+
+        return dp[i1][i2];
     }
 
     //nlogn at best and n^2 at worst
@@ -2272,6 +2481,18 @@ public class Test {
 
         return left - 1;
     }
+    public static int search(int L, int n, String S) {
+        HashSet<String> seen = new HashSet();
+        String tmp;
+        for(int start = 0; start < n - L + 1; ++start) {
+            tmp = S.substring(start, start + L);
+            if (seen.contains(tmp))
+                return start;
+            seen.add(tmp);
+        }
+        return -1;
+    }
+
 
     //n^2
     //the i!=j is the diff between LCS
@@ -2287,6 +2508,344 @@ public class Test {
             }
         }
         return maxLength;
+    }
+
+    public static int findLASubstringLength(int[] nums) {
+        // we have to start with two recursive calls, one where we will consider that the first element is
+        // bigger than the second element and one where the first element is smaller than the second element
+        return Math.max(findLASLengthRecursive(nums, -1, 0, true,1),
+                findLASLengthRecursive(nums, -1, 0, false,1));
+    }
+
+    private static int findLASLengthRecursive(int[] nums, int previousIndex, int currentIndex, boolean isAsc, int count) {
+        if(currentIndex == nums.length)
+            return count;
+
+//        int c1=0;
+        // if ascending, the next element should be bigger
+        if(isAsc) {
+            if(previousIndex == -1 || nums[previousIndex] < nums[currentIndex])
+                count = findLASLengthRecursive(nums, currentIndex, currentIndex+1, !isAsc, count++);
+        } else { // if descending, the next element should be smaller
+            if(previousIndex == -1 || nums[previousIndex] > nums[currentIndex])
+                count = findLASLengthRecursive(nums, currentIndex, currentIndex+1, !isAsc,count++);
+        }
+        // skip the current element
+        int c2 = findLASLengthRecursive(nums, previousIndex, currentIndex+1, isAsc,2);
+        return Math.max(count,c2);
+    }
+
+    public static int findLASubstringLengthDP(int[] nums) {
+        if(nums.length == 0) return 0;
+        //dp[i][0] = stores the LAS ending at 'i' such that the last two elements are in ascending order
+        //dp[i][1] = stores the LAS ending at 'i' such that the last two elements are in descending order
+        int[][] dp = new int[nums.length][2];
+        int maxLength = 1;
+        for(int i=0; i < nums.length; i++) {
+            // every single element can be considered as LAS of length 1
+            dp[i][0] = dp[i][1] = 1;
+            int j=i-1;
+            if(j < i && j>=0) {
+                if(nums[i] > nums[j]) {
+                    // if nums[i] is BIGGER than nums[j] then we will consider the LAS ending at 'j' where the
+                    // last two elements were in DESCENDING order
+                    dp[i][0] = Math.max(dp[i][0], 1 + dp[j][1]);
+                    maxLength = Math.max(maxLength, dp[i][0]);
+                } else if (nums[i] != nums[j]) { // if the numbers are equal don't do anything
+                    // if nums[i] is SMALLER than nums[j] then we will consider the LAS ending at 'j' where the
+                    // last two elements were in ASCENDING order
+                    dp[i][1] = Math.max(dp[i][1], 1 + dp[j][0]);
+                    maxLength = Math.max(maxLength, dp[i][1]);
+                }
+            }
+        }
+        return maxLength;
+    }
+
+    public static int findLASLengthDP(int[] nums) {
+        if(nums.length == 0) return 0;
+        //dp[i][0] = stores the LAS ending at 'i' such that the last two elements are in ascending order
+        //dp[i][1] = stores the LAS ending at 'i' such that the last two elements are in descending order
+        int[][] dp = new int[nums.length][2];
+        int maxLength = 1;
+        for(int i=0; i < nums.length; i++) {
+            // every single element can be considered as LAS of length 1
+            dp[i][0] = dp[i][1] = 1;
+            for(int j=0; j < i; j++) {
+                if(nums[i] > nums[j]) {
+                    // if nums[i] is BIGGER than nums[j] then we will consider the LAS ending at 'j' where the
+                    // last two elements were in DESCENDING order
+                    dp[i][0] = Math.max(dp[i][0], 1 + dp[j][1]);
+                    maxLength = Math.max(maxLength, dp[i][0]);
+                } else if (nums[i] != nums[j]) { // if the numbers are equal don't do anything
+                    // if nums[i] is SMALLER than nums[j] then we will consider the LAS ending at 'j' where the
+                    // last two elements were in ASCENDING order
+                    dp[i][1] = Math.max(dp[i][1], 1 + dp[j][0]);
+                    maxLength = Math.max(maxLength, dp[i][1]);
+                }
+            }
+        }
+        return maxLength;
+    }
+
+    //Similar to the above LAS question method, may not work
+    private int findLBSLengthAnotherWay(int[] nums) {
+        if(nums.length == 0) return 0;
+        //dp[i][0] = stores the LAS ending at 'i' such that the last two elements are in ascending order
+        //dp[i][1] = stores the LAS ending at 'i' such that the last two elements are in descending order
+        int[][] dp = new int[nums.length][2];
+        int maxLength = 1;
+        for(int i=0; i < nums.length; i++) {
+            // every single element can be considered as LAS of length 1
+            dp[i][0] = dp[i][1] = 1;
+            for(int j=0; j < i; j++) {
+                if(nums[i] > nums[j]) {
+                    // if nums[i] is BIGGER than nums[j] then we will consider the LAS ending at 'j' where the
+                    // last two elements were in DESCENDING order
+                    dp[i][0] = Math.max(dp[i][0], 1 + dp[j][0]);
+                    maxLength = Math.max(maxLength, dp[i][0]);
+                } else if (nums[i] <= nums[j]) { // if the numbers are equal don't do anything
+                    // if nums[i] is SMALLER than nums[j] then we will consider the LAS ending at 'j' where the
+                    // last two elements were in ASCENDING order
+                    dp[i][1] = Math.max( dp[i][1],Math.max(1+ dp[j][1], 1 + dp[j][0]));
+                    maxLength = Math.max(maxLength, dp[i][1]);
+                }
+            }
+        }
+        return maxLength;
+    }
+
+    static int findLBSLength(int[] nums) {
+        int[] lds = new int[nums.length];
+        int[] ldsReverse = new int[nums.length];
+
+        // find LDS for every index up to the beginning of the array
+        for (int i = 0; i < nums.length; i++) {
+            lds[i] = 1; // every element is an LDS of length 1
+            for (int j = i - 1; j >= 0; j--)
+                if (nums[j] < nums[i]) {
+                    lds[i] = Math.max(lds[i], lds[j] + 1);
+                }
+        }
+
+        // find LDS for every index up to the end of the array
+        for (int i = nums.length - 1; i >= 0; i--) {
+            ldsReverse[i] = 1; // every element is an LDS of length 1
+            for (int j = i + 1; j < nums.length; j++)
+                if (nums[j] < nums[i]) {
+                    ldsReverse[i] = Math.max(ldsReverse[i], ldsReverse[j] + 1);
+                }
+        }
+
+        int maxLength = 0;
+        for (int i = 0; i < nums.length; i++) {
+            maxLength = Math.max(maxLength, lds[i] + ldsReverse[i] - 1);
+        }
+
+        return maxLength;
+    }
+
+    static int minDistance(String word1, String word2) {
+        return word1.length() + word2.length()- 2 * longestCommonSubsequence(word1,word2);
+    }
+
+    //nlogn
+    public static int lengthOfLIS(int[] nums) {
+        int[] dp = new int[nums.length];
+        int len = 0;
+        for (int num : nums) {
+            int i = Arrays.binarySearch(dp, 0, len, num);
+            if (i < 0) {
+                i = -(i + 1);
+            }
+            dp[i] = num;
+            if (i == len) {
+                len++;
+            }
+        }
+        return len;
+    }
+
+    //n^2
+    public static int LisDP(int[] input) {
+        int finalMax = 1;
+        int[] dp = new int[input.length];
+        for (int i = input.length - 1; i >= 0; i--) {
+            int currentMax = 0;
+            for (int j = i + 1; j < input.length; j++) {
+                if (input[j] > input[i]) {
+                    currentMax = Math.max(currentMax, dp[j]);
+                    if(dp[j]==finalMax) break;
+                }
+            }
+            dp[i] = currentMax + 1;
+            if (dp[i] > finalMax) finalMax = dp[i];
+        }
+        return finalMax;
+    }
+
+    //2^n. refer educative. This is cuz there are 2 recursions take it or exclude it.
+    public static int LIS(int start, int[] input) {
+        int maxCount = 1;
+        for (int i = start; i < input.length; i++) {
+            for (int j = i + 1; j < input.length; j++) {
+                if (input[j] > input[i]) {
+                    maxCount = Math.max(LIS(j, input) + 1, maxCount);
+                }
+            }
+        }
+        return maxCount;
+
+    }
+
+    public static int minInsertionAndDeletionDpIterative(String s1, String s2) {
+        int[][] dp = new int[s2.length() + 1][s1.length() + 1];
+        for (int i = 0; i <= s2.length(); i++) {
+            for (int j = 0; j <= s1.length(); j++) {
+                if (i == 0) dp[i][j] = j;
+                else if (j == 0) dp[i][j] = i;
+                else if (s1.charAt(i - 1) == s2.charAt(j - 1))
+                    dp[i][j] = dp[i - 1][j - 1];
+                else
+                    dp[i][j] = Math.min(dp[i - 1][j - 1] + 2, dp[i][j - 1] + 1);
+
+            }
+        }
+        return dp[s2.length()][s1.length()];
+    }
+
+    public static int minInsertionAndDeletionDpRecur(String s1, String s2) {
+        Integer[][] dp=new Integer[s1.length()][s2.length()];
+        minInsertionAndDeletionDpRecur2(s1, s2, 0, 0,dp);
+         return dp[0][0];
+    }
+    //here we calculated it from bottom, so we cud dp it
+    private static Integer minInsertionAndDeletionDpRecur2(String s1, String s2, int i1, int i2, Integer[][] dp) {
+        if (i1 == s1.length() || i2 == s2.length()) {
+            if (i1 < s1.length())
+                return s1.substring(i1).length();
+            else
+            if (i2 < s2.length())
+                return s2.substring(i2).length();
+            else
+                return 0;
+        }
+        if (dp[i1][i2] == null) {
+            if (s1.charAt(i1) == s2.charAt(i2))
+                dp[i1][i2] = minInsertionAndDeletionDpRecur2(s1, s2, i1 + 1, i2 + 1, dp);
+            else {
+                dp[i1][i2] = Math.min(minInsertionAndDeletionDpRecur2(s1, s2, i1 + 1, i2 + 1, dp) + 2,
+                        minInsertionAndDeletionDpRecur2(s1, s2, i1 + 1, i2, dp) + 1);
+            }
+        }
+        return dp[i1][i2];
+    }
+
+    static int  minCount=Integer.MAX_VALUE;
+    public static int minInsertionAndDeletionRecur(String s1, String s2) {
+        minInsertionAndDeletionRecur2(s1, s2, 0, 0,0);
+        return minCount;
+    }
+    //here we calculated it from top
+    private static void minInsertionAndDeletionRecur2(String s1, String s2, int i1, int i2, int count) {
+        if(i1 == s1.length() || i2 == s2.length()) {
+            if(i1<s1.length())
+                count += s1.substring(i1).length();
+            if(i2<s2.length())
+                count += s2.substring(i2).length();
+            if (count < minCount) {
+                minCount = count;
+            }
+            return;
+        }
+        if (s1.charAt(i1) == s2.charAt(i2))
+            minInsertionAndDeletionRecur2(s1, s2, i1 + 1, i2 + 1, count);
+        else {
+            minInsertionAndDeletionRecur2(s1, s2, i1 + 1, i2 + 1, count + 2);
+            minInsertionAndDeletionRecur2(s1, s2, i1 + 1, i2, count + 1);
+        }
+    }
+
+    //the idea is to draw a link between the original and replaced string
+    //LL can be used, but an overkill. Just link between the indices is enough
+    public static String findReplaceString(String S, int[] indexes, String[] sources, String[] targets) {
+        int N = S.length();
+        int[] match = new int[N];
+        Arrays.fill(match, -1);
+
+        for (int i = 0; i < indexes.length; ++i) {
+            int ix = indexes[i];
+            if (S.substring(ix, ix + sources[i].length()).equals(sources[i]))
+                match[ix] = i;
+        }
+
+        StringBuilder ans = new StringBuilder();
+        int ix = 0;
+        while (ix < N) {
+            if (match[ix] >= 0) {
+                ans.append(targets[match[ix]]);
+                ix += sources[match[ix]].length();
+            } else {
+                ans.append(S.charAt(ix++));
+            }
+        }
+        return ans.toString();
+    }
+
+    public static void gameOfLife(int[][] board) {
+
+        // Neighbors array to find 8 neighboring cells for a given cell
+        int[] neighbors = {0, 1, -1};
+
+        int rows = board.length;
+        int cols = board[0].length;
+
+        // Iterate through board cell by cell.
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+
+                // For each cell count the number of live neighbors.
+                int liveNeighbors = 0;
+
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+
+                        if (!(neighbors[i] == 0 && neighbors[j] == 0)) {
+                            int r = (row + neighbors[i]);
+                            int c = (col + neighbors[j]);
+
+                            // Check the validity of the neighboring cell.
+                            // and whether it was originally a live cell.
+                            if ((r < rows && r >= 0) && (c < cols && c >= 0) && (Math.abs(board[r][c]) == 1)) {
+                                liveNeighbors += 1;
+                            }
+                        }
+                    }
+                }
+
+                // Rule 1 or Rule 3
+                if ((board[row][col] == 1) && (liveNeighbors < 2 || liveNeighbors > 3)) {
+                    // -1 signifies the cell is now dead but originally was live.
+                    board[row][col] = -1;
+                }
+                // Rule 4
+                if (board[row][col] == 0 && liveNeighbors == 3) {
+                    // 2 signifies the cell is now live but was originally dead.
+                    board[row][col] = 2;
+                }
+            }
+        }
+
+        // Get the final representation for the newly updated board.
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (board[row][col] > 0) {
+                    board[row][col] = 1;
+                } else {
+                    board[row][col] = 0;
+                }
+            }
+        }
     }
 
     //a made up question can also be to find 3rd largest element in a stream
@@ -2478,7 +3037,7 @@ public class Test {
             visitList.add(new Visit(username[i], timestamp[i], website[i]));
         }
 
-        Collections.sort(visitList, (v1, v2) -> { return v1.time - v2.time; });
+        Collections.sort(visitList, (v1, v2) ->  v1.time - v2.time);
 
         Map<String, List<String>> userWebMap = new HashMap<>();
         for (Visit v : visitList) {
@@ -4352,58 +4911,6 @@ public class Test {
         return popPointer == N;
     }
 
-    public static int editDistance(String s1, String s2) {
-        int[][] dp = new int[s1.length()+1][s2.length()+1];
-
-        // if s2 is empty, we can remove all the characters of s1 to make it empty too
-        for(int i1=0; i1 <= s1.length(); i1++)
-            dp[i1][0] = i1;
-
-        // if s1 is empty, we have to insert all the characters of s2
-        for(int i2=0; i2 <= s2.length(); i2++)
-            dp[0][i2] = i2;
-
-        for(int i1=1; i1 <= s1.length(); i1++) {
-            for(int i2=1; i2 <= s2.length(); i2++) {
-                // If the strings have a matching character, we can recursively match for the remaining lengths
-                if(s1.charAt(i1-1) == s2.charAt(i2-1))
-                    dp[i1][i2] = dp[i1-1][i2-1];
-                else
-                    dp[i1][i2] = 1 + Math.min(dp[i1-1][i2], //delete
-                            Math.min(dp[i1][i2-1], //insert
-                                    dp[i1-1][i2-1])); //replace
-            }
-        }
-
-        return dp[s1.length()][s2.length()];
-    }
-
-    //3^(m+n) without memo
-    private static int editDistanceRecur(Integer[][] dp, String s1, String s2, int i1, int i2) {
-
-        if(dp[i1][i2] == null) {
-            // if we have reached the end of s1, then we have to insert all the remaining characters of s2
-            if(i1 == s1.length())
-                dp[i1][i2] = s2.length() - i2;
-
-                // if we have reached the end of s2, then we have to delete all the remaining characters of s1
-            else if(i2 == s2.length())
-                dp[i1][i2] = s1.length() - i1;
-
-                // If the strings have a matching character, we can recursively match for the remaining lengths
-            else if(s1.charAt(i1) == s2.charAt(i2))
-                dp[i1][i2] = editDistanceRecur(dp, s1, s2, i1+1, i2+1);
-            else {
-                int c1 = editDistanceRecur(dp, s1, s2, i1+1, i2); //delete
-                int c2 = editDistanceRecur(dp, s1, s2, i1, i2+1); //insert
-                int c3 = editDistanceRecur(dp, s1, s2, i1+1, i2+1); //replace
-                dp[i1][i2] = 1 + Math.min(c1, Math.min(c2, c3));
-            }
-        }
-
-        return dp[i1][i2];
-    }
-
     //here count gets reset
     //the top down with memo requires 3D array with count in it
     public static int longestCommonSubstring(String s1, String s2) {
@@ -4513,58 +5020,7 @@ public class Test {
         return dp[i1][i2];
     }
 
-    static int minDistance(String word1, String word2) {
-        return word1.length() + word2.length()- 2 * longestCommonSubsequence(word1,word2);
-    }
 
-    //nlogn
-    public static int lengthOfLIS(int[] nums) {
-        int[] dp = new int[nums.length];
-        int len = 0;
-        for (int num : nums) {
-            int i = Arrays.binarySearch(dp, 0, len, num);
-            if (i < 0) {
-                i = -(i + 1);
-            }
-            dp[i] = num;
-            if (i == len) {
-                len++;
-            }
-        }
-        return len;
-    }
-
-    //n^2
-    public static int LisDP(int[] input) {
-        int finalMax = 1;
-        int[] dp = new int[input.length];
-        for (int i = input.length - 1; i >= 0; i--) {
-            int currentMax = 0;
-            for (int j = i + 1; j < input.length; j++) {
-                if (input[j] > input[i]) {
-                    currentMax = Math.max(currentMax, dp[j]);
-                    if(dp[j]==finalMax) break;
-                }
-            }
-            dp[i] = currentMax + 1;
-            if (dp[i] > finalMax) finalMax = dp[i];
-        }
-        return finalMax;
-    }
-
-    //2^n. refer educative. This is cuz there are 2 recursions take it or exclude it.
-    public static int LIS(int start, int[] input) {
-        int maxCount = 1;
-        for (int i = start; i < input.length; i++) {
-            for (int j = i + 1; j < input.length; j++) {
-                if (input[j] > input[i]) {
-                    maxCount = Math.max(LIS(j, input) + 1, maxCount);
-                }
-            }
-        }
-        return maxCount;
-
-    }
 
     //linearly searching for k can be better as for the entire j loop k only goes over n once
     //n^2
@@ -14471,7 +14927,7 @@ public class Test {
 
     public static List<List<Integer>> permute1BySwapping(int[] nums) {
         List<List<Integer>> list = new ArrayList<>();
-        Arrays.sort(nums);
+//        Arrays.sort(nums); not required
         List<Integer> input = new ArrayList<>();
         for (int i : nums)
             input.add(i);

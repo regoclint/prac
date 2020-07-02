@@ -79,7 +79,7 @@ To store array index in row * C + col. To retrieve the index row= storedValue / 
 LCA
     For BST - its where the values divide
     For Binary & Nary - return the node if the return node count is >1 the root is new lca
-    For multi parent(graph) - Build adj matrix, traverse from child to parent for both the targets 
+    For multi parent(graph) - Build rev adj matrix, traverse from child to parent for both the targets 
 2 sorted lists get minimum difference use 2 pointers and increment the smaller one to get closer(word distance)
 2 sorted lists find k pairs minimum sum use PQ(K pairs with smallest sum)
 Removing from arraylist and without maintaining sorted order can be done efficiently by replacing the element to remove with the last element
@@ -115,6 +115,26 @@ For matrix multiplication each row of A is multiplied with each col of B
 Assigning a new object to an object variable is not the same as assigning a new value to an array element pointed by an object variable...pass by ref/val
 to keep data sorted continuously can use 2 heaps - Median data stream, of sliding window 
 
+
+DP
+Pattern Bounded Knapsack
+    choosing without repetition
+    Subset sum - 1d array was used by going backwards to preserve the previous values for calculations
+        [1,2,5] is false for equal subsets even tough sum is even 
+    Minimum subset sum - min diff will be if a subset =n/2 or close to it. So find subset with maximum sum reaching n/2
+    Target sum, has a formula for its dp, making it like count subset sum
+Unbounded Knapsack 
+    choosing with repetition     
+Palindromic Subsequence
+    the movement here is from start and end
+    LPSubstring - the > and == condition can be used to reflect the ones and 0 in the matrix
+        
+Pattern LCS
+    Substring is continuous, gets set to 0 if not matched. Hence each row can be diff. Require 2 rows for dp
+    Subsequence is not continuous, keeps building. Require just 1 row for dp
+    recursive length of dp matrix doesnt require +1 as its handled with ifs. For iterative +1 is done, but it still needs to be populated based on the case.
+    
+    
 
 Utility funcs
 
@@ -308,7 +328,7 @@ https://www.youtube.com/watch?v=nBdTBDJNOh8 (for the diagrams)
     - Images stored as File vs BLOB 
         - Files are cheaper, faster, dont need updates. Can use CDN 
     - Images stored in DFS(Distributed File system) based on user id
-    - DB storing user id and file url(CDN ???)
+    - DB storing user id and file3 url(CDN ???)
     - token used for authorizing each call instead of sessions as this is not web
     
 - Recommend matches
@@ -378,8 +398,8 @@ Netflix (Streaming service) https://www.youtube.com/watch?v=psQzyFfsUGU
 - Recommendations
     - Spark n ML    
     - Collaborative filtering - What a similar user watched 
-    - Content based filtering - What content type the user is interested in from the past
-
+    - Content based filtering - What content type the user is interested in from the past. The actors, directors, genre, 
+    - Store multiple thumbnails for a title. Then based on the click thru a permanent thumbnail can be selected
 
 Web crawler https://www.youtube.com/watch?v=BKZxZwUgL3Y
 
@@ -438,23 +458,27 @@ Dropbox https://www.youtube.com/watch?v=U0xTu6E2CT8
  - Write and read heavy system
  - SQL cuz of ACID will help in consistency. NoSQL eventual consistency will be messy
  - Client
-        Watcher watches for changes in current folders, hashing can be used to check file differences
-        Chunker - Breaks file into smaller chunks for better bandwidth, time, storage, throughput
+        Watcher watches for changes in current folders, hashing can be used to check file3 differences
+        Chunker - Breaks file3 into smaller chunks for better bandwidth, time, storage, throughput
         Indexer - receives events from watcher and updates DB, also shares changes with Sync svc
         Internal DB - Keep track of offline changes
    Each client has this structure to rebuild changes on their side      
  - Metadata server with Cache(MySQL)
     Info about Chunks, Files, User, Devices, Workspace (sync folders)
-    Hash file id with CH
+    Hash file3 id with CH
     They built their own Edge wrapper DB with MySQL n cache
  - Synchronisation server
  - Message Queue Service
-    One request queue may be because of ordering, might be possible to have one queue per file 
-    Separate response Qs because of many devices so each device needs to get an update of the file
+    One request queue may be because of ordering, might be possible to have one queue per file3 
+    Separate response Qs because of many devices so each device needs to get an update of the file3
     Helps persist data if devices are offline
  - Caches do deal with hot chunks    
  - Block Cloud storage like EBS for editing files and S3 & CDN for photos, videos etc        
        
+S3
+- First write will be synchronously backed up. only after the backup is written, the write should be successful
+- Following writes/updates will be eventual consistency 
+
        
 Tiny URL
  - Flow:- client -> LB -> App server -> LB -> Cache
@@ -500,7 +524,7 @@ Type Ahead Suggestions
  - To update the trie for freq, log the counts, Use Map reduce job every hour to read the counts and update a slave, then make it master.
         Counts need to be updated for each node recursively for a given period. 
         Also after updating the count the parent's top 10 list may need to be updated, this can be done with a pointer to the parent
- - Rebuild trie by storing it a file in level order C2,A2,R1,T,P,O1,D
+ - Rebuild trie by storing it a file3 in level order C2,A2,R1,T,P,O1,D
  - Cache top searches       
  - Client
     Allow type ahead only after a couple of searches
@@ -547,7 +571,7 @@ Redis
     - Fault tolerance - Snapshots or Log reconstruction
                         CH
                         master slave config for data replication. Slaves can be in another DC 
-                        Replication can happen asynchronously for better speed, replication failur sometimes is ok as it can fetch from 
+                        Replication can happen asynchronously for better speed, replication failure sometimes is ok as it can fetch from DB
                              
                              
 Yelp
@@ -643,7 +667,7 @@ Solr vs ElasticSearch
  
 SOAP vs REST vs GraphQL
     - REST was supersceeded by SOAP was superceeded by CORBA
-    - SOAP is a protocol(developed by Microsoft),  GraphQL(developed by Fb) & REST are an architectural pattern
+    - SOAP is a protocol(developed by Microsoft),  GraphQL(developed by FB) & REST are an architectural pattern
     - SOAP uses XML, REST can use anything
     - REST architectural pattern is to be stateless and use HTTP status codes
     - https://restfulapi.net/statelessness/
@@ -691,8 +715,9 @@ Encryption is a two-way function where information is scrambled in such a way th
 Hashing is a one-way function where data is mapped to a fixed-length value. Hashing is primarily used for authentication. For passwords but not that safe.
 Salting is an additional step during hashing, typically seen in association to hashed passwords, that adds an additional value to the end of the password that changes the hash value produced.
     This is better for password storage. Eg. bcrypt and scrypt.
+Emails are encrypted and passwords are hashed.    
 SHA-256 vs MD5 checksums
-    Both are hashing algos which are used to check file integrity.
+    Both are hashing algos which are used to check file3 integrity.
     SHA-256 https://www.baeldung.com/sha-256-hashing-java
         Secure Hash algorithm is 256 bit
     MD5 is 128 bit and hence faster but less secure
@@ -792,11 +817,11 @@ Caching
             - 2 write calls so slower. but very persistent
             - used where latency is not an issue and cache hits are more important
         Write-around 
-            - First write to db then later cache
+            - First write to db then cache when a read happens
             - Leads to initial cache misses. but persistent
             - Used where persistence is more important
         Write-back 
-            - First write to cache then later to db
+            - First write to cache then later to db after intervals
             - Very fast. But not very persistent
             - Used where data is not very critical and reads need to be quick
     Cache eviction policies - LRU,etc
@@ -923,46 +948,36 @@ Hosted vs Cloud services- In hosted there may not be multiple tenants or scale c
 
 
 **Design Patterns**
+https://stackoverflow.com/questions/1673841/examples-of-gof-design-patterns-in-javas-core-libraries/
+GoF - Gang of four ppl made design patterns
 
+SOLID 
+    - Single responsibility
+    - Open for extensibility, closed for modification
+    - Liskov substitution - Program to an interface
+    - Interface segregation - Fine grained interface. No analysis paralysis for devs to choose which function to choose
+    - Dependency Inversion
+    
 Abstract class is so that no object can be created of it and you can have common functions defined so that inherited classes can reuse.
 Abstract classes can have abstract functions which will have no body so the inherited classes must define it
 When abstract class and when interface - abstract class when you have common functions also, interfaces when function names/process only might be same not function definitions
 
-Singleton - Creational
+**Creational:-**
+
+Singleton 
 - static getInstance and synchronise to prevent multiple initial creations
 - private constructor
     
-Factory - Creational
+Factory
 - Class to create objects so that the creation logic is not handled by clients
 - so client doesnt need to be recompiled
 - Also there is loose coupling in the client cuz of using the interface/abstract class   
 - A factory class with a method to return new objects based on the input parameter with return type of the interface/abstract class
+- Single responsibility to create, not to do anything else.
+- Creating in one place reduces changes all over the code.  
+- Can have a factory of decorated objects like NY pizza, CA pizza etc. A custom pizza can return a base pizza and then allow decorators on it
   
-Template - Behavioral
-- a process flow that needs to be done for many base classes
-- Abstract template class, final template method, that contains abstract methods which each sub class will define separately
-            
-Strategy design pattern - Behavioral
-- https://www.geeksforgeeks.org/strategy-pattern-set-1/
-- https://www.geeksforgeeks.org/strategy-pattern-set-2/
-- Used for optional behaviours
-- If a behaviour definition is common and required for all classes use abstract classes
-- But, If a behaviour definition is common but not required for all classes use Strategy pattern
-- Assign an interface to a base class and have concrete implementation of the interfaces
-    
-Observer - Behavioral
-- Used when multiple objects(Observers) are dependent on the state of one object(Subject)
-- Eg. Followers get notified, subscriptions, whatsapp group, anything that involves broadcasting a state
-- Coding to interfaces helps generalize stuff and can add more classes later on
-
-Adapter - Structural
-- Used to take some existing/legacy code and modify a part of it in the adapter for the new code
-- Eg. Android to iphone charger, US car speed in m/hr to UK speed km/hr
-- To convert A into an object B having some A functionality. Pass A to the constructor of the Adapter and use that object in a function coming from B's interface
-- Adapter pattern improves compatibility between 2 incompatible interfaces
-- https://stackify.com/design-patterns-explained-adapter-pattern-with-code-examples/
-
-Builder - Creational
+Builder
 - Should be used only when you want to build different IMMUTABLE objects using same object building process.
 - Instead of giving all values in the constructor as a must or telescopic constructors we use builder pattern.
 - one inner static class with public methods to set values, no setters for outer class, all final members for outer class(immutability), one build method in the inner class which creates an object of the outer class with itself as a parameter so that
@@ -971,18 +986,77 @@ Builder - Creational
 - Eg. StringBuilder, MockMvcBuilder
 - https://www.youtube.com/watch?v=YmEVYvELt28&t=822s
 
-Decorator - Structural
+
+**Structural:-**
+
+Adapter
+- Used to take some existing/legacy code and modify a part of it in the adapter for the new code
+- Eg. Android to iphone charger, US car speed in m/hr to UK speed km/hr
+- Plug the input into the constructor. Map the output functionalities with the input.
+- Adapter pattern improves compatibility between 2 incompatible interfaces
+- https://stackify.com/design-patterns-explained-adapter-pattern-with-code-examples/
+- Supports one to one or many to one mapping. Many to one by passing an interface(s) as input 
+
+Facade 
+- Used to build a facade to a client. Used as a cleanup/abstraction layer
+- Supports many to many abstraction 
+- Used to map to different function names. Same function names means they could be done by coding to an interface, facade wouldnt be required
+- Template pattern can become a facade too, if the sub-template methods are defined in the template class
+    like order flow- define the inventory, payment and shipping in the template class
+- https://dzone.com/articles/the-facade-pattern
+
+
+Decorator
 - https://www.youtube.com/watch?v=vqy8BL0xV0c&t=352s
 - Keep an interface which will be general to all types 
   Keep a basic object to be created as a must. 
   The decorator class is abstract and has the common interface 
   Classes that extend the decorator will call super and add functionality/decorate it.
+- To have a constructor that takes an instance of the same abstract class, that's the recognition key of the decorator pattern
 - At run time we can add features by decorating each object
 - Pizza and their toppings, nokia android phone
+- Diff between this and factory is - Factory is like coffee, boba, juice. Decorator is like the toppings on them
+- Decorator is used to make combinations possible in any order.
+- Helps prevent many ifs
+- Drawbacks - Can get too nested to debug, too many objects, can lower the performance
+
+
+**Behavioral:-**
+  
+Template
+- a process flow that needs to be done for many base classes
+- Abstract template class, final template method, that contains abstract methods which each sub class will define separately
+            
+Strategy design pattern
+- https://www.geeksforgeeks.org/strategy-pattern-set-1/
+- https://www.geeksforgeeks.org/strategy-pattern-set-2/
+- Used for optional behaviours
+- If a behaviour definition is common and required for all classes use abstract classes
+- But, If a behaviour definition is common but not required for all classes use Strategy pattern
+- Assign an interface to a base class and have concrete implementation of the interfaces
+- In runtime u wanna be able to set a new interface
+- Eg. comparators plugin in diff algos for sorting, characters and their powers
+    
+Observer
+- Used when multiple objects(Observers) are dependent on the state of one object(Subject)
+- Eg. Followers get notified, subscriptions, whatsapp group, anything that involves broadcasting a state
+- Coding to interfaces helps generalize stuff and can add more classes later on
+
+Iterator
+
+
+Command
+- Creates an abstraction layer for doing commands. The command object has all the implementation details
+- Client creates a few commands -> Invoker executes them.
+
+Memento
+- Creates a way to undo operations
+- A momento is a clone of the object to keep track of its state. A list of momentos can be kept in the invoker to rollback
+- https://www.youtube.com/watch?v=zRbHlDeon3E
+
 
 
 **Java**
-
 
 Stream https://www.geeksforgeeks.org/stream-in-java/
 - Intermediate Operations: map, filter, sorted
@@ -1113,7 +1187,7 @@ BigDecimal is better for precision/monetary stuff compared to double or float, b
  
 Static inner class and inner class
 - Inner classes can access all outer class variables including private
-- If a class is not used by any other classes it can be kept inside.
+- If a class is not used by any other classes it can be kept inside.    
 - Non-static inner classes have access to members of the enclosing class, even private. 
 - Static nested classes do not have access to other members of the enclosing class. Hence its used in builder pattern
 - A static nested class interacts with the instance members of its outer class as the static class exists before the outer class
@@ -1182,6 +1256,7 @@ Interceptors
 @Transactional 
     - will rollback in case of unchecked exceptions(Runtime exp,) but can be configured for checked also
     - method needs to be public
+    - Will auto commit at the end
     
 Live reload
 Actuator     
@@ -1213,7 +1288,7 @@ Microservices
 - Monolith is a all in one, SOA is many services but still in one, MS is multiple services in separate instances
 - Advantages - diff development cycles and languages, diff scaling, fault tolerant, modular POCs
 - Disadvantages - Latency, authentication, load balancing, debugging 
-- In case of many MS, debugging can be done better with a correlation id per request(originating timestamp_threadname)
+- In case of many MS, debugging can be done better with a correlation id per request(originating processName_timestamp_threadname)
 
 **Misc**
 Agile methodology uses scrum framework 

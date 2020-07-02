@@ -1,8 +1,6 @@
 package patterns;
 // Java implementation of Adapter pattern
 
-import java.util.Arrays;
-
 interface Bird
 {
     // birds implement Bird interface that allows
@@ -40,19 +38,19 @@ class PlasticToyDuck implements ToyDuck
     }
 }
 
-class BirdAdapter implements ToyDuck
+class BirdToToyDuckAdapter implements ToyDuck
 {
-    // You need to implement the interface your
-    // client expects to use.
     //Here bird is reused, and would be an example of legacy code
+    //plug bird into the adapter and make it behave like a toyduck
     Bird bird;
-    public BirdAdapter(Bird bird)
+    public BirdToToyDuckAdapter(Bird bird)
     {
         // we need reference to the object we
         // are adapting
         this.bird = bird;
     }
 
+    //mapping
     public void squeak()
     {
         // translate the methods appropriately
@@ -69,7 +67,7 @@ public class AdapterPattern
 
         // Wrap a bird in a birdAdapter so that it
         // behaves like toy duck
-        ToyDuck birdAdapter = new BirdAdapter(sparrow);
+        ToyDuck birdAdapter = new BirdToToyDuckAdapter(sparrow);
 
         System.out.println("Sparrow...");
         sparrow.fly();

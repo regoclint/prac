@@ -22,14 +22,14 @@ Dev stuff
 
 Challenges
 - Postman testsuite
+- Tech debt
+    - Open sessions, converted sessions to JPA
 - Long polling was bad, suggested websockets, settled with long polling with a condition
 - Performance on discovery API, did the research
 - Collaborating with multiple teams for Pna, learning and imparting
 - Suggested refresh token and access token be done automatically in SDK
 - Looking into core stack code and fixing bugs
 - LiveReload
-- Tech debt
-    - Open sessions, converted sessions to JPA
 
     
 faced something and how did u improve
@@ -193,11 +193,11 @@ contributed to improving moral, got critisized what did u do, tell someone else 
 data to develop strategy, large problem u helped solve 
 
 13. Have backbone: disagree and commit
-someone didnt agreee, conflict, unpopular descision, u disagreed, challenging situation
+someone didnt agreee, conflict, unpopular decision, u disagreed, challenging situation
 
 14. Deliver results
 exceeded goal, most complex problem, worked on something extremely hard and failed
-
+-buyer code base defect
 
 
 

@@ -1,11 +1,11 @@
-package pack;
+package patterns;
 
 import java.util.*;
 
 //Inner classes
 //Generics
 //ArrayList wrapper to call iterator function
-public class CustomListIterator {
+public class IteratorPattern {
     public static void main(String args[]) throws Exception {
         EmpList<Emp> empList = new EmpList<Emp>(new ArrayList<>());
         empList.add(new Emp(1));
@@ -20,6 +20,7 @@ public class CustomListIterator {
         System.out.println(emp4.equals(emp5));
         System.out.println(emp4.hashCode());
         System.out.println(emp5.hashCode());
+        System.out.println("------");
         HashSet hashSet=new HashSet();
         hashSet.add(emp4);
         hashSet.add(emp5);
@@ -85,6 +86,7 @@ class Emp {
 
     @Override
     public boolean equals(Object o) {
+        System.out.println("equals");
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Emp emp = (Emp) o;
@@ -93,7 +95,8 @@ class Emp {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        System.out.println("hash");
+        return Objects.hash(id);//if hash is different then equals is not checked
     }
 }
 
