@@ -94,7 +94,14 @@ Graphs
     - Graph is a tree if
         - number of edges exactly = nodes - 1
         - no cycles
-Subsequence is not contguous, substring is
+Topological sort
+    DFS - gets the reverse order of dependency. Keep a visited set. print after visiting all the neighbours/dependencies
+            it assumes it is acyclic and uses only one hashset.
+            Can check for cycles with another hashset may be.
+    BFS - gets the forward order of dependency. Keep an indegree count. Add to Q and print only if indegree goes to 0.
+            if the number of pushes do not equal to the nodes, there's a cycle
+             
+Subsequence is not contiguous, substring is
 LIS, Longest arith seq, LCS(substring and Subsequence) all are similar dp loop checks
 if top down goes with a +1 to next index then bottom up will go with -1. The opposite happens as dp builds on completed areas.     
 For binary search its better to do l +(r-l)/2 to prevent number out of bounds  
@@ -114,7 +121,19 @@ Stack can be used to continue a previous processing and end intermediate process
 For matrix multiplication each row of A is multiplied with each col of B
 Assigning a new object to an object variable is not the same as assigning a new value to an array element pointed by an object variable...pass by ref/val
 to keep data sorted continuously can use 2 heaps - Median data stream, of sliding window 
-
+Subarray sum
+    has a unique method of hashmap
+Median of a steam requires sorted data
+    Can use 2 heaps to give logN complexity for each
+Kth largest
+    Fixed set - Quick Select can be used to find kth largest faster than heap. Avg time is N, worst is N^2
+    
+To make parenthesis valid, remove invalid close brackets need to be done from start and open brackets from end
+String builder can be used for backtracking strings like lists are used for other stuff
+Sliding window
+    for subsequence the length of the window can be anything
+    for substring the window will be of fixed length - find all anagrams 
+        here the window can be reset based on an invalid char occurence
 
 DP
 Pattern Bounded Knapsack
@@ -127,8 +146,10 @@ Unbounded Knapsack
     choosing with repetition     
 Palindromic Subsequence
     the movement here is from start and end
-    LPSubstring - the > and == condition can be used to reflect the ones and 0 in the matrix
-        
+    the > and == condition can be used to reflect the ones and 0 in the matrix
+    LPSubstring - can use true or 0 to break the streak even if the current letter matched
+    LPSubsequence has the minimum deletions and good for a K-Palindromic check
+    Palindrome partitioning  
 Pattern LCS
     Substring is continuous, gets set to 0 if not matched. Hence each row can be diff. Require 2 rows for dp
     Subsequence is not continuous, keeps building. Require just 1 row for dp
@@ -141,6 +162,7 @@ Utility funcs
     Changing DS
         Arrays.asList(0, 1, 2, 3, 4, 5);
         sourceList.toArray(new Integer[sourceList.size()]);
+        Converting a list of integer arrays to matrix - ans.toArray(new int[ans.size()][2])
         new String(charArray);
     Copy func
         list.add(new ArrayList<String>(list1));
@@ -156,8 +178,22 @@ Utility funcs
     Character.isDigit
     Character.isAlphabet
     
+    sb.setCharAt()
+    
 Collections.sort uses Array.sort by converting the collection to array
 Array.sort uses quick sort for primitive type and Tim sort for objects
+
+Ways to optimise
+- on time 
+        increase space
+        multiple O(N)
+        already sorted then binary search
+        look at different complexity scales and see if you can reduce to the next lower scale
+        try diff DS
+- On space
+        sorting
+        binary search
+        use input for modification or sentinels          
 
 26 -
 128 -
@@ -660,8 +696,8 @@ Indexing sorts a particular set of data so that it can be binary searched. This 
     - When the indexed rows are used more often for querying its useful otherwise its more of a negative for writes
     https://www.youtube.com/watch?v=zDzu6vka0rQ
     https://www.youtube.com/watch?v=WmJuhKLQMA4
-Solr vs ElasticSearch
-    - both build on Apache Lucene. Elastic came later
+Apache Solr vs ElasticSearch
+    - both build on Apache Lucene. Elastic came later and built by the Elastic company
     - Elastic has built in Zookeeper. SolrCloud needs Zookeeper to manage 
     - Solr is much more oriented towards text search while Elasticsearch is often used for analytical querying, filtering, and grouping.
  
@@ -1204,8 +1240,12 @@ Lombok - a java framework to remove boilerplate code
 
 try-finally combination is used to free up resources. BoundedBlockingQueueReentrantLock
  
- 
- 
+Comparable vs Comparator
+- Comparable uses compareTo(T), Comparator uses compare(T, T)
+- Sometimes, we can't modify the source code of the class whose objects we want to sort, thus making the use of Comparable impossible
+- Using Comparators allows us to avoid adding additional code to our domain classes
+- We can define multiple different comparison strategies which isn't possible when using Comparable
+- collection.sort(List) uses comparable, collection.sort(List, Comparator) uses comparator and follows strategy pattern
 **Spring**
 
 Spring is a framework over Servlets

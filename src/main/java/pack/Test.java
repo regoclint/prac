@@ -142,7 +142,7 @@ public class Test {
 //////////// Median of Sorted Arrays
 //        System.out.println(findMedianSortedArrays(new int[]{1,2,4},new int[]{2,5}));
 
-//////////// merge K Lists and Merge Two Sorted Lists
+//////////// Merge k Sorted Lists and Merge Two Sorted Lists
 //        ListNode l1=new ListNode(1);
 //        ListNode l2=new ListNode(2);
 //        ListNode l3=new ListNode(3);
@@ -329,7 +329,7 @@ public class Test {
 //        System.out.println(isSameTreeRecur(t1, t1));
 //        System.out.println(isSameTreeQueue(t1, t1));
 
-//////////// Max Path sum BT
+//////////// Binary Tree Maximum Path Sum
 //        TreeNode t4 = new TreeNode(-4, null, null);
 //        TreeNode t5 = new TreeNode(-5, null, null);
 //        TreeNode t3 = new TreeNode(-3, t4, null);
@@ -348,7 +348,7 @@ public class Test {
 ////        System.out.println(levels);
 //        System.out.println(levelOrderIter(t1)); // after removing the parents at one level, the remaining elements in the queue = no: of children at next level
 
-//////////// Serialize and deserialize BT
+//////////// Serialize and Deserialize Binary Tree
 //        TreeNode t5 = new TreeNode(7, null, null);
 //        TreeNode t4 = new TreeNode(15, null, null);
 //        TreeNode t3 = new TreeNode(20, t4, t5);
@@ -637,7 +637,7 @@ public class Test {
 //        List<String> res=wordSearchIITrie(input,new String[]{"oath","pea","eat","rain"});
 
 
-//////////// Peak element
+//////////// Find Peak Element
 //        System.out.println(findPeakElement(new int[]{3,2,3,5,6,7,8,9,10}));
 
 //////////// Alien Dictionary
@@ -1201,7 +1201,7 @@ public class Test {
 //        System.out.println(addBinary("1010","10"));
 //        System.out.println(addBinaryBitManip("1010","10"));
 
-//////////// verify alien dictionary
+//////////// Verifying an Alien Dictionary
 //        System.out.println(isAlienSorted(new String[]{"hello", "leetcode"}, "hlabcdefgijkmnopqrstuvwxyz"));
 
 //////////// BST to DLL
@@ -1219,9 +1219,9 @@ public class Test {
 //////////// Expression Add Operators
 //        System.out.println(addOperators("1234",6));
 
-//////////// Read N Characters Given Read4 II
+//////////// Read N Characters Given Read4 II - Call multiple times
 //        File file("abc");
-//        Solution sol;
+//        Read4 sol;
 //        sol.read(buf, 1); // After calling your read method, buf should contain "a". We read a total of 1 character from the file, so return 1.
 //        sol.read(buf, 2); // Now buf should contain "bc". We read a total of 2 characters from the file, so return 2.
 //        sol.read(buf, 1); // We have reached the end of file, no more characters can be read. So return 0.
@@ -1736,7 +1736,7 @@ public class Test {
 //        n3.right=n5;
 //        System.out.println(findSecondMinimumValue(n1));
 
-//////////// Populating Next Right Pointers in Each Node
+//////////// Populating Next Right Pointers in Each Node I and II
 //        TreeNode n1=new TreeNode(1);
 //        TreeNode n2=new TreeNode(2);
 //        TreeNode n3=new TreeNode(3);
@@ -1752,6 +1752,9 @@ public class Test {
 //        n3.right=n7;
 //        connect(n1);
 //        connectRecur(n1);
+
+//        connectII();
+
 
 //////////// Top K Frequent Elements
 //        System.out.println(topKFrequent(new int[]{1,1,1,2,2,3},2));
@@ -2160,12 +2163,682 @@ public class Test {
 //        num = new int[]{1, 2, 7, 1};
 //        System.out.println(findTargetSubsets(num, 9));
 
-        System.out.println(findLPSLength("abdbca"));
+//        System.out.println(findLPSLength("abdbca"));
 
 
 //////////// Word Break II
 //        WordBreakII wordBreakII=new WordBreakII();
 
+//////////// Kth Largest Element in an Array
+//        System.out.println(findKthLargest(new int[]{3,2,1,5,6,4},2));
+//        System.out.println(findKthLargestQuickSelect(new int[]{3,2,1,5,6,4},2));
+
+//////////// Valid Palindrome II
+//        System.out.println(validPalindromeII("akcbca"));
+
+//////////// Diameter of Binary Tree
+//        DiameterBT diameterBT=new DiameterBT();
+
+//////////// Range Sum of BST
+//        System.out.println(rangeSumBST());
+
+//////////// Leftmost Column with at Least a One
+//        leftMostColumnWithOne();
+        
+//////////// Create Maximum Number
+//        System.out.println(maxNumber(new int[]{3, 4, 6, 5},new int[]{9, 1, 2, 5, 8, 3},5));
+
+//////////// Cracking the Safe
+//        System.out.println(crackSafe(2,2));
+
+//////////// Next Closest Time
+//        System.out.println(nextClosestTime("12:34s"));
+
+//////////// Evaluate Division
+//        System.out.println(calcEquation(new String[][]{ {"a", "b"}, {"a", "c"} ,{"a", "d"} },
+//                                        new double[] {2.0, 3.0,4.0},
+//                                        new String[][]{ {"a", "c"}, {"b", "a"}, {"d", "b"}, {"a", "a"}, {"a", "b"} }));
+//        System.out.println(calcEquationDfs(new String[][]{ {"a", "b"}, {"a", "c"} ,{"a", "d"} },
+//                                        new double[] {2.0, 3.0,4.0},
+//                                        new String[][]{ {"a", "c"}, {"b", "a"}, {"d", "b"}, {"a", "a"}, {"a", "b"} }));
+
+//////////// Wiggle Sort
+//        int[] input = new int[]{3, 5, 2, 1, 6, 4};
+//        wiggleSortSorting(input);
+//        wiggleSort(input);
+
+//////////// Bulls and Cows
+//        System.out.println(getHint("1123","0111"));
+
+//////////// Repeated String Match
+//        System.out.println(repeatedStringMatch("abcd","cdabcdab"));
+
+//////////// Surrounded Regions
+//        SurroundedRegions surroundedRegions=new SurroundedRegions();
+
+//////////// Plus One
+//        plusOne(new int[]{1,2,3});
+
+//////////// Repeated Substring Pattern
+//        System.out.println(repeatedSubstringPattern("ababba"));
+//        System.out.println(repeatedSubstringPatternRabinKarp("ababba"));
+
+//////////// Swap Adjacent in LR String
+//        System.out.println(canTransform("RXXLRXRXL","XRLXXRRLX"));
+
+//////////// Best Meeting Point
+//        System.out.println(minTotalDistance());
+    }
+
+
+
+    public static int minTotalDistance(int[][] grid) {
+        List<Integer> rows = collectRows(grid);
+        List<Integer> cols = collectCols(grid);
+        return minDistance1D(rows) + minDistance1D(cols);
+    }
+
+    private static int minDistance1D(List<Integer> points) {
+        int distance = 0;
+        int i = 0;
+        int j = points.size() - 1;
+        while (i < j) {
+            distance += points.get(j) - points.get(i);
+            i++;
+            j--;
+        }
+        return distance;
+    }
+
+    private static List<Integer> collectRows(int[][] grid) {
+        List<Integer> rows = new ArrayList<>();
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[0].length; col++) {
+                if (grid[row][col] == 1) {
+                    rows.add(row);
+                }
+            }
+        }
+        return rows;
+    }
+
+    private static List<Integer> collectCols(int[][] grid) {
+        List<Integer> cols = new ArrayList<>();
+        for (int col = 0; col < grid[0].length; col++) {
+            for (int row = 0; row < grid.length; row++) {
+                if (grid[row][col] == 1) {
+                    cols.add(col);
+                }
+            }
+        }
+        return cols;
+    }
+
+    public static boolean canTransform(String start, String end) {
+        int n = start.length();
+
+        // count X in start and end --> should be the same
+        int count = 0;
+        for (int i = 0; i < n; ++i) {
+            if (start.charAt(i) == 'X') count++;
+            if (end.charAt(i) == 'X') count--;
+        }
+        if (count != 0) return false;
+
+        int i = 0, j = 0;
+        while (i < n && j < n) {
+            while (i < n && start.charAt(i) == 'X') i++;
+            while (j < n && end.charAt(j) == 'X') j++;
+
+            // i and j are the indices representing the next
+            // occurrences of non-X characters
+            if (i == n || j == n)
+                return i == n && j == n;
+
+            if (start.charAt(i) != end.charAt(j)) return false;
+            if (start.charAt(i) == 'L' && i < j) return false;
+            if (start.charAt(i) == 'R' && i > j) return false;
+
+            i++;
+            j++;
+        }
+
+        return true;
+    }
+
+    //Knutt morris, didnt understand
+    public static boolean repeatedSubstringPattern(String s) {
+        int n = s.length();
+        int[] dp = new int[n];
+        // Construct partial match table (lookup table).
+        // It stores the length of the proper prefix that is also a proper suffix.
+        // ex. ababa --> [0, 0, 1, 2, 1]
+        // ab --> the length of common prefix / suffix = 0
+        // aba --> the length of common prefix / suffix = 1
+        // abab --> the length of common prefix / suffix = 2
+        // ababa --> the length of common prefix / suffix = 1
+        for (int i = 1; i < n; ++i) {
+            int j = dp[i - 1];
+            while (j > 0 && s.charAt(i) != s.charAt(j)) {
+                j = dp[j - 1];
+            }
+            if (s.charAt(i) == s.charAt(j)) {
+                ++j;
+            }
+            dp[i] = j;
+        }
+
+        int l = dp[n - 1];
+        // check if it's repeated pattern string
+        return l != 0 && n % (n - l) == 0;
+    }
+
+    //Find divisors + Rabin Karp
+    //For eg string length 10 will have either 5, 2 length patterns or 2, 5 length patterns
+    //Maximium possible factors are till root N like factors question
+    //N * rootN
+    public static boolean repeatedSubstringPatternRabinKarp(String s) {
+        int n = s.length();
+        if (n < 2) return false;
+        if (n == 2) return s.charAt(0) == s.charAt(1);
+
+        for (int i = (int)Math.sqrt(n); i > 0; i--) {
+            if (n % i == 0) {
+                List<Integer> divisors = new ArrayList<>();
+                divisors.add(i);
+                if (i != 1) {
+                    divisors.add(n / i);
+                }
+                for (int l : divisors) {
+                    String tmp = s.substring(0, l);
+                    int firstHash = tmp.hashCode();
+                    int currHash = firstHash;
+                    int start = l;
+                    while (start != n && currHash == firstHash) {
+                        tmp = s.substring(start, start + l);
+                        currHash = tmp.hashCode();
+                        start += l;
+                    }
+                    if (start == n && currHash == firstHash) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    //N * (N+M)...cuz of the indexOf function
+    public static int repeatedStringMatch(String A, String B) {
+        int q = 1;
+        StringBuilder S = new StringBuilder(A);
+        for (; S.length() < B.length(); q++) S.append(A);
+        if (S.indexOf(B) >= 0) return q;
+        if (S.append(A).indexOf(B) >= 0) return q+1;
+        return -1;
+    }
+
+    public static int[] plusOne(int[] digits) {
+        int n = digits.length;
+
+        for (int idx = n - 1; idx >= 0; --idx) {
+            if (digits[idx] == 9)
+                digits[idx] = 0;
+            // here we have the rightmost not-nine
+            else {
+                digits[idx]++;
+                return digits;
+            }
+        }
+        // we're here because all the digits are nines
+        digits = new int[n + 1];
+        digits[0] = 1;
+        return digits;
+    }
+
+    //the key thing here is to start from the border 0's
+    public class SurroundedRegions {
+        class Pair<U, V> {
+            public U first;
+            public V second;
+
+            public Pair(U first, V second) {
+                this.first = first;
+                this.second = second;
+            }
+        }
+        protected Integer ROWS = 0;
+        protected Integer COLS = 0;
+
+        public void solve(char[][] board) {
+            if (board == null || board.length == 0) {
+                return;
+            }
+            this.ROWS = board.length;
+            this.COLS = board[0].length;
+
+            List<Pair<Integer, Integer>> borders = new LinkedList<Pair<Integer, Integer>>();
+            // Step 1). construct the list of border cells
+            for (int r = 0; r < this.ROWS; ++r) {
+                borders.add(new Pair(r, 0));
+                borders.add(new Pair(r, this.COLS - 1));
+            }
+            for (int c = 0; c < this.COLS; ++c) {
+                borders.add(new Pair(0, c));
+                borders.add(new Pair(this.ROWS - 1, c));
+            }
+
+            // Step 2). mark the escaped cells
+            for (Pair<Integer, Integer> pair : borders) {
+                this.BFS(board, pair.first, pair.second);
+            }
+
+            // Step 3). flip the cells to their correct final states
+            for (int r = 0; r < this.ROWS; ++r) {
+                for (int c = 0; c < this.COLS; ++c) {
+                    if (board[r][c] == 'O')
+                        board[r][c] = 'X';
+                    if (board[r][c] == 'E')
+                        board[r][c] = 'O';
+                }
+            }
+        }
+
+        protected void BFS(char[][] board, int r, int c) {
+            LinkedList<Pair<Integer, Integer>> queue = new LinkedList<Pair<Integer, Integer>>();
+            queue.offer(new Pair<>(r, c));
+
+            while (!queue.isEmpty()) {
+                Pair<Integer, Integer> pair = queue.pollFirst();
+                int row = pair.first, col = pair.second;
+                if (board[row][col] != 'O')
+                    continue;
+
+                board[row][col] = 'E';
+                if (col < this.COLS - 1)
+                    queue.offer(new Pair<>(row, col + 1));
+                if (row < this.ROWS - 1)
+                    queue.offer(new Pair<>(row + 1, col));
+                if (col > 0)
+                    queue.offer(new Pair<>(row, col - 1));
+                if (row > 0)
+                    queue.offer(new Pair<>(row - 1, col));
+            }
+        }
+    }
+
+    public static String getHint(String secret, String guess) {
+        int bulls = 0;
+        int cows = 0;
+        int[] numbers = new int[10];
+        for (int i = 0; i < secret.length(); i++) {
+            if (secret.charAt(i) == guess.charAt(i)) bulls++;
+            else {
+                if (numbers[secret.charAt(i) - '0']++ < 0) cows++;
+                if (numbers[guess.charAt(i) - '0']-- > 0) cows++;
+            }
+        }
+        return bulls + "A" + cows + "B";
+    }
+
+    public static void wiggleSort(int[] nums) {
+        boolean increasing = true;
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (increasing) {
+                if (nums[i] > nums[i + 1]) {
+                    swap(nums, i, i + 1);
+                }
+            } else {
+                if (nums[i] < nums[i + 1]) {
+                    swap(nums, i, i + 1);
+                }
+            }
+            increasing = !increasing;
+        }
+    }
+
+    public static void wiggleSortSorting(int[] nums) {
+        Arrays.sort(nums);
+        for (int i = 1; i < nums.length - 1; i += 2) {
+            int temp = nums[i];
+            nums[i] = nums[i+1];
+            nums[i+1] = temp;
+        }
+    }
+
+    //the dist.put are the tough parts
+    public static double[] calcEquation(String[][] e, double[] values, String[][] q) {
+        double[] res = new double[q.length];
+        Map<String, String> root = new HashMap<>();
+        Map<String, Double> dist = new HashMap<>();
+        for (int i = 0; i < e.length; i++) {
+            String r1 = find(root, dist, e[i][0]);
+            String r2 = find(root, dist, e[i][1]);
+            root.put(r1, r2);//union
+            dist.put(r1, dist.get(e[i][1]) * values[i] / dist.get(e[i][0]));//gets the value of the previous step
+        }
+        for (int i = 0; i < q.length; i++) {
+            if (!root.containsKey(q[i][0]) || !root.containsKey(q[i][1])) {
+                res[i] = -1.0;
+                continue;
+            }
+            String r1 = find(root, dist, q[i][0]);
+            String r2 = find(root, dist, q[i][1]);
+            if (!r1.equals(r2)) {
+                res[i] = -1.0;
+                continue;
+            }
+            res[i] = (double) dist.get(q[i][0]) / dist.get(q[i][1]);
+        }
+        return res;
+    }
+
+    private static String find(Map<String, String> root, Map<String, Double> dist, String s) {
+        if (!root.containsKey(s)) {
+            root.put(s, s);
+            dist.put(s, 1.0);
+            return s;
+        }
+        if (root.get(s).equals(s)) return s;
+        String lastP = root.get(s);
+        String p = find(root, dist, lastP);
+        root.put(s, p);
+        dist.put(s, dist.get(s) * dist.get(lastP));
+        return p;
+    }
+
+    public static double[] calcEquationDfs(String[][] equations, double[] values, String[][] query) {
+        Map<String, Map<String, Double>> numMap = new HashMap<>();
+        int i = 0;
+        for(String[] str : equations) {
+            insertPairs(numMap, str[0], str[1], values[i]);
+            insertPairs(numMap, str[1], str[0], 1.0/values[i]);
+            i++;
+        }
+
+        double[] res = new double[query.length];
+        i = 0;
+        for(String[] q: query) {
+            Double resObj = handleQuery(q[0], q[1], numMap, new HashSet<>());
+            res[i++] = (resObj != null) ? resObj : -1.0;
+        }
+        return res;
+    }
+
+    public static void insertPairs(Map<String, Map<String, Double>> numMap, String num, String denom, Double value) {
+        Map<String, Double> denomMap = numMap.get(num);
+        if(denomMap == null) {
+            denomMap = new HashMap<>();
+            numMap.put(num, denomMap);
+        }
+        denomMap.put(denom, value);
+    }
+
+    public static Double handleQuery(String num, String denom, Map<String, Map<String, Double>> numMap, Set<String> visitedSet) {
+        String dupeKey = num+":"+denom;
+        if(visitedSet.contains(dupeKey)) return null;
+        if(!numMap.containsKey(num) || !numMap.containsKey(denom)) return null;
+        if(num.equals(denom)) return 1.0;
+
+        Map<String, Double> denomMap = numMap.get(num);
+        visitedSet.add(dupeKey);
+        for(String key : denomMap.keySet()) {
+            Double res = handleQuery(key, denom, numMap, visitedSet);
+            if(res != null) {
+                return denomMap.get(key) * res;
+            }
+        }
+        visitedSet.remove(dupeKey);
+        return null;
+    }
+
+    public static String nextClosestTime(String time) {
+        char[] result = time.toCharArray();
+        char[] digits = new char[] {result[0], result[1], result[3], result[4]};
+        Arrays.sort(digits);
+
+        result[4] = findNext(result[4], (char)('9' + 1), digits);  // no upperLimit for this digit, i.e. 0-9
+        if(result[4] > time.charAt(4)) return String.valueOf(result);
+
+        result[3] = findNext(result[3], '5', digits);
+        if(result[3] > time.charAt(3)) return String.valueOf(result);
+
+        result[1] = result[0] == '2' ? findNext(result[1], '3', digits) : findNext(result[1], (char)('9' + 1), digits);
+        if(result[1] > time.charAt(1)) return String.valueOf(result);
+
+        result[0] = findNext(result[0], '2', digits);
+        return String.valueOf(result);
+    }
+
+    private static char findNext(char current, char upperLimit, char[] digits) {
+        if(current == upperLimit)
+            return digits[0];
+
+        int pos = Arrays.binarySearch(digits, current) + 1;
+        while(pos < 4 && digits[pos] == current)
+            pos++;
+
+        return pos == 4 || digits[pos] > upperLimit ? digits[0] : digits[pos];
+    }
+
+    //the char is recorded at the end to prevent getting stuck
+    public static String crackSafe(int n, int k) {
+        if (n == 1 && k == 1) return "0";
+        Set<String> seen = new HashSet();
+        StringBuilder ans = new StringBuilder();
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n - 1; ++i)
+            sb.append("0");
+        String start = sb.toString();
+
+        dfs(start, k, seen,ans);
+        ans.append(start);
+        return new String(ans);
+    }
+
+    public static void dfs(String node, int k, Set<String> seen,StringBuilder ans) {
+        for (int x = 0; x < k; ++x) {
+            String nei = node + x;
+            if (!seen.contains(nei)) {
+                seen.add(nei);
+                dfs(nei.substring(1), k, seen,ans);
+                ans.append(x);
+            }
+        }
+    }
+
+    //the maxarray function is key
+    public static int[] maxNumber(int[] nums1, int[] nums2, int k) {
+        int n = nums1.length;
+        int m = nums2.length;
+        int[] ans = new int[k];
+        //k-m cuz if n=4, m=3...minimum n would be 2 for a k=5. This will help always generate k lengths
+        for (int i = Math.max(0, k - m); i <= k && i <= n; ++i) {
+            int[] candidate = merge(maxArray(nums1, i), maxArray(nums2, k - i), k);
+            if (greater(candidate, 0, ans, 0)) ans = candidate;
+        }
+        return ans;
+    }
+    //2 pointers may be better than this for and nested while
+    private static int[] merge(int[] nums1, int[] nums2, int k) {
+        int[] ans = new int[k];
+        for (int i = 0, j = 0, r = 0; r < k; ++r)
+            ans[r] = greater(nums1, i, nums2, j) ? nums1[i++] : nums2[j++];
+        return ans;
+    }
+    public static boolean greater(int[] nums1, int i, int[] nums2, int j) {
+        while (i < nums1.length && j < nums2.length && nums1[i] == nums2[j]) {
+            i++;
+            j++;
+        }
+        return j == nums2.length || (i < nums1.length && nums1[i] > nums2[j]);
+    }
+    public static int[] maxArray(int[] nums, int k) {
+        int n = nums.length;
+        int[] ans = new int[k];
+        for (int i = 0, j = 0; i < n ; ++i) {
+             int numberOfDigitsFormed = n - i + j - 1;
+            while (numberOfDigitsFormed >= k && j > 0 && ans[j - 1] < nums[i]) {
+                j--;
+                numberOfDigitsFormed = n - i + j - 1;
+            }
+            if (j < k) ans[j++] = nums[i];
+        }
+        return ans;
+    }
+
+    //code commented to compile successfully
+    public static int leftMostColumnWithOne(int binaryMatrix) {
+
+        int rows = 0;//binaryMatrix.dimensions().get(0);
+        int cols = 0;//binaryMatrix.dimensions().get(1);
+
+        // Set pointers to the top-right corner.
+        int currentRow = 0;
+        int currentCol = cols - 1;
+
+        // Repeat the search until it goes off the grid.
+        while (currentRow < rows && currentCol >= 0) {
+            if (true)//(binaryMatrix.get(currentRow, currentCol) == 0)
+                currentRow++;
+             else
+                currentCol--;
+
+        }
+
+        // If we never left the last column, this is because it was all 0's.
+        return (currentCol == cols - 1) ? -1 : currentCol + 1;
+    }
+
+    static int rangeSum=0;
+    public static int rangeSumBST(TreeNode root, int L, int R) {
+        rangeSum = 0;
+        rangeSumDfs(root, L, R);
+        return rangeSum;
+    }
+
+    public static void rangeSumDfs(TreeNode node, int L, int R) {
+        if (node != null) {
+            if (L <= node.val && node.val <= R)
+                rangeSum += node.val;
+            if (L < node.val)
+                rangeSumDfs(node.left, L, R);
+            if (node.val < R)
+                rangeSumDfs(node.right, L, R);
+        }
+    }
+
+    //tricky question to keep it neat
+    //max is always L+R, independent of the return value
+    public class DiameterBT {
+        int max = 0;
+
+        public int diameterOfBinaryTree(TreeNode root) {
+            maxDepth(root);
+            return max;
+        }
+
+        private int maxDepth(TreeNode root) {
+            if (root == null) return 0;
+
+            int left = maxDepth(root.left);
+            int right = maxDepth(root.right);
+
+            max = Math.max(max, left + right);
+
+            return Math.max(left, right) + 1;
+        }
+    }
+
+    public static boolean isPalindromeRange(String s, int i, int j) {
+        for (int k = i; k <= i + (j - i) / 2; k++) {
+            if (s.charAt(k) != s.charAt(j - k + i)) return false;
+        }
+        return true;
+    }
+    public static boolean validPalindromeII(String s) {
+        for (int i = 0; i < s.length() / 2; i++) {
+            if (s.charAt(i) != s.charAt(s.length() - 1 - i)) {
+                int j = s.length() - 1 - i;
+                return (isPalindromeRange(s, i+1, j) ||
+                        isPalindromeRange(s, i, j-1));
+            }
+        }
+        return true;
+    }
+
+    public static void swap(int a, int b, int[] nums) {
+        int tmp = nums[a];
+        nums[a] = nums[b];
+        nums[b] = tmp;
+    }
+
+    public static int partition(int left, int right, int pivot_index,int[] nums) {
+        int pivot = nums[pivot_index];
+        // 1. move pivot to end
+        swap(pivot_index, right,nums);
+        int store_index = left;
+
+        // 2. move all smaller elements to the left
+        for (int i = left; i <= right; i++) {
+            if (nums[i] < pivot) {
+                swap(store_index, i,nums);
+                store_index++;
+            }
+        }
+
+        // 3. move pivot to its final place
+        swap(store_index, right,nums);
+
+        return store_index;
+    }
+
+    public static int quickSelect(int left, int right, int k_smallest, int[] nums) {
+    /*
+    Returns the k-th smallest element of list within left..right.
+    */
+
+        if (left == right) // If the list contains only one element,
+            return nums[left];  // return that element
+
+        // select a random pivot_index
+        Random random_num = new Random();
+        int pivot_index = left + random_num.nextInt(right - left);
+
+        pivot_index = partition(left, right, pivot_index,nums);
+
+        // the pivot is on (N - k)th smallest position
+        if (k_smallest == pivot_index)
+            return nums[k_smallest];
+            // go left side
+        else if (k_smallest < pivot_index)
+            return quickSelect(left, pivot_index - 1, k_smallest,nums);
+        // go right side
+        return quickSelect(pivot_index + 1, right, k_smallest,nums);
+    }
+
+    public static int findKthLargestQuickSelect(int[] nums, int k) {
+        nums = nums;
+        int size = nums.length;
+        // kth largest is (N - k)th smallest
+        return quickSelect(0, size - 1, size - k,nums);
+    }
+
+    public static int findKthLargest(int[] nums, int k) {
+        // init heap 'the smallest element first'
+        PriorityQueue<Integer> heap =
+                new PriorityQueue<Integer>((n1, n2) -> n1 - n2);
+
+        // keep k largest elements in the heap
+        for (int n: nums) {
+            heap.add(n);
+            if (heap.size() > k)
+                heap.poll();
+        }
+
+        // output
+        return heap.poll();
     }
 
     //Dont need 2 indices, just previous is sufficient to go back
@@ -3649,7 +4322,7 @@ public class Test {
         return new ArrayList<>(groups.values());
     }
 
-    //in the case of 1/n majority there will be a max of n-1 candiates
+    //in the case of 1/n majority there will be a max of n-1 candidates
     public static List<Integer> majorityElementII(int[] nums) {
         if (nums == null || nums.length == 0)
             return new ArrayList<Integer>();
@@ -3776,11 +4449,11 @@ public class Test {
             a.add(head.val);
             head = head.next;
         }
-        TreeNode node = contructBinaryBalancedTree(a, 0, a.size()-1);
+        TreeNode node = constructBinaryBalancedTree(a, 0, a.size()-1);
         return node;
     }
 
-    public static TreeNode contructBinaryBalancedTree(List<Integer> a, int start, int end) {
+    public static TreeNode constructBinaryBalancedTree(List<Integer> a, int start, int end) {
         if(start > end) return null;
         if(start == end) return new TreeNode(a.get(start));//not really required by helps prevent 2 extra recur calls each time
 
@@ -3788,8 +4461,8 @@ public class Test {
 
         TreeNode root = new TreeNode(a.get(mid));
 
-        root.left = contructBinaryBalancedTree(a, start, mid-1);
-        root.right = contructBinaryBalancedTree(a, mid+1, end);
+        root.left = constructBinaryBalancedTree(a, start, mid-1);
+        root.right = constructBinaryBalancedTree(a, mid+1, end);
 
         return root;
     }
@@ -3891,7 +4564,7 @@ public class Test {
         int left = 0, right = n - 1, pivot;
         // find left = right index such that
         // missing(left - 1) < k <= missing(left)
-        while (left != right) {
+        while (left < right) {
             pivot = left + (right - left) / 2;
 
             if (missing(pivot, nums) < k)
@@ -4062,6 +4735,7 @@ public class Test {
         return result;
     }
 
+    //can remove from back directly no need of openToKeep
     public static String minRemoveToMakeValid2(String s) {
 
         // Parse 1: Remove all invalid ")"
@@ -4080,6 +4754,7 @@ public class Test {
             sb.append(c);
         }
 
+        if (balance==0) return sb.toString();
         // Parse 2: Remove the rightmost "("
         StringBuilder result = new StringBuilder();
         int openToKeep = openSeen - balance;
@@ -5342,6 +6017,8 @@ public class Test {
     }
 
     //here the if condition prevents nB checks if the value is 0
+    //sparse matrix means a matrix where most elements are 0, hence the if condition is important
+    //multiplication can be done by m->nB->n or m->n>nB...with the latter we can get all combos of a[i][k] first and skip
     public static int[][] multiply(int[][] A, int[][] B) {
         int m = A.length, n = A[0].length, nB = B[0].length;
         int[][] C = new int[m][nB];
@@ -6150,6 +6827,40 @@ public class Test {
         return top_k;
     }
 
+    public static TreeNode connectII(TreeNode root) {
+
+        if (root == null)
+            return root;
+        TreeNode leftmost = root;
+        TreeNode curr = leftmost;
+        TreeNode prev;
+        while (leftmost != null) {
+            prev = null;
+            curr = leftmost;
+            leftmost = null;
+            while (curr != null) {
+                processChild(curr.left,leftmost,prev);
+                processChild(curr.right,leftmost,prev);
+                curr = curr.next;
+            }
+        }
+
+        return root;
+    }
+
+    public static void processChild(TreeNode childNode, TreeNode leftmost, TreeNode prev) {
+
+        if (childNode != null) {
+
+            if (prev != null)
+                prev.next = childNode;
+            else
+                leftmost = childNode;
+
+            prev = childNode;
+        }
+    }
+
     public static void connectRecur(TreeNode root) {
 
         if(root==null || root.left==null)
@@ -6705,7 +7416,7 @@ public class Test {
         return newRoot;
     }
 
-    //passing i in the recursion prevents duplicates
+    //passing i in the recursion prevents duplicates For eg 12...[2,2,3] and then [3,2,2] will get prevented as it wont go for lower numbers than 3
     //square root can be used as max limit
     public static List<List<Integer>> getFactors(int n) {
         List<List<Integer>> res = new LinkedList<>();
@@ -7552,29 +8263,34 @@ public class Test {
         return output + elementsLessThanK;
     }
 
-    //DP didnt understand
+    //similar to product except self
     public static int[] maxSumOfThreeSubarrays(int[] nums, int subarrayLength) {
         //W is an array of sums of windows
         int[] W = new int[nums.length - subarrayLength + 1];
         int sum = 0;
+        //sliding window of calculating sums starting at an index
         for (int i = 0; i < nums.length; i++) {
             sum += nums[i];
-            if (i >= subarrayLength) sum -= nums[i-subarrayLength];
-            if (i >= subarrayLength-1) W[i-subarrayLength+1] = sum;
+            if (i >= subarrayLength)
+                sum -= nums[i-subarrayLength];
+            if (i >= subarrayLength-1)
+                W[i-subarrayLength+1] = sum;
         }
 
-        //indices of w from left
+        //best subarray sum on the left side
         int[] left = new int[W.length];
         int best = 0;
         for (int i = 0; i < W.length; i++) {
-            if (W[i] > W[best]) best = i;
+            if (W[i] > W[best])
+                best = i;
             left[i] = best;
         }
 
         int[] right = new int[W.length];
         best = W.length - 1;
         for (int i = W.length - 1; i >= 0; i--) {
-            if (W[i] >= W[best]) best = i;
+            if (W[i] >= W[best])
+                best = i;
             right[i] = best;
         }
 
@@ -8631,18 +9347,6 @@ public class Test {
             return mid;
     }
 
-    public static String addStrings(String num1, String num2) {
-        StringBuilder sb = new StringBuilder();
-        int carry = 0;
-        for(int i = num1.length() - 1, j = num2.length() - 1; i >= 0 || j >= 0 || carry == 1; i--, j--){
-            int x = i < 0 ? 0 : num1.charAt(i) - '0';
-            int y = j < 0 ? 0 : num2.charAt(j) - '0';
-            sb.append((x + y + carry) % 10);
-            carry = (x + y + carry) / 10;
-        }
-        return sb.reverse().toString();
-    }
-
     public static boolean isNumber(String s) {
         s = s.trim();
 
@@ -8732,9 +9436,9 @@ public class Test {
         int ans = 0;
         for (int ageA = 0; ageA <= 120; ageA++) {
             int countA = count[ageA];
-            for (int ageB = 0; ageB <= ageA; ageB++) {
+            for (int ageB = (int)(ageA * 0.5 + 8); ageB <= ageA; ageB++) {
                 int countB = count[ageB];
-                if (ageA * 0.5 + 7 >= ageB) continue;
+//                if (ageA * 0.5 + 7 >= ageB) continue;
                 ans += countA * countB;
                 if (ageA == ageB) ans -= countA;
             }
@@ -8909,7 +9613,7 @@ public class Test {
                         queue.poll();
                 }
                 time++;
-                if (queue.isEmpty() && temp.isEmpty())
+                if (queue.isEmpty() && temp.isEmpty()) //no pending tasks
                     break;
                 i++;
             }
@@ -9005,6 +9709,8 @@ public class Test {
 
     }
 
+    //For the multiplication part, prev is + and - and running product, product is only the running product, so prev - prod will be running sum
+    //eg. 5+ 2*3...prev 11, product is 6...11-6= 5 gives current sum
     public static void dfs(List<String> res, StringBuilder sb, char[] num, int pos, int target, long prev, long product) {
         if(pos == num.length) {
             if(target == prev) res.add(sb.toString());
@@ -9158,6 +9864,18 @@ public class Test {
                 return false;
         }
         return true;
+    }
+
+    public static String addStrings(String num1, String num2) {
+        StringBuilder sb = new StringBuilder();
+        int carry = 0;
+        for(int i = num1.length() - 1, j = num2.length() - 1; i >= 0 || j >= 0 || carry == 1; i--, j--){
+            int x = i < 0 ? 0 : num1.charAt(i) - '0';
+            int y = j < 0 ? 0 : num2.charAt(j) - '0';
+            sb.append((x + y + carry) % 10);
+            carry = (x + y + carry) / 10;
+        }
+        return sb.reverse().toString();
     }
 
     //Do ?????
@@ -10909,6 +11627,8 @@ public class Test {
 
     private static Set<String> validExpressions = new HashSet<String>();
 
+    //the leftCount > rightCount is a key condition preventing invalid close brackets from being considered
+    //the current leftCount at the end, rejects invalid open brackets
     private static void recurse(String s, int index, int leftCount, int rightCount, int leftRem, int rightRem, StringBuilder expression) {
 
         // If we reached the end of the string, just check if the resulting expression is
@@ -10933,7 +11653,7 @@ public class Test {
                 recurse(s, index + 1, leftCount, rightCount, leftRem, rightRem, expression);
             else if (character == '(')
                 recurse(s, index + 1, leftCount + 1, rightCount, leftRem, rightRem, expression); // Consider an opening bracket.
-            else if (rightCount < leftCount)
+            else if (leftCount > rightCount)
                 recurse(s, index + 1, leftCount, rightCount + 1, leftRem, rightRem, expression); // Consider a closing bracket.
 
             // Delete for backtracking.
@@ -11100,6 +11820,23 @@ public class Test {
     }
 
     //similar to trapping water
+     static int[] productExceptSelfNoSpace(int[] nums) {
+        int length = nums.length;
+        int[] answer = new int[length];
+        answer[0] = 1;
+        for (int i = 1; i < length; i++) {
+            answer[i] = nums[i - 1] * answer[i - 1];
+        }
+
+        int R = 1;
+        for (int i = length - 1; i >= 0; i--) {
+            answer[i] = answer[i] * R;
+            R *= nums[i];
+        }
+
+        return answer;
+    }
+
     public static int[] productExceptSelf(int[] nums) {
 
         int length = nums.length;
@@ -11599,8 +12336,8 @@ public class Test {
                         }
                     }
                 }
+                return false;
             }
-            return false;
         }
     }
 
@@ -12366,6 +13103,7 @@ public class Test {
         }
     }
 
+    //can use arraylist instead of stack
     public static void topoDFS(UndirectedGraphNode node, HashSet<Integer> visited) {
 
         visited.add(node.value);
@@ -12769,14 +13507,16 @@ public class Test {
 
     //here if useless char is found, things get reset to a new begin
     //or if valid char count drops below 0
+    //Can also do with a window of fixed length
+    //Since this is a substring pattern match the window can be reset based on an invalid char occurence
     public static List<Integer> findAnagrams(String s, String p) {
         int[] count = new int[256];
         for(char c : p.toCharArray()) count[c]++;
         List<Integer> res = new ArrayList<>();
-        char[] c = s.toCharArray();
-        for(int begin = 0, end = 0; end < c.length; end++) {
-            count[c[end]]--;
-            while(count[c[end]] < 0) count[c[begin++]]++;
+        char[] input = s.toCharArray();
+        for(int begin = 0, end = 0; end < input.length; end++) {
+            count[input[end]]--;
+            while(count[input[end]] < 0) count[input[begin++]]++;
             if(end - begin + 1 == p.length()) res.add(begin);
         }
         return res;
@@ -13018,17 +13758,15 @@ public class Test {
     }
 
     public static TreeNode lowestCommonAncestorBinaryTree(TreeNode root, TreeNode p, TreeNode q) {
-        if (root == null || root == p || root == q) {
+        if (root == null || root == p || root == q)
             return root;
-        }
 
         TreeNode left = lowestCommonAncestorBinaryTree(root.left, p, q);
         TreeNode right = lowestCommonAncestorBinaryTree(root.right, p, q);
-        if (left != null && right != null) {
+        if (left != null && right != null)
             return root;
-        } else {
+        else
             return left != null ? left : right;
-        }
     }
 
     //In BST iterative, may not need stack as u can move through searching
@@ -14243,6 +14981,10 @@ public class Test {
         }
     }
 
+    //For 8 lists, lets say each list size is N/8, so merge2lists will be N/4 time complexity
+    //4 such pairs exist at the first level so 4 * N/4 that is N
+    //N is the time for each level. Number of levels is logk so time is Nlogk
+    //Binary computations does fewer comparisons than ternary hence preferred
     public static ListNode mergeKListsMyTest(ListNode[] lists){
 
         int increment=1,end=lists.length-1;
@@ -14264,7 +15006,7 @@ public class Test {
         int interval = 1;
         while (interval < lists.length) {
             for (int i = 0; i + interval < lists.length; i = i + interval * 2)
-                merge2Lists(lists[i], lists[i + interval]);
+                lists[i]=merge2Lists(lists[i], lists[i + interval]);
 
             interval *= 2;
         }
@@ -14285,9 +15027,9 @@ public class Test {
             }
             currL3 = currL3.next;
         }
-        if ((l1 == null) && (l2 != null))
+        if (l2 != null)
             currL3.next = l2;
-        if ((l1 != null) && (l2 == null))
+        if (l1 != null)
             currL3.next = l1;
 
         return l3.next;

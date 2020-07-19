@@ -45,6 +45,16 @@ My questions
  
 
 
+**Approach to LC**
+
+questions on the input…shows yr gathering req completely
+    string - lower case, kinds of chars(. , /)
+    number - negative, length, total length overflow, decimal
+            choosing smaller numbers in case of 2 inputs
+discuss all approaches and complexity, wait for a go ahead, they'll guide you
+check for early terminators, edge cases, break your code…shows yr complete and not error prone.
+    
+
 **About Companies**
 
 Workday - Enterprise solutions for Financial management, Human resources
