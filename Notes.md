@@ -1,4 +1,4 @@
-**DS & Algos**
+#### DS & Algos
 
 DS
 String, Array, ArrayList, LinkedList, PQ(Heap), TreeSet, 
@@ -111,8 +111,7 @@ Bipartite graph
     - Can be identified by coloring with 2 colors
 Maximum sliding window, daily temperatures...use a stack to get rid of old irrelevant values    
 In two sum, take care of 2 equal numbers(Two sum 3)
-Graph is a tree, if there is only one connected path to all nodes, no cycles
-% 1000 / 100 will give number at hundred position directly
+% 1000 / 100 will give number at hundredth position directly
 For a Pair the functions are getKey() and getValue()
 Can do Collections.binarySearch on a List of Pairs - TimeMap question
 Random number from a range can be done by low + rand(high - low)
@@ -127,9 +126,15 @@ Median of a steam requires sorted data
     Can use 2 heaps to give logN complexity for each
 Kth largest
     Fixed set - Quick Select can be used to find kth largest faster than heap. Avg time is N, worst is N^2
-    
+
+
+Quick select
+    Choose a pivot.
+    Swap it to the end.
+    move all elements lesser than it to the left at the end swap it with the current index which will be its sorted position
+        
 To make parenthesis valid, remove invalid close brackets need to be done from start and open brackets from end
-String builder can be used for backtracking strings like lists are used for other stuff
+String builder can be used for backtracking strings like lists are used for other stuff with the setCharAt()
 Sliding window
     for subsequence the length of the window can be anything
     for substring the window will be of fixed length - find all anagrams 
@@ -265,14 +270,14 @@ Ternary search does more comparisons than binary in worst case. hence binary is 
 
 
 
-**SQL**
+#### SQL
 where is applied first, then group by and then having
 aggregate functions with group by are applied to each group
 
 
 
 
-**System Design**
+#### System Design
 
 Twitter (News Feed) https://www.youtube.com/watch?v=KmAyPUv9gOY    
 - is read heavy compared to write
@@ -682,7 +687,7 @@ WaitingUsersService - daemon service with a hashmap of LinkedHM
      
      
      
-**SD Concepts**
+#### SD Concepts
 
 When something is read heavy looks like an oppurtunity to cache. Also then good to serve reads from slave dbs.
  
@@ -969,7 +974,7 @@ HTTP status “429 - Too many requests"
 Redis can be in master/slave or cluster mode 
 Hosted vs Cloud services- In hosted there may not be multiple tenants or scale can be limited.
 
-**DB Design**
+#### DB Design
 
 - 1st Normal form
     - Data should be atomic. No grouping of data in one coloumn
@@ -983,7 +988,8 @@ Hosted vs Cloud services- In hosted there may not be multiple tenants or scale c
 
 
 
-**Design Patterns**
+#### Design Patterns
+
 https://stackoverflow.com/questions/1673841/examples-of-gof-design-patterns-in-javas-core-libraries/
 GoF - Gang of four ppl made design patterns
 
@@ -998,7 +1004,7 @@ Abstract class is so that no object can be created of it and you can have common
 Abstract classes can have abstract functions which will have no body so the inherited classes must define it
 When abstract class and when interface - abstract class when you have common functions also, interfaces when function names/process only might be same not function definitions
 
-**Creational:-**
+##### Creational:-
 
 Singleton 
 - static getInstance and synchronise to prevent multiple initial creations
@@ -1023,7 +1029,7 @@ Builder
 - https://www.youtube.com/watch?v=YmEVYvELt28&t=822s
 
 
-**Structural:-**
+##### Structural:-
 
 Adapter
 - Used to take some existing/legacy code and modify a part of it in the adapter for the new code
@@ -1057,7 +1063,7 @@ Decorator
 - Drawbacks - Can get too nested to debug, too many objects, can lower the performance
 
 
-**Behavioral:-**
+##### Behavioral:-
   
 Template
 - a process flow that needs to be done for many base classes
@@ -1092,7 +1098,7 @@ Memento
 
 
 
-**Java**
+#### Java
 
 Stream https://www.geeksforgeeks.org/stream-in-java/
 - Intermediate Operations: map, filter, sorted
@@ -1246,7 +1252,8 @@ Comparable vs Comparator
 - Using Comparators allows us to avoid adding additional code to our domain classes
 - We can define multiple different comparison strategies which isn't possible when using Comparable
 - collection.sort(List) uses comparable, collection.sort(List, Comparator) uses comparator and follows strategy pattern
-**Spring**
+
+#### Spring
 
 Spring is a framework over Servlets
 
@@ -1330,7 +1337,9 @@ Microservices
 - Disadvantages - Latency, authentication, load balancing, debugging 
 - In case of many MS, debugging can be done better with a correlation id per request(originating processName_timestamp_threadname)
 
-**Misc**
+
+#### Misc.
+
 Agile methodology uses scrum framework 
 Sprint is like 2 weeks or 4 weeks development cycle and shippable product
 Daily Scrum meetings is a standup meeting either daily, where what has been completed, what being worked on and issues are discussed 

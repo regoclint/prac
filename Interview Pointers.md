@@ -53,7 +53,7 @@ questions on the input…shows yr gathering req completely
             choosing smaller numbers in case of 2 inputs
 discuss all approaches and complexity, wait for a go ahead, they'll guide you
 check for early terminators, edge cases, break your code…shows yr complete and not error prone.
-    
+if better complexity is asked try to think of time-space trade off, in-place, lower complexity scale value     
 
 **About Companies**
 
