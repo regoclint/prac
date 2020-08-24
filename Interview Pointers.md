@@ -209,6 +209,7 @@ someone didnt agreee, conflict, unpopular decision, u disagreed, challenging sit
 exceeded goal, most complex problem, worked on something extremely hard and failed
 -buyer code base defect
  
+ 
 
 
 
