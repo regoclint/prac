@@ -208,7 +208,7 @@ someone didnt agreee, conflict, unpopular decision, u disagreed, challenging sit
 14. Deliver results
 exceeded goal, most complex problem, worked on something extremely hard and failed
 -buyer code base defect
-
+ 
 
 
 
