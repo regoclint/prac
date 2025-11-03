@@ -841,12 +841,14 @@ Count min sketch algo https://www.youtube.com/watch?v=ibxXO-b14j4
     - Boyer moore can be used if we know the number of times a frequency is required
 
 Bloom filter https://www.youtube.com/watch?v=Bay3X9PAX5k
+    - Used to find if an item is already present in large systems
     - Similar to count min sketch but only keeps 1 or 0 as present or absent
     - Uses an array
     - Eg. 40 million records, P -> 1 mistake in 10M, 132MB space and 23 hask() functions 
     - Hbase, Cassandra etc use it to check for records that dont exist and return fast
     - Google uses it in chrome to return malicious websites
     - Recommendation of youtube, tinder, nettflix
+    - Used in web crawlers
     
     
 Caching
