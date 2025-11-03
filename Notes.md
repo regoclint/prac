@@ -448,7 +448,7 @@ Web crawler https://www.youtube.com/watch?v=BKZxZwUgL3Y
         -> URL filter -> Is Crawled?(Bloom filter - youtube.com/watch?v=RSwjdlTp108) 
 
 - Seed url from all categories
- - URL Frontier:- Prioritizer -> front Qs(1 Q per priority) -> Back Q router -> Back Qs (1 per thread and per domain to maintain politeness)
+- URL Frontier:- Prioritizer -> front Qs(1 Q per priority) -> Back Q router -> Back Qs (1 per thread and per domain to maintain politeness)
                 ->Heap(to select earliest politeness)    
                 Prioritizer will have priority on type of content(like news),freshness etc
                 Back Q Router will create mapping of hostid to Back Q id
@@ -841,14 +841,14 @@ Count min sketch algo https://www.youtube.com/watch?v=ibxXO-b14j4
     - Boyer moore can be used if we know the number of times a frequency is required
 
 Bloom filter https://www.youtube.com/watch?v=Bay3X9PAX5k
-    - Used to find if an item is already present in large systems
-    - Similar to count min sketch but only keeps 1 or 0 as present or absent
-    - Uses an array
-    - Eg. 40 million records, P -> 1 mistake in 10M, 132MB space and 23 hask() functions 
-    - Hbase, Cassandra etc use it to check for records that dont exist and return fast
-    - Google uses it in chrome to return malicious websites
-    - Recommendation of youtube, tinder, nettflix
-    - Used in web crawlers
+- Used to find if an item is already present in large systems
+- Similar to count min sketch but only keeps 1 or 0 as present or absent
+- Uses an array
+- Eg. 40 million records, P -> 1 mistake in 10M, 132MB space and 23 hask() functions 
+- Hbase, Cassandra etc use it to check for records that dont exist and return fast
+- Google uses it in chrome to return malicious websites
+- Recommendation of youtube, tinder, nettflix
+- Used in web crawlers
     
     
 Caching
