@@ -928,25 +928,30 @@ ACID
     - Isolation - no current modification. No threading. done by locks
     - Durability - Data should persist
 Data integrity - is accuracy and consistency of data
-NoSQL vs SQL https://www.youtube.com/watch?v=p4C0n3afZdk
-    performance & scalability vs transaction(ACID compliant)
-    scaling horiz vs joins
-    
-Types of NoSQL db - key Value - Redis, Vodemort, Dynamodb.
-                  - Document based - MongoDB. can do nested queries
-                  - Wide-Column - For big data as they look at column families instead of all columns. Cassandra, Hbase, Bigtable
-                  - Graph - best for many relations. Neo4j    
-RDBMS offer CA, HBase and Mongo offer CP, Casandra offers AP
-Hbase is preferred in historical analysis, Casandra in IoT, recommendation systems(Netflix), messaging systems(Twitter)
 
-- Kafka vs Message queues
-    - https://hackernoon.com/a-super-quick-comparison-between-kafka-and-message-queues-e69742d855a8
-    - https://kafka.apache.org/intro.html
-    - Messaging traditionally has two models: queuing and publish-subscribe
-    - queues aren't multi-subscriber—once, once a process reads the data it's gone
-    - Publish-subscribe allows you broadcast data to multiple processes, but has no way of scaling processing since every message goes to every subscriber
-    - Kafka's model is that every topic has both these properties—it can scale processing and is also multi-subscriber
-    - Kafka messages are retained even after they are consumed
+NoSQL vs SQL https://www.youtube.com/watch?v=p4C0n3afZdk
+- performance & scalability vs transaction(ACID compliant)
+- scaling horiz vs joins
+    
+Types of NoSQL db 
+- key Value - Redis, Vodemort, Dynamodb.
+- Document based - MongoDB. can do nested queries
+- Wide-Column - For big data as they look at column families instead of all columns. Cassandra, Hbase, Bigtable
+- Graph - best for many relations. Neo4j    
+
+RDBMS offer CA, HBase and Mongo offer CP, Casandra offers AP
+Hbase is preferred in historical analysis, 
+Casandra in IoT, recommendation systems(Netflix), messaging systems(Twitter)
+
+
+Kafka vs Message queues
+- https://hackernoon.com/a-super-quick-comparison-between-kafka-and-message-queues-e69742d855a8
+- https://kafka.apache.org/intro.html
+- Messaging traditionally has two models: queuing and publish-subscribe
+- queues aren't multi-subscriber—once, once a process reads the data it's gone
+- Publish-subscribe allows you broadcast data to multiple processes, but has no way of scaling processing since every message goes to every subscriber
+- Kafka's model is that every topic has both these properties—it can scale processing and is also multi-subscriber
+- Kafka messages are retained even after they are consumed
 
 Kafka definitions
 - Producer, Consumer, topic, Broker
