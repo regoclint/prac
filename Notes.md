@@ -279,7 +279,7 @@ aggregate functions with group by are applied to each group
 
 #### System Design
 
-Twitter (News Feed) https://www.youtube.com/watch?v=KmAyPUv9gOY    
+**Twitter (News Feed)** https://www.youtube.com/watch?v=KmAyPUv9gOY    
 - is read heavy compared to write
 - Tweeting
     - HTTP Put -> Load balancer -> into 3 redis instances(Fan out). Redis because high speed of in-memory and only 140 characters.
