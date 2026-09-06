@@ -38,7 +38,7 @@ Feed ranking
 - Zookeeper to manage the large Redis clusters    
     
  
-Instagram (News Feed) 
+##### Instagram (News Feed) 
 - Precomputing like count is better so store the aggregation counts in another table  
 - similar to twitter cuz of timelines
 - Cache and precompute news
@@ -47,7 +47,7 @@ Instagram (News Feed)
 - Store Images/Videos in S3
 
     
-Whatsapp (Chat service)
+##### Whatsapp (Chat service)
 - https://www.youtube.com/watch?v=vvhC64hQZMk
 - Auth Service/Profile service
 - One-one chat
@@ -63,7 +63,7 @@ Whatsapp (Chat service)
 - Image service
 - Email/SMS service
 
-Facebook (Chat service with storage)
+##### Facebook (Chat service with storage)
 - FR - 1-1 chat, online status, chat storage,group chat, push notifications
 - NFR - low latency, no data loss and high consistency
 - Message handling 
@@ -85,7 +85,7 @@ Facebook (Chat service with storage)
 
                         
 
-Tinder (Dating)
+##### Tinder (Dating)
 https://www.youtube.com/watch?v=tndzLznxq40&list=PLMCXHnjXnTnvo6alSjVkgxV-VH6EPyvoX&index=9
 https://www.youtube.com/watch?v=nBdTBDJNOh8 (for the diagrams)
 + Store Profiles and Login
@@ -116,7 +116,7 @@ https://www.youtube.com/watch?v=nBdTBDJNOh8 (for the diagrams)
 
 
 
-Amazon (Shopping)
+##### Amazon (Shopping)
 
 - Availability > consistency
     - Loss of availability means loss of revenue, hence more important
@@ -138,7 +138,8 @@ Youtube/Netflix
 - Use CDN may be within an ISP like Netflix
       
 
-Netflix (Streaming service) https://www.youtube.com/watch?v=psQzyFfsUGU
+##### Netflix (Streaming service) 
+https://www.youtube.com/watch?v=psQzyFfsUGU
 - Uploading content
     - Transcoding - Videos need to be created for different formats and resolutions for different devices approx 1200 different versions are created
         - Video validation
@@ -166,7 +167,8 @@ Netflix (Streaming service) https://www.youtube.com/watch?v=psQzyFfsUGU
     - Content based filtering - What content type the user is interested in from the past. The actors, directors, genre, 
     - Store multiple thumbnails for a title. Then based on the click thru a permanent thumbnail can be selected
 
-Web crawler https://www.youtube.com/watch?v=BKZxZwUgL3Y
+##### Web crawler 
+https://www.youtube.com/watch?v=BKZxZwUgL3Y
 
  - Flow: Seed URL -> URL Frontier -> Fetcher + Renderer (DNS resolver + Redis + Storage) -> URL Extractor + Duplicate detection + ...
         -> URL filter -> Is Crawled?(Bloom filter - youtube.com/watch?v=RSwjdlTp108) 
@@ -191,7 +193,8 @@ Web crawler https://www.youtube.com/watch?v=BKZxZwUgL3Y
  - Data can be parttittioned based on host name
  - Fault tolerance - snapshots of queues can be taken  
     
-Rate limiter https://www.youtube.com/watch?v=mhUQe4BKZXs
+##### Rate limiter 
+https://www.youtube.com/watch?v=mhUQe4BKZXs
  - Flow:- Clients -> Web Server -><- Rate Limiter Svc -> Redis & DBMS 
                                 -><- App Service        
  - High availability, low latency system
@@ -213,7 +216,8 @@ Rate limiter https://www.youtube.com/watch?v=mhUQe4BKZXs
     It has 2 operations, getHits() is not a multi-threaded low latency response  
  
  
-Dropbox https://www.youtube.com/watch?v=U0xTu6E2CT8
+##### Dropbox 
+https://www.youtube.com/watch?v=U0xTu6E2CT8
  - Flow- 
          Client -> EBS/S3/CDN storage
                 -> Req Message Qs -> Sync Svc -> Metadata store
@@ -245,7 +249,7 @@ S3
 - Following writes/updates will be eventual consistency 
 
        
-Tiny URL
+##### Tiny URL
  - Flow:- client -> LB -> App server -> LB -> Cache
                                            -> DB                 <- Cleanup Svc
                                      -> Key gen svc -> Key DB    <-     
@@ -269,12 +273,12 @@ Tiny URL
     Cleanup should be another micro-service
  - HTTP 302 to redirect and 404 not found  
    
-Pastebin
+##### Pastebin
 - Same like URL shortening except read to write is 5:1, Object storage S3 is used for content and Cassandra for metadata(Paste n User table)
 - Why S3, why not S3 and CLOB. S3 is automatically scaleable. 
 - Cache 80-20  
     
-Maximus (upload and download)
+##### Maximus (upload and download)
 
 Type Ahead Suggestions
  - Flow:- Gateway -> LB -> Cache
@@ -298,7 +302,7 @@ Type Ahead Suggestions
     pre-fetch
 
 
-Twitter search
+##### Twitter search
 Index
 -to find tweets that contain search terms
     Build an in memory Distributed Hashtable of all words to tweetid
@@ -329,7 +333,7 @@ Search
         - Page rank - 200+ factors based on ordering of words,visits, rank of users, search keywords appears together rather than far away
                             location, context
                             
-Redis
+##### Redis
     Get/Put -> Event Queue -> Event loop -> Threadpool -> RAM
     - RAM - would contain a LRU cache for operations
     - Cache write pattern can be chosen based on the application
@@ -339,7 +343,7 @@ Redis
                         Replication can happen asynchronously for better speed, replication failure sometimes is ok as it can fetch from DB
                              
                              
-Yelp
+##### Yelp
 - Shard based on location id to a quad tree server
 - Quad tree structure per quad tree server
     Quad tree has 4 children, each time the size of the children exceeds 500 locations it is further divided into 4 children
@@ -353,7 +357,7 @@ Yelp
     based on popularity, relevance, etc can be done while aggregating
 
 
-Uber (Ride share) https://www.youtube.com/watch?v=umWABit-wbk
+##### Uber (Ride share) https://www.youtube.com/watch?v=umWABit-wbk
  - Booking a cab
     - Mapping drivers to riders, cost, time calculations
     - Make payments
@@ -371,7 +375,8 @@ Uber (Ride share) https://www.youtube.com/watch?v=umWABit-wbk
 
 
 
-Stock trading system https://www.youtube.com/watch?v=dUMWMZmMsVE     
+##### Stock trading system 
+https://www.youtube.com/watch?v=dUMWMZmMsVE     
 - Users                                                                                           |->Zookeper
             -> API Gateway -> Accumulator sequence -> Risk Management System ->TSLA Q             |
    HFT                                                                       ->GOOG Q   ->Active matching VM ------------>Redis Snapshots
@@ -396,7 +401,7 @@ Stock trading system https://www.youtube.com/watch?v=dUMWMZmMsVE
     - CDNs are used as historic data will not change                                                       
 Stock alert system can have stock updates come in with different hash functions for each stock type(high med low), so that high stocks dont end up on the same server
 
-Ticket master
+##### Ticket master
 NF req
     - concurrent ticket booking
     - security of maximum tickets and DDos attacks on booking reservations
