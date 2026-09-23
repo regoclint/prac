@@ -415,6 +415,8 @@ WaitingUsersService - daemon service with a hashmap of LinkedHM
 - Sharding should be done on showId, as movieId can result in hot movies resulting in unbalanced load
      
      
+#### Comcast analytics 
+How Comcast scaled analytics 80x while cutting costs 38% with GraphQL and Amazon S3 Tables | AWS Storage Blog https://share.google/3ljtXbaSsuXjXcCGk
      
 #### SD Concepts
 
